@@ -94,14 +94,14 @@ void ofApp::update(){
         
         
         // take the abs value of the difference between background and incoming and then threshold:
-//        grayDiff.absDiff(grayBg, grayImage);
-//        grayDiff.threshold(threshold);
+        grayDiff.absDiff(grayBg, grayImage);
+        grayDiff.threshold(threshold);
         
         // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
         // also, find holes is set to true so we will get interior contours as well....
         contourFinder.findContours(grayImage, 20, (VIDEO_WIDTH*VIDEO_HEIGHT)/3, 10, true);	// find holes
         
-//        grayBg = grayImage;
+        grayBg = grayImage;
     }
     for (int i = 0; i < contourFinder.nBlobs; i++){
         
