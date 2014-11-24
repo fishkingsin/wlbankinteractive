@@ -5,8 +5,8 @@
 #include "ofxBox2d.h"
 #include "ofxOpticalFlowLK.h"
 #include "ofxGui.h"
-#define VIDEO_WIDTH 640
-#define VIDEO_HEIGHT 480
+#define VIDEO_WIDTH 320
+#define VIDEO_HEIGHT 240
 class ofApp : public ofBaseApp{
 
 	public:

@@ -2,3 +2,7 @@
 bin/wlBankInteractive.app
 bin/wlBankInteractiveDebug.app
 
+obj/
+bin/wlBankInteractive_debug.exp
+wlBankInteractive.opensdf
+wlBankInteractive.sdf
