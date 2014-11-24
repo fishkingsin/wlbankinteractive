@@ -5,6 +5,7 @@
 #include "ofxBox2d.h"
 #include "ofxOpticalFlowLK.h"
 #include "ofxGui.h"
+
 #define VIDEO_WIDTH 160
 #define VIDEO_HEIGHT 120
 class Data {
@@ -54,6 +55,7 @@ public:
     
     
 };
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -87,10 +89,12 @@ class ofApp : public ofBaseApp{
     ofParameter<int> nConsidered;
     ofParameter<bool> bFindHoles;
     ofParameter<bool> bUseApproximation ;
+    ofParameter<bool> bBlur;
     ofParameter<bool> debugDraw1;
     ofParameter<bool> debugDraw2;
     ofParameter<bool> debugDraw3;
     ofxPanel gui;
+    float counter;
     //box2d
     ofxBox2d                            box2d;			  //	the box2d world
     vector    <ofPtr<CustomParticle> >	circles;		  //	default box2d circles

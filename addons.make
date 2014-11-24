@@ -3,7 +3,6 @@ ofxNetwork
 ofxOpenCv
 ofxOsc
 ofxSvg
-ofxThreadedImageLoader
 ofxVectorGraphics
 ofxXmlSettings
 ofxBox2d

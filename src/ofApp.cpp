@@ -34,10 +34,12 @@ void ofApp::setup(){
     gui.add( nConsidered.set("nConsidered",10,1,100));
     gui.add( bFindHoles.set("bFindHoles",true));
     gui.add( bUseApproximation.set("bUseApproximation",true));
+    gui.add( bBlur.set("bBlur",true));
     gui.add( debugDraw1.set("debugDraw1",false));
     gui.add( debugDraw2.set("debugDraw2",false));
     gui.add( debugDraw3.set("debugDraw3",false));
     gui.loadFromFile("settings.xml");
+    counter = 0;
 }
 
 //--------------------------------------------------------------
@@ -46,6 +48,19 @@ void ofApp::update(){
     {
         circles.erase(circles.begin());
         
+    }
+    float diff = ofGetElapsedTimeMillis() - counter;
+    if(diff > 1000)
+    {
+        int n = ofRandom(1,10);
+        if(n<circles.size())
+        {
+            for (int i = 0 ; i < n ; i++)
+            {
+                circles.erase(circles.begin());
+            }
+        }
+        counter = ofGetElapsedTimeMillis();
     }
     if(maxArea<minArea)
     {
@@ -73,19 +88,20 @@ void ofApp::update(){
         cvImage.setFromPixels(pixels.getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
         grayImage = cvImage;
         
-        //        grayImage.blurHeavily();
+        if(bBlur)grayImage.blurGaussian();
+
         
         
         
         // take the abs value of the difference between background and incoming and then threshold:
-        grayDiff.absDiff(grayBg, grayImage);
-        grayDiff.threshold(threshold);
+//        grayDiff.absDiff(grayBg, grayImage);
+//        grayDiff.threshold(threshold);
         
         // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
         // also, find holes is set to true so we will get interior contours as well....
-        contourFinder.findContours(grayDiff, 20, (VIDEO_WIDTH*VIDEO_HEIGHT)/3, 10, true);	// find holes
+        contourFinder.findContours(grayImage, 20, (VIDEO_WIDTH*VIDEO_HEIGHT)/3, 10, true);	// find holes
         
-        grayBg = grayImage;
+//        grayBg = grayImage;
     }
     for (int i = 0; i < contourFinder.nBlobs; i++){
         
@@ -108,11 +124,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+    ofBackground(0);
     ofSetColor(255);
     if(debugDraw1)
     {
-        cvImage.draw(0,0,ofGetWidth(),ofGetHeight());
+        grabber.draw(0,0,ofGetWidth(),ofGetHeight());
     }
     if(debugDraw2)
     {
