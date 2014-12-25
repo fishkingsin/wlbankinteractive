@@ -22,16 +22,39 @@ void MyScene3::setup()
     kParticles = 8;
     
     float padding = 256;
-    float maxVelocity = .5;
+    float maxVelocity = 0;
     billboards.getVertices().resize(kParticles * 1024);
     billboards.getColors().resize(kParticles * 1024);
     billboards.getTexCoords().resize(kParticles * 1024);
     billboards.getNormals().resize(kParticles * 1024,ofVec3f(0));
     for(int i = 0; i < kParticles * 1024; i++) {
-        float x = ofRandom(padding, ofGetWidth() - padding);
-        float y = ofRandom(padding, ofGetHeight() - padding);
-        float xv = ofRandom(-maxVelocity, maxVelocity);
-        float yv = ofRandom(-maxVelocity, maxVelocity);
+        float x,y,xv,yv;
+        int n = ofRandom(0,3);
+        switch(n)
+        {
+            case 0:
+                x = -ofRandom(0, padding);
+                y = ofRandom(0, ofGetHeight() );
+
+                break;
+            case 1:
+                x = ofGetWidth()+ofRandom(0, padding);
+                y = ofRandom(0, ofGetHeight() );
+
+                break;
+            case 2:
+                x = ofRandom(0, ofGetWidth() );
+                y = -ofRandom(0, padding);
+
+                break;
+            case 3:
+                x = ofRandom(0, ofGetWidth());
+                y = ofGetHeight()+ofRandom(0, padding);
+
+                break;
+        }
+        xv = ofRandom(-maxVelocity, maxVelocity);
+        yv = ofRandom(-maxVelocity, maxVelocity);
         Particle particle(x, y, xv, yv);
         particleSystem.add(particle);
         billboards.setColor(i, ofColor::fromHsb(0, 0, 255));
@@ -75,7 +98,7 @@ void MyScene3::update(float dt)
         // global force on other particles
         particleSystem.addRepulsionForce(cur, 3, 1);
         // forces on this particle
-        cur.bounceOffWalls(0, 0, ofGetWidth(), ofGetHeight());
+//        cur.bounceOffWalls(0, 0, ofGetWidth(), ofGetHeight());
         cur.addDampingForce();
     }
     // single global forces
@@ -91,7 +114,7 @@ void MyScene3::update(float dt)
         if(billboards.getVertices()[i].x>0 && billboards.getVertices()[i].x < image.getWidth() && billboards.getVertices()[i].y >0 && billboards.getVertices()[i].y < image.getHeight())
          {
          ofColor c = image.getColor(billboards.getVertices()[i].x, billboards.getVertices()[i].y);
-         if(c.r > 50 && c.g > 50 && c.b > 50 )billboards.setColor(i, c);
+         if(c.r > 0 && c.g > 0 && c.b > 0 )billboards.setColor(i, c);
          //            billboards.getNormals()[i].set(particles[i].xv*particles[i].yv, 0,0);
          }
     }
@@ -134,4 +157,11 @@ void MyScene3::sceneWillAppear( ofxScene * fromScreen )
 //scene notifications
 void MyScene3::sceneWillDisappear( ofxScene * toScreen )
 {
+    
+}
+
+void MyScene3::sceneDidAppear()
+{
+//    printf("ofxScene::sceneDidAppear() :: %d\n", sceneID);
+    isStart = true;
 }

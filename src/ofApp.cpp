@@ -4,6 +4,9 @@
 void ofApp::setup(){
     ofEnableSmoothing();
     ofSetLogLevel(OF_LOG_VERBOSE);
+    videoPlayer.loadMovie("movies/background.mp4");
+    videoPlayer.setLoopState(OF_LOOP_NORMAL);
+    videoPlayer.play();
     grabber.setDesiredFrameRate(60);
     grabber.setDeviceID(0);
     grabber.initGrabber(VIDEO_WIDTH,VIDEO_HEIGHT);
@@ -79,6 +82,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    videoPlayer.update();
     fps = ofToString(ofGetFrameRate());
     if(maxArea<minArea)
     {
@@ -157,7 +161,9 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0);
+    
     ofSetColor(255);
+    videoPlayer.draw(0, 0, ofGetWidth(), ofGetHeight());
     if(debugDraw1)
     {
         grabber.draw(0,0,ofGetWidth(),ofGetHeight());

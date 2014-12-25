@@ -121,6 +121,7 @@
 		1A3F943E1A320AAF00305F4F /* CustomParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F943C1A320AAF00305F4F /* CustomParticle.cpp */; };
 		1A3F94401A320B3100305F4F /* MyScene1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F943F1A320B3100305F4F /* MyScene1.cpp */; };
 		1A58495E1A4B1B1B0083E0B6 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A58495C1A4B1B1B0083E0B6 /* ParticleSystem.cpp */; };
+		1A5849671A4C1A260083E0B6 /* MeScene4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5849651A4C1A260083E0B6 /* MeScene4.cpp */; };
 		1AE25EEB1A34B54E005B2732 /* MyScene3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE25EE91A34B54E005B2732 /* MyScene3.cpp */; };
 		1B19FD7E51B73109C4AC02D9 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75D46D6B41E78DF2B519A18 /* b2BroadPhase.cpp */; };
 		1B5F996886A777589D5DD794 /* svgtiny_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 077F7AC989DAB289A1EC643F /* svgtiny_list.cpp */; };
@@ -560,6 +561,8 @@
 		1A58495C1A4B1B1B0083E0B6 /* ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
 		1A58495D1A4B1B1B0083E0B6 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
 		1A58495F1A4B1B7B0083E0B6 /* Tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
+		1A5849651A4C1A260083E0B6 /* MeScene4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeScene4.cpp; sourceTree = "<group>"; };
+		1A5849661A4C1A260083E0B6 /* MeScene4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeScene4.h; sourceTree = "<group>"; };
 		1AE25EE91A34B54E005B2732 /* MyScene3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene3.cpp; sourceTree = "<group>"; };
 		1AE25EEA1A34B54E005B2732 /* MyScene3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene3.h; sourceTree = "<group>"; };
 		1C085E327DAB912CFA2A443D /* ofxTCPServer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPServer.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPServer.cpp; sourceTree = SOURCE_ROOT; };
@@ -1677,6 +1680,8 @@
 				1A2C0E551A30C0B5003D32F3 /* MyScene2.cpp */,
 				1AE25EE91A34B54E005B2732 /* MyScene3.cpp */,
 				1AE25EEA1A34B54E005B2732 /* MyScene3.h */,
+				1A5849651A4C1A260083E0B6 /* MeScene4.cpp */,
+				1A5849661A4C1A260083E0B6 /* MeScene4.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2762,6 +2767,7 @@
 				CB503B33759F22A302B8FC6E /* b2Settings.cpp in Sources */,
 				1A07F7511A2F7E7F0001394E /* Calibration.cpp in Sources */,
 				0C7BD977292F7D20B41DF594 /* b2StackAllocator.cpp in Sources */,
+				1A5849671A4C1A260083E0B6 /* MeScene4.cpp in Sources */,
 				1A07F6B91A2F7D200001394E /* AbstractFilter.cpp in Sources */,
 				1BE4156E2DF3B30461C48C70 /* b2Timer.cpp in Sources */,
 				1A07F74F1A2F7E7F0001394E /* ETF.cpp in Sources */,

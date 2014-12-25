@@ -29,6 +29,7 @@ public:
     void sceneWillAppear( ofxScene * fromScreen );
     //scene notifications
     void sceneWillDisappear( ofxScene * toScreen );
+    void sceneDidAppear();
     int kParticles;
     ParticleSystem particleSystem;
     

@@ -55,6 +55,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    ofVideoPlayer videoPlayer;
     ofVideoGrabber grabber;
 //scening
     ofxOpticalFlowLK opticalFlow;
@@ -89,5 +90,6 @@ class ofApp : public ofBaseApp{
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
 //    MyScene2 *scene2;
+
     
 };
