@@ -4,7 +4,9 @@
 #include "ofxGui.h"
 #include "ofxAnimatable.h"
 #include "ofxAnimatableOfPoint.h"
-
+#include "ofxDelaunay.h"
+#include "ofxOpenCV.h"
+#include "ofxOpticalFlowLK.h"
 #include "ofxFaceTracker.h"
 #include "ofxFilterLibrary.h"
 #include "ofxMioFlowGLSL.h"
@@ -54,8 +56,28 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     ofVideoGrabber grabber;
-
+//scening
+    ofxOpticalFlowLK opticalFlow;
+    ofxCvColorImage cvImage;
+    ofxCvGrayscaleImage grayImage;
+    ofxCvGrayscaleImage 	grayBg;
+    ofxCvGrayscaleImage 	grayDiff;
+    ofxCvContourFinder 	contourFinder;
+    
+    ofFbo fbo;
+    ofPixels pixels;
+    ofParameter<int>  threshold;
+    ofParameter<int> minArea;
+    ofParameter<int> maxArea;
+    ofParameter<int> nConsidered;
+    ofParameter<bool> bFindHoles;
+    ofParameter<bool> bUseApproximation ;
+    ofParameter<bool> bBlur;
+    ofParameter<bool> debugDraw1;
+    ofParameter<bool> debugDraw2;
+    ofParameter<bool> debugDraw3;
     ofParameter<int>Mode;
+    ofParameter<string>fps;
     ofxPanel gui;
     bool toggleDrawGUI;
 
@@ -66,5 +88,6 @@ class ofApp : public ofBaseApp{
     enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
-    MyScene2 *scene2;
+//    MyScene2 *scene2;
+    
 };

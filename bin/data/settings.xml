@@ -1,15 +1,16 @@
 <Settings>
-	<threashold>225</threashold>
+	<threashold>121</threashold>
 	<minArea>16914</minArea>
-	<maxArea>43025</maxArea>
+	<maxArea>178184</maxArea>
 	<nConsidered>15</nConsidered>
 	<bFindHoles>1</bFindHoles>
 	<bUseApproximation>1</bUseApproximation>
 <Settings/>
 <debugDraw1>0</debugDraw1>
-	<debugDraw2>1</debugDraw2>
+	<debugDraw2>0</debugDraw2>
 	<debugDraw3>0</debugDraw3>
 <bBlur>1</bBlur>
 	<Mode>0</Mode>
 	<coolDown>75000</coolDown>
+<fps>14.1799</fps>
 </Settings>

@@ -106,7 +106,7 @@ void MyScene2::draw(){ //draw scene 2 here
     }
     
     fbo.draw(0,0,ofGetWidth(),ofGetHeight());
-    grabber->draw(0,0,160,120);
+//    grabber->draw(0,0,160,120);
     //        ofPixels pixels = grabber->getPixelsRef();
     //        for(int i = 0 ; i < myFonts.size() ; i++)
     //        {
