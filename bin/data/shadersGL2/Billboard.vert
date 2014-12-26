@@ -5,12 +5,13 @@ attribute float offsetYAtt;
 varying float div;
 varying float offsetX;
 varying float offsetY;
-
+attribute float angle;
+varying float rotAngle;
 void main() {
     offsetX = offsetXAtt;
     offsetY = offsetYAtt;
     div = divAtt;
-    
+    rotAngle = angle;
 
     
     gl_TexCoord[0] = gl_MultiTexCoord0;

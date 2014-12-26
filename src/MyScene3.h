@@ -49,6 +49,7 @@ public:
     vector<float>divAtt;
     vector<float>offSetXAtt;
     vector<float>offSetYAtt;
+    vector<float>angle;
     
 #else
     VBOBillboard billboard;
