@@ -108,6 +108,7 @@
 		1A07F75C1A2F7E7F0001394E /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A07F74E1A2F7E7F0001394E /* opencv.a */; };
 		1A07F7631A2F7FF50001394E /* FlowShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F75F1A2F7FF50001394E /* FlowShader.cpp */; };
 		1A07F7641A2F7FF50001394E /* ofxMioFlowGLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F7611A2F7FF50001394E /* ofxMioFlowGLSL.cpp */; };
+		1A1F034B1A4D063D00C89193 /* VBOBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */; };
 		1A2B9CB01A314B6D00D661EC /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CAE1A314B6D00D661EC /* ofxTrueTypeFontUC.cpp */; };
 		1A2B9CE01A314CC500D661EC /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CB41A314CC500D661EC /* ofxFTGLFont.cpp */; };
 		1A2B9CE11A314CC500D661EC /* ofxFTGLSimpleLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CB61A314CC500D661EC /* ofxFTGLSimpleLayout.cpp */; };
@@ -498,6 +499,10 @@
 		1A07F7601A2F7FF50001394E /* FlowShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlowShader.h; sourceTree = "<group>"; };
 		1A07F7611A2F7FF50001394E /* ofxMioFlowGLSL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMioFlowGLSL.cpp; sourceTree = "<group>"; };
 		1A07F7621A2F7FF50001394E /* ofxMioFlowGLSL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxMioFlowGLSL.h; sourceTree = "<group>"; };
+		1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VBOBillboard.cpp; sourceTree = "<group>"; };
+		1A1F034A1A4D063D00C89193 /* VBOBillboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBOBillboard.h; sourceTree = "<group>"; };
+		1A1F034E1A4D1B1C00C89193 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
+		1A1F03501A4D21FF00C89193 /* Billboard.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Billboard.geom; path = bin/data/shadersGL2/Billboard.geom; sourceTree = "<group>"; };
 		1A2B9CAE1A314B6D00D661EC /* ofxTrueTypeFontUC.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTrueTypeFontUC.cpp; sourceTree = "<group>"; };
 		1A2B9CAF1A314B6D00D661EC /* ofxTrueTypeFontUC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontUC.h; sourceTree = "<group>"; };
 		1A2B9CB31A314CC500D661EC /* ofxFTGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFTGL.h; sourceTree = "<group>"; };
@@ -1660,6 +1665,8 @@
 				1A58495D1A4B1B1B0083E0B6 /* ParticleSystem.h */,
 				1A3F943C1A320AAF00305F4F /* CustomParticle.cpp */,
 				1A3F943D1A320AAF00305F4F /* CustomParticle.h */,
+				1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */,
+				1A1F034A1A4D063D00C89193 /* VBOBillboard.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2443,8 +2450,10 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				1A1F03501A4D21FF00C89193 /* Billboard.geom */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				1A1F034E1A4D1B1C00C89193 /* data */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
@@ -2737,6 +2746,7 @@
 				1A07F6EF1A2F7D200001394E /* ToonFilter.cpp in Sources */,
 				B103DF2084E0F38D03E0E6F1 /* ofxBox2dRect.cpp in Sources */,
 				1B19FD7E51B73109C4AC02D9 /* b2BroadPhase.cpp in Sources */,
+				1A1F034B1A4D063D00C89193 /* VBOBillboard.cpp in Sources */,
 				1A07F6C21A2F7D200001394E /* CGAColorspaceFilter.cpp in Sources */,
 				1A07F7231A2F7D230001394E /* PDM.cc in Sources */,
 				2F666321514A2075B12CE4EE /* b2CollideCircle.cpp in Sources */,

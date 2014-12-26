@@ -16,7 +16,11 @@
 
 #include "Constants.h"
 #include "ParticleSystem.h"
-
+#define USE_OFVBO 1
+#if USE_OFVBO
+#else
+#include "VBOBillboard.h"
+#endif
 class MyScene3 : public ofxScene{
 public:
     
@@ -30,19 +34,26 @@ public:
     //scene notifications
     void sceneWillDisappear( ofxScene * toScreen );
     void sceneDidAppear();
-    int kParticles;
+
     ParticleSystem particleSystem;
-    
+#if USE_OFVBO
+    int kParticles;
     ofShader billboardShader;
     ofImage texture;
     
     ofVboMesh billboards;
-    ofImage image;
-    bool isStart;
-    void setParticleTexCoords(int i, float columnID, float rowID);
     int                     cellRows;
     int                     cellColls;
     float           texW, texH;
+    void setParticleTexCoords(int i, float columnID, float rowID);
+
+#else
+    VBOBillboard billboard;
+#endif
+    ofImage image;
+    bool isStart;
+
+
     
 };
 

@@ -1,9 +1,20 @@
 attribute vec2 texCoord;
-varying vec2 texcoord0; 
+varying vec2 texcoord0;
+attribute float textureScale;
+varying float texScale;
+
+attribute float offsetAttX;
+varying float offsetX;
+attribute float offsetAttY;
+varying float offsetY;
+
 void main() {
 	//Process texCoord
+    texScale = textureScale;
+    offsetX = offsetAttX;
+    offsetY = offsetAttY;
     // gl_TexCoord[0].st = texCoord;
-    texcoord0 = vec2(gl_TextureMatrix[0] * gl_MultiTexCoord0);  
+    texcoord0 = vec2(gl_TextureMatrix[0] * gl_MultiTexCoord0);
 	vec4 eyeCoord = gl_ModelViewMatrix * gl_Vertex;
 	gl_Position = gl_ProjectionMatrix * eyeCoord;
 	float dist = sqrt(eyeCoord.x*eyeCoord.x + eyeCoord.y*eyeCoord.y + eyeCoord.z*eyeCoord.z);
