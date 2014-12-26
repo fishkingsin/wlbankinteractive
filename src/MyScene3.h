@@ -46,7 +46,10 @@ public:
     int                     cellColls;
     float           texW, texH;
     void setParticleTexCoords(int i, float columnID, float rowID);
-
+    vector<float>divAtt;
+    vector<float>offSetXAtt;
+    vector<float>offSetYAtt;
+    
 #else
     VBOBillboard billboard;
 #endif

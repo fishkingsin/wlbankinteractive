@@ -502,7 +502,6 @@
 		1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VBOBillboard.cpp; sourceTree = "<group>"; };
 		1A1F034A1A4D063D00C89193 /* VBOBillboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBOBillboard.h; sourceTree = "<group>"; };
 		1A1F034E1A4D1B1C00C89193 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
-		1A1F03501A4D21FF00C89193 /* Billboard.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Billboard.geom; path = bin/data/shadersGL2/Billboard.geom; sourceTree = "<group>"; };
 		1A2B9CAE1A314B6D00D661EC /* ofxTrueTypeFontUC.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTrueTypeFontUC.cpp; sourceTree = "<group>"; };
 		1A2B9CAF1A314B6D00D661EC /* ofxTrueTypeFontUC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontUC.h; sourceTree = "<group>"; };
 		1A2B9CB31A314CC500D661EC /* ofxFTGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFTGL.h; sourceTree = "<group>"; };
@@ -2450,7 +2449,6 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				1A1F03501A4D21FF00C89193 /* Billboard.geom */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				1A1F034E1A4D1B1C00C89193 /* data */,

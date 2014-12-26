@@ -32,19 +32,22 @@ void MyScene3::setup()
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     
+    
     billboardShader.setGeometryInputType(GL_POINT);
     billboardShader.setGeometryOutputType(GL_TRIANGLE_STRIP);
     billboardShader.setGeometryOutputCount(4);
     if(ofGetGLProgrammableRenderer()){
         billboardShader.load("shadersGL3/Billboard");
     }else{
-        billboardShader.load("shadersGL2/Billboard.vert","shadersGL2/Billboard.frag","shadersGL2/Billboard.geom");
+        billboardShader.load("shadersGL2/Billboard");
     }
 
-    
+    divAtt.resize(kParticles * 1024);
+    offSetXAtt.resize(kParticles * 1024);
+    offSetYAtt.resize(kParticles * 1024);
     billboards.getVertices().resize(kParticles * 1024);
     billboards.getColors().resize(kParticles * 1024);
-    billboards.getTexCoords().resize(kParticles * 1024);
+//    billboards.getTexCoords().resize(kParticles * 1024);
     billboards.getNormals().resize(kParticles * 1024,ofVec3f(0));
     for(int i = 0; i <kParticles * 1024; i++) {
 #else
@@ -54,7 +57,7 @@ void MyScene3::setup()
         for(int i = 0; i <MAX_PARTICLES; i++) {
 #endif
         float x,y,xv,yv;
-        int n = ofRandom(0,3);
+        int n = ofRandom(0,4);
         switch(n)
         {
             case 0:
@@ -78,23 +81,51 @@ void MyScene3::setup()
                 
                 break;
         }
+            
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
         Particle particle(x, y, xv, yv);
         particleSystem.add(particle);
+        
+
 #if USE_OFVBO
         billboards.setColor(i, ofColor::fromHsb(0, 0, 255));
-        billboards.setNormal(i,ofVec3f(ofRandom(64, 128 ),0,0));
-        billboards.setTexCoord(i,ofVec2f((int)ofRandom(0, 2 ), (int)ofRandom(0, 2)));
-        setParticleTexCoords(i, (int)ofRandom(0, 4 ), (int)ofRandom(0, 4));
+        billboards.setNormal(i,ofVec3f(ofRandom(16, 64 ),0,0));
+//        billboards.setTexCoord(i,ofVec2f((int)ofRandom(0, 2 ), (int)ofRandom(0, 2)));
+        setParticleTexCoords(i, (int)ofRandom(0, cellColls ), (int)ofRandom(0, cellRows));
+        divAtt[i] = 1.0f/cellColls;
+            
 #else
 
         billboard.setParticlePos(i, particle.x, particle.y);
 #endif
         
     }
-    
-    
+/*
+ attribute float divAtt;
+ attribute float offsetXAtt;
+ attribute float offsetYAtt;
+ int pointAttLoc = shader.getAttributeLocation("pointSize");
+	vbo.setAttributeData(pointAttLoc, pointSizes, 1, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
+ 
+ shader.begin();
+	int pointAttLoc = shader.getAttributeLocation("pointSize");
+	vbo.setAttributeData(pointAttLoc, pointSizes, 1, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
+ 
+	// rotate the snow based on the velocity
+	int angleLoc = shader.getAttributeLocation("angle");
+	vbo.setAttributeData(angleLoc, rotations, 1, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
+	shader.end();
+ */
+        
+    billboardShader.begin();
+    int divAttLoc = billboardShader.getAttributeLocation("divAtt");
+    billboards.getVbo().setAttributeData(divAttLoc,  &divAtt[0], 1, kParticles*1024,  GL_STATIC_DRAW);
+        int offsetXAttLoc = billboardShader.getAttributeLocation("offsetXAtt");
+    billboards.getVbo().setAttributeData(offsetXAttLoc, &offSetXAtt[0], 1, kParticles*1024, GL_STATIC_DRAW);
+        int offsetYAttLoc = billboardShader.getAttributeLocation("offsetYAtt");
+    billboards.getVbo().setAttributeData(offsetYAttLoc, &offSetYAtt[0], 1, kParticles*1024, GL_STATIC_DRAW);
+    billboardShader.end();
     particleSystem.setTimeStep(1);
     
     
@@ -169,7 +200,9 @@ void MyScene3::setParticleTexCoords(int i, float columnID, float rowID)
     
     float row = rowID;
     float col = columnID;
-
+    offSetXAtt[i] = (cellWidth * row) / texW;
+    offSetYAtt[i] = (cellHeight * col) / texH;
+//    ofLogVerbose(__PRETTY_FUNCTION__) << "offSetXAtt :" << offSetXAtt[i] <<  " offSetYAtt :" << offSetYAtt[i];
     // P1
 //    billboards.getTexCoords()[(i*4)+0].set( (cellWidth * row) / texW,(cellHeight * col) / texH);
 //    ofLogVerbose(ofToString(i)) << billboards.getTexCoords()[(i*4)+0];
