@@ -3,10 +3,11 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    ofDisableArbTex();
     ofSetLogLevel(OF_LOG_VERBOSE);
 
-    commonAssets.loadImage();
-    commonAssets.setup();
+
     
     videoPlayer.loadMovie("movies/background.mp4");
     videoPlayer.setLoopState(OF_LOOP_NORMAL);
@@ -29,6 +30,8 @@ void ofApp::setup(){
     grayDiff.allocate(VIDEO_WIDTH,VIDEO_HEIGHT);
     threshold = 80;
 
+    commonAssets.loadImage("particleGrid.png",4,4,8);
+    commonAssets.setup();
     ///////////////////////////////////////
     
     sceneManager = ofxSceneManager::instance();
@@ -36,6 +39,9 @@ void ofApp::setup(){
     scene1->grabber = &grabber;
     scene1->contourFinder = &contourFinder;
     sceneManager->addScene(scene1 , SCENE_1);
+    
+    
+    
     MyScene2* scene2 = new MyScene2();
     scene2->commonAssets = &commonAssets;
     sceneManager->addScene(scene2 , SCENE_2);

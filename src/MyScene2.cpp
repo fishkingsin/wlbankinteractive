@@ -10,45 +10,21 @@
 void MyScene2::setup()
 {
     image.loadImage("bg.png");
-    
-    
-    ofEnableAlphaBlending();
 
-    ofSetWindowShape(image.getWidth(), image.getHeight());
+//    ofSetWindowShape(image.getWidth(), image.getHeight());
     
     
     float padding = 256;
     float maxVelocity = 0;
     
     int n = commonAssets->kParticles * 1024;
-
+    int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight())*0.5;
     for(int i = 0; i < n; i++) {
         
         float x,y,xv,yv;
-        int n = ofRandom(0,4);
-        switch(n)
-        {
-            case 0:
-                x = -ofRandom(0, padding);
-                y = ofRandom(0, ofGetHeight() );
-                
-                break;
-            case 1:
-                x = ofGetWidth()+ofRandom(0, padding);
-                y = ofRandom(0, ofGetHeight() );
-                
-                break;
-            case 2:
-                x = ofRandom(0, ofGetWidth() );
-                y = -ofRandom(0, padding);
-                
-                break;
-            case 3:
-                x = ofRandom(0, ofGetWidth());
-                y = ofGetHeight()+ofRandom(0, padding);
-                
-                break;
-        }
+        float randomPI = ofRandom(-PI,PI);
+        x = (sin(randomPI)*maxRadius)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+        y = (cos(randomPI)*maxRadius)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
         
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
@@ -59,7 +35,7 @@ void MyScene2::setup()
         commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
-        commonAssets->angle[i] = ofRandom(-PI,PI);
+        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
 
         
     }
@@ -68,7 +44,7 @@ void MyScene2::setup()
     
     particleSystem.setTimeStep(1);
     
-    
+    commonAssets->updateAttribtuteData();
     
     
     ofBackground(0, 0, 0);
@@ -109,6 +85,8 @@ void MyScene2::update(float dt)
             //            billboards.getNormals()[i].set(particles[i].xv*particles[i].yv, 0,0);
         }
     }
+//    int alphaAttLoc = commonAssets->billboardShader.getAttributeLocation("alphaAtt");
+//    commonAssets->billboards.getVbo().updateAttributeData(alphaAttLoc, &commonAssets->alpha[0], n);
 }
 void MyScene2::draw()
 {

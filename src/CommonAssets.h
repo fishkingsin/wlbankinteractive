@@ -28,6 +28,7 @@ public:
     
     void setParticleTexCoords(int i, float columnID, float rowID);
     
+    void updateAttribtuteData();
     int kParticles;
     
     ofShader billboardShader;
@@ -49,6 +50,7 @@ public:
     vector<float>offSetYAtt;
     
     vector<float>angle;
+    vector<float>alpha;
 
 };
 

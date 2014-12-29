@@ -3,11 +3,13 @@ varying float div;
 varying float offsetX;
 varying float offsetY;
 varying  float		rotAngle;
+varying float alpha;
 void main (void) {
     
     float d = div;
     float x = offsetX;
     float y = offsetY;
+    float a = alpha;
     
     float angle		= rotAngle;
     vec2 offset		= vec2(.5, .5)*d;
@@ -28,6 +30,7 @@ void main (void) {
     
     vec2 newcoords = ((v2-offset) * (rotationMatrix));
     newcoords += offset;
-    
-	gl_FragColor = texture2D(tex,v2) * gl_Color;
+    vec4 col = texture2D(tex,v2);
+    col.a *= a;
+	gl_FragColor = col * gl_Color ;
 }

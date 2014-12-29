@@ -7,11 +7,16 @@ varying float offsetX;
 varying float offsetY;
 attribute float angle;
 varying float rotAngle;
+
+attribute float alphaAtt;
+varying float alpha;
+
 void main() {
     offsetX = offsetXAtt;
     offsetY = offsetYAtt;
     div = divAtt;
     rotAngle = angle;
+    alpha = alphaAtt;
 
     
     gl_TexCoord[0] = gl_MultiTexCoord0;
