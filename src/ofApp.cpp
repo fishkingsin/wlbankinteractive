@@ -1,9 +1,13 @@
 #include "ofApp.h"
-#include "MyScene3.h"
+#include "MyScene2.h"
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofEnableSmoothing();
     ofSetLogLevel(OF_LOG_VERBOSE);
+
+    commonAssets.loadImage();
+    commonAssets.setup();
+    
     videoPlayer.loadMovie("movies/background.mp4");
     videoPlayer.setLoopState(OF_LOOP_NORMAL);
     videoPlayer.play();
@@ -32,14 +36,9 @@ void ofApp::setup(){
     scene1->grabber = &grabber;
     scene1->contourFinder = &contourFinder;
     sceneManager->addScene(scene1 , SCENE_1);
-
-    
-//    scene2 = new MyScene2();
-//    scene2->grabber = &grabber;
-//    sceneManager->addScene(scene2 , SCENE_1);
-
-//    sceneManager->addScene( scene2, SCENE_2);
-        sceneManager->addScene( new MyScene3(), SCENE_3);
+    MyScene2* scene2 = new MyScene2();
+    scene2->commonAssets = &commonAssets;
+    sceneManager->addScene(scene2 , SCENE_2);
     
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
@@ -72,8 +71,11 @@ void ofApp::setup(){
     gui.add( debugDraw3.set("debugDraw3",false));
     gui.add( scene1->coolDown.set("coolDown",0,0,100000));
     gui.add( Mode.set("Mode",0,0,3));
+    gui.add( timePriority.set("Toggle Time Prioirty",false));
+    gui.add( maxIdleTime.set("Mac Idle(min)",0.5,0,60.0f));
+    
     gui.add(fps.set("fps",""));
-
+    gui.add(currentIdleString.set("Idle",""));
     gui.loadFromFile("settings.xml");
     
     sceneManager->setDrawDebug(toggleDrawGUI);
@@ -82,6 +84,28 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    if(timePriority)
+    {
+        int idle = ofGetElapsedTimef() - currentIdleTime;
+        currentIdleString = ofToString(idle);
+        if(idle>(maxIdleTime*60))
+        {
+            currentIdleTime = ofGetElapsedTimef();
+            int sceneID = sceneManager->getCurrentSceneID();
+            switch(sceneID)
+            {
+                case SCENE_1:
+                    //go to next scene
+                    sceneManager->goToScene(SCENE_2);
+                    break;
+                case SCENE_2:
+                    //loop back
+                    sceneManager->goToScene(SCENE_1);
+                    break;
+                
+            }
+        }
+    }
     videoPlayer.update();
     fps = ofToString(ofGetFrameRate());
     if(maxArea<minArea)
@@ -221,8 +245,7 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
-//    if (key == '2') sceneManager->goToScene(SCENE_2);
-    if (key == '3') sceneManager->goToScene(SCENE_3);
+    if (key == '2') sceneManager->goToScene(SCENE_2);
     sceneManager->keyPressed(key);
     switch(key) 
     {

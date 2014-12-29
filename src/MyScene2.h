@@ -2,31 +2,21 @@
 //  MyScene2.h
 //  wlbankinteractive
 //
-//  Created by Kong king sin on 4/12/14.
+//  Created by Kong king sin on 8/12/14.
 //
 //
 
-#ifndef wlbankinteractive_MyScene2_h
-#define wlbankinteractive_MyScene2_h
+#ifndef __wlbankinteractive__MyScene2__
+#define __wlbankinteractive__MyScene2__
 
+#include "ofxBox2d.h"
+#include "ofxOpenCv.h"
 #include "ofMain.h"
 #include "ofxScene.h"
-#include "ofxFTGLFont.h"
-#include "Constants.h"
 
-enum Presets
-{
-    
-};
-class MyFont
-{
-public:
-    ofPoint pos;
-    ofPoint pixelPos;
-    ofPoint offset;
-    string mChar;
-    int scale;
-};
+#include "Constants.h"
+#include "ParticleSystem.h"
+#include "CommonAssets.h"
 class MyScene2 : public ofxScene{
 public:
     
@@ -39,20 +29,15 @@ public:
     void sceneWillAppear( ofxScene * fromScreen );
     //scene notifications
     void sceneWillDisappear( ofxScene * toScreen );
-    ofVideoGrabber *grabber;
-    ofxFTGLFont font;
-    ofFbo fbo;
-    Presets presets;
-    int charCount;
-    float fontScale;
-//    vector<string>fontFamily;
-    vector<wstring>charSet;
-//    vector<ofPtr<MyFont> > myFonts;
+    void sceneDidAppear();
 
-    wstring currentCharSet;
-    ofParameter<float> scaleFactor;
-//    ofParameter<int> characterPreset;
-    bool isLive,isCapture;
+    ParticleSystem particleSystem;
+
+    ofImage image;
+    bool isStart;
+
+    CommonAssets *commonAssets;
     
 };
-#endif
+
+#endif /* defined(__wlbankinteractive__MyScene2__) */

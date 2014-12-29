@@ -2,164 +2,148 @@
 //  MyScene2.cpp
 //  wlbankinteractive
 //
-//  Created by Kong king sin on 5/12/14.
+//  Created by Kong king sin on 8/12/14.
 //
 //
+
 #include "MyScene2.h"
-#include <stdio.h>
-void MyScene2::setup(){
-    fbo.allocate(ofGetWidth(),ofGetHeight());
-    fbo.begin();
-    ofClear(0, 0, 0);
-    fbo.end();
-    //    ofTrueTypeFont::setGlobalDpi(72);
-    
-    font.loadFont("arialuni.ttf", 12, 1);
-    
-    //    font.setLineHeight(18.0f);
+void MyScene2::setup()
+{
+    image.loadImage("bg.png");
     
     
-    charSet.push_back(L"ABC");
-    charSet.push_back(L"•");
-    charSet.push_back(L"▲▼◀◆");
-    charSet.push_back(L"✖✕");
-    charSet.push_back(L"@#%");
-    charSet.push_back(L"oO◌◎");
-    charSet.push_back(L"✦✩✪✭");
-    charSet.push_back(L"◼");
-    charSet.push_back(L"01");
-    charSet.push_back(L"❆❇❋");
-    charSet.push_back(L"/\\");
-    
-    
-    currentCharSet = charSet[0];
-    //        int step = 10;
-    //        for(int i = 0 ; i < VIDEO_HEIGHT; i+=step)
-    //        {
-    //            for(int j = 0 ; j < VIDEO_WIDTH; j+=step)
-    //            {
-    //                myFonts.push_back(ofPtr<MyFont>(new MyFont));
-    //                myFonts.back().get()->pos = ofPoint(j,i);
-    //                myFonts.back().get()->pixelPos = ofPoint(j,i);
-    //                myFonts.back().get()->offset = ofPoint(ofRandom(-5,5),ofRandom(-5,5));
-    //                myFonts.back().get()->mChar = currentCharSet[(int)(ofRandom(0,currentCharSet.size()))];
-    //                myFonts.back().get()->scale = ofRandom(0.1,5);
-    //            }
-    //        }
-    isLive = true;
-};
+    ofEnableAlphaBlending();
 
+    ofSetWindowShape(image.getWidth(), image.getHeight());
+    
+    
+    float padding = 256;
+    float maxVelocity = 0;
+    
+    int n = commonAssets->kParticles * 1024;
 
-void MyScene2::update(float dt){ //update scene 2 here
-    if(NULL==grabber)
-    {
-        return;
+    for(int i = 0; i < n; i++) {
         
-    }
-    if(isCapture || isLive)
-    {
-        grabber->update();
-        ofPixels pixels = grabber->getPixelsRef();
-        
-        fbo.begin();
-        
-        int n = (isCapture)?10000:ofRandom(50,200);
-        //    ofEnableDepthTest();
-        //    ofEnableNormalizedTexCoords();
-        float screenScale = ofGetWidth()*1.0f/VIDEO_WIDTH;
-        for(int i = 0 ; i < n ;i++)
+        float x,y,xv,yv;
+        int n = ofRandom(0,4);
+        switch(n)
         {
-            
-            
-            int x = (int)(ofRandom(0,VIDEO_WIDTH)) ;
-            int y = (int)(ofRandom(0,VIDEO_HEIGHT));
-            ofColor c = pixels.getColor(x,y);
-            float scale = ofRandom(0.1,4);
-            wstring mc;
-            mc.append(currentCharSet,(int)(ofRandom(0,currentCharSet.size())),1);
-            ofRectangle rect = font.getStringBoundingBox(mc, x, y);
-            ofPushMatrix();
-            ofTranslate((x-rect.width*0.5)*screenScale, (y+rect.height*0.5)*screenScale);
-            ofScale(scale, scale);
-            
-            ofPushStyle();
-            ofSetColor(c);
-            
-            font.drawString( mc,0,0);
-            ofPopStyle();
-            ofPopMatrix();
-            
+            case 0:
+                x = -ofRandom(0, padding);
+                y = ofRandom(0, ofGetHeight() );
+                
+                break;
+            case 1:
+                x = ofGetWidth()+ofRandom(0, padding);
+                y = ofRandom(0, ofGetHeight() );
+                
+                break;
+            case 2:
+                x = ofRandom(0, ofGetWidth() );
+                y = -ofRandom(0, padding);
+                
+                break;
+            case 3:
+                x = ofRandom(0, ofGetWidth());
+                y = ofGetHeight()+ofRandom(0, padding);
+                
+                break;
         }
-        //    ofDisableNormalizedTexCoords();
-        //    ofDisableDepthTest();
-        fbo.end();
-        isCapture = false;
-    }
-};
+        
+        xv = ofRandom(-maxVelocity, maxVelocity);
+        yv = ofRandom(-maxVelocity, maxVelocity);
+        Particle particle(x, y, xv, yv);
+        particleSystem.add(particle);
+        
+        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
+        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
+        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
+        commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
+        commonAssets->angle[i] = ofRandom(-PI,PI);
 
-
-void MyScene2::draw(){ //draw scene 2 here
-    if(NULL==grabber)
-    {
-        return;
         
     }
     
-    fbo.draw(0,0,ofGetWidth(),ofGetHeight());
-//    grabber->draw(0,0,160,120);
-    //        ofPixels pixels = grabber->getPixelsRef();
-    //        for(int i = 0 ; i < myFonts.size() ; i++)
-    //        {
-    //            ofPushStyle();
-    //
-    //            ofSetColor(pixels.getColor(myFonts[i].get()->pixelPos.x,myFonts[i].get()->pixelPos.y));
-    //            font.drawString( myFonts[i].get()->mChar , myFonts[i].get()->pos.x , myFonts[i].get()->pos.y);
-    //            ofPopStyle();
-    //        }
     
-};
+    
+    particleSystem.setTimeStep(1);
+    
+    
+    
+    
+    ofBackground(0, 0, 0);
+    
+    isStart = false;
+}
+
+void MyScene2::update(float dt)
+{
+    if(!isStart)
+    {
+        return;
+    }
+    particleSystem.setupForces();
+    
+    // apply per-particle forces
+    for(int i = 0; i < particleSystem.size(); i++) {
+        Particle& cur = particleSystem[i];
+        // global force on other particles
+        particleSystem.addRepulsionForce(cur, 3, 1);
+        // forces on this particle
+        //        cur.bounceOffWalls(0, 0, ofGetWidth(), ofGetHeight());
+        cur.addDampingForce();
+    }
+    // single global forces
+    particleSystem.addAttractionForce(ofGetWidth() / 2, ofGetHeight() / 2, 1500, 0.01);
+    //    particleSystem.addRepulsionForce(mouseX, mouseY, 100, 2);
+    particleSystem.update();
+    vector<Particle> &particles = particleSystem.getParticles();
+    int n = particles.size();
+    for(int i = 0; i < n; i++)
+    {
+        commonAssets->setParticleVertex(i, particles[i]);
+        if(particles[i].x>0 && particles[i].x < image.getWidth() && particles[i].y >0 && particles[i].y < image.getHeight())
+        {
+            ofColor c = image.getColor(particles[i].x, particles[i].y);
+            if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
+            //            billboards.getNormals()[i].set(particles[i].xv*particles[i].yv, 0,0);
+        }
+    }
+}
+void MyScene2::draw()
+{
+    if(!isStart)
+    {
+        return;
+    }
+    ofSetColor(255, 255, 255);
+    ofFill();
+    commonAssets->draw();
+    ofDrawBitmapString(ofToString(commonAssets->kParticles*1024) + "k particles", 32, 32);
+    
+    ofDrawBitmapString(ofToString((int) ofGetFrameRate()) + " fps", 32, 52);
+}
 void MyScene2::keyPressed(int key)
 {
-    switch(key)
+    if(key == ' ')
     {
-        case 's':
-        {
-            grabber->videoSettings();
-        }
-            break;
-        case OF_KEY_RETURN:
-        {
-            currentCharSet = charSet[(int)(ofRandom(0,charSet.size()))];
-            wstring string_to_convert;
-            
-            //setup converter
-
-            //use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
-            string converted_str ( currentCharSet.begin() , currentCharSet.end() );
-            ofLogVerbose("Scene2") << "current uniString character set "<< converted_str;
-
-        }
-            break;
-        case 'l':
-            isLive = !isLive;
-            if(!isLive)
-            {
-                isCapture = true;
-            }
-            break;
-            case 'c':
-            isCapture = true;
-            break;
+        isStart = !isStart;
     }
 }
-void MyScene2::mousePressed( int x, int y, int button ){
+void MyScene2::mousePressed( int x, int y, int button )
+{
+}    //scene notifications
+void MyScene2::sceneWillAppear( ofxScene * fromScreen )
+{
+}
+//scene notifications
+void MyScene2::sceneWillDisappear( ofxScene * toScreen )
+{
     
 }
 
-//scene notifications
-void MyScene2::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
-};
-
-//scene notifications
-void MyScene2::sceneWillDisappear( ofxScene * toScreen ){
+void MyScene2::sceneDidAppear()
+{
+    //    printf("ofxScene::sceneDidAppear() :: %d\n", sceneID);
+        isStart = true;
 }

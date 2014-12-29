@@ -26,8 +26,8 @@ void main (void) {
     mat2 rotationMatrix = mat2( cosX, -sinX,
                                sinY, cosX);
     
-    vec2 newcoords = ((v2) * (rotationMatrix));
-//    newcoords += offset;
+    vec2 newcoords = ((v2-offset) * (rotationMatrix));
+    newcoords += offset;
     
 	gl_FragColor = texture2D(tex,v2) * gl_Color;
 }

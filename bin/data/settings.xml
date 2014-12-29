@@ -12,5 +12,8 @@
 <bBlur>1</bBlur>
 	<Mode>0</Mode>
 	<coolDown>75000</coolDown>
-<fps>14.1799</fps>
+<fps>9.42476</fps>
+<Toggle_Time_Prioirty>0</Toggle_Time_Prioirty>
+	<Mac_Idle_min_>0.5</Mac_Idle_min_>
+	<Idle>13</Idle>
 </Settings>

@@ -109,6 +109,7 @@
 		1A07F7631A2F7FF50001394E /* FlowShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F75F1A2F7FF50001394E /* FlowShader.cpp */; };
 		1A07F7641A2F7FF50001394E /* ofxMioFlowGLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F7611A2F7FF50001394E /* ofxMioFlowGLSL.cpp */; };
 		1A1F034B1A4D063D00C89193 /* VBOBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */; };
+		1A26FA9B1A510CD600E2CCFF /* CommonAssets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A26FA991A510CD600E2CCFF /* CommonAssets.cpp */; };
 		1A2B9CB01A314B6D00D661EC /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CAE1A314B6D00D661EC /* ofxTrueTypeFontUC.cpp */; };
 		1A2B9CE01A314CC500D661EC /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CB41A314CC500D661EC /* ofxFTGLFont.cpp */; };
 		1A2B9CE11A314CC500D661EC /* ofxFTGLSimpleLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CB61A314CC500D661EC /* ofxFTGLSimpleLayout.cpp */; };
@@ -118,12 +119,12 @@
 		1A2B9D021A31519A00D661EC /* ofUTF8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CEB1A31519A00D661EC /* ofUTF8.cpp */; };
 		1A2C0E4B1A30ACEB003D32F3 /* ofxSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E491A30ACEB003D32F3 /* ofxSceneManager.cpp */; };
 		1A2C0E501A30ACEE003D32F3 /* ofxScreenCurtain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E4E1A30ACEE003D32F3 /* ofxScreenCurtain.cpp */; };
-		1A2C0E561A30C0B5003D32F3 /* MyScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E551A30C0B5003D32F3 /* MyScene2.cpp */; };
+		1A2C0E561A30C0B5003D32F3 /* MyScene_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E551A30C0B5003D32F3 /* MyScene_2.cpp */; };
 		1A3F943E1A320AAF00305F4F /* CustomParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F943C1A320AAF00305F4F /* CustomParticle.cpp */; };
 		1A3F94401A320B3100305F4F /* MyScene1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F943F1A320B3100305F4F /* MyScene1.cpp */; };
 		1A58495E1A4B1B1B0083E0B6 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A58495C1A4B1B1B0083E0B6 /* ParticleSystem.cpp */; };
 		1A5849671A4C1A260083E0B6 /* MeScene4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5849651A4C1A260083E0B6 /* MeScene4.cpp */; };
-		1AE25EEB1A34B54E005B2732 /* MyScene3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE25EE91A34B54E005B2732 /* MyScene3.cpp */; };
+		1AE25EEB1A34B54E005B2732 /* MyScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE25EE91A34B54E005B2732 /* MyScene2.cpp */; };
 		1B19FD7E51B73109C4AC02D9 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75D46D6B41E78DF2B519A18 /* b2BroadPhase.cpp */; };
 		1B5F996886A777589D5DD794 /* svgtiny_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 077F7AC989DAB289A1EC643F /* svgtiny_list.cpp */; };
 		1BE4156E2DF3B30461C48C70 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E555B42DF1D4FF502F76F8AF /* b2Timer.cpp */; };
@@ -502,6 +503,8 @@
 		1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VBOBillboard.cpp; sourceTree = "<group>"; };
 		1A1F034A1A4D063D00C89193 /* VBOBillboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBOBillboard.h; sourceTree = "<group>"; };
 		1A1F034E1A4D1B1C00C89193 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
+		1A26FA991A510CD600E2CCFF /* CommonAssets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommonAssets.cpp; sourceTree = "<group>"; };
+		1A26FA9A1A510CD600E2CCFF /* CommonAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAssets.h; sourceTree = "<group>"; };
 		1A2B9CAE1A314B6D00D661EC /* ofxTrueTypeFontUC.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTrueTypeFontUC.cpp; sourceTree = "<group>"; };
 		1A2B9CAF1A314B6D00D661EC /* ofxTrueTypeFontUC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontUC.h; sourceTree = "<group>"; };
 		1A2B9CB31A314CC500D661EC /* ofxFTGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFTGL.h; sourceTree = "<group>"; };
@@ -555,9 +558,9 @@
 		1A2C0E4E1A30ACEE003D32F3 /* ofxScreenCurtain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxScreenCurtain.cpp; sourceTree = "<group>"; };
 		1A2C0E4F1A30ACEE003D32F3 /* ofxScreenCurtain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxScreenCurtain.h; sourceTree = "<group>"; };
 		1A2C0E511A30ADCE003D32F3 /* MyScene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene1.h; sourceTree = "<group>"; };
-		1A2C0E531A30B37A003D32F3 /* MyScene2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene2.h; sourceTree = "<group>"; };
+		1A2C0E531A30B37A003D32F3 /* MyScene_2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene_2.h; sourceTree = "<group>"; };
 		1A2C0E541A30B6AE003D32F3 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		1A2C0E551A30C0B5003D32F3 /* MyScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene2.cpp; sourceTree = "<group>"; };
+		1A2C0E551A30C0B5003D32F3 /* MyScene_2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene_2.cpp; sourceTree = "<group>"; };
 		1A3F943C1A320AAF00305F4F /* CustomParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomParticle.cpp; sourceTree = "<group>"; };
 		1A3F943D1A320AAF00305F4F /* CustomParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomParticle.h; sourceTree = "<group>"; };
 		1A3F943F1A320B3100305F4F /* MyScene1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene1.cpp; sourceTree = "<group>"; };
@@ -567,8 +570,8 @@
 		1A58495F1A4B1B7B0083E0B6 /* Tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
 		1A5849651A4C1A260083E0B6 /* MeScene4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeScene4.cpp; sourceTree = "<group>"; };
 		1A5849661A4C1A260083E0B6 /* MeScene4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeScene4.h; sourceTree = "<group>"; };
-		1AE25EE91A34B54E005B2732 /* MyScene3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene3.cpp; sourceTree = "<group>"; };
-		1AE25EEA1A34B54E005B2732 /* MyScene3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene3.h; sourceTree = "<group>"; };
+		1AE25EE91A34B54E005B2732 /* MyScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene2.cpp; sourceTree = "<group>"; };
+		1AE25EEA1A34B54E005B2732 /* MyScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene2.h; sourceTree = "<group>"; };
 		1C085E327DAB912CFA2A443D /* ofxTCPServer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPServer.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPServer.cpp; sourceTree = SOURCE_ROOT; };
 		1C0DA2561397A7DE0246858B /* ofxGuiGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGuiGroup.h; path = ../../../addons/ofxGui/src/ofxGuiGroup.h; sourceTree = SOURCE_ROOT; };
 		1C9E4AC6CF4626BA74F7E994 /* ofxAnimatableFloat.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxAnimatableFloat.cpp; path = ../../../addons/ofxAnimatable/src/ofxAnimatableFloat.cpp; sourceTree = SOURCE_ROOT; };
@@ -1666,6 +1669,8 @@
 				1A3F943D1A320AAF00305F4F /* CustomParticle.h */,
 				1A1F03491A4D063D00C89193 /* VBOBillboard.cpp */,
 				1A1F034A1A4D063D00C89193 /* VBOBillboard.h */,
+				1A26FA991A510CD600E2CCFF /* CommonAssets.cpp */,
+				1A26FA9A1A510CD600E2CCFF /* CommonAssets.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1682,10 +1687,10 @@
 			children = (
 				1A2C0E511A30ADCE003D32F3 /* MyScene1.h */,
 				1A3F943F1A320B3100305F4F /* MyScene1.cpp */,
-				1A2C0E531A30B37A003D32F3 /* MyScene2.h */,
-				1A2C0E551A30C0B5003D32F3 /* MyScene2.cpp */,
-				1AE25EE91A34B54E005B2732 /* MyScene3.cpp */,
-				1AE25EEA1A34B54E005B2732 /* MyScene3.h */,
+				1A2C0E531A30B37A003D32F3 /* MyScene_2.h */,
+				1A2C0E551A30C0B5003D32F3 /* MyScene_2.cpp */,
+				1AE25EE91A34B54E005B2732 /* MyScene2.cpp */,
+				1AE25EEA1A34B54E005B2732 /* MyScene2.h */,
 				1A5849651A4C1A260083E0B6 /* MeScene4.cpp */,
 				1A5849661A4C1A260083E0B6 /* MeScene4.h */,
 			);
@@ -2677,7 +2682,7 @@
 				1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				1A2B9CE11A314CC500D661EC /* ofxFTGLSimpleLayout.cpp in Sources */,
-				1A2C0E561A30C0B5003D32F3 /* MyScene2.cpp in Sources */,
+				1A2C0E561A30C0B5003D32F3 /* MyScene_2.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				1A07F6BB1A2F7D200001394E /* AbstractTwoInputCrossTextureSamplingFilter.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
@@ -2767,11 +2772,12 @@
 				1A07F6E41A2F7D200001394E /* NormalBlendFilter.cpp in Sources */,
 				1A2B9D021A31519A00D661EC /* ofUTF8.cpp in Sources */,
 				1A07F6F01A2F7D200001394E /* VignetteFilter.cpp in Sources */,
-				1AE25EEB1A34B54E005B2732 /* MyScene3.cpp in Sources */,
+				1AE25EEB1A34B54E005B2732 /* MyScene2.cpp in Sources */,
 				1A07F7521A2F7E7F0001394E /* ContourFinder.cpp in Sources */,
 				BB885F5F39C8DA070D80EF02 /* b2BlockAllocator.cpp in Sources */,
 				89F31F234274A62F3501E2EE /* b2Draw.cpp in Sources */,
 				22A83FE368C671FA8DBD5E51 /* b2Math.cpp in Sources */,
+				1A26FA9B1A510CD600E2CCFF /* CommonAssets.cpp in Sources */,
 				CB503B33759F22A302B8FC6E /* b2Settings.cpp in Sources */,
 				1A07F7511A2F7E7F0001394E /* Calibration.cpp in Sources */,
 				0C7BD977292F7D20B41DF594 /* b2StackAllocator.cpp in Sources */,

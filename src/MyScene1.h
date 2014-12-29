@@ -33,6 +33,9 @@ public:
     void sceneWillAppear( ofxScene * fromScreen );
     //scene notifications
     void sceneWillDisappear( ofxScene * toScreen );
+    
+    void sceneDidDisappear( ofxScene * fromScreen );
+    
     ofVideoGrabber *grabber;
     ofxCvContourFinder 	*contourFinder;
     //sencing

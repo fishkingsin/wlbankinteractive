@@ -144,4 +144,13 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
 
 //scene notifications
 void MyScene1::sceneWillDisappear( ofxScene * toScreen ){
+    
+}
+void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
+{
+    while(circles.size()>0)
+    {
+        circles.erase(circles.begin());
+        
+    }
 }

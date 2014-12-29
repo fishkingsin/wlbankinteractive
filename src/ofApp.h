@@ -13,8 +13,7 @@
 #include "ofxSceneManager.h"
 #include "MyScene1.h"
 #include "MyScene2.h"
-//#include "MyScene3.h"
-
+#include "CommonAssets.h"
 class FlowPoint : public ofxAnimatableOfPoint
 {
 public:
@@ -79,6 +78,11 @@ class ofApp : public ofBaseApp{
     ofParameter<bool> debugDraw3;
     ofParameter<int>Mode;
     ofParameter<string>fps;
+    
+    ofParameter<bool> timePriority;
+    ofParameter<float> maxIdleTime;
+    ofParameter<string> currentIdleString;
+    float currentIdleTime;
     ofxPanel gui;
     bool toggleDrawGUI;
 
@@ -89,7 +93,7 @@ class ofApp : public ofBaseApp{
     enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
-//    MyScene2 *scene2;
-
+//    MyScene_2 *scene2;
     
+    CommonAssets commonAssets;
 };
