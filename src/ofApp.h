@@ -14,30 +14,30 @@
 #include "MyScene1.h"
 #include "MyScene2.h"
 #include "CommonAssets.h"
-class FlowPoint : public ofxAnimatableOfPoint
-{
-public:
-    ofColor color;
-    float _radius;
-    
-    void setup()
-    {
-        color = ofColor::fromHsb(ofRandom(255),100,100);
-    }
-
-    
-    void draw()
-    {
-        ofPushMatrix();
-        ofTranslate(ofxAnimatableOfPoint::getCurrentPosition());
-
-        ofSetColor(color);
-        ofFill();
-        ofCircle(0, 0, _radius);
-        
-        ofPopMatrix();
-    }
-};
+//class FlowPoint : public ofxAnimatableOfPoint
+//{
+//public:
+//    ofColor color;
+//    float _radius;
+//    
+//    void setup()
+//    {
+//        color = ofColor::fromHsb(ofRandom(255),100,100);
+//    }
+//
+//    
+//    void draw()
+//    {
+//        ofPushMatrix();
+//        ofTranslate(ofxAnimatableOfPoint::getCurrentPosition());
+//
+//        ofSetColor(color);
+//        ofFill();
+//        ofCircle(0, 0, _radius);
+//        
+//        ofPopMatrix();
+//    }
+//};
 class ofApp : public ofBaseApp{
 
 	public:
@@ -76,7 +76,7 @@ class ofApp : public ofBaseApp{
     ofParameter<bool> debugDraw1;
     ofParameter<bool> debugDraw2;
     ofParameter<bool> debugDraw3;
-    ofParameter<int>Mode;
+
     ofParameter<string>fps;
     
     ofParameter<bool> timePriority;
@@ -87,7 +87,7 @@ class ofApp : public ofBaseApp{
     bool toggleDrawGUI;
 
     
-    vector    <ofPtr<FlowPoint> >	points;
+//    vector    <ofPtr<FlowPoint> >	points;
 
     
     enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 };

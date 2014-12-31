@@ -17,7 +17,7 @@ void MyScene2::setup()
     float padding = 256;
     float maxVelocity = 0;
     
-    int n = commonAssets->kParticles * 1024;
+    int n = commonAssets->kParticles;
     int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight())*0.5;
     for(int i = 0; i < n; i++) {
         
@@ -97,7 +97,7 @@ void MyScene2::draw()
     ofSetColor(255, 255, 255);
     ofFill();
     commonAssets->draw();
-    ofDrawBitmapString(ofToString(commonAssets->kParticles*1024) + "k particles", 32, 32);
+    ofDrawBitmapString(ofToString(commonAssets->kParticles) + "k particles", 32, 32);
     
     ofDrawBitmapString(ofToString((int) ofGetFrameRate()) + " fps", 32, 52);
 }

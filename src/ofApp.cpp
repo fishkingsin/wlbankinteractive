@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #include "MyScene2.h"
+#include "MyScene3.h"
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofEnableSmoothing();
@@ -46,23 +47,27 @@ void ofApp::setup(){
     scene2->commonAssets = &commonAssets;
     sceneManager->addScene(scene2 , SCENE_2);
     
+    MyScene3* scene3 = new MyScene3();
+    scene3->commonAssets = &commonAssets;
+    sceneManager->addScene(scene3 , SCENE_3);
+    
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
     sceneManager->setCurtainStayTime(0.0);
     sceneManager->setCurtainRiseTime(1.0);
     sceneManager->setOverlapUpdate(true);
 //   sceneManager->goToScene(SCENE_2);
-    int step = 10;
-    for(int y = 0 ;y < VIDEO_HEIGHT ; y+=step )
-    {
-        for(int x = 0 ;x < VIDEO_WIDTH ; x+=step )
-        {
-            points.push_back(ofPtr<FlowPoint>(new FlowPoint));
-            points.back().
-            get()->setPosition(ofPoint(x,y));
-            points.back().get()->setup();
-        }
-    }
+//    int step = 10;
+//    for(int y = 0 ;y < VIDEO_HEIGHT ; y+=step )
+//    {
+//        for(int x = 0 ;x < VIDEO_WIDTH ; x+=step )
+//        {
+//            points.push_back(ofPtr<FlowPoint>(new FlowPoint));
+//            points.back().
+//            get()->setPosition(ofPoint(x,y));
+//            points.back().get()->setup();
+//        }
+//    }
     
     gui.setup("Settings");
     gui.add(threshold.set("threashold",80,1,255));
@@ -76,7 +81,7 @@ void ofApp::setup(){
     gui.add( debugDraw2.set("debugDraw2",false));
     gui.add( debugDraw3.set("debugDraw3",false));
     gui.add( scene1->coolDown.set("coolDown",0,0,100000));
-    gui.add( Mode.set("Mode",0,0,3));
+//    gui.add( Mode.set("Mode",0,0,3));
     gui.add( timePriority.set("Toggle Time Prioirty",false));
     gui.add( maxIdleTime.set("Mac Idle(min)",0.5,0,60.0f));
     
@@ -112,80 +117,86 @@ void ofApp::update(){
             }
         }
     }
-    videoPlayer.update();
     fps = ofToString(ofGetFrameRate());
     if(maxArea<minArea)
     {
         maxArea = minArea;
     }
+    videoPlayer.update();
     float dt = 0.016666666;
-    
-    bool bNewFrame = grabber.isFrameNew();
-    float scale = (1.0f*ofGetWidth())/VIDEO_WIDTH;
-    if (bNewFrame){
-        opticalFlow.update(grabber);
-        fbo.begin();
-        ofPushStyle();
-        ofSetColor(0);
-        ofFill();
-        ofRect(0, 0, VIDEO_WIDTH,VIDEO_HEIGHT);
-        ofPopStyle();
-        ofSetColor(255);
-        opticalFlow.draw(VIDEO_WIDTH,VIDEO_HEIGHT);
-        fbo.end();
-        fbo.readToPixels(pixels);
-        //        cvImage.setFromPixels(grabber->getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
-        cvImage.setFromPixels(pixels.getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
-        grayImage = cvImage;
-        
-        if(bBlur)grayImage.blur();
+    if(sceneManager->getCurrentSceneID()==SCENE_1)
+    {
+
+       
         
         
-        
-        
-        // take the abs value of the difference between background and incoming and then threshold:
-        grayDiff.absDiff(grayBg, grayImage);
-        grayDiff.threshold(threshold);
-        
-        // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
-        // also, find holes is set to true so we will get interior contours as well....
-        contourFinder.findContours(grayImage,
-                                   minArea,
-                                   maxArea,
-                                   nConsidered,
-                                   bFindHoles,
-                                   bUseApproximation);	// find holes
-        
-        grayBg = grayImage;
+        bool bNewFrame = grabber.isFrameNew();
+        float scale = (1.0f*ofGetWidth())/VIDEO_WIDTH;
+        if (bNewFrame){
+            opticalFlow.update(grabber);
+            fbo.begin();
+            ofPushStyle();
+            ofSetColor(0);
+            ofFill();
+            ofRect(0, 0, VIDEO_WIDTH,VIDEO_HEIGHT);
+            ofPopStyle();
+            ofSetColor(255);
+            opticalFlow.draw(VIDEO_WIDTH,VIDEO_HEIGHT);
+            fbo.end();
+            fbo.readToPixels(pixels);
+            //        cvImage.setFromPixels(grabber->getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
+            cvImage.setFromPixels(pixels.getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
+            grayImage = cvImage;
+            
+            if(bBlur)grayImage.blur();
+            
+            
+            
+            
+            // take the abs value of the difference between background and incoming and then threshold:
+            grayDiff.absDiff(grayBg, grayImage);
+            grayDiff.threshold(threshold);
+            
+            // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
+            // also, find holes is set to true so we will get interior contours as well....
+            contourFinder.findContours(grayImage,
+                                       minArea,
+                                       maxArea,
+                                       nConsidered,
+                                       bFindHoles,
+                                       bUseApproximation);	// find holes
+            
+            grayBg = grayImage;
+        }
     }
     sceneManager->update( dt );
     
-    switch(Mode)
-    {
-        case 0:
-        {
-            
-        }
-            break;
-        case 1:
-        {
-            float dt = 1.0f / ofGetFrameRate();
-            for(int i=0; i<points.size(); i++) {
-                points[i].get()->update(dt);
-            }
-        }
-            break;
-        case 2:
-        {
-//            mioFlow.update(grabber.getTextureReference());
-        }
-            break;
-        case 3:
-        {
-            
-        }
-            break;
-    }
+//    switch(Mode)
+//    {
+//        case 0:
+//        {
+//            
+//        }
+//            break;
+//        case 1:
+//        {
+//            float dt = 1.0f / ofGetFrameRate();
+//            for(int i=0; i<points.size(); i++) {
+//                points[i].get()->update(dt);
+//            }
+//        }
+//            break;
+//        case 2:
+//        {
+////            mioFlow.update(grabber.getTextureReference());
+//        }
+//            break;
+//        case 3:
+//        {
+//            
+//        }
+//            break;
+//    }
 }
 
 //--------------------------------------------------------------
@@ -201,27 +212,27 @@ void ofApp::draw(){
     sceneManager->draw();
     
     
-    switch(Mode)
-    {
-        case 0:
-        {
-            
-        }
-            break;
-        case 1:
-        {
-            for(int i=0; i<points.size(); i++) {
-                points[i].get()->draw();
-            }
-        }
-            break;
-        case 2:
-//            mioFlow.getFlowBlurTexture().draw(0,0);
-            
-            break;
-        case 3:
-            break;
-    }
+//    switch(Mode)
+//    {
+//        case 0:
+//        {
+//            
+//        }
+//            break;
+//        case 1:
+//        {
+//            for(int i=0; i<points.size(); i++) {
+//                points[i].get()->draw();
+//            }
+//        }
+//            break;
+//        case 2:
+////            mioFlow.getFlowBlurTexture().draw(0,0);
+//            
+//            break;
+//        case 3:
+//            break;
+//    }
     
     if(debugDraw2)
     {
@@ -252,6 +263,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
     if (key == '2') sceneManager->goToScene(SCENE_2);
+        if (key == '3') sceneManager->goToScene(SCENE_3);
     sceneManager->keyPressed(key);
     switch(key) 
     {

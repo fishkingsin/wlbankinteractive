@@ -7,7 +7,18 @@
 //
 
 #include "CommonAssets.h"
-
+void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle)
+{
+    
+    texture.loadImage(filePath);
+    
+    texW = texture.getWidth();
+    texH = texture.getHeight();
+    
+    cellRows  = col;
+    cellColls = row;
+    kParticles = nParticle *1024;
+}
 void CommonAssets::setup()
 {
 
@@ -24,15 +35,15 @@ void CommonAssets::setup()
         billboardShader.load("shadersGL2/Billboard");
     }
     
-    divAtt.resize(kParticles * 1024);
-    offSetXAtt.resize(kParticles * 1024);
-    offSetYAtt.resize(kParticles * 1024);
-    angle.resize(kParticles * 1024);
-    alpha.resize(kParticles * 1024);
-    billboards.getVertices().resize(kParticles * 1024);
-    billboards.getColors().resize(kParticles * 1024);
-    billboards.getNormals().resize(kParticles * 1024,ofVec3f(0));
-    int n = kParticles * 1024;
+    divAtt.resize(kParticles);
+    offSetXAtt.resize(kParticles);
+    offSetYAtt.resize(kParticles);
+    angle.resize(kParticles);
+    alpha.resize(kParticles);
+    billboards.getVertices().resize(kParticles);
+    billboards.getColors().resize(kParticles);
+    billboards.getNormals().resize(kParticles,ofVec3f(0));
+    int n = kParticles;
 
     billboardShader.begin();
     int divAttLoc = billboardShader.getAttributeLocation("divAtt");
@@ -52,7 +63,7 @@ void CommonAssets::setup()
 }
 void CommonAssets::updateAttribtuteData()
 {
-    int n = kParticles * 1024;
+    int n = kParticles;
     billboardShader.begin();
     int divAttLoc = billboardShader.getAttributeLocation("divAtt");
     billboards.getVbo().updateAttributeData(divAttLoc,  &divAtt[0], n);
@@ -67,18 +78,7 @@ void CommonAssets::updateAttribtuteData()
     
     billboardShader.end();
 }
-void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle)
-{
-    
-    texture.loadImage(filePath);
-    
-    texW = texture.getWidth();
-    texH = texture.getHeight();
-    
-    cellRows  = col;
-    cellColls = row;
-    kParticles = nParticle;
-}
+
 void CommonAssets::draw()
 {
     ofSetColor(255);
@@ -96,21 +96,21 @@ void CommonAssets::draw()
 void CommonAssets::setParticleColor(int i, ofColor c)
 {
     if(i < 0)                               i = 0;
-    if(i > kParticles * 1024)   i = kParticles * 1024;
+    if(i > kParticles)   i = kParticles;
     billboards.setColor(i, c);
 //    alpha[i] = c.a;
 }
 void CommonAssets::setParticleVertex(int i, ofVec3f v)
 {
     if(i < 0)                               i = 0;
-    if(i > kParticles * 1024)   i = kParticles * 1024;
+    if(i > kParticles)   i = kParticles;
     billboards.getVertices()[i] = v;
 }
 
 void CommonAssets::setParticleNormal(int i, ofVec3f v)
 {
     if(i < 0)                               i = 0;
-    if(i > kParticles * 1024)   i = kParticles * 1024;
+    if(i > kParticles)   i = kParticles;
      billboards.setNormal(i,v);
 }
 
@@ -118,7 +118,7 @@ void CommonAssets::setParticleTexCoords(int i, float columnID, float rowID)
 {
     
     if(i < 0)                               i = 0;
-    if(i > kParticles * 1024)   i = kParticles * 1024;
+    if(i > kParticles)   i = kParticles;
     
     if(columnID > cellColls) columnID = cellColls;
     if(rowID    > cellRows)  rowID    = cellRows;
