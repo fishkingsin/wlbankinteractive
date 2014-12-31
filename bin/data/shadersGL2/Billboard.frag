@@ -31,6 +31,6 @@ void main (void) {
     vec2 newcoords = ((v2-offset) * (rotationMatrix));
     newcoords += offset;
     vec4 col = texture2D(tex,v2);
-    col.a *= a;
+//    col.a *= a;
 	gl_FragColor = col * gl_Color ;
 }
