@@ -17,7 +17,7 @@ void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle
     
     cellRows  = col;
     cellColls = row;
-    kParticles = nParticle *1024;
+    kParticles = nParticle *128;
 }
 void CommonAssets::setup()
 {
@@ -38,22 +38,24 @@ void CommonAssets::setup()
     }
     
     divAtt.resize(kParticles);
-    offSetXAtt.resize(kParticles);
-    offSetYAtt.resize(kParticles);
+    moffsetXAtt.resize(kParticles);
+    moffsetYAtt.resize(kParticles);
 //    angle.resize(kParticles);
 //    alpha.resize(kParticles);
     billboards.getVertices().resize(kParticles);
     billboards.getColors().resize(kParticles);
     billboards.getNormals().resize(kParticles,ofVec3f(0));
+    billboards.getTexCoords().resize(kParticles,ofVec2f(0));
     int n = kParticles;
 
     billboardShader.begin();
+//    int moffsetXAttLoc = billboardShader.getAttributeLocation("moffsetXAtt");
+//    billboards.getVbo().setAttributeData(moffsetXAttLoc, &moffsetXAtt[0], 1, n, GL_DYNAMIC_DRAW);
+//    int moffsetYAttLoc = billboardShader.getAttributeLocation("moffsetYAtt");
+//    billboards.getVbo().setAttributeData(moffsetYAttLoc, &moffsetYAtt[0], 1, n, GL_DYNAMIC_DRAW);
+
     int divAttLoc = billboardShader.getAttributeLocation("divAtt");
     billboards.getVbo().setAttributeData(divAttLoc,  &divAtt[0], 1, n,  GL_DYNAMIC_DRAW);
-    int offsetXAttLoc = billboardShader.getAttributeLocation("offsetXAtt");
-    billboards.getVbo().setAttributeData(offsetXAttLoc, &offSetXAtt[0], 1, n, GL_DYNAMIC_DRAW);
-    int offsetYAttLoc = billboardShader.getAttributeLocation("offsetYAtt");
-    billboards.getVbo().setAttributeData(offsetYAttLoc, &offSetYAtt[0], 1, n, GL_DYNAMIC_DRAW);
 //    int angleAttLoc = billboardShader.getAttributeLocation("angle");
 //    billboards.getVbo().setAttributeData(angleAttLoc, &angle[0], 1, n, GL_DYNAMIC_DRAW);
 
@@ -67,12 +69,13 @@ void CommonAssets::updateAttribtuteData()
 {
     int n = kParticles;
     billboardShader.begin();
+//    int moffsetXAttLoc = billboardShader.getAttributeLocation("moffsetXAtt");
+//    billboards.getVbo().updateAttributeData(moffsetXAttLoc, &moffsetXAtt[0], n);
+//    int moffsetYAttLoc = billboardShader.getAttributeLocation("moffsetYAtt");
+//    billboards.getVbo().updateAttributeData(moffsetYAttLoc, &moffsetYAtt[0], n);
+
     int divAttLoc = billboardShader.getAttributeLocation("divAtt");
     billboards.getVbo().updateAttributeData(divAttLoc,  &divAtt[0], n);
-    int offsetXAttLoc = billboardShader.getAttributeLocation("offsetXAtt");
-    billboards.getVbo().updateAttributeData(offsetXAttLoc, &offSetXAtt[0], n);
-    int offsetYAttLoc = billboardShader.getAttributeLocation("offsetYAtt");
-    billboards.getVbo().updateAttributeData(offsetYAttLoc, &offSetYAtt[0], n);
 //    int angleAttLoc = billboardShader.getAttributeLocation("angle");
 //    billboards.getVbo().updateAttributeData(angleAttLoc, &angle[0], n);
 //    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
@@ -136,9 +139,11 @@ void CommonAssets::setParticleTexCoords(int i, float columnID, float rowID)
     
     float row = rowID;
     float col = columnID;
-    offSetXAtt[i] = (cellWidth * row) / texW;
-    offSetYAtt[i] = (cellHeight * col) / texH;
-//        ofLogVerbose(__PRETTY_FUNCTION__) << "offSetXAtt :" << offSetXAtt[i] <<  " offSetYAtt :" << offSetYAtt[i];
+//    moffsetXAtt[i] = (cellWidth * row) / texW;
+//    moffsetYAtt[i] = (cellHeight * col) / texH;
+    billboards.getTexCoords()[i].set((cellWidth * row) / texW,
+                                     moffsetYAtt[i] = (cellHeight * col) / texH);
+//        ofLogVerbose(__PRETTY_FUNCTION__) << "moffsetXAtt :" << moffsetXAtt[i] <<  " moffsetYAtt :" << moffsetYAtt[i];
     // P1
     //    billboards.getTexCoords()[(i*4)+0].set( (cellWidth * row) / texW,(cellHeight * col) / texH);
     //    ofLogVerbose(ofToString(i)) << billboards.getTexCoords()[(i*4)+0];

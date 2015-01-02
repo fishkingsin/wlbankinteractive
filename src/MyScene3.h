@@ -12,21 +12,26 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "ofxScene.h"
-#include "CommonAssets.h"
+#include "ofxTween.h"
+
+#define INTERVAL_MILLS 1000
+
 class MyScene3 : public ofxScene
 {
 public:
     void setup();
-    
+    void init();
     void update(float dt);
     void draw();
-    vector<ofVec3f>points;
-    vector<ofVec3f>target;
-    vector<int>radius;
-    vector<ofVec3f> billboardVels;
-    CommonAssets *commonAssets;
-    int n ;
-    int decay;
+    void sceneDidAppear();
+    vector<ofxTween> tweensX;
+    vector<ofxTween> tweensY;
+    ofxEasingElastic easingelastic;
+    int count;
+    int interval;
+    int MAX_POINTS;
+    ofImage image;
+    int step;
 
 };
 #endif /* defined(__wlbankinteractive__MeScene3__) */

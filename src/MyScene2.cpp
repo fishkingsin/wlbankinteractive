@@ -38,7 +38,7 @@ void MyScene2::setup()
         particleSystem.add(particle);
         
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
-        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
+        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 64 ),0,0));
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
 //        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);

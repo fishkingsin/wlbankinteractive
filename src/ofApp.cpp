@@ -48,7 +48,7 @@ void ofApp::setup(){
     sceneManager->addScene(scene2 , SCENE_2);
     
     MyScene3* scene3 = new MyScene3();
-    scene3->commonAssets = &commonAssets;
+//    scene3->commonAssets = &commonAssets;
     sceneManager->addScene(scene3 , SCENE_3);
     
     sceneManager->setDrawDebug(true);

@@ -28,6 +28,8 @@
 		<string>https://github.com/armadillu/ofxScreenCurtain.git</string>
 		<key>4A07A85B784FB5A65CC7D97FE58343D157517D6A</key>
 		<string>https://github.com/julapy/ofxOpticalFlowLK.git</string>
+		<key>6B5D1DE462D521A98972DF70F1147E20268C546A</key>
+		<string>https://github.com/arturoc/ofxTween.git</string>
 		<key>6E85F585BA7940AD33F8E74F0EE05D55511194B6</key>
 		<string>https://github.com/hironishihara/ofxTrueTypeFontUC.git</string>
 		<key>903165F9FDCB952EAE50578862E56DA722F43224</key>
@@ -61,6 +63,8 @@
 		<string>../../../addons/ofxScreenCurtain</string>
 		<key>4A07A85B784FB5A65CC7D97FE58343D157517D6A</key>
 		<string>../../../addons/ofxOpticalFlowLK</string>
+		<key>6B5D1DE462D521A98972DF70F1147E20268C546A</key>
+		<string>../../../../../addons/ofxTween</string>
 		<key>6E85F585BA7940AD33F8E74F0EE05D55511194B6</key>
 		<string>../../../addons/ofxTrueTypeFontUC</string>
 		<key>903165F9FDCB952EAE50578862E56DA722F43224</key>
@@ -175,6 +179,14 @@
 			<string>6E85F585BA7940AD33F8E74F0EE05D55511194B6</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxTrueTypeFontUC</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6B5D1DE462D521A98972DF70F1147E20268C546A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxTween</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

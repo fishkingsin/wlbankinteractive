@@ -54,7 +54,7 @@ void ParticleSystem::addForce(const Particle& particle, float radius, float scal
 }
 
 void ParticleSystem::addForce(float x, float y, float radius, float scale) {
-	tree->addForce(x, y, radius, scale);
+	tree->addForce(x, y, radius*4, scale);
 
 	/*
 	// this is another technique that uses the getNeighbors() function

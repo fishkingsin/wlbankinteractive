@@ -45,9 +45,9 @@ public:
     
     vector<float>divAtt;
     
-    vector<float>offSetXAtt;
+    vector<float>moffsetXAtt;
     
-    vector<float>offSetYAtt;
+    vector<float>moffsetYAtt;
     
 //    vector<float>angle;
 //    vector<float>alpha;
