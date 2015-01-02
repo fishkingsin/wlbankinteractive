@@ -12,24 +12,7 @@ in vec3  normal;
 
 out vec4 colorVarying;
 
-
-in float divAtt;
-in float offsetXAtt;
-in float offsetYAtt;
-in float angle;
-
-out float div;
-out float offsetX;
-out float offsetY;
-out float rotAngle;
-
 void main() {
-    
-    offsetX = offsetXAtt;
-    offsetY = offsetYAtt;
-    div = divAtt;
-    rotAngle = angle;
-    
 	vec4 eyeCoord = modelViewMatrix * position;
 	gl_Position = projectionMatrix * eyeCoord; // to be accurate this should premultiply by orientationMatrix
 	

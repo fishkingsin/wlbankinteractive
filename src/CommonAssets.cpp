@@ -30,16 +30,18 @@ void CommonAssets::setup()
     billboardShader.setGeometryOutputType(GL_TRIANGLE_STRIP);
     billboardShader.setGeometryOutputCount(4);
     if(ofGetGLProgrammableRenderer()){
+        ofLogVerbose(__PRETTY_FUNCTION__)<< "load shadersGL3";
         billboardShader.load("shadersGL3/Billboard");
     }else{
+        ofLogVerbose(__PRETTY_FUNCTION__)<< "load shadersGL2";
         billboardShader.load("shadersGL2/Billboard");
     }
     
     divAtt.resize(kParticles);
     offSetXAtt.resize(kParticles);
     offSetYAtt.resize(kParticles);
-    angle.resize(kParticles);
-    alpha.resize(kParticles);
+//    angle.resize(kParticles);
+//    alpha.resize(kParticles);
     billboards.getVertices().resize(kParticles);
     billboards.getColors().resize(kParticles);
     billboards.getNormals().resize(kParticles,ofVec3f(0));
@@ -52,11 +54,11 @@ void CommonAssets::setup()
     billboards.getVbo().setAttributeData(offsetXAttLoc, &offSetXAtt[0], 1, n, GL_DYNAMIC_DRAW);
     int offsetYAttLoc = billboardShader.getAttributeLocation("offsetYAtt");
     billboards.getVbo().setAttributeData(offsetYAttLoc, &offSetYAtt[0], 1, n, GL_DYNAMIC_DRAW);
-    int angleAttLoc = billboardShader.getAttributeLocation("angle");
-    billboards.getVbo().setAttributeData(angleAttLoc, &angle[0], 1, n, GL_DYNAMIC_DRAW);
+//    int angleAttLoc = billboardShader.getAttributeLocation("angle");
+//    billboards.getVbo().setAttributeData(angleAttLoc, &angle[0], 1, n, GL_DYNAMIC_DRAW);
 
-    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
-    billboards.getVbo().setAttributeData(alphaAttLoc, &alpha[0], 1, n, GL_DYNAMIC_DRAW);
+//    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
+//    billboards.getVbo().setAttributeData(alphaAttLoc, &alpha[0], 1, n, GL_DYNAMIC_DRAW);
 
     
     billboardShader.end();
@@ -71,10 +73,10 @@ void CommonAssets::updateAttribtuteData()
     billboards.getVbo().updateAttributeData(offsetXAttLoc, &offSetXAtt[0], n);
     int offsetYAttLoc = billboardShader.getAttributeLocation("offsetYAtt");
     billboards.getVbo().updateAttributeData(offsetYAttLoc, &offSetYAtt[0], n);
-    int angleAttLoc = billboardShader.getAttributeLocation("angle");
-    billboards.getVbo().updateAttributeData(angleAttLoc, &angle[0], n);
-    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
-    billboards.getVbo().updateAttributeData(alphaAttLoc, &alpha[0], n);
+//    int angleAttLoc = billboardShader.getAttributeLocation("angle");
+//    billboards.getVbo().updateAttributeData(angleAttLoc, &angle[0], n);
+//    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
+//    billboards.getVbo().updateAttributeData(alphaAttLoc, &alpha[0], n);
     
     billboardShader.end();
 }
@@ -83,13 +85,13 @@ void CommonAssets::draw()
 {
     ofSetColor(255);
     billboardShader.begin();
-    
+
     ofEnablePointSprites(); // not needed for GL3/4
     texture.getTextureReference().bind();
     billboards.draw();
     texture.getTextureReference().unbind();
     ofDisablePointSprites(); // not needed for GL3/4
-    
+
     billboardShader.end();
 }
 

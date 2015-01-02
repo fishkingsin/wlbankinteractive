@@ -49,8 +49,8 @@ public:
     
     vector<float>offSetYAtt;
     
-    vector<float>angle;
-    vector<float>alpha;
+//    vector<float>angle;
+//    vector<float>alpha;
 
 };
 

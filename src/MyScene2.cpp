@@ -9,6 +9,12 @@
 #include "MyScene2.h"
 void MyScene2::setup()
 {
+    ofBackground(99);
+    ofSetFrameRate(60);
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    ofSetVerticalSync(true);
+    
     image.loadImage("bg.png");
 
 //    ofSetWindowShape(image.getWidth(), image.getHeight());
@@ -35,7 +41,7 @@ void MyScene2::setup()
         commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
-        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
+//        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
 
         
     }
