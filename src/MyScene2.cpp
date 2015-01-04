@@ -7,6 +7,7 @@
 //
 
 #include "MyScene2.h"
+
 void MyScene2::setup()
 {
     ofBackground(99);
@@ -21,17 +22,19 @@ void MyScene2::setup()
     box2d.setGravity(0, 0);
     box2d.setFPS(30.0);
 
-
-//    ofSetWindowShape(image.getWidth(), image.getHeight());
     
+    ofBackground(0, 0, 0);
     
+    isStart = false;
+}
+//--------------------------------------------------------------------------------------------
+void MyScene2::init()
+{
     float padding = 256;
     float maxVelocity = 0;
     
     int n = 500;
     int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight())*0.75;
-    
-//    circles.resize(n,ofPtr<ofxBox2dCircle>(new ofxBox2dCircle));
     for(int i = 0; i <n ; i++) {
         
         float x,y,xv,yv;
@@ -41,34 +44,28 @@ void MyScene2::setup()
         float r = ofRandom(8, 20);
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
-//        Particle particle(x, y, xv, yv);
-//        particleSystem.add(particle);
         ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         circle.get()->setPhysics(3.0, 0.53, 0.9);
         circle.get()->setup(box2d.getWorld(), x, y , r*0.5);
         circles.push_back(circle);
-
+        
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
         commonAssets->setParticleNormal(i,ofVec3f(r,0,0));
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
-//        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
-
+        //        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
+        
         
     }
     
     
     
-//    particleSystem.setTimeStep(1);
+    //    particleSystem.setTimeStep(1);
     
     commonAssets->updateAttribtuteData();
     
-    
-    ofBackground(0, 0, 0);
-    
-    isStart = false;
 }
-
+//--------------------------------------------------------------------------------------------
 void MyScene2::update(float dt)
 {
 
@@ -86,6 +83,7 @@ void MyScene2::update(float dt)
         }
 
     }
+    commonAssets->updateAttribtuteData();
 }
 void MyScene2::draw()
 {
@@ -116,18 +114,21 @@ void MyScene2::mousePressed( int x, int y, int button )
 }    //scene notifications
 void MyScene2::sceneWillAppear( ofxScene * fromScreen )
 {
-//    commonAssets->reset();
+    commonAssets->reset();
+        init();
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )
 {
 //    commonAssets->reset();
+
 }
 
 void MyScene2::sceneDidAppear()
 {
     //    printf("ofxScene::sceneDidAppear() :: %d\n", sceneID);
         isStart = true;
+    
 
 }
 

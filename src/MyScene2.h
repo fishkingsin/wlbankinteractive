@@ -23,7 +23,7 @@ class MyScene2 : public ofxScene{
 public:
     
     void setup();
-    
+    void init();
     void update(float dt);
     void draw();
     void keyPressed(int key);
