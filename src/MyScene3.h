@@ -25,8 +25,9 @@ public:
     void draw();
     void sceneWillAppear( ofxScene * fromScreen );
     void sceneDidAppear();
-    vector<ofxTween> tweensX;
-    vector<ofxTween> tweensY;
+    void sceneDidDisappear(ofxScene *fromScreen);
+    vector<ofPtr<ofxTween> > tweensX;
+    vector<ofPtr<ofxTween> > tweensY;
     ofxEasingElastic easingelastic;
     int count;
     int interval;

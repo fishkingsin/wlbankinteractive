@@ -21,8 +21,7 @@ void MyScene3::setup()
             
         }
     }
-    tweensX.resize(MAX_POINTS);
-    tweensY.resize(MAX_POINTS);
+
     
     
 
@@ -58,8 +57,19 @@ void MyScene3::init()
         points[i].set(_x, _y);
         
         
-        tweensX[i].setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,i);
-        tweensY[i].setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
+        ofPtr<ofxTween> tx = ofPtr<ofxTween>(new ofxTween);
+        tx.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,i);
+        tweensX.push_back(tx);
+
+        
+        ofPtr<ofxTween> ty = ofPtr<ofxTween>(new ofxTween);
+        ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
+        tweensY.push_back(ty);
+
+        
+        
+//        tweensX[i].setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,i);
+//        tweensY[i].setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
         commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
@@ -67,14 +77,15 @@ void MyScene3::init()
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
     }
     count = 0;
+    commonAssets->updateAttribtuteData();
 }
 
 void MyScene3::update(float dt)
 {
-    for(int i = 0 ; i< MAX_POINTS ; i++)
+    for(int i = 0 ; i< tweensX.size() ; i++)
     {
-        float x = tweensX[i].update();
-        float y = tweensY[i].update();
+        float x = tweensX[i].get()->update();
+        float y = tweensY[i].get()->update();
         commonAssets->setParticleVertex(i, ofVec3f(x,y,0));
         
         //        points[i].draw();
@@ -89,10 +100,26 @@ void MyScene3::draw()
 void MyScene3::sceneWillAppear( ofxScene * fromScreen )
 {
     commonAssets->reset();
+    init();
 
 }
 void MyScene3::sceneDidAppear()
 {
     
-    init();
+    
+}
+
+void MyScene3::sceneDidDisappear(ofxScene *fromScreen)
+{
+    while(tweensX.size()>0)
+    {
+        tweensX.erase(tweensX.begin());
+        
+    }
+    while(tweensY.size()>0)
+    {
+        tweensY.erase(tweensY.begin());
+        
+    }
+
 }
