@@ -16,6 +16,11 @@ void MyScene2::setup()
     ofSetVerticalSync(true);
     
     image.loadImage("bg.png");
+    
+    box2d.init();
+    box2d.setGravity(0, 0);
+    box2d.setFPS(30.0);
+
 
 //    ofSetWindowShape(image.getWidth(), image.getHeight());
     
@@ -23,22 +28,28 @@ void MyScene2::setup()
     float padding = 256;
     float maxVelocity = 0;
     
-    int n = commonAssets->kParticles;
-    int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight())*0.5;
-    for(int i = 0; i < n; i++) {
+    int n = 500;
+    int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight())*0.75;
+    
+//    circles.resize(n,ofPtr<ofxBox2dCircle>(new ofxBox2dCircle));
+    for(int i = 0; i <n ; i++) {
         
         float x,y,xv,yv;
         float randomPI = ofRandom(-PI,PI);
         x = (sin(randomPI)*maxRadius)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
         y = (cos(randomPI)*maxRadius)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
-        
+        float r = ofRandom(8, 20);
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
-        Particle particle(x, y, xv, yv);
-        particleSystem.add(particle);
-        
+//        Particle particle(x, y, xv, yv);
+//        particleSystem.add(particle);
+        ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
+        circle.get()->setPhysics(3.0, 0.53, 0.9);
+        circle.get()->setup(box2d.getWorld(), x, y , r*0.5);
+        circles.push_back(circle);
+
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
-        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
+        commonAssets->setParticleNormal(i,ofVec3f(r,0,0));
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
 //        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
@@ -48,7 +59,7 @@ void MyScene2::setup()
     
     
     
-    particleSystem.setTimeStep(1);
+//    particleSystem.setTimeStep(1);
     
     commonAssets->updateAttribtuteData();
     
@@ -60,46 +71,32 @@ void MyScene2::setup()
 
 void MyScene2::update(float dt)
 {
-    if(!isStart)
-    {
-        return;
-    }
-    particleSystem.setupForces();
-    
+
+
+    box2d.update();
     // apply per-particle forces
-    for(int i = 0; i < particleSystem.size(); i++) {
-        Particle& cur = particleSystem[i];
-        // global force on other particles
-        particleSystem.addRepulsionForce(cur, 3, 1);
-        // forces on this particle
-        //        cur.bounceOffWalls(0, 0, ofGetWidth(), ofGetHeight());
-        cur.addDampingForce();
-    }
-    // single global forces
-    particleSystem.addAttractionForce(ofGetWidth() / 2, ofGetHeight() / 2, 1500, 0.05);
-    //    particleSystem.addRepulsionForce(mouseX, mouseY, 100, 2);
-    particleSystem.update();
-    vector<Particle> &particles = particleSystem.getParticles();
-    int n = particles.size();
-    for(int i = 0; i < n; i++)
-    {
-        commonAssets->setParticleVertex(i, particles[i]);
-        if(particles[i].x>0 && particles[i].x < image.getWidth() && particles[i].y >0 && particles[i].y < image.getHeight())
+    for(int i=0; i<circles.size(); i++) {
+        circles[i].get()->addAttractionPoint(ofVec2f(ofGetWidth()*0.5,ofGetHeight()*0.5), (isStart)?0.5:0);
+        ofVec2f pos = circles[i].get()->getPosition();
+        commonAssets->setParticleVertex(i, pos);
+        if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())
         {
-            ofColor c = image.getColor(particles[i].x, particles[i].y);
+            ofColor c = image.getColor(pos.x, pos.y);
             if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
-            //            billboards.getNormals()[i].set(particles[i].xv*particles[i].yv, 0,0);
         }
+
     }
-//    int alphaAttLoc = commonAssets->billboardShader.getAttributeLocation("alphaAtt");
-//    commonAssets->billboards.getVbo().updateAttributeData(alphaAttLoc, &commonAssets->alpha[0], n);
 }
 void MyScene2::draw()
 {
-    if(!isStart)
-    {
-        return;
+
+#if DEBUG
+    for(int i=0; i<circles.size(); i++) {
+        ofFill();
+        ofSetHexColor(0xf6c738);
+        circles[i].get()->draw();
     }
+#endif
     ofSetColor(255, 255, 255);
     ofFill();
     commonAssets->draw();
@@ -119,12 +116,12 @@ void MyScene2::mousePressed( int x, int y, int button )
 }    //scene notifications
 void MyScene2::sceneWillAppear( ofxScene * fromScreen )
 {
-    commonAssets->reset();
+//    commonAssets->reset();
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )
 {
-    commonAssets->reset();
+//    commonAssets->reset();
 }
 
 void MyScene2::sceneDidAppear()
@@ -132,4 +129,13 @@ void MyScene2::sceneDidAppear()
     //    printf("ofxScene::sceneDidAppear() :: %d\n", sceneID);
         isStart = true;
 
+}
+
+void MyScene2::sceneDidDisappear(ofxScene *fromScreen)
+{
+    while(circles.size()>0)
+    {
+        circles.erase(circles.begin());
+        
+    }
 }
