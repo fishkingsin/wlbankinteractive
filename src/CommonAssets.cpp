@@ -17,7 +17,7 @@ void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle
     
     cellRows  = col;
     cellColls = row;
-    kParticles = nParticle *128;
+    kParticles = nParticle *1024;
 }
 void CommonAssets::setup()
 {
@@ -164,3 +164,10 @@ void CommonAssets::setParticleTexCoords(int i, float columnID, float rowID)
     
 }
 
+void CommonAssets::reset()
+{
+    for(int i = 0 ; i < kParticles ; i++)
+    {
+        setParticleVertex(i,ofVec3f::zero());
+    }
+}

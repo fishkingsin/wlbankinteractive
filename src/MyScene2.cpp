@@ -38,7 +38,7 @@ void MyScene2::setup()
         particleSystem.add(particle);
         
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
-        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 64 ),0,0));
+        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
 //        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
@@ -76,7 +76,7 @@ void MyScene2::update(float dt)
         cur.addDampingForce();
     }
     // single global forces
-    particleSystem.addAttractionForce(ofGetWidth() / 2, ofGetHeight() / 2, 1500, 0.01);
+    particleSystem.addAttractionForce(ofGetWidth() / 2, ofGetHeight() / 2, 1500, 0.05);
     //    particleSystem.addRepulsionForce(mouseX, mouseY, 100, 2);
     particleSystem.update();
     vector<Particle> &particles = particleSystem.getParticles();
@@ -119,15 +119,17 @@ void MyScene2::mousePressed( int x, int y, int button )
 }    //scene notifications
 void MyScene2::sceneWillAppear( ofxScene * fromScreen )
 {
+    commonAssets->reset();
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )
 {
-    
+    commonAssets->reset();
 }
 
 void MyScene2::sceneDidAppear()
 {
     //    printf("ofxScene::sceneDidAppear() :: %d\n", sceneID);
         isStart = true;
+
 }

@@ -29,6 +29,9 @@ public:
     void setParticleTexCoords(int i, float columnID, float rowID);
     
     void updateAttribtuteData();
+    
+    void reset();
+
     int kParticles;
     
     ofShader billboardShader;

@@ -8,14 +8,9 @@ void ofApp::setup(){
     ofDisableArbTex();
     ofSetLogLevel(OF_LOG_VERBOSE);
 
-
+    grabberManager.setup();
     
-    videoPlayer.loadMovie("movies/background.mp4");
-    videoPlayer.setLoopState(OF_LOOP_NORMAL);
-    videoPlayer.play();
-    grabber.setDesiredFrameRate(60);
-    grabber.setDeviceID(0);
-    grabber.initGrabber(VIDEO_WIDTH,VIDEO_HEIGHT);
+    
     
     fbo.allocate(VIDEO_WIDTH,VIDEO_HEIGHT,GL_RGB);
     pixels.allocate(VIDEO_WIDTH,VIDEO_HEIGHT,OF_IMAGE_COLOR);
@@ -37,7 +32,7 @@ void ofApp::setup(){
     
     sceneManager = ofxSceneManager::instance();
     scene1 = new MyScene1();
-    scene1->grabber = &grabber;
+//    scene1->grabber = &grabber;
     scene1->contourFinder = &contourFinder;
     sceneManager->addScene(scene1 , SCENE_1);
     
@@ -48,7 +43,7 @@ void ofApp::setup(){
     sceneManager->addScene(scene2 , SCENE_2);
     
     MyScene3* scene3 = new MyScene3();
-//    scene3->commonAssets = &commonAssets;
+    scene3->commonAssets = &commonAssets;
     sceneManager->addScene(scene3 , SCENE_3);
     
     sceneManager->setDrawDebug(true);
@@ -122,18 +117,19 @@ void ofApp::update(){
     {
         maxArea = minArea;
     }
-    videoPlayer.update();
+    
+    grabberManager.update();
+    
     float dt = 0.016666666;
     if(sceneManager->getCurrentSceneID()==SCENE_1)
     {
 
-       
         
         
-        bool bNewFrame = grabber.isFrameNew();
+        bool bNewFrame = true;//grabber.isFrameNew();
         float scale = (1.0f*ofGetWidth())/VIDEO_WIDTH;
         if (bNewFrame){
-            opticalFlow.update(grabber);
+//            opticalFlow.update(grabber);
             fbo.begin();
             ofPushStyle();
             ofSetColor(0);
@@ -202,16 +198,15 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0);
-    
     ofSetColor(255);
-    videoPlayer.draw(0, 0, ofGetWidth(), ofGetHeight());
-    if(debugDraw1)
-    {
-        grabber.draw(0,0,ofGetWidth(),ofGetHeight());
-    }
+    grabberManager.videoPlayer.draw(0, 0, ofGetWidth(), ofGetHeight());
+    
     sceneManager->draw();
     
-    
+    if(debugDraw1)
+    {
+        grabberManager.draw();
+    }
 //    switch(Mode)
 //    {
 //        case 0:
@@ -246,7 +241,7 @@ void ofApp::draw(){
         grayImage.draw(20,20,160,120);
         grayBg.draw(180,20,160,120);
         grayDiff.draw(20,180,160,120);
-        grabber.draw(180, 160, 160, 120);
+//        grabber.draw(180, 160, 160, 120);
         
         ofPushStyle();
         ofSetHexColor(0xffffff);
@@ -329,3 +324,5 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
+
+

@@ -13,7 +13,7 @@
 #include "ofMain.h"
 #include "ofxScene.h"
 #include "ofxTween.h"
-
+#include "CommonAssets.h"
 #define INTERVAL_MILLS 1000
 
 class MyScene3 : public ofxScene
@@ -23,6 +23,7 @@ public:
     void init();
     void update(float dt);
     void draw();
+    void sceneWillAppear( ofxScene * fromScreen );
     void sceneDidAppear();
     vector<ofxTween> tweensX;
     vector<ofxTween> tweensY;
@@ -32,6 +33,7 @@ public:
     int MAX_POINTS;
     ofImage image;
     int step;
+    CommonAssets *commonAssets;
 
 };
 #endif /* defined(__wlbankinteractive__MeScene3__) */

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "IPVideoGrabber.h"
 #include "ofxGui.h"
 #include "ofxAnimatable.h"
 #include "ofxAnimatableOfPoint.h"
@@ -14,6 +15,7 @@
 #include "MyScene1.h"
 #include "MyScene2.h"
 #include "CommonAssets.h"
+#include "VideoGrabberManager.h"
 //class FlowPoint : public ofxAnimatableOfPoint
 //{
 //public:
@@ -54,8 +56,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    ofVideoPlayer videoPlayer;
-    ofVideoGrabber grabber;
+    
+
+//    ofVideoGrabber grabber;
+//    ofxIpVideoGrabber grabber;
 //scening
     ofxOpticalFlowLK opticalFlow;
     ofxCvColorImage cvImage;
@@ -96,4 +100,6 @@ class ofApp : public ofBaseApp{
 //    MyScene_2 *scene2;
     
     CommonAssets commonAssets;
+    
+    VideoGrabberManager grabberManager;
 };
