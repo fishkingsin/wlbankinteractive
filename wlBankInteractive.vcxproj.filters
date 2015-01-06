@@ -391,9 +391,6 @@
     <ClCompile Include="..\..\..\addons\ofxDelaunay\libs\Delaunay\Delaunay.cpp">
       <Filter>addons\ofxDelaunay\libs\Delaunay</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxFilterLibrary\src\.DS_Store">
-      <Filter>addons\ofxFilterLibrary\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxFilterLibrary\src\filters\Abstract3x3ConvolutionFilter.cpp">
       <Filter>addons\ofxFilterLibrary\src\filters</Filter>
     </ClCompile>
@@ -801,6 +798,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxUnicode\src\ofUTF8.cpp">
       <Filter>addons\ofxUnicode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyScene4.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2491,6 +2491,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8.h">
       <Filter>addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyScene4.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

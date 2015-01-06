@@ -37,7 +37,7 @@ void VideoGrabberManager::setup()
     }
     
     videoFbo.allocate(VIDEO_WIDTH*3,VIDEO_HEIGHT,GL_RGB);
-    videoPlayer.loadMovie("movies/background.mp4");
+    //videoPlayer.loadMovie("movies/background.mp4");
     videoPlayer.setLoopState(OF_LOOP_NORMAL);
     videoPlayer.play();
     

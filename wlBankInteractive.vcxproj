@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MyScene4.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\CommonAssets.cpp" />
     <ClCompile Include="src\CustomParticle.cpp" />
@@ -218,7 +219,6 @@
     <ClCompile Include="..\..\..\addons\ofxCv\libs\ofxCv\src\Wrappers.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDelaunay\src\ofxDelaunay.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDelaunay\libs\Delaunay\Delaunay.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxFilterLibrary\src\.DS_Store" />
     <ClCompile Include="..\..\..\addons\ofxFilterLibrary\src\filters\Abstract3x3ConvolutionFilter.cpp" />
     <ClCompile Include="..\..\..\addons\ofxFilterLibrary\src\filters\Abstract3x3PingPongFilter.cpp" />
     <ClCompile Include="..\..\..\addons\ofxFilterLibrary\src\filters\Abstract3x3TextureSamplingFilter.cpp" />
@@ -357,6 +357,7 @@
     <ClCompile Include="..\..\..\addons\ofxUnicode\src\ofUTF8.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\MyScene4.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\CommonAssets.h" />
     <ClInclude Include="src\Constants.h" />
