@@ -30,10 +30,10 @@ void CommonAssets::setup()
     billboardShader.setGeometryOutputType(GL_TRIANGLE_STRIP);
     billboardShader.setGeometryOutputCount(4);
     if(ofGetGLProgrammableRenderer()){
-        ofLogVerbose(__PRETTY_FUNCTION__)<< "load shadersGL3";
+        ofLogVerbose()<< "load shadersGL3";
         billboardShader.load("shadersGL3/Billboard");
     }else{
-        ofLogVerbose(__PRETTY_FUNCTION__)<< "load shadersGL2";
+        ofLogVerbose()<< "load shadersGL2";
         billboardShader.load("shadersGL2/Billboard");
     }
     
