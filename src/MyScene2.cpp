@@ -45,7 +45,7 @@ void MyScene2::init()
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
         ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-        circle.get()->setPhysics(3.0, 0.53, 0.9);
+        circle.get()->setPhysics(10.0, 0.0, 10);
         circle.get()->setup(box2d.getWorld(), x, y , r*0.5);
         circles.push_back(circle);
         

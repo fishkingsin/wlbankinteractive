@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "MyScene2.h"
 #include "MyScene3.h"
+#include "MyScene4.h"
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofEnableSmoothing();
@@ -45,7 +46,11 @@ void ofApp::setup(){
     MyScene3* scene3 = new MyScene3();
     scene3->commonAssets = &commonAssets;
     sceneManager->addScene(scene3 , SCENE_3);
-    
+
+    MyScene4* scene4 = new MyScene4();
+    scene4->commonAssets = &commonAssets;
+    sceneManager->addScene(scene4 , SCENE_4);
+
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
     sceneManager->setCurtainStayTime(0.0);
@@ -258,7 +263,8 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
     if (key == '2') sceneManager->goToScene(SCENE_2);
-        if (key == '3') sceneManager->goToScene(SCENE_3);
+    if (key == '3') sceneManager->goToScene(SCENE_3);
+    if (key == '4') sceneManager->goToScene(SCENE_4);
     sceneManager->keyPressed(key);
     switch(key) 
     {

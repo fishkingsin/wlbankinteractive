@@ -17,6 +17,7 @@
 		14F3FB468FED85DD86CC9BCF /* b2DistanceJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87C1E2A2CC108C32B0D02B08 /* b2DistanceJoint.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
 		19894C344A6861A26A61D2C0 /* b2TimeOfImpact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72D68EFE6B068991551C750D /* b2TimeOfImpact.cpp */; };
+		1A0157751A5987AF0055C8E9 /* MyScene4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A0157731A5987AF0055C8E9 /* MyScene4.cpp */; };
 		1A07F6B51A2F7D200001394E /* Abstract3x3ConvolutionFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F6281A2F7D200001394E /* Abstract3x3ConvolutionFilter.cpp */; };
 		1A07F6B61A2F7D200001394E /* Abstract3x3PingPongFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F62A1A2F7D200001394E /* Abstract3x3PingPongFilter.cpp */; };
 		1A07F6B71A2F7D200001394E /* Abstract3x3TextureSamplingFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A07F62C1A2F7D200001394E /* Abstract3x3TextureSamplingFilter.cpp */; };
@@ -311,6 +312,8 @@
 		15F2C6477A769C03A56D1401 /* ofxSlider.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSlider.cpp; path = ../../../addons/ofxGui/src/ofxSlider.cpp; sourceTree = SOURCE_ROOT; };
 		17177733C8AB60D9DDDE9850 /* b2FrictionJoint.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2FrictionJoint.h; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/Joints/b2FrictionJoint.h; sourceTree = SOURCE_ROOT; };
 		17E65988300FBD9AAA2CD0CA /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGui.h; path = ../../../addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
+		1A0157731A5987AF0055C8E9 /* MyScene4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene4.cpp; sourceTree = "<group>"; };
+		1A0157741A5987AF0055C8E9 /* MyScene4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene4.h; sourceTree = "<group>"; };
 		1A07F6281A2F7D200001394E /* Abstract3x3ConvolutionFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Abstract3x3ConvolutionFilter.cpp; sourceTree = "<group>"; };
 		1A07F6291A2F7D200001394E /* Abstract3x3ConvolutionFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Abstract3x3ConvolutionFilter.h; sourceTree = "<group>"; };
 		1A07F62A1A2F7D200001394E /* Abstract3x3PingPongFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Abstract3x3PingPongFilter.cpp; sourceTree = "<group>"; };
@@ -1805,6 +1808,8 @@
 				1AE25EEA1A34B54E005B2732 /* MyScene2.h */,
 				1A5849651A4C1A260083E0B6 /* MyScene3.cpp */,
 				1A5849661A4C1A260083E0B6 /* MyScene3.h */,
+				1A0157731A5987AF0055C8E9 /* MyScene4.cpp */,
+				1A0157741A5987AF0055C8E9 /* MyScene4.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2773,6 +2778,7 @@
 				1A07F6DE1A2F7D200001394E /* KuwaharaFilter.cpp in Sources */,
 				1A07F71E1A2F7D230001394E /* FCheck.cc in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
+				1A0157751A5987AF0055C8E9 /* MyScene4.cpp in Sources */,
 				1A0E027D1A56660400D5DA5E /* ofxEasingElastic.cpp in Sources */,
 				1A07F6E11A2F7D200001394E /* LowPassFilter.cpp in Sources */,
 				1A07F7241A2F7D230001394E /* Tracker.cc in Sources */,

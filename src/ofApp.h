@@ -94,7 +94,7 @@ class ofApp : public ofBaseApp{
 //    vector    <ofPtr<FlowPoint> >	points;
 
     
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 };
+    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
 //    MyScene_2 *scene2;
