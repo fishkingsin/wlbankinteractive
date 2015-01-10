@@ -123,7 +123,6 @@
 		1A0E02831A56660400D5DA5E /* ofxEasingSine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E02741A56660400D5DA5E /* ofxEasingSine.cpp */; };
 		1A0E02841A56660400D5DA5E /* ofxTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E02761A56660400D5DA5E /* ofxTween.cpp */; };
 		1A0E02931A56BFF800D5DA5E /* IPVideoGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E02911A56BFF800D5DA5E /* IPVideoGrabber.cpp */; };
-		1A0E02971A56C3EC00D5DA5E /* VideoGrabberManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E02951A56C3EC00D5DA5E /* VideoGrabberManager.cpp */; };
 		1A26FA9B1A510CD600E2CCFF /* CommonAssets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A26FA991A510CD600E2CCFF /* CommonAssets.cpp */; };
 		1A2B9CB01A314B6D00D661EC /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CAE1A314B6D00D661EC /* ofxTrueTypeFontUC.cpp */; };
 		1A2B9CE01A314CC500D661EC /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CB41A314CC500D661EC /* ofxFTGLFont.cpp */; };
@@ -546,8 +545,6 @@
 		1A0E02771A56660400D5DA5E /* ofxTween.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxTween.h; sourceTree = "<group>"; };
 		1A0E02911A56BFF800D5DA5E /* IPVideoGrabber.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IPVideoGrabber.cpp; sourceTree = "<group>"; };
 		1A0E02921A56BFF800D5DA5E /* IPVideoGrabber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPVideoGrabber.h; sourceTree = "<group>"; };
-		1A0E02951A56C3EC00D5DA5E /* VideoGrabberManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoGrabberManager.cpp; sourceTree = "<group>"; };
-		1A0E02961A56C3EC00D5DA5E /* VideoGrabberManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoGrabberManager.h; sourceTree = "<group>"; };
 		1A1F034E1A4D1B1C00C89193 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
 		1A26FA991A510CD600E2CCFF /* CommonAssets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommonAssets.cpp; sourceTree = "<group>"; };
 		1A26FA9A1A510CD600E2CCFF /* CommonAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAssets.h; sourceTree = "<group>"; };
@@ -1784,8 +1781,6 @@
 				1A3F943D1A320AAF00305F4F /* CustomParticle.h */,
 				1A26FA991A510CD600E2CCFF /* CommonAssets.cpp */,
 				1A26FA9A1A510CD600E2CCFF /* CommonAssets.h */,
-				1A0E02951A56C3EC00D5DA5E /* VideoGrabberManager.cpp */,
-				1A0E02961A56C3EC00D5DA5E /* VideoGrabberManager.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2993,7 +2988,6 @@
 				1A07F75B1A2F7E7F0001394E /* Wrappers.cpp in Sources */,
 				1A07F6CA1A2F7D200001394E /* CrosshatchFilter.cpp in Sources */,
 				1A07F75A1A2F7E7F0001394E /* Utilities.cpp in Sources */,
-				1A0E02971A56C3EC00D5DA5E /* VideoGrabberManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

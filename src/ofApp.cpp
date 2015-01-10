@@ -2,30 +2,15 @@
 #include "MyScene2.h"
 #include "MyScene3.h"
 #include "MyScene4.h"
+#define PORT 12345
 //--------------------------------------------------------------
 void ofApp::setup(){
+    receiver.setup(PORT);
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofDisableArbTex();
     ofSetLogLevel(OF_LOG_VERBOSE);
 
-    grabberManager.setup();
-    
-    
-    
-    fbo.allocate(VIDEO_WIDTH,VIDEO_HEIGHT,GL_RGB);
-    pixels.allocate(VIDEO_WIDTH,VIDEO_HEIGHT,OF_IMAGE_COLOR);
-    
-    
-    
-    opticalFlow.setup(ofRectangle(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT));
-    cvImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-    grayImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-    opticalFlow.setOpticalFlowSize(14);
-    opticalFlow.setOpticalFlowBlur(14);
-    grayBg.allocate(VIDEO_WIDTH,VIDEO_HEIGHT);
-    grayDiff.allocate(VIDEO_WIDTH,VIDEO_HEIGHT);
-    threshold = 80;
 
     commonAssets.loadImage("particleGrid.png",4,4,8);
     commonAssets.setup();
@@ -33,11 +18,8 @@ void ofApp::setup(){
     
     sceneManager = ofxSceneManager::instance();
     scene1 = new MyScene1();
-//    scene1->grabber = &grabber;
-    scene1->contourFinder = &contourFinder;
     sceneManager->addScene(scene1 , SCENE_1);
-    
-    
+    ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     
     MyScene2* scene2 = new MyScene2();
     scene2->commonAssets = &commonAssets;
@@ -56,34 +38,13 @@ void ofApp::setup(){
     sceneManager->setCurtainStayTime(0.0);
     sceneManager->setCurtainRiseTime(1.0);
     sceneManager->setOverlapUpdate(true);
-//   sceneManager->goToScene(SCENE_2);
-//    int step = 10;
-//    for(int y = 0 ;y < VIDEO_HEIGHT ; y+=step )
-//    {
-//        for(int x = 0 ;x < VIDEO_WIDTH ; x+=step )
-//        {
-//            points.push_back(ofPtr<FlowPoint>(new FlowPoint));
-//            points.back().
-//            get()->setPosition(ofPoint(x,y));
-//            points.back().get()->setup();
-//        }
-//    }
+
     
     gui.setup("Settings");
-    gui.add(threshold.set("threashold",80,1,255));
-    gui.add( minArea.set("minArea",20,20,VIDEO_WIDTH*VIDEO_HEIGHT));
-    gui.add( maxArea.set("maxArea",80,20,VIDEO_WIDTH*VIDEO_HEIGHT));
-    gui.add( nConsidered.set("nConsidered",10,1,100));
-    gui.add( bFindHoles.set("bFindHoles",true));
-    gui.add( bUseApproximation.set("bUseApproximation",true));
-    gui.add( bBlur.set("bBlur",true));
-    gui.add( debugDraw1.set("debugDraw1",false));
-    gui.add( debugDraw2.set("debugDraw2",false));
-    gui.add( debugDraw3.set("debugDraw3",false));
     gui.add( scene1->coolDown.set("coolDown",0,0,100000));
 //    gui.add( Mode.set("Mode",0,0,3));
     gui.add( timePriority.set("Toggle Time Prioirty",false));
-    gui.add( maxIdleTime.set("Mac Idle(min)",0.5,0,60.0f));
+    gui.add( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     
     gui.add(fps.set("fps",""));
     gui.add(currentIdleString.set("Idle",""));
@@ -95,6 +56,38 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    // check for waiting messages
+
+    while(receiver.hasWaitingMessages()){
+        // get the next message
+        ofParameterGroup pGroup;
+        receiver.getParameter(pGroup);
+//        string msg ;
+//        msg += m.getAddress() + " : ";
+//        for(int i = 0; i < m.getNumArgs(); i++){
+//            // get the argument type
+//            // display the argument - make sure we get the right type
+//            if(m.getArgType(i) == OFXOSC_TYPE_INT32){
+//                msg += "int : "+ ofToString(m.getArgAsInt32(i)) +" | ";
+//            }
+//            else if(m.getArgType(i) == OFXOSC_TYPE_FLOAT){
+//
+//                msg += "float : "+ ofToString(m.getArgAsFloat(i)) +" | ";
+//            }
+//            else if(m.getArgType(i) == OFXOSC_TYPE_STRING){
+//            
+//                msg += "string : "+ m.getArgAsString(i) +" | ";
+//            }
+//           
+//        }
+//        if(m.getAddress()=="/contour" && m.getNumArgs() == 2)
+//        {
+//            ofVec2f v = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));
+//            ofNotifyEvent(trackerEvent,v,this);
+//        }
+//         ofLogVerbose() << msg;
+        
+    }
     if(timePriority)
     {
         int idle = ofGetElapsedTimef() - currentIdleTime;
@@ -118,144 +111,18 @@ void ofApp::update(){
         }
     }
     fps = ofToString(ofGetFrameRate());
-    if(maxArea<minArea)
-    {
-        maxArea = minArea;
-    }
-    
-    grabberManager.update();
-    
-    float dt = 0.016666666;
-    if(sceneManager->getCurrentSceneID()==SCENE_1)
-    {
 
-        
-        
-        bool bNewFrame = true;//grabber.isFrameNew();
-        float scale = (1.0f*ofGetWidth())/VIDEO_WIDTH;
-        if (bNewFrame){
-//            opticalFlow.update(grabber);
-            fbo.begin();
-            ofPushStyle();
-            ofSetColor(0);
-            ofFill();
-            ofRect(0, 0, VIDEO_WIDTH,VIDEO_HEIGHT);
-            ofPopStyle();
-            ofSetColor(255);
-            opticalFlow.draw(VIDEO_WIDTH,VIDEO_HEIGHT);
-            fbo.end();
-            fbo.readToPixels(pixels);
-            //        cvImage.setFromPixels(grabber->getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
-            cvImage.setFromPixels(pixels.getPixels(), VIDEO_WIDTH ,VIDEO_HEIGHT);
-            grayImage = cvImage;
-            
-            if(bBlur)grayImage.blur();
-            
-            
-            
-            
-            // take the abs value of the difference between background and incoming and then threshold:
-            grayDiff.absDiff(grayBg, grayImage);
-            grayDiff.threshold(threshold);
-            
-            // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
-            // also, find holes is set to true so we will get interior contours as well....
-            contourFinder.findContours(grayImage,
-                                       minArea,
-                                       maxArea,
-                                       nConsidered,
-                                       bFindHoles,
-                                       bUseApproximation);	// find holes
-            
-            grayBg = grayImage;
-        }
-    }
-    sceneManager->update( dt );
+    float dt = 0.016666666;
+        sceneManager->update( dt );
     
-//    switch(Mode)
-//    {
-//        case 0:
-//        {
-//            
-//        }
-//            break;
-//        case 1:
-//        {
-//            float dt = 1.0f / ofGetFrameRate();
-//            for(int i=0; i<points.size(); i++) {
-//                points[i].get()->update(dt);
-//            }
-//        }
-//            break;
-//        case 2:
-//        {
-////            mioFlow.update(grabber.getTextureReference());
-//        }
-//            break;
-//        case 3:
-//        {
-//            
-//        }
-//            break;
-//    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0);
     ofSetColor(255);
-    grabberManager.videoPlayer.draw(0, 0, ofGetWidth(), ofGetHeight());
     
     sceneManager->draw();
-    
-    if(debugDraw1)
-    {
-        grabberManager.draw();
-    }
-//    switch(Mode)
-//    {
-//        case 0:
-//        {
-//            
-//        }
-//            break;
-//        case 1:
-//        {
-//            for(int i=0; i<points.size(); i++) {
-//                points[i].get()->draw();
-//            }
-//        }
-//            break;
-//        case 2:
-////            mioFlow.getFlowBlurTexture().draw(0,0);
-//            
-//            break;
-//        case 3:
-//            break;
-//    }
-    
-    if(debugDraw2)
-    {
-        ofSetColor(255);
-        //    fbo.draw(0,0,ofGetWidth(),ofGetHeight());
-        opticalFlow.draw(ofGetWidth(),ofGetHeight());
-    }
-    if(debugDraw3)
-    {
-        ofSetColor(255);
-        grayImage.draw(20,20,160,120);
-        grayBg.draw(180,20,160,120);
-        grayDiff.draw(20,180,160,120);
-//        grabber.draw(180, 160, 160, 120);
-        
-        ofPushStyle();
-        ofSetHexColor(0xffffff);
-        
-        // we could draw the whole contour finder
-        contourFinder.draw(0,0,ofGetWidth(),ofGetHeight());
-        
-        
-    }
     if(toggleDrawGUI)gui.draw();
 }
 
@@ -271,18 +138,6 @@ void ofApp::keyPressed(int key){
     
         case 'f':
             ofToggleFullscreen();
-            break;
-//        case 'c':
-//        {       float r = ofRandom(4, 20);
-//            circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-//            circles.back().get()->setPhysics(3.0, 0.53, 0.1);
-//            circles.back().get()->setup(box2d.getWorld(), mouseX, mouseY, r);
-//        }
-//            break;
-//        case 's':
-//        {
-//            grabber.videoSettings();
-//        }
             break;
         case ' ' :
             toggleDrawGUI = !toggleDrawGUI;

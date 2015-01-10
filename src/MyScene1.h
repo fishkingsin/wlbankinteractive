@@ -35,9 +35,7 @@ public:
     void sceneWillDisappear( ofxScene * toScreen );
     
     void sceneDidDisappear( ofxScene * fromScreen );
-    
-    ofVideoGrabber *grabber;
-    ofxCvContourFinder 	*contourFinder;
+    void eventsIn(ofVec2f & data);
     //sencing
     
     ofParameter<int> coolDown;
