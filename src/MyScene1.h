@@ -16,7 +16,7 @@
 #include "Constants.h"
 
 #include "CustomParticle.h"
-
+#include "CommonAssets.h"
 
 class MyScene1 : public ofxScene{
 public:
@@ -35,7 +35,7 @@ public:
     void sceneWillDisappear( ofxScene * toScreen );
     
     void sceneDidDisappear( ofxScene * fromScreen );
-    void eventsIn(ofVec2f & data);
+    void eventsIn(customeOSCData & data);
     //sencing
     
     ofParameter<int> coolDown;

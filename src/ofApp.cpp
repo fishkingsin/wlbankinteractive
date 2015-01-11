@@ -5,11 +5,40 @@
 #define PORT 12345
 //--------------------------------------------------------------
 void ofApp::setup(){
-    receiver.setup(PORT);
+    info.version = (char*)glGetString(GL_VERSION);
+    info.vendor = (char*)glGetString(GL_VENDOR);
+    info.renderer = (char*)glGetString(GL_RENDERER);
+    info.bVboSupported = false;
+    info.bShadersSupported = false;
+    info.bPointSpritesSupported = false;
+    if(glewIsSupported("GL_VERSION_1_4  GL_ARB_point_sprite")) {
+        info.bPointSpritesSupported = true;
+    }
+    
+    if(glewIsSupported("GL_ARB_vertex_buffer_object")) {
+        info.bVboSupported = true;
+    }
+    
+    if(glewIsSupported("GL_ARB_vertex_shader")) {
+        info.bShadersSupported = true;
+    }
+    
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &info.maxTextureSize);
+    glGetIntegerv(GL_MAX_VIEWPORT_DIMS, info.maxDimensions);
+    glGetIntegerv(GL_MAX_LIGHTS, &info.maxLights);
+    
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofDisableArbTex();
     ofSetLogLevel(OF_LOG_VERBOSE);
+    player.loadMovie("movies/CNY theme.mov");
+    player.setLoopState(OF_LOOP_NORMAL);
+    player.play();
+    
+    
+    receiver.setup(PORT);
+    
+    
 
 
     commonAssets.loadImage("particleGrid.png",4,4,8);
@@ -18,6 +47,7 @@ void ofApp::setup(){
     
     sceneManager = ofxSceneManager::instance();
     scene1 = new MyScene1();
+
     sceneManager->addScene(scene1 , SCENE_1);
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     
@@ -39,53 +69,69 @@ void ofApp::setup(){
     sceneManager->setCurtainRiseTime(1.0);
     sceneManager->setOverlapUpdate(true);
 
+    gui.loadFont("MONACO.TTF", 12);
+    gui.setup("Settings", 0, 0, ofGetWidth(), ofGetHeight());
     
-    gui.setup("Settings");
-    gui.add( scene1->coolDown.set("coolDown",0,0,100000));
+    gui.setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("General", 4, false);
+    gui.setWhichPanel(0);
+    gui.setWhichColumn(0);
+    gui.addSlider( scene1->coolDown.set("coolDown",0,0,100000));
 //    gui.add( Mode.set("Mode",0,0,3));
-    gui.add( timePriority.set("Toggle Time Prioirty",false));
-    gui.add( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
+    gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
+    gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     
-    gui.add(fps.set("fps",""));
-    gui.add(currentIdleString.set("Idle",""));
-    gui.loadFromFile("settings.xml");
+    gui.addLabel(fps.set("fps",""));
+    gui.addLabel(currentIdleString.set("Idle",""));
+    string output = "";
+    
+    string pointSprites = ((info.bPointSpritesSupported == true) ? "yes" : "no");
+    string shaders = ((info.bShadersSupported == true) ? "yes" : "no");
+    string vbo = ((info.bVboSupported == true) ? "yes" : "no");
+    
+    
+    output += "opengl version: " + info.version + "\n";
+    output += "vendor: " + info.vendor + "\n";
+    output += "renderer: " + info.renderer + "\n";
+    output += "\n";
+    output += "point sprites support: " + pointSprites + "\n";
+    output += "shader support: " + shaders + "\n";
+    output += "vbo support: " + vbo + "\n";
+    output += "\n";
+    output += "max texture size: " + ofToString(info.maxTextureSize) + "\n";
+    output += "max viewport dimensions: " + ofToString(info.maxDimensions[0]) + "," +  ofToString(info.maxDimensions[1]) + "\n";
+    output += "max lights: " + ofToString(info.maxLights) + "\n";
+    status = "first frame";
+    gui.setStatusMessage(status);
+    gui.loadSettings("settings.xml");
     
     sceneManager->setDrawDebug(toggleDrawGUI);
-    
+    if(player.isLoaded())
+    {
+        ofSetWindowShape(player.getWidth(), player.getHeight());
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    status = "App running at " + ofToString(ofGetFrameRate());
+    player.update();
+    gui.update();
     // check for waiting messages
 
     while(receiver.hasWaitingMessages()){
         // get the next message
-        ofParameterGroup pGroup;
-        receiver.getParameter(pGroup);
-//        string msg ;
-//        msg += m.getAddress() + " : ";
-//        for(int i = 0; i < m.getNumArgs(); i++){
-//            // get the argument type
-//            // display the argument - make sure we get the right type
-//            if(m.getArgType(i) == OFXOSC_TYPE_INT32){
-//                msg += "int : "+ ofToString(m.getArgAsInt32(i)) +" | ";
-//            }
-//            else if(m.getArgType(i) == OFXOSC_TYPE_FLOAT){
-//
-//                msg += "float : "+ ofToString(m.getArgAsFloat(i)) +" | ";
-//            }
-//            else if(m.getArgType(i) == OFXOSC_TYPE_STRING){
-//            
-//                msg += "string : "+ m.getArgAsString(i) +" | ";
-//            }
-//           
-//        }
-//        if(m.getAddress()=="/contour" && m.getNumArgs() == 2)
-//        {
-//            ofVec2f v = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));
-//            ofNotifyEvent(trackerEvent,v,this);
-//        }
-//         ofLogVerbose() << msg;
+        ofParameterGroup p;
+        p.setName("cvtracker");
+        ofParameter<ofColor>color;
+        ofParameter<ofVec2f>v2;
+        p.add(color.set("color", ofColor::white));
+        p.add(v2.set("contour",ofVec2f::zero()));
+        receiver.getParameter(p);
+        customeOSCData data;
+        data.pos = v2.get();
+        data.c = color.get();
+        ofNotifyEvent(trackerEvent,data,this);
         
     }
     if(timePriority)
@@ -121,9 +167,18 @@ void ofApp::update(){
 void ofApp::draw(){
     ofBackground(0);
     ofSetColor(255);
+    player.draw(0, 0);
+    
     
     sceneManager->draw();
-    if(toggleDrawGUI)gui.draw();
+    if(toggleDrawGUI)
+    {
+        ofPushStyle();
+        ofPushMatrix();
+        gui.draw();
+        ofPopMatrix();
+        ofPopStyle();
+    }
 }
 
 //--------------------------------------------------------------

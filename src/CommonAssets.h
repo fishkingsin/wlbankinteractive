@@ -9,8 +9,27 @@
 #ifndef __wlbankinteractive__CommonAssets__
 #define __wlbankinteractive__CommonAssets__
 #include "ofMain.h"
-
-
+#include "ofxAutoReloadedShader.h"
+typedef struct {
+    ofVec2f pos;
+    ofColor c;
+}customeOSCData;
+typedef struct {
+    
+    string version;
+    string vendor;
+    string renderer;
+    
+    
+    bool bPointSpritesSupported;
+    bool bVboSupported;
+    bool bShadersSupported;
+    int maxTextureSize;
+    int maxDimensions[2];
+    int maxLights;
+    
+    
+} commonOpenGlInfo;
 class CommonAssets
 {
 public:
@@ -34,7 +53,7 @@ public:
 
     int kParticles;
     
-    ofShader billboardShader;
+    ofxAutoReloadedShader billboardShader;
     
     ofImage texture;
     

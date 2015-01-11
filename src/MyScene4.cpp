@@ -20,11 +20,13 @@ void MyScene4::setup()
 }
 void MyScene4::init()
 {
+    col = (int)ofRandom(0, commonAssets->cellColls );
+    row = (int)ofRandom(0, commonAssets->cellRows);
     for(int i = 0 ; i < 200; i++)
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(1, 0.5, 0.5);
-        c.get()->setup(box2d.getWorld(), ofGetWidth()*0.5+ofRandom(-5,5), ofGetHeight()*0.5, ofRandom(5,14));
+        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-5,5), CANVAS_HEIGHT*0.5, ofRandom(5,14));
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
 
@@ -32,7 +34,8 @@ void MyScene4::init()
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
         commonAssets->setParticleNormal(i,ofVec3f(r*2,0,0));
 
-        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
+        commonAssets->setParticleTexCoords(i,col,row );
+        commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
 
         circles.push_back(c);
     }
@@ -50,7 +53,7 @@ void MyScene4::update(float dt)
         commonAssets->setParticleNormal(i,ofVec3f(r*2,0,0));
 //        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
 
-        if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())
+        if(pos.x>0 && pos.x < CANVAS_WIDTH && pos.y >0 && pos.y < CANVAS_HEIGHT)
         {
             ofColor c = image.getColor(pos.x, pos.y);
             if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
@@ -68,8 +71,11 @@ void MyScene4::keyPressed(int key)
     if(key == 'b') {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(1, 0.5, 0.5);
-        c.get()->setup(box2d.getWorld(), ofGetWidth()*0.5, 0, ofRandom(5,14));
+        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5, 0, ofRandom(5,14));
+        
         circles.push_back(c);
+        commonAssets->setParticleColor(circles.size()-1, ofColor::fromHsb(0, 0, 255));
+        commonAssets->setParticleTexCoords(circles.size()-1,col,row );
     }
     if(key == 'c') {
         edges.clear();
@@ -86,7 +92,7 @@ void MyScene4::mousePressed( int x, int y, int button )
 void MyScene4::sceneWillAppear( ofxScene * fromScreen )
 {
     commonAssets->reset();
-    init();
+    
 }
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
@@ -95,7 +101,7 @@ void MyScene4::sceneWillDisappear( ofxScene * toScreen )
 }
 void MyScene4::sceneDidAppear()
 {
-    
+    init();
 }
 void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 {
@@ -110,11 +116,11 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 void MyScene4::setupEdge()
 {
     int density = 10;
-    float radius =  ofGetHeight()*0.25;
+    float radius =  CANVAS_HEIGHT*0.45;
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
     for (int i=-180+density; i<180; i+=density) {
-        float x = sin(TWO_PI*(i/360.0f))*radius+ofGetWidth()*0.5;
-        float y = cos(TWO_PI*(i/360.0f))*radius+ofGetHeight()*0.5;
+        float x = sin(TWO_PI*(i/360.0f))*radius+CANVAS_WIDTH*0.5;
+        float y = cos(TWO_PI*(i/360.0f))*radius+CANVAS_HEIGHT*0.5;
         edge.get()->addVertex(x, y);
         edge.get()->create(box2d.getWorld());
         

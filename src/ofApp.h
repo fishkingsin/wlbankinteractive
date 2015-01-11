@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxGui.h"
+#include "ofxControlPanel.h"
 #include "ofxSceneManager.h"
 #include "MyScene1.h"
 #include "MyScene2.h"
@@ -32,7 +32,8 @@ public:
     ofParameter<float> maxIdleTime;
     ofParameter<string> currentIdleString;
     float currentIdleTime;
-    ofxPanel gui;
+//    ofxPanel gui;
+    ofxControlPanel gui;
     bool toggleDrawGUI;
     
     enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 };
@@ -42,5 +43,8 @@ public:
     CommonAssets commonAssets;
     ofxOscReceiver receiver;
     
-    ofEvent <ofVec2f> trackerEvent;
+    ofEvent <customeOSCData> trackerEvent;
+    ofVideoPlayer player;
+    commonOpenGlInfo info;
+    ofParameter <string> status; 
 };

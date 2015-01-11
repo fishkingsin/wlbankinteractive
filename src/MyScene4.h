@@ -39,6 +39,7 @@ public:
     vector    <ofPtr<ofxBox2dCircle> >	circles;		  //	default box2d circles
     vector <ofPtr<ofxBox2dEdge> >       edges;
         ofImage image;
+    int col , row ;
 };
 
 

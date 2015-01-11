@@ -19,7 +19,8 @@ void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int siz
     
     theData->color = color;
     theData->image = &image;
-    
+    theData->r = ofRandom(size,size*2);
+    theData->color.a = ofMap(theData->r,size,size*2,255,10,true);
 }
 
 void CustomParticle::draw() {
@@ -31,13 +32,11 @@ void CustomParticle::draw() {
         // you would use this when using a contact listener
         // or tapping into box2d's solver.
         
-        float radius = getRadius();
+        float radius = theData->r;
         ofPushMatrix();
         ofTranslate(getPosition());
         ofRotateZ(getRotation());
         ofSetColor(theData->color);
-        ofFill();
-        ofCircle(0, 0, radius);
         ofPushMatrix();
         theData->image->draw(-radius,-radius,radius*2,radius*2);
         ofPopMatrix();

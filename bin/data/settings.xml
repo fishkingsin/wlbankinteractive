@@ -1,19 +1,28 @@
 <Settings>
-	<threashold>121</threashold>
-	<minArea>16914</minArea>
-	<maxArea>178184</maxArea>
-	<nConsidered>15</nConsidered>
-	<bFindHoles>1</bFindHoles>
-	<bUseApproximation>1</bUseApproximation>
-<Settings/>
-<debugDraw1>0</debugDraw1>
-	<debugDraw2>0</debugDraw2>
-	<debugDraw3>0</debugDraw3>
-<bBlur>1</bBlur>
-	<Mode>0</Mode>
-	<coolDown>75000</coolDown>
-<fps>9.42476</fps>
-<Toggle_Time_Prioirty>0</Toggle_Time_Prioirty>
-	<Mac_Idle_min_>0.5</Mac_Idle_min_>
-	<Idle>13</Idle>
+    <threashold>121</threashold>
+    <minArea>16914</minArea>
+    <maxArea>178184</maxArea>
+    <nConsidered>15</nConsidered>
+    <bFindHoles>1</bFindHoles>
+    <bUseApproximation>1</bUseApproximation>
+    <Settings />
+    <debugDraw1>0</debugDraw1>
+    <debugDraw2>0</debugDraw2>
+    <debugDraw3>0</debugDraw3>
+    <bBlur>1</bBlur>
+    <Mode>0</Mode>
+    <coolDown>75000</coolDown>
+    <fps>9.42476</fps>
+    <Toggle_Time_Prioirty>0</Toggle_Time_Prioirty>
+    <Mac_Idle_min_>0.5</Mac_Idle_min_>
+    <Idle>13</Idle>
 </Settings>
+<coolDown>
+    <val_0>25769</val_0>
+</coolDown>
+<Toggle_Time_Prioirty>
+    <val_0>1</val_0>
+</Toggle_Time_Prioirty>
+<Max_Idle_min_>
+    <val_0>33.6923</val_0>
+</Max_Idle_min_>

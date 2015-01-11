@@ -34,13 +34,15 @@ void MyScene2::init()
     float maxVelocity = 0;
     
     int n = 500;
-    int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight())*0.75;
+    int maxRadius = ((CANVAS_WIDTH>CANVAS_HEIGHT)?CANVAS_WIDTH:CANVAS_HEIGHT)*0.75;
+    int col = (int)ofRandom(0, commonAssets->cellColls );
+    int row = (int)ofRandom(0, commonAssets->cellRows);
     for(int i = 0; i <n ; i++) {
         
         float x,y,xv,yv;
         float randomPI = ofRandom(-PI,PI);
-        x = (sin(randomPI)*maxRadius)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
-        y = (cos(randomPI)*maxRadius)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
+        x = (sin(randomPI)*maxRadius)+(sin(randomPI)*ofRandom(padding))+CANVAS_WIDTH*0.5;
+        y = (cos(randomPI)*maxRadius)+(cos(randomPI)*ofRandom(padding))+CANVAS_HEIGHT*0.5;
         float r = ofRandom(8, 20);
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
@@ -51,7 +53,7 @@ void MyScene2::init()
         
         commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
         commonAssets->setParticleNormal(i,ofVec3f(r,0,0));
-        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
+        commonAssets->setParticleTexCoords(i,col,row );
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
         //        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
         
@@ -73,7 +75,7 @@ void MyScene2::update(float dt)
     box2d.update();
     // apply per-particle forces
     for(int i=0; i<circles.size(); i++) {
-        circles[i].get()->addAttractionPoint(ofVec2f(ofGetWidth()*0.5,ofGetHeight()*0.5), (isStart)?0.5:0);
+        circles[i].get()->addAttractionPoint(ofVec2f(CANVAS_WIDTH*0.5,CANVAS_HEIGHT*0.5), (isStart)?0.5:0);
         ofVec2f pos = circles[i].get()->getPosition();
         commonAssets->setParticleVertex(i, pos);
         if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())

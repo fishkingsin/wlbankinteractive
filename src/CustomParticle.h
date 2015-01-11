@@ -12,6 +12,7 @@ public:
     ofColor color;
     int		id;
     ofImage *image;
+    float r;
     
 };
 // A Custom Particle extedning the box2d circle
