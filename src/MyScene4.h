@@ -40,6 +40,8 @@ public:
     vector <ofPtr<ofxBox2dEdge> >       edges;
         ofImage image;
     int col , row ;
+    
+    vector<ofPolyline>  createOutlineFromImage(string path);
 };
 
 

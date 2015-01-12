@@ -46,5 +46,5 @@ public:
     ofEvent <customeOSCData> trackerEvent;
     ofVideoPlayer player;
     commonOpenGlInfo info;
-    ofParameter <string> status; 
+    ofParameter <string> status;
 };
