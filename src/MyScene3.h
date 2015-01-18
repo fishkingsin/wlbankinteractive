@@ -35,6 +35,7 @@ public:
     ofImage image;
     int step;
     CommonAssets *commonAssets;
-
+    ofParameter<float>minRadius;
+    ofParameter<float>maxRadius;
 };
 #endif /* defined(__wlbankinteractive__MeScene3__) */

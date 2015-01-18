@@ -136,6 +136,11 @@ void ofApp::setup(){
     gui.addSlider(scene2->minRadius.set("S2_MIN_RADIUS", 8,1,50));
     gui.addSlider(scene2->maxRadius.set("S2_MAX_RADIUS", 20,1,50));
     
+    gui.setWhichPanel(3);
+    gui.setWhichColumn(0);
+    gui.addSlider(scene3->minRadius.set("S3_MIN_RADIUS", 8,1,50));
+    gui.addSlider(scene3->maxRadius.set("S3_MAX_RADIUS", 20,1,50));
+    
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
     gui.addSlider(scene4->initX.set("INIT_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));

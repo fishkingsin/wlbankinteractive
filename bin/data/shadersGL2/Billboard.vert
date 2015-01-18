@@ -1,11 +1,11 @@
 attribute float		divAtt;
 attribute float		moffsetXAtt;
 attribute float		moffsetYAtt;
-attribute float angleAtt;
+attribute float     angleAtt;
 //attribute float     alphaAtt;
-varying float mDiv;
-varying float mOffsetX;
-varying float mOffsetY;
+varying float       mDiv;
+varying float       mOffsetX;
+varying float       mOffsetY;
 //varying float alpha;
 varying float angle;
 

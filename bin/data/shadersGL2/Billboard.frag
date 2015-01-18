@@ -28,24 +28,24 @@ void main (void) {
     vec2 texCoor = newcoords;
     vec4 c = texture2D(tex, texCoor*d+vec2(x,y));
     vec4 result =  mix(c, gl_Color, c.a);//vec4(1.0,1.0,1.0,1.0);
-//    if (c.r < 0.5 || c.r < 0.5 || c.r < 0.5) {
-//        result = 2.0 * c * gl_Color;
-//    } else {
-//        result = vec4(1.0) - 2.0 * (vec4(1.0) - gl_Color) * (vec4(1.0) - c);
-//    }
-//    if (c.g < 0.5) {
-//        result = 2.0 * c * gl_Color;
-//    } else {
-//        result = vec4(1.0) - 2.0 * (vec4(1.0) - gl_Color) * (vec4(1.0) - c);
-//    }
-//    if (c.b < 0.5) {
-//        result = 2.0 * c * gl_Color;
-//    } else {
-//        result = vec4(1.0) - 2.0 * (vec4(1.0) - gl_Color) * (vec4(1.0) - c);
-//    }
-//    result.a = c.a*gl_Color.a;
+    if (c.r < 0.5 || c.r < 0.5 || c.r < 0.5) {
+        result = 2.0 * c * gl_Color;
+    } else {
+        result = vec4(1.0) - 2.0 * (vec4(1.0) - gl_Color) * (vec4(1.0) - c);
+    }
+    if (c.g < 0.5) {
+        result = 2.0 * c * gl_Color;
+    } else {
+        result = vec4(1.0) - 2.0 * (vec4(1.0) - gl_Color) * (vec4(1.0) - c);
+    }
+    if (c.b < 0.5) {
+        result = 2.0 * c * gl_Color;
+    } else {
+        result = vec4(1.0) - 2.0 * (vec4(1.0) - gl_Color) * (vec4(1.0) - c);
+    }
+    result.a = c.a*gl_Color.a;
 
-//    gl_FragColor = result;
-    gl_FragColor = c*gl_Color;
+    gl_FragColor = result;
+//    gl_FragColor = c*gl_Color;
 	 
 }

@@ -59,3 +59,9 @@
 <DEBUG_TOGGLE>
     <val_0>1</val_0>
 </DEBUG_TOGGLE>
+<S3_MIN_RADIUS>
+    <val_0>1</val_0>
+</S3_MIN_RADIUS>
+<S3_MAX_RADIUS>
+    <val_0>4.20385</val_0>
+</S3_MAX_RADIUS>

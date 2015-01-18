@@ -121,9 +121,9 @@ void MyScene3::init()
         ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
         tweensY.push_back(ty);
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
-        ofVec3f particleSize = ofVec3f(ofRandom(1, 3 ));
+        ofVec3f particleSize = ofVec3f(ofRandom(minRadius.get(), maxRadius.get() ));
         ofColor c = image.getColor(targets[i].x,targets[i].y);//ofColor::fromHsb(0, 0, 255);
-//        c.a = ofMap(particleSize.x,8, 4,10,255);
+        c.a = ofMap(particleSize.x,minRadius.get(), maxRadius.get(),255,10);
         commonAssets->setParticleColor(i,c );
         commonAssets->setParticleNormal(i,particleSize);
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
