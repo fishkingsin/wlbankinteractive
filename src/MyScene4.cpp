@@ -11,6 +11,7 @@
 
 void MyScene4::setup()
 {
+    counter = 0 ;
 //    image.loadImage("bg.png");
     box2d.init();
     box2d.setGravity(0, 30);
@@ -22,6 +23,7 @@ void MyScene4::setup()
 }
 void MyScene4::init()
 {
+     prevElapse = ofGetElapsedTimef();
     counter = 0;
     setupEdge();
     image = commonAssets->bg;
@@ -75,15 +77,19 @@ void MyScene4::update(float dt)
     }
     commonAssets->updateAttribtuteData();
    
-    if(counter<timeOut)
+    if(counter<timeOut.get())
     {
-         counter+=ofGetElapsedTimef();
+        
+        counter+=ofGetElapsedTimef()-prevElapse;
     }
     else{
+        ofLogVerbose() << "counter : " << counter;
         toNextScene tonextScene;
         ofNotifyEvent(toNextSceneEvent, tonextScene, this);
         counter=0;
     }
+        counterString = ofToString(counter);
+    prevElapse = ofGetElapsedTimef();
 }
 void MyScene4::draw()
 {
@@ -131,6 +137,7 @@ void MyScene4::mousePressed( int x, int y, int button )
 }
 void MyScene4::sceneWillAppear( ofxScene * fromScreen )
 {
+   
     commonAssets->reset();
     
 }

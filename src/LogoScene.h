@@ -32,6 +32,10 @@ public:
 
      CommonAssets *commonAssets;
     ofEvent<toNextScene>toNextSceneEvent;
+    ofParameter<int>timeOut;
+    float counter;
+    ofParameter<string>counterString;
+    float prevElapse;
 private:
     ofImage logo;
 };

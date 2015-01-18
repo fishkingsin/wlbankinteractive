@@ -48,7 +48,9 @@ public:
     ofParameter<float>maxRadius;
     ofParameter<bool>debugDraw;
     ofParameter<int>timeOut;
-    int counter;
+    float counter;
+    float prevElapse;
+    ofParameter<string>counterString;
     ofEvent<toNextScene>toNextSceneEvent;
     
 };

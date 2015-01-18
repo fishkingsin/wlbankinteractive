@@ -125,6 +125,7 @@ void ofApp::setup(){
     gui.addPanel("Scene2", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene3", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene4", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("SceneLogo", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.setWhichPanel(0);
     gui.setWhichColumn(0);
     gui.addToggle(toggleDrawGUI.set("DEBUG_TOGGLE", true));
@@ -161,8 +162,7 @@ void ofApp::setup(){
     gui.addSlider(scene6->minRadius.set("S6_MIN_RADIUS", 8,1,50));
     gui.addSlider(scene6->maxRadius.set("S6_MAX_RADIUS", 20,1,50));
     gui.addSlider(scene6->maxR.set("S6_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
-        gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
-
+    gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
     gui.addSlider(scene6->delay.set("S6_DELAY", 1, 0,20));
     gui.addSlider(scene6->duration.set("S6_DURATION", 1000,1,50000));
     gui.addSlider(scene6->theStep.set("STEP", 1,0.0f,100));
@@ -181,8 +181,12 @@ void ofApp::setup(){
     gui.addSlider(scene4->minRadius.set("S4_MIN_RADIUS",8,1,50));
     gui.addSlider(scene4->maxRadius.set("S4_MAX_RADIUS",20,1,50));
     gui.addToggle(scene4->debugDraw.set("DEBUG_DRAW",false));
-    gui.addSlider(scene4->timeOut.set("S3_TIEM_OUT",5,0,20));
-    
+    gui.addSlider(scene4->timeOut.set("S4_TIME_OUT",5,0,20));
+        gui.addLabel(scene4->counterString.set("S4_COUNTER",""));
+    gui.setWhichPanel(5);
+    gui.setWhichColumn(0);
+    gui.addSlider(logoScene->timeOut.set("SLOGO_TIME_OUT",5,0,20));
+    gui.addLabel(logoScene->counterString.set("SLOGO_COUNTER",""));
     string output = "";
     
     string pointSprites = ((info.bPointSpritesSupported == true) ? "yes" : "no");
@@ -202,7 +206,7 @@ void ofApp::setup(){
     output += "max viewport dimensions: " + ofToString(info.maxDimensions[0]) + "," +  ofToString(info.maxDimensions[1]) + "\n";
     output += "max lights: " + ofToString(info.maxLights) + "\n";
     status = "first frame";
-    gui.setStatusMessage(status);
+    gui.setStatusMessage(status.set("glStatus",output));
     gui.loadSettings("settings.xml");
     
     sceneManager->setDrawDebug(toggleDrawGUI);

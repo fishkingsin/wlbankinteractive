@@ -11,9 +11,22 @@ void LogoScene::setup(){
     
 }
 void LogoScene::init(){
+        prevElapse = ofGetElapsedTimef();
     logo = commonAssets->logo;
+    counter = 0;
 }
 void LogoScene::update(float dt){
+    if(counter<timeOut.get())
+    {
+        counter+=ofGetElapsedTimef()-prevElapse;
+    }
+    else{
+        toNextScene tonextScene;
+        ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+        counter=0;
+    }
+    counterString = ofToString(counter);
+    prevElapse = ofGetElapsedTimef();
 }
 void LogoScene::draw(){
     logo.draw(0,0);

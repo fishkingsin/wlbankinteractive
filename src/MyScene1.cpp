@@ -34,26 +34,30 @@ void MyScene1::update(float dt){ //update scene 1 here
     numParticle  = ofToString(circles.size());
     
     box2d.update();
-    while(circles.size()>maxParticle)
+    if(circles.size()>maxParticle)
     {
-        toNextScene tonextScene;
-        ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+        if(!isFireEvent)
+        {
+            toNextScene tonextScene;
+            ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+            isFireEvent = true;
+        }
 //        circles.erase(circles.begin());
         
     }
     float diff = ofGetElapsedTimeMillis() - counter;
-    if(diff > coolDown)
-    {
-        int n = ofRandom(1,10);
-        if(n<circles.size())
-        {
-            for (int i = 0 ; i < n ; i++)
-            {
-                circles.erase(circles.begin());
-            }
-        }
-        counter = ofGetElapsedTimeMillis();
-    }
+//    if(diff > coolDown)
+//    {
+//        int n = ofRandom(1,10);
+//        if(n<circles.size())
+//        {
+//            for (int i = 0 ; i < n ; i++)
+//            {
+//                circles.erase(circles.begin());
+//            }
+//        }
+//        counter = ofGetElapsedTimeMillis();
+//    }
     
     for (int i = 0 ; i < circles.size() ; i++) {
         commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
@@ -121,6 +125,11 @@ void MyScene1::keyPressed(int key)
         {
         }
             break;
+            case 'c':
+        {
+            
+        }
+            break;
     }
     
 }
@@ -131,6 +140,7 @@ void MyScene1::mousePressed( int x, int y, int button ){
 //scene notifications
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
     commonAssets->reset();
+    isFireEvent = false;
 };
 
 

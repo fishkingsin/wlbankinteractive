@@ -56,6 +56,7 @@ public:
     ofParameter<float>maxRadius;
     ofParameter<string>numParticle;
     ofParameter<int>maxParticle;
+    bool isFireEvent;
 };
 
 #endif

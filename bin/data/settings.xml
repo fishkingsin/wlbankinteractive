@@ -69,13 +69,13 @@
     <val_0>500</val_0>
 </S4_MAX_PARTICLE>
 <S1_MIN_RADIUS>
-    <val_0>5.14615</val_0>
+    <val_0>3.82692</val_0>
 </S1_MIN_RADIUS>
 <S1_MAX_RADIUS>
-    <val_0>11.7423</val_0>
+    <val_0>7.40769</val_0>
 </S1_MAX_RADIUS>
 <S1_MAX_PARTICLE>
-    <val_0>1885</val_0>
+    <val_0>385</val_0>
 </S1_MAX_PARTICLE>
 <S2_MAX_PARTICLE>
     <val_0>770</val_0>
@@ -113,3 +113,15 @@
 <COMMON_CENER_Y>
     <val_0>240</val_0>
 </COMMON_CENER_Y>
+<AUDO_MODE>
+    <val_0>1</val_0>
+</AUDO_MODE>
+<S3_TIEM_OUT>
+    <val_0>5</val_0>
+</S3_TIEM_OUT>
+<S4_TIME_OUT>
+    <val_0>15</val_0>
+</S4_TIME_OUT>
+<SLOGO_TIME_OUT>
+    <val_0>5</val_0>
+</SLOGO_TIME_OUT>
