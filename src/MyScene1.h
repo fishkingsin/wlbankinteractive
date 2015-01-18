@@ -39,6 +39,7 @@ public:
     //sencing
     
     ofParameter<int> coolDown;
+    ofEvent<toNextScene>toNextSceneEvent;
     
     
     float counter;

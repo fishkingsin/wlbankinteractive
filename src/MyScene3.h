@@ -38,5 +38,7 @@ public:
     CommonAssets *commonAssets;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
+    ofEvent<toNextScene>toNextSceneEvent;
+    void tweenEnd(int &i);
 };
 #endif /* defined(__wlbankinteractive__MeScene3__) */

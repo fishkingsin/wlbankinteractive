@@ -15,6 +15,9 @@ typedef struct {
     ofColor c;
 }customeOSCData;
 typedef struct {
+    int sceneID;
+}toNextScene;
+typedef struct {
     
     string version;
     string vendor;

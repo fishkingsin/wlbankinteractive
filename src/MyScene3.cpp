@@ -120,6 +120,7 @@ void MyScene3::init()
         ofPtr<ofxTween> ty = ofPtr<ofxTween>(new ofxTween);
         ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
         tweensY.push_back(ty);
+        
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
         ofVec3f particleSize = ofVec3f(ofRandom(minRadius.get(), maxRadius.get() ));
         ofColor c = image.getColor(targets[i].x,targets[i].y);//ofColor::fromHsb(0, 0, 255);
@@ -129,6 +130,7 @@ void MyScene3::init()
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
     }
+   ofAddListener(tweensY.back()->end_E, this, &MyScene3::tweenEnd);
     count = 0;
     commonAssets->updateAttribtuteData();
 }
@@ -176,5 +178,11 @@ void MyScene3::sceneDidDisappear(ofxScene *fromScreen)
 //        tweensY.erase(tweensY.begin());
 //        
 //    }
+
+}
+void MyScene3::tweenEnd(int &i)
+{
+    toNextScene tonextScene;
+    ofNotifyEvent(toNextSceneEvent, tonextScene, this);
 
 }

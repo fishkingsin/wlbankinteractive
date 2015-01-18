@@ -47,6 +47,10 @@ public:
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
     ofParameter<bool>debugDraw;
+    ofParameter<int>timeOut;
+    int counter;
+    ofEvent<toNextScene>toNextSceneEvent;
+    
 };
 
 

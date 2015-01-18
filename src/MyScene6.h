@@ -38,7 +38,8 @@ public:
     vector<ofxEasing* >easings;
     ofxEasingExpo easingExpo;
     ofxEasingSine easingSine;
-    ofxEasingElastic easingElastic;
+//    ofxEasingElastic easingElastic;
+    ofxEasingLinear easingLinear;
     ofxEasingCubic easingCubic;
     
     CommonAssets *commonAssets;
@@ -52,6 +53,9 @@ public:
     ofParameter<bool>bDebug;
     ofParameter<float>maxR;
     ofParameter<float>maxOutterR;
+    
+    void tweenEnd(int &i);
+    ofEvent<toNextScene>toNextSceneEvent;
     
     
     

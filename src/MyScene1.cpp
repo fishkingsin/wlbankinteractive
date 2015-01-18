@@ -34,9 +34,11 @@ void MyScene1::update(float dt){ //update scene 1 here
     numParticle  = ofToString(circles.size());
     
     box2d.update();
-    while(circles.size()>5000)
+    while(circles.size()>maxParticle)
     {
-        circles.erase(circles.begin());
+        toNextScene tonextScene;
+        ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+//        circles.erase(circles.begin());
         
     }
     float diff = ofGetElapsedTimeMillis() - counter;

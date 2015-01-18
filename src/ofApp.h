@@ -58,4 +58,6 @@ public:
     vector<ofColor>curtainColors;
     
     
+    void handleToNextScene(toNextScene &tonextscene);
+    
 };

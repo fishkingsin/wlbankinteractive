@@ -28,6 +28,7 @@ void ofApp::setup(){
     ofEnableAlphaBlending();
     ofDisableArbTex();
     ofSetLogLevel(OF_LOG_VERBOSE);
+    glDisable(GL_DEPTH_TEST);
     
     settings.load("config.xml");
     if(settings.pushTag("XML"))
@@ -84,6 +85,7 @@ void ofApp::setup(){
     scene1->commonAssets = &commonAssets;
     sceneManager->addScene(scene1 , SCENE_1);
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
+    ofAddListener(scene1->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
 //    MyScene2* scene2 = new MyScene2();
 //    scene2->commonAssets = &commonAssets;
@@ -91,20 +93,23 @@ void ofApp::setup(){
     MyScene6* scene6 = new MyScene6();
     scene6->commonAssets = &commonAssets;
     sceneManager->addScene(scene6 , SCENE_2);
-
+    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     MyScene3* scene3 = new MyScene3();
     scene3->commonAssets = &commonAssets;
     sceneManager->addScene(scene3 , SCENE_3);
-
+    ofAddListener(scene3->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    
     MyScene4* scene4 = new MyScene4();
     scene4->commonAssets = &commonAssets;
     sceneManager->addScene(scene4 , SCENE_4);
+    ofAddListener(scene4->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     LogoScene* logoScene = new LogoScene();
     logoScene->commonAssets = &commonAssets;
     sceneManager->addScene(logoScene , SCENE_LOGO);
-
+    ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
     sceneManager->setCurtainStayTime(0.0);
@@ -128,11 +133,17 @@ void ofApp::setup(){
 
     gui.addLabel(fps.set("fps",""));
     gui.addLabel(currentIdleString.set("Idle",""));
+    gui.addLabel("USAGE:\n\
+                 1-5 :changing Scene\n\
+                 right arrow:next scene\n\
+                 space:toggle panel\n\
+                 scene1 : 'b' :fire particle\n\
+                 ");
     gui.addSlider(commonAssets.elementCenterX.set("COMMON_CENER_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
     gui.addSlider(commonAssets.elementCenterY.set("COMMON_CENER_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
     gui.addSlider( scene1->coolDown.set("coolDown",0,0,100000));
 //    gui.add( Mode.set("Mode",0,0,3));
-    gui.addToggle( bAuto.set("audo",false));
+    gui.addToggle( bAuto.set("AUDO_MODE",false));
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     
@@ -170,6 +181,8 @@ void ofApp::setup(){
     gui.addSlider(scene4->minRadius.set("S4_MIN_RADIUS",8,1,50));
     gui.addSlider(scene4->maxRadius.set("S4_MAX_RADIUS",20,1,50));
     gui.addToggle(scene4->debugDraw.set("DEBUG_DRAW",false));
+    gui.addSlider(scene4->timeOut.set("S3_TIEM_OUT",5,0,20));
+    
     string output = "";
     
     string pointSprites = ((info.bPointSpritesSupported == true) ? "yes" : "no");
@@ -387,5 +400,15 @@ void ofApp::nextScene()
             sceneManager->goToScene(SCENE_1);
             break;
             
+    }
+}
+void ofApp::handleToNextScene(toNextScene &tonextscene)
+{
+    if(bAuto)
+    {
+        nextScene();
+    }
+    else{
+        ofLogWarning() << "Audo mode off has scene incoming";
     }
 }

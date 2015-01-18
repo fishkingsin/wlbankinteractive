@@ -31,6 +31,7 @@ public:
     void sceneDidDisappear(ofxScene *fromScreen);
 
      CommonAssets *commonAssets;
+    ofEvent<toNextScene>toNextSceneEvent;
 private:
     ofImage logo;
 };

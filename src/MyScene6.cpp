@@ -11,7 +11,7 @@ void MyScene6::setup()
 {
     easings.push_back(&easingExpo);
     easings.push_back(&easingSine);
-    easings.push_back(& easingElastic);
+    easings.push_back(& easingLinear);
     easings.push_back(& easingCubic);
 
     image = commonAssets->bg;
@@ -91,7 +91,7 @@ void MyScene6::init()
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
     }
-
+ofAddListener(tweensY.back()->end_E, this, &MyScene6::tweenEnd);
     commonAssets->updateAttribtuteData();
 }
 
@@ -154,4 +154,11 @@ void MyScene6::sceneDidDisappear(ofxScene *fromScreen)
     end.clear();
     particleSizes.clear();
     image.clear();
+}
+
+void MyScene6::tweenEnd(int &i)
+{
+    toNextScene tonextScene;;
+    ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+
 }
