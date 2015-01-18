@@ -243,6 +243,18 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    switch (key)
+    {
+        case '1':
+            case '2':
+            case '3':
+            case '4':
+            commonAssets.nextImage();
+            break;
+            
+        default:
+            break;
+    }
     ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
     if(curtainColors.size()>0)
     {

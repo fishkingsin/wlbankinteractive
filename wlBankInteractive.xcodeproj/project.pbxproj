@@ -141,6 +141,17 @@
 		1A58495E1A4B1B1B0083E0B6 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A58495C1A4B1B1B0083E0B6 /* ParticleSystem.cpp */; };
 		1A5849671A4C1A260083E0B6 /* MyScene3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5849651A4C1A260083E0B6 /* MyScene3.cpp */; };
 		1A5DCA771A6A54B500F7F140 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA751A6A54B500F7F140 /* LogoScene.cpp */; };
+		1A5DCA931A6B4C5C00F7F140 /* Back.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA7D1A6B4C5C00F7F140 /* Back.cpp */; };
+		1A5DCA941A6B4C5C00F7F140 /* Bounce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA7F1A6B4C5C00F7F140 /* Bounce.cpp */; };
+		1A5DCA951A6B4C5C00F7F140 /* Circ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA811A6B4C5C00F7F140 /* Circ.cpp */; };
+		1A5DCA961A6B4C5C00F7F140 /* Cubic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA831A6B4C5C00F7F140 /* Cubic.cpp */; };
+		1A5DCA971A6B4C5C00F7F140 /* Elastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA851A6B4C5C00F7F140 /* Elastic.cpp */; };
+		1A5DCA981A6B4C5C00F7F140 /* Expo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA871A6B4C5C00F7F140 /* Expo.cpp */; };
+		1A5DCA991A6B4C5C00F7F140 /* Linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA891A6B4C5C00F7F140 /* Linear.cpp */; };
+		1A5DCA9A1A6B4C5C00F7F140 /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA8B1A6B4C5C00F7F140 /* Quad.cpp */; };
+		1A5DCA9B1A6B4C5C00F7F140 /* Quart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA8D1A6B4C5C00F7F140 /* Quart.cpp */; };
+		1A5DCA9C1A6B4C5C00F7F140 /* Quint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA8F1A6B4C5C00F7F140 /* Quint.cpp */; };
+		1A5DCA9D1A6B4C5C00F7F140 /* Sine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA911A6B4C5C00F7F140 /* Sine.cpp */; };
 		1AE25EEB1A34B54E005B2732 /* MyScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE25EE91A34B54E005B2732 /* MyScene2.cpp */; };
 		1AE7DCA91A624BC50089D362 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7DC741A624BC50089D362 /* guiBaseObject.cpp */; };
 		1AE7DCAA1A624BC50089D362 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7DC761A624BC50089D362 /* guiCallback.cpp */; };
@@ -683,6 +694,28 @@
 		1A5849661A4C1A260083E0B6 /* MyScene3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene3.h; sourceTree = "<group>"; };
 		1A5DCA751A6A54B500F7F140 /* LogoScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogoScene.cpp; sourceTree = "<group>"; };
 		1A5DCA761A6A54B500F7F140 /* LogoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoScene.h; sourceTree = "<group>"; };
+		1A5DCA7D1A6B4C5C00F7F140 /* Back.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Back.cpp; sourceTree = "<group>"; };
+		1A5DCA7E1A6B4C5C00F7F140 /* Back.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Back.h; sourceTree = "<group>"; };
+		1A5DCA7F1A6B4C5C00F7F140 /* Bounce.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bounce.cpp; sourceTree = "<group>"; };
+		1A5DCA801A6B4C5C00F7F140 /* Bounce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bounce.h; sourceTree = "<group>"; };
+		1A5DCA811A6B4C5C00F7F140 /* Circ.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Circ.cpp; sourceTree = "<group>"; };
+		1A5DCA821A6B4C5C00F7F140 /* Circ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circ.h; sourceTree = "<group>"; };
+		1A5DCA831A6B4C5C00F7F140 /* Cubic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cubic.cpp; sourceTree = "<group>"; };
+		1A5DCA841A6B4C5C00F7F140 /* Cubic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cubic.h; sourceTree = "<group>"; };
+		1A5DCA851A6B4C5C00F7F140 /* Elastic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Elastic.cpp; sourceTree = "<group>"; };
+		1A5DCA861A6B4C5C00F7F140 /* Elastic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Elastic.h; sourceTree = "<group>"; };
+		1A5DCA871A6B4C5C00F7F140 /* Expo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Expo.cpp; sourceTree = "<group>"; };
+		1A5DCA881A6B4C5C00F7F140 /* Expo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Expo.h; sourceTree = "<group>"; };
+		1A5DCA891A6B4C5C00F7F140 /* Linear.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Linear.cpp; sourceTree = "<group>"; };
+		1A5DCA8A1A6B4C5C00F7F140 /* Linear.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Linear.h; sourceTree = "<group>"; };
+		1A5DCA8B1A6B4C5C00F7F140 /* Quad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Quad.cpp; sourceTree = "<group>"; };
+		1A5DCA8C1A6B4C5C00F7F140 /* Quad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
+		1A5DCA8D1A6B4C5C00F7F140 /* Quart.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Quart.cpp; sourceTree = "<group>"; };
+		1A5DCA8E1A6B4C5C00F7F140 /* Quart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quart.h; sourceTree = "<group>"; };
+		1A5DCA8F1A6B4C5C00F7F140 /* Quint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Quint.cpp; sourceTree = "<group>"; };
+		1A5DCA901A6B4C5C00F7F140 /* Quint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quint.h; sourceTree = "<group>"; };
+		1A5DCA911A6B4C5C00F7F140 /* Sine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sine.cpp; sourceTree = "<group>"; };
+		1A5DCA921A6B4C5C00F7F140 /* Sine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sine.h; sourceTree = "<group>"; };
 		1AE25EE91A34B54E005B2732 /* MyScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene2.cpp; sourceTree = "<group>"; };
 		1AE25EEA1A34B54E005B2732 /* MyScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene2.h; sourceTree = "<group>"; };
 		1AE7DC741A624BC50089D362 /* guiBaseObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
@@ -2024,6 +2057,44 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		1A5DCA7B1A6B4C5C00F7F140 /* ofxPennerEasing */ = {
+			isa = PBXGroup;
+			children = (
+				1A5DCA7C1A6B4C5C00F7F140 /* src */,
+			);
+			name = ofxPennerEasing;
+			sourceTree = "<group>";
+		};
+		1A5DCA7C1A6B4C5C00F7F140 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1A5DCA7D1A6B4C5C00F7F140 /* Back.cpp */,
+				1A5DCA7E1A6B4C5C00F7F140 /* Back.h */,
+				1A5DCA7F1A6B4C5C00F7F140 /* Bounce.cpp */,
+				1A5DCA801A6B4C5C00F7F140 /* Bounce.h */,
+				1A5DCA811A6B4C5C00F7F140 /* Circ.cpp */,
+				1A5DCA821A6B4C5C00F7F140 /* Circ.h */,
+				1A5DCA831A6B4C5C00F7F140 /* Cubic.cpp */,
+				1A5DCA841A6B4C5C00F7F140 /* Cubic.h */,
+				1A5DCA851A6B4C5C00F7F140 /* Elastic.cpp */,
+				1A5DCA861A6B4C5C00F7F140 /* Elastic.h */,
+				1A5DCA871A6B4C5C00F7F140 /* Expo.cpp */,
+				1A5DCA881A6B4C5C00F7F140 /* Expo.h */,
+				1A5DCA891A6B4C5C00F7F140 /* Linear.cpp */,
+				1A5DCA8A1A6B4C5C00F7F140 /* Linear.h */,
+				1A5DCA8B1A6B4C5C00F7F140 /* Quad.cpp */,
+				1A5DCA8C1A6B4C5C00F7F140 /* Quad.h */,
+				1A5DCA8D1A6B4C5C00F7F140 /* Quart.cpp */,
+				1A5DCA8E1A6B4C5C00F7F140 /* Quart.h */,
+				1A5DCA8F1A6B4C5C00F7F140 /* Quint.cpp */,
+				1A5DCA901A6B4C5C00F7F140 /* Quint.h */,
+				1A5DCA911A6B4C5C00F7F140 /* Sine.cpp */,
+				1A5DCA921A6B4C5C00F7F140 /* Sine.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxPennerEasing/src;
+			sourceTree = "<group>";
+		};
 		1AE7DC721A624BC50089D362 /* ofxControlPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2672,6 +2743,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				1A5DCA7B1A6B4C5C00F7F140 /* ofxPennerEasing */,
 				1A3674C41A67A239005EDDBF /* ofxFX */,
 				1AE7DCC81A625BEC0089D362 /* ofxAutoReloadedShader */,
 				1AE7DC721A624BC50089D362 /* ofxControlPanel */,
@@ -3091,6 +3163,7 @@
 				1A58495E1A4B1B1B0083E0B6 /* ParticleSystem.cpp in Sources */,
 				1A07F6E81A2F7D200001394E /* PosterizeFilter.cpp in Sources */,
 				1A07F7531A2F7E7F0001394E /* Distance.cpp in Sources */,
+				1A5DCA991A6B4C5C00F7F140 /* Linear.cpp in Sources */,
 				1A07F6D71A2F7D200001394E /* FlowDoGFilter.cpp in Sources */,
 				1A5DCA771A6A54B500F7F140 /* LogoScene.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
@@ -3150,6 +3223,7 @@
 				B88A57B4B0BA6191EF3571E9 /* ofxSvg.cpp in Sources */,
 				6A565A9714A6A12EB9098F52 /* src_colors.cpp in Sources */,
 				1D6B78EF041B097CE4F423C4 /* svgtiny.cpp in Sources */,
+				1A5DCA941A6B4C5C00F7F140 /* Bounce.cpp in Sources */,
 				4294163B15857489B2176769 /* svgtiny_gradient.cpp in Sources */,
 				1AE7DCB31A624BC50089D362 /* guiTypeLabel.cpp in Sources */,
 				1B5F996886A777589D5DD794 /* svgtiny_list.cpp in Sources */,
@@ -3162,6 +3236,7 @@
 				63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */,
 				933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */,
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
+				1A5DCA931A6B4C5C00F7F140 /* Back.cpp in Sources */,
 				1AE7DCC61A625A4B0089D362 /* glewOutput.cpp in Sources */,
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
 				1A07F6B51A2F7D200001394E /* Abstract3x3ConvolutionFilter.cpp in Sources */,
@@ -3181,6 +3256,7 @@
 				1A07F6D51A2F7D200001394E /* ExclusionBlendFilter.cpp in Sources */,
 				1AE7DCBE1A624BC50089D362 /* ofxControlPanel.cpp in Sources */,
 				1A07F6CE1A2F7D200001394E /* DisplacementFilter.cpp in Sources */,
+				1A5DCA9B1A6B4C5C00F7F140 /* Quart.cpp in Sources */,
 				1AE7DCAF1A624BC50089D362 /* guiTypeChartPlotter.cpp in Sources */,
 				1A07F6E61A2F7D200001394E /* PixelateFilter.cpp in Sources */,
 				12548B44285B5C07EEA5379C /* ofxBox2dJoint.cpp in Sources */,
@@ -3197,6 +3273,7 @@
 				1A0E02781A56660400D5DA5E /* ofxEasing.cpp in Sources */,
 				1AE7DCBA1A624BC50089D362 /* guiTypeToggle.cpp in Sources */,
 				1A07F6C91A2F7D200001394E /* CornerDetectionFilter.cpp in Sources */,
+				1A5DCA961A6B4C5C00F7F140 /* Cubic.cpp in Sources */,
 				F387370DB571155BC1282B7D /* b2CollideEdge.cpp in Sources */,
 				298EAD2C029D9959F5B32246 /* b2CollidePolygon.cpp in Sources */,
 				AC5A3D9E6C3E12122C80F404 /* b2Collision.cpp in Sources */,
@@ -3236,6 +3313,7 @@
 				1A07F6F21A2F7D200001394E /* XYDerivativeFilter.cpp in Sources */,
 				3E76A164B41BCEB11B15C175 /* b2Body.cpp in Sources */,
 				1AE7DCAA1A624BC50089D362 /* guiCallback.cpp in Sources */,
+				1A5DCA971A6B4C5C00F7F140 /* Elastic.cpp in Sources */,
 				C3D8EF14A387EA959014AD91 /* b2ContactManager.cpp in Sources */,
 				1A07F7211A2F7D230001394E /* Patch.cc in Sources */,
 				FA7300BAC71DAC1ABAF6EE15 /* b2Fixture.cpp in Sources */,
@@ -3244,9 +3322,12 @@
 				6FCE95D2EF10ACCEC2724688 /* b2Island.cpp in Sources */,
 				AC527216645D66921FB3E36F /* b2World.cpp in Sources */,
 				1A07F6E91A2F7D200001394E /* SaturationFilter.cpp in Sources */,
+				1A5DCA9A1A6B4C5C00F7F140 /* Quad.cpp in Sources */,
 				5146AEB9E58FB1B388820C2A /* b2WorldCallbacks.cpp in Sources */,
+				1A5DCA951A6B4C5C00F7F140 /* Circ.cpp in Sources */,
 				1AE7DCB11A624BC50089D362 /* guiTypeDrawable.cpp in Sources */,
 				1A07F6BE1A2F7D200001394E /* AlphaBlendFilter.cpp in Sources */,
+				1A5DCA9D1A6B4C5C00F7F140 /* Sine.cpp in Sources */,
 				1AE7DCA91A624BC50089D362 /* guiBaseObject.cpp in Sources */,
 				1FC2864D958F177964A20421 /* b2ChainAndCircleContact.cpp in Sources */,
 				1A07F6F11A2F7D200001394E /* VoronoiFilter.cpp in Sources */,
@@ -3275,12 +3356,14 @@
 				0B399DEC7ADBF7A3B1CF81A9 /* b2EdgeAndPolygonContact.cpp in Sources */,
 				1AE7DCC01A624BC50089D362 /* simpleFileLister.cpp in Sources */,
 				1A07F6D31A2F7D200001394E /* EmbossFilter.cpp in Sources */,
+				1A5DCA981A6B4C5C00F7F140 /* Expo.cpp in Sources */,
 				7E1AAAB7A2F92465251AE49E /* b2PolygonAndCircleContact.cpp in Sources */,
 				1A07F6CD1A2F7D200001394E /* DirectionalDoGFilter.cpp in Sources */,
 				41DDB078572B368F685E19F8 /* b2PolygonContact.cpp in Sources */,
 				14F3FB468FED85DD86CC9BCF /* b2DistanceJoint.cpp in Sources */,
 				1A2B9D001A31519A00D661EC /* ofTextConverter.cpp in Sources */,
 				1A07F7501A2F7E7F0001394E /* fdog.cpp in Sources */,
+				1A5DCA9C1A6B4C5C00F7F140 /* Quint.cpp in Sources */,
 				1A0E027C1A56660400D5DA5E /* ofxEasingCubic.cpp in Sources */,
 				1A0E02791A56660400D5DA5E /* ofxEasingBack.cpp in Sources */,
 				03AC305C546FEDB7C2A7E1A8 /* b2FrictionJoint.cpp in Sources */,
