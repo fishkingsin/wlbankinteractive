@@ -43,8 +43,8 @@ void MyScene2::init()
         
         float x,y,xv,yv;
         float randomPI = ofRandom(-PI,PI);
-        x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+CANVAS_WIDTH*0.5;
-        y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+CANVAS_HEIGHT*0.5;
+        x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
+        y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+commonAssets->elementCenterY.get();
         int min = (int)minRadius.get();
         int max = (int)maxRadius.get();
         float r = ofRandom(min ,max);

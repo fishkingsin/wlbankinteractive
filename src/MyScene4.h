@@ -42,8 +42,7 @@ public:
     int col , row ;
     
     vector<ofPolyline>  createOutlineFromImage(string path);
-    ofParameter<int>initX;
-    ofParameter<int>initY;
+
     ofParameter<int>maxParitcle;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;

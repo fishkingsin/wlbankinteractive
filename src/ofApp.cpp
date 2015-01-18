@@ -85,9 +85,13 @@ void ofApp::setup(){
     sceneManager->addScene(scene1 , SCENE_1);
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     
-    MyScene2* scene2 = new MyScene2();
-    scene2->commonAssets = &commonAssets;
-    sceneManager->addScene(scene2 , SCENE_2);
+//    MyScene2* scene2 = new MyScene2();
+//    scene2->commonAssets = &commonAssets;
+//    sceneManager->addScene(scene2 , SCENE_2);
+    MyScene6* scene6 = new MyScene6();
+    scene6->commonAssets = &commonAssets;
+    sceneManager->addScene(scene6 , SCENE_2);
+
     
     MyScene3* scene3 = new MyScene3();
     scene3->commonAssets = &commonAssets;
@@ -124,7 +128,8 @@ void ofApp::setup(){
 
     gui.addLabel(fps.set("fps",""));
     gui.addLabel(currentIdleString.set("Idle",""));
-
+    gui.addSlider(commonAssets.elementCenterX.set("COMMON_CENER_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
+    gui.addSlider(commonAssets.elementCenterY.set("COMMON_CENER_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
     gui.addSlider( scene1->coolDown.set("coolDown",0,0,100000));
 //    gui.add( Mode.set("Mode",0,0,3));
     gui.addToggle( bAuto.set("audo",false));
@@ -141,9 +146,16 @@ void ofApp::setup(){
     //scene2
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
-    gui.addSlider(scene2->maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
-    gui.addSlider(scene2->minRadius.set("S2_MIN_RADIUS", 8,1,50));
-    gui.addSlider(scene2->maxRadius.set("S2_MAX_RADIUS", 20,1,50));
+    gui.addSlider(scene6->maxParitcle.set("S6_MAX_PARTICLE",3000,1,10000));
+    gui.addSlider(scene6->minRadius.set("S6_MIN_RADIUS", 8,1,50));
+    gui.addSlider(scene6->maxRadius.set("S6_MAX_RADIUS", 20,1,50));
+    gui.addSlider(scene6->maxR.set("S6_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
+        gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
+
+    gui.addSlider(scene6->delay.set("S6_DELAY", 1, 0,20));
+    gui.addSlider(scene6->duration.set("S6_DURATION", 1000,1,50000));
+    gui.addSlider(scene6->theStep.set("STEP", 1,0.0f,100));
+    gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));
     
     gui.setWhichPanel(3);
     gui.setWhichColumn(0);
@@ -153,8 +165,8 @@ void ofApp::setup(){
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
     gui.addSlider(scene4->maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
-    gui.addSlider(scene4->initX.set("INIT_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
-    gui.addSlider(scene4->initY.set("INIT_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
+//    gui.addSlider(scene4->initX.set("INIT_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
+//    gui.addSlider(scene4->initY.set("INIT_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
     gui.addSlider(scene4->minRadius.set("S4_MIN_RADIUS",8,1,50));
     gui.addSlider(scene4->maxRadius.set("S4_MAX_RADIUS",20,1,50));
     gui.addToggle(scene4->debugDraw.set("DEBUG_DRAW",false));

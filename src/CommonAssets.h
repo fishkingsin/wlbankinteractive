@@ -86,6 +86,8 @@ public:
     int imageIndex;
     ofImage logo;
     ofImage bg;
+    ofParameter<int>elementCenterX;
+    ofParameter<int>elementCenterY;
 };
 
 

@@ -32,7 +32,7 @@ void MyScene4::init()
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(10, 0.1, 0.5);
-        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(),maxRadius.get()));
+        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(),maxRadius.get()));
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
 
@@ -97,7 +97,7 @@ void MyScene4::keyPressed(int key)
     if(key == 'b') {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(1, 0.5, 0.5);
-        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5, 0, ofRandom(minRadius.get(),maxRadius.get()));
+        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get(), 0, ofRandom(minRadius.get(),maxRadius.get()));
         
         circles.push_back(c);
         commonAssets->setParticleColor(circles.size()-1, ofColor::fromHsb(0, 0, 255));  
@@ -146,8 +146,8 @@ void MyScene4::setupEdge()
     float radius =  CANVAS_HEIGHT*0.40;
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
     for (int i=-180+density+25; i<180-25; i+=density) {
-        float x = sin(TWO_PI*(i/360.0f))*radius+initX.get();
-        float y = cos(TWO_PI*(i/360.0f))*radius+initY.get();
+        float x = sin(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterX.get();
+        float y = cos(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterY.get();
         edge.get()->addVertex(x, y);
         edge.get()->create(box2d.getWorld());
         

@@ -151,6 +151,7 @@
 		1A5DCA9B1A6B4C5C00F7F140 /* Quart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA8D1A6B4C5C00F7F140 /* Quart.cpp */; };
 		1A5DCA9C1A6B4C5C00F7F140 /* Quint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA8F1A6B4C5C00F7F140 /* Quint.cpp */; };
 		1A5DCA9D1A6B4C5C00F7F140 /* Sine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA911A6B4C5C00F7F140 /* Sine.cpp */; };
+		1A5DCAA11A6BA83100F7F140 /* MyScene6.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA9F1A6BA83100F7F140 /* MyScene6.cpp */; };
 		1AE25EEB1A34B54E005B2732 /* MyScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE25EE91A34B54E005B2732 /* MyScene2.cpp */; };
 		1AE7DCA91A624BC50089D362 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7DC741A624BC50089D362 /* guiBaseObject.cpp */; };
 		1AE7DCAA1A624BC50089D362 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7DC761A624BC50089D362 /* guiCallback.cpp */; };
@@ -713,6 +714,8 @@
 		1A5DCA901A6B4C5C00F7F140 /* Quint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quint.h; sourceTree = "<group>"; };
 		1A5DCA911A6B4C5C00F7F140 /* Sine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sine.cpp; sourceTree = "<group>"; };
 		1A5DCA921A6B4C5C00F7F140 /* Sine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sine.h; sourceTree = "<group>"; };
+		1A5DCA9F1A6BA83100F7F140 /* MyScene6.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene6.cpp; sourceTree = "<group>"; };
+		1A5DCAA01A6BA83100F7F140 /* MyScene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene6.h; sourceTree = "<group>"; };
 		1AE25EE91A34B54E005B2732 /* MyScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene2.cpp; sourceTree = "<group>"; };
 		1AE25EEA1A34B54E005B2732 /* MyScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene2.h; sourceTree = "<group>"; };
 		1AE7DC741A624BC50089D362 /* guiBaseObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
@@ -2048,6 +2051,8 @@
 				1A3674F01A67A254005EDDBF /* MyScene5.h */,
 				1A5DCA751A6A54B500F7F140 /* LogoScene.cpp */,
 				1A5DCA761A6A54B500F7F140 /* LogoScene.h */,
+				1A5DCA9F1A6BA83100F7F140 /* MyScene6.cpp */,
+				1A5DCAA01A6BA83100F7F140 /* MyScene6.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3209,6 +3214,7 @@
 				1A2C0E501A30ACEE003D32F3 /* ofxScreenCurtain.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				1A07F6E51A2F7D200001394E /* PerlinPixellationFilter.cpp in Sources */,
+				1A5DCAA11A6BA83100F7F140 /* MyScene6.cpp in Sources */,
 				1A07F7631A2F7FF50001394E /* FlowShader.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,

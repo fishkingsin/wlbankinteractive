@@ -7,6 +7,7 @@
 #include "MyScene2.h"
 #include "MyScene3.h"
 #include "MyScene4.h"
+#include "MyScene6.h"
 #include "LogoScene.h"
 #include "CommonAssets.h"
 #include "ofxOsc.h"

@@ -14,6 +14,7 @@
 #include "ofxScene.h"
 #include "ofxTween.h"
 #include "CommonAssets.h"
+#include "Constants.h"
 #define INTERVAL_MILLS 1000
 
 class MyScene3 : public ofxScene

@@ -48,7 +48,7 @@ void MyScene3::init()
 //    image.loadImage("backgrounds/bg.png");
     ofPoint* points = new ofPoint[MAX_POINTS];
     ofPoint* targets = new ofPoint[MAX_POINTS];
-    int maxR = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight());
+    int maxR = ((CANVAS_WIDTH>CANVAS_HEIGHT)?CANVAS_WIDTH:CANVAS_HEIGHT);
     float padding = 256;
     int  i= 0 ;
     for (int y = 0 ; y < image.height; y+=step)
@@ -77,8 +77,8 @@ void MyScene3::init()
         float _y = 0;//
         switch (mode) {
             case 0:
-                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
-                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
+                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+commonAssets->elementCenterY.get();
 
                 break;
             case 1:
@@ -86,24 +86,24 @@ void MyScene3::init()
                 int direction = (int)ofRandom(0, 1);
                 
                 _x = (direction==1)?-100:ofGetWidth()+100;
-                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
+                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+commonAssets->elementCenterY.get();
             }
                 break;
             case 2:
             {
                 int direction = (int)ofRandom(0, 1);
                 
-                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
                 _y = (direction==1)?-100:ofGetHeight()+100;
             }
                 
                 break;
             case 3:
-                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
                 _y = ofGetHeight()+100;
                 break;
             case 4:
-                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
                 _y = -100;
                 break;
             default:
