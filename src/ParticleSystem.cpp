@@ -104,3 +104,8 @@ vector<Particle>& ParticleSystem::getParticles()
 {
     return particles;
 }
+
+void ParticleSystem::clear()
+{
+    particles.clear();
+}

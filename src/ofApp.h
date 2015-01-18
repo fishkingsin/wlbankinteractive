@@ -5,6 +5,9 @@
 #include "ofxSceneManager.h"
 #include "MyScene1.h"
 #include "MyScene2.h"
+#include "MyScene3.h"
+#include "MyScene4.h"
+#include "LogoScene.h"
 #include "CommonAssets.h"
 #include "ofxOsc.h"
 
@@ -36,7 +39,9 @@ public:
     ofxControlPanel gui;
     ofParameter<bool> toggleDrawGUI;
     void toggleDebug(bool& _value);
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 };
+    
+    void nextScene();
+    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 , SCENE_LOGO };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
     
@@ -51,5 +56,5 @@ public:
     ofxXmlSettings settings;
     vector<ofColor>curtainColors;
     
-
+    
 };

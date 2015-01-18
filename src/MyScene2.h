@@ -43,7 +43,7 @@ public:
     //box2d
     ofxBox2d                            box2d;			  //	the box2d world
     vector    <ofPtr<ofxBox2dCircle> >	circles;		  //	default box2d circles
-    
+    ofParameter<int>maxParitcle;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
 };

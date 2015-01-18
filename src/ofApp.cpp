@@ -1,7 +1,4 @@
 #include "ofApp.h"
-#include "MyScene2.h"
-#include "MyScene3.h"
-#include "MyScene4.h"
 #define PORT 12345
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -99,6 +96,10 @@ void ofApp::setup(){
     MyScene4* scene4 = new MyScene4();
     scene4->commonAssets = &commonAssets;
     sceneManager->addScene(scene4 , SCENE_4);
+    
+    LogoScene* logoScene = new LogoScene();
+    logoScene->commonAssets = &commonAssets;
+    sceneManager->addScene(logoScene , SCENE_LOGO);
 
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
@@ -107,14 +108,14 @@ void ofApp::setup(){
     sceneManager->setOverlapUpdate(true);
 
     gui.loadFont("MONACO.TTF", 12);
-    gui.setup("Settings", 0, 0, ofGetWidth(), ofGetHeight());
+    gui.setup("Settings", CANVAS_WIDTH, 0, ofGetWidth(), ofGetHeight());
     
     gui.setBackgroundColor(0, 0, 0, 125);
-    gui.addPanel("General", 4, false);
-    gui.addPanel("Scene1", 4, false);
-    gui.addPanel("Scene2", 4, false);
-    gui.addPanel("Scene3", 4, false);
-    gui.addPanel("Scene4", 4, false);
+
+    gui.addPanel("Scene1", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Scene2", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Scene3", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Scene4", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.setWhichPanel(0);
     gui.setWhichColumn(0);
     gui.addToggle(toggleDrawGUI.set("DEBUG_TOGGLE", true));
@@ -140,6 +141,7 @@ void ofApp::setup(){
     //scene2
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
+    gui.addSlider(scene2->maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
     gui.addSlider(scene2->minRadius.set("S2_MIN_RADIUS", 8,1,50));
     gui.addSlider(scene2->maxRadius.set("S2_MAX_RADIUS", 20,1,50));
     
@@ -214,19 +216,7 @@ void ofApp::update(){
         if(idle>(maxIdleTime*60))
         {
             currentIdleTime = ofGetElapsedTimef();
-            int sceneID = sceneManager->getCurrentSceneID();
-            switch(sceneID)
-            {
-                case SCENE_1:
-                    //go to next scene
-                    sceneManager->goToScene(SCENE_2);
-                    break;
-                case SCENE_2:
-                    //loop back
-                    sceneManager->goToScene(SCENE_1);
-                    break;
-                
-            }
+            nextScene();
         }
     }
     fps = ofToString(ofGetFrameRate());
@@ -263,25 +253,20 @@ void ofApp::keyPressed(int key){
             case '3':
             case '4':
             commonAssets.nextImage();
+        {
+            ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
+            if(curtainColors.size()>0)
+            {
+                cColor = curtainColors[int(ofRandom(curtainColors.size()))];
+            }
+            sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b);
+            if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
+            if (key == '2') sceneManager->goToScene(SCENE_2);
+            if (key == '3') sceneManager->goToScene(SCENE_3);
+            if (key == '4') sceneManager->goToScene(SCENE_4);
+
+        }
             break;
-            
-        default:
-            break;
-    }
-    ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
-    if(curtainColors.size()>0)
-    {
-        cColor = curtainColors[int(ofRandom(curtainColors.size()))];
-    }
-    sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b);
-    if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
-    if (key == '2') sceneManager->goToScene(SCENE_2);
-    if (key == '3') sceneManager->goToScene(SCENE_3);
-    if (key == '4') sceneManager->goToScene(SCENE_4);
-    sceneManager->keyPressed(key);
-    switch(key) 
-    {
-    
         case 'f':
             ofToggleFullscreen();
             break;
@@ -291,7 +276,14 @@ void ofApp::keyPressed(int key){
             
             
             break;
+        case OF_KEY_RIGHT:
+            nextScene();
+            break;
+        default:
+            sceneManager->keyPressed(key);
+            break;
     }
+
 }
 
 //--------------------------------------------------------------
@@ -348,4 +340,40 @@ void ofApp::toggleDebug(bool& _value)
         ofSetLogLevel(OF_LOG_SILENT);
     }
     sceneManager->setDrawDebug(toggleDrawGUI);
+}
+void ofApp::nextScene()
+{
+    int sceneID = sceneManager->getCurrentSceneID();
+    ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
+    if(curtainColors.size()>0)
+    {
+        cColor = curtainColors[int(ofRandom(curtainColors.size()))];
+    }
+    sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b);
+
+    switch(sceneID)
+    {
+        case SCENE_1:
+            //go to next scene 2-4
+        {
+            commonAssets.nextImage();
+            float rand = ofRandom(SCENE_2,SCENE_LOGO);
+            ofLogVerbose () << " rand: " << rand;
+            Scenes scene = (Scenes)rand;
+            ofLogVerbose () << " scene: " << scene;
+            sceneManager->goToScene(scene);
+        }
+            break;
+        case SCENE_2:
+        case SCENE_3:
+        case SCENE_4:
+
+            sceneManager->goToScene(SCENE_LOGO);
+            break;
+        case SCENE_LOGO:
+            //loop back
+            sceneManager->goToScene(SCENE_1);
+            break;
+            
+    }
 }

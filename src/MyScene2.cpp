@@ -35,8 +35,8 @@ void MyScene2::init()
     float padding = 256;
     float maxVelocity = 0;
     
-    int n = 500;
-    int maxR = ((CANVAS_WIDTH>CANVAS_HEIGHT)?CANVAS_WIDTH:CANVAS_HEIGHT)*0.75;
+    int n = maxParitcle.get();
+    int maxR = ((CANVAS_WIDTH>CANVAS_HEIGHT)?CANVAS_WIDTH:CANVAS_HEIGHT)*2;
     int col = (int)ofRandom(0, commonAssets->cellColls );
     int row = (int)ofRandom(0, commonAssets->cellRows);
     for(int i = 0; i <n ; i++) {
@@ -86,8 +86,11 @@ void MyScene2::update(float dt)
         if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())
         {
             ofColor c = image.getColor(pos.x, pos.y);
-            c.a = ofMap(maxRadius.get()-circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),10,255 );//((maxRadius.get()-circles[i].get()->getRadius())/maxRadius.get())*255;
-            if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
+//            if(c.a > 0)
+            {
+                c.a = ofMap(maxRadius.get()-circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10 );//((maxRadius.get()-circles[i].get()->getRadius())/maxRadius.get())*255;
+                if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
+            }
         }
 
     }

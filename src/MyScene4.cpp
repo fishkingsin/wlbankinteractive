@@ -64,7 +64,7 @@ void MyScene4::update(float dt)
         if(pos.x>0 && pos.x < CANVAS_WIDTH && pos.y >0 && pos.y < CANVAS_HEIGHT)
         {
             ofColor c = image.getColor(pos.x, pos.y);
-            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10);
+            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10)*c.a;
             if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
         }
         

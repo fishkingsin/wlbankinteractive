@@ -27,6 +27,7 @@ public:
 	void addForce(const Particle& particle, float radius, float scale);
 	void addForce(float x, float y, float radius, float scale);
 	void update();
+    void clear();
 
 	void draw();
     vector<Particle>& getParticles();
