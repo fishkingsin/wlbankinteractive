@@ -104,6 +104,12 @@ void ofApp::setup(){
     scene4->commonAssets = &commonAssets;
     sceneManager->addScene(scene4 , SCENE_4);
     ofAddListener(scene4->toNextSceneEvent, this, &ofApp::handleToNextScene);
+
+    MyScene7* scene7 = new MyScene7();
+    scene7->commonAssets = &commonAssets;
+    sceneManager->addScene(scene7 , SCENE_7);
+    ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
+
     
     LogoScene* logoScene = new LogoScene();
     logoScene->commonAssets = &commonAssets;
@@ -125,6 +131,7 @@ void ofApp::setup(){
     gui.addPanel("Scene2", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene3", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene4", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Scene7", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("SceneLogo", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.setWhichPanel(0);
     gui.setWhichColumn(0);
@@ -165,7 +172,7 @@ void ofApp::setup(){
     gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
     gui.addSlider(scene6->delay.set("S6_DELAY", 1, 0,20));
     gui.addSlider(scene6->duration.set("S6_DURATION", 1000,1,50000));
-    gui.addSlider(scene6->theStep.set("STEP", 1,0.0f,100));
+    gui.addSlider(scene6->theStep.set("S6_STEP", 1,0.0f,100));
     gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));
     
     gui.setWhichPanel(3);
@@ -187,6 +194,18 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
     gui.addSlider(logoScene->timeOut.set("SLOGO_TIME_OUT",5,0,20));
     gui.addLabel(logoScene->counterString.set("SLOGO_COUNTER",""));
+    
+    gui.setWhichPanel(6);
+    gui.setWhichColumn(0);
+    gui.addSlider(scene7->maxParitcle.set("S7_MAX_PARTICLE",3000,1,10000));
+    gui.addSlider(scene7->minRadius.set("S7_MIN_RADIUS", 8,1,50));
+    gui.addSlider(scene7->maxRadius.set("S7_MAX_RADIUS", 20,1,50));
+    gui.addSlider(scene7->maxR.set("S7_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
+    gui.addSlider(scene7->maxOutterR.set("S7_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
+    gui.addSlider(scene7->delay.set("S7_DELAY", 1, 0,20));
+    gui.addSlider(scene7->duration.set("S7_DURATION", 1000,1,50000));
+    gui.addSlider(scene7->theStep.set("S7_STEP", 1,0.0f,100));
+    gui.addToggle(scene7->bDebug.set("S7_DEBUG",false));
     string output = "";
     
     string pointSprites = ((info.bPointSpritesSupported == true) ? "yes" : "no");
@@ -281,6 +300,9 @@ void ofApp::keyPressed(int key){
             case '2':
             case '3':
             case '4':
+            case '5':
+            case '6':
+           case '7':
             commonAssets.nextImage();
         {
             ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
@@ -293,6 +315,8 @@ void ofApp::keyPressed(int key){
             if (key == '2') sceneManager->goToScene(SCENE_2);
             if (key == '3') sceneManager->goToScene(SCENE_3);
             if (key == '4') sceneManager->goToScene(SCENE_4);
+            if (key == '5') sceneManager->goToScene(SCENE_LOGO);
+            if (key == '6') sceneManager->goToScene(SCENE_7);
 
         }
             break;
@@ -396,6 +420,7 @@ void ofApp::nextScene()
         case SCENE_2:
         case SCENE_3:
         case SCENE_4:
+        case SCENE_7:
 
             sceneManager->goToScene(SCENE_LOGO);
             break;

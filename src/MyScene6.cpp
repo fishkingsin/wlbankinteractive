@@ -46,7 +46,7 @@ void MyScene6::init()
      int _index = (int)ofRandom(easings.size());
     ofxEasing * ease = easings[_index];
     ofLogVerbose() << "_index : " << _index;
-    delay = ofRandom(0,2);
+
     for(int i = 0 ; i< maxParitcle.get() ; i++)
     {
 //        float step = i;

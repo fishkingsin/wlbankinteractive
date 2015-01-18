@@ -125,3 +125,33 @@
 <SLOGO_TIME_OUT>
     <val_0>5</val_0>
 </SLOGO_TIME_OUT>
+<S6_STEP>
+    <val_0>1</val_0>
+</S6_STEP>
+<S7_MAX_PARTICLE>
+    <val_0>3000</val_0>
+</S7_MAX_PARTICLE>
+<S7_MIN_RADIUS>
+    <val_0>1.94231</val_0>
+</S7_MIN_RADIUS>
+<S7_MAX_RADIUS>
+    <val_0>2.88462</val_0>
+</S7_MAX_RADIUS>
+<S7_MAX_R>
+    <val_0>211</val_0>
+</S7_MAX_R>
+<S7_MAX_OUTTER_R>
+    <val_0>844</val_0>
+</S7_MAX_OUTTER_R>
+<S7_DELAY>
+    <val_0>0.923077</val_0>
+</S7_DELAY>
+<S7_DURATION>
+    <val_0>2693.25</val_0>
+</S7_DURATION>
+<S7_STEP>
+    <val_0>1</val_0>
+</S7_STEP>
+<S7_DEBUG>
+    <val_0>0</val_0>
+</S7_DEBUG>
