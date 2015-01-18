@@ -133,7 +133,6 @@
 		1A2B9D021A31519A00D661EC /* ofUTF8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B9CEB1A31519A00D661EC /* ofUTF8.cpp */; };
 		1A2C0E4B1A30ACEB003D32F3 /* ofxSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E491A30ACEB003D32F3 /* ofxSceneManager.cpp */; };
 		1A2C0E501A30ACEE003D32F3 /* ofxScreenCurtain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E4E1A30ACEE003D32F3 /* ofxScreenCurtain.cpp */; };
-		1A2C0E561A30C0B5003D32F3 /* MyScene_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2C0E551A30C0B5003D32F3 /* MyScene_2.cpp */; };
 		1A3674EE1A67A239005EDDBF /* ofxFXObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3674E11A67A239005EDDBF /* ofxFXObject.cpp */; };
 		1A3674F11A67A254005EDDBF /* MyScene5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3674EF1A67A254005EDDBF /* MyScene5.cpp */; };
 		1A3F943E1A320AAF00305F4F /* CustomParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F943C1A320AAF00305F4F /* CustomParticle.cpp */; };
@@ -642,9 +641,7 @@
 		1A2C0E4E1A30ACEE003D32F3 /* ofxScreenCurtain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxScreenCurtain.cpp; sourceTree = "<group>"; };
 		1A2C0E4F1A30ACEE003D32F3 /* ofxScreenCurtain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxScreenCurtain.h; sourceTree = "<group>"; };
 		1A2C0E511A30ADCE003D32F3 /* MyScene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene1.h; sourceTree = "<group>"; };
-		1A2C0E531A30B37A003D32F3 /* MyScene_2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene_2.h; sourceTree = "<group>"; };
 		1A2C0E541A30B6AE003D32F3 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		1A2C0E551A30C0B5003D32F3 /* MyScene_2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene_2.cpp; sourceTree = "<group>"; };
 		1A3674C71A67A239005EDDBF /* ofxBlend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBlend.h; sourceTree = "<group>"; };
 		1A3674C81A67A239005EDDBF /* ofxClone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxClone.h; sourceTree = "<group>"; };
 		1A3674C91A67A239005EDDBF /* ofxMask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxMask.h; sourceTree = "<group>"; };
@@ -2041,8 +2038,6 @@
 			children = (
 				1A2C0E511A30ADCE003D32F3 /* MyScene1.h */,
 				1A3F943F1A320B3100305F4F /* MyScene1.cpp */,
-				1A2C0E531A30B37A003D32F3 /* MyScene_2.h */,
-				1A2C0E551A30C0B5003D32F3 /* MyScene_2.cpp */,
 				1AE25EE91A34B54E005B2732 /* MyScene2.cpp */,
 				1AE25EEA1A34B54E005B2732 /* MyScene2.h */,
 				1A5849651A4C1A260083E0B6 /* MyScene3.cpp */,
@@ -3184,7 +3179,6 @@
 				1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				1A2B9CE11A314CC500D661EC /* ofxFTGLSimpleLayout.cpp in Sources */,
-				1A2C0E561A30C0B5003D32F3 /* MyScene_2.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				1A07F6BB1A2F7D200001394E /* AbstractTwoInputCrossTextureSamplingFilter.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
