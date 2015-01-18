@@ -44,6 +44,9 @@ public:
     ofxBox2d                            box2d;			  //	the box2d world
     vector    <ofPtr<ofxBox2dCircle> >	circles;		  //	default box2d circles
     
+    ofParameter<float>minRadius;
+    ofParameter<float>maxRadius;
 };
+
 
 #endif /* defined(__wlbankinteractive__MyScene2__) */

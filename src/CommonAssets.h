@@ -47,7 +47,15 @@ public:
     
     void setParticleTexCoords(int i, float columnID, float rowID);
     
+    void setParticleAngle(int i, float _angle);
+    
     void updateAttribtuteData();
+    
+    string getLogoPath();
+    
+    string getBGPath();
+    
+    void nextImage();
     
     void reset();
 
@@ -71,9 +79,13 @@ public:
     
     vector<float>moffsetYAtt;
     
-//    vector<float>angle;
+    vector<float>angle;
 //    vector<float>alpha;
-    
+    ofDirectory bgDir;
+    ofDirectory logoDir;
+    int imageIndex;
+    ofImage logo;
+    ofImage bg;
 };
 
 

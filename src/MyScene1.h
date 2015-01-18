@@ -50,6 +50,7 @@ public:
 #endif
     vector< vector< ofPtr<ofImage> > > imagesSet;
     vector<ofImage> images;
+    CommonAssets *commonAssets;
 };
 
 #endif

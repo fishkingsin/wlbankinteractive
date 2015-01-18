@@ -1,5 +1,5 @@
 #pragma once
-
+//#define USE_PROGRAMMABLE_GL					// Maybe there is a reason you would want to
 #include "ofMain.h"
 #include "ofxControlPanel.h"
 #include "ofxSceneManager.h"
@@ -27,15 +27,15 @@ public:
     
     
     ofParameter<string>fps;
-    
+    ofParameter<bool> bAuto;
     ofParameter<bool> timePriority;
     ofParameter<float> maxIdleTime;
     ofParameter<string> currentIdleString;
     float currentIdleTime;
 //    ofxPanel gui;
     ofxControlPanel gui;
-    bool toggleDrawGUI;
-    
+    ofParameter<bool> toggleDrawGUI;
+    void toggleDebug(bool& _value);
     enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
@@ -47,4 +47,9 @@ public:
     ofVideoPlayer player;
     commonOpenGlInfo info;
     ofParameter <string> status;
+
+    ofxXmlSettings settings;
+    vector<ofColor>curtainColors;
+    
+
 };

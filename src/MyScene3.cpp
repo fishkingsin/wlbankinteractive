@@ -9,7 +9,8 @@
 #include "MyScene3.h"
 void MyScene3::setup()
 {
-    image.loadImage("bg.png");
+    image = commonAssets->bg;
+//    image.loadImage("backgrounds/bg.png");
     step = 4;
     for (int y = 0 ; y < image.height; y+=step)
     {
@@ -28,17 +29,32 @@ void MyScene3::setup()
 }
 void MyScene3::init()
 {
-       vector <ofPoint> points;
-    vector <ofPoint> targets;
-    points.resize(MAX_POINTS);
-    targets.resize(MAX_POINTS);
-    int maxRadius = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight());
+    tweensY.clear();
+    tweensX.clear();
+    image = commonAssets->bg;
+//    ofDirectory *dir = &commonAssets->dir;
+//    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
+    MAX_POINTS = 0;
+    for (int y = 0 ; y < image.height; y+=step)
+    {
+        for (int x = 0 ; x < image.width; x+=step) {
+            if(image.getColor(x, y).getHue()>0 && image.getColor(x, y).a>0)
+            {
+                MAX_POINTS++;
+            }
+            
+        }
+    }
+//    image.loadImage("backgrounds/bg.png");
+    ofPoint* points = new ofPoint[MAX_POINTS];
+    ofPoint* targets = new ofPoint[MAX_POINTS];
+    int maxR = ((ofGetWidth()>ofGetHeight())?ofGetWidth():ofGetHeight());
     float padding = 256;
     int  i= 0 ;
     for (int y = 0 ; y < image.height; y+=step)
     {
         for (int x = 0 ; x < image.width; x+=step) {
-            if(image.getColor(x, y).getHue()>0)
+            if(image.getColor(x, y).getSaturation()>0)
             {
                 targets[i].set(x,y);
                 
@@ -48,12 +64,48 @@ void MyScene3::init()
         }
     }
     
+    int mode = (int)ofRandom(0,4);
+    
     for(int i = 0 ; i< MAX_POINTS ; i++)
     {
         float randomPI = ofRandom(-PI,PI);
-        float r = ofRandom(maxRadius);
-        float _x = (sin(randomPI)*maxRadius)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
-        float _y = (cos(randomPI)*maxRadius)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
+        float r = ofRandom(maxR);
+        float _x = 0;//
+        float _y = 0;//
+        switch (mode) {
+            case 0:
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
+
+                break;
+            case 1:
+            {
+                int direction = (int)ofRandom(0, 1);
+                
+                _x = (direction==1)?-100:ofGetWidth()+100;
+                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+ofGetHeight()*0.5;
+            }
+                break;
+            case 2:
+            {
+                int direction = (int)ofRandom(0, 1);
+                
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _y = (direction==1)?-100:ofGetHeight()+100;
+            }
+                
+                break;
+            case 3:
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _y = ofGetHeight()+100;
+                break;
+            case 4:
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+ofGetWidth()*0.5;
+                _y = -100;
+                break;
+            default:
+                break;
+        }
         points[i].set(_x, _y);
         
         
@@ -65,14 +117,12 @@ void MyScene3::init()
         ofPtr<ofxTween> ty = ofPtr<ofxTween>(new ofxTween);
         ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
         tweensY.push_back(ty);
-
-        
-        
-//        tweensX[i].setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,i);
-//        tweensY[i].setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
-        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
-        commonAssets->setParticleNormal(i,ofVec3f(ofRandom(4, 8 ),0,0));
+        ofVec3f particleSize = ofVec3f(ofRandom(1, 3 ));
+        ofColor c = image.getColor(points[i].x,points[i].y);//ofColor::fromHsb(0, 0, 255);
+//        c.a = ofMap(particleSize.x,8, 4,10,255);
+        commonAssets->setParticleColor(i,c );
+        commonAssets->setParticleNormal(i,particleSize);
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
     }
@@ -94,7 +144,7 @@ void MyScene3::update(float dt)
 }
 void MyScene3::draw()
 {
-    ofSetColor(255, 255, 255);
+//    ofSetColor(255, 255, 255);
     commonAssets->draw();
 }
 void MyScene3::sceneWillAppear( ofxScene * fromScreen )
@@ -111,15 +161,17 @@ void MyScene3::sceneDidAppear()
 
 void MyScene3::sceneDidDisappear(ofxScene *fromScreen)
 {
-    while(tweensX.size()>0)
-    {
-        tweensX.erase(tweensX.begin());
-        
-    }
-    while(tweensY.size()>0)
-    {
-        tweensY.erase(tweensY.begin());
-        
-    }
+    tweensX.clear();
+    tweensY.clear();
+//    while(tweensX.size()>0)
+//    {
+//        tweensX.erase(tweensX.begin());
+//        
+//    }
+//    while(tweensY.size()>0)
+//    {
+//        tweensY.erase(tweensY.begin());
+//        
+//    }
 
 }

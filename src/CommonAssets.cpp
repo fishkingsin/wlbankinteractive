@@ -165,7 +165,8 @@ void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle
 }
 void CommonAssets::setup()
 {
-
+    bgDir.listDir("backgrounds/");
+    logoDir.listDir("logos/");
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     
@@ -184,8 +185,8 @@ void CommonAssets::setup()
     divAtt.resize(kParticles,0);
     moffsetXAtt.resize(kParticles,0);
     moffsetYAtt.resize(kParticles,0);
-//    angle.resize(kParticles);
-//    alpha.resize(kParticles);
+    angle.resize(kParticles,0);
+//    alpha.resize(kParticles,0);
     billboards.getVertices().resize(kParticles,ofVec3f::zero());
     billboards.getColors().resize(kParticles,ofColor::white);
     billboards.getNormals().resize(kParticles,ofVec3f(0));
@@ -200,8 +201,8 @@ void CommonAssets::setup()
 
     int divAttLoc = billboardShader.getAttributeLocation("divAtt");
     billboards.getVbo().setAttributeData(divAttLoc,  &divAtt[0], 1, n,  GL_DYNAMIC_DRAW);
-//    int angleAttLoc = billboardShader.getAttributeLocation("angle");
-//    billboards.getVbo().setAttributeData(angleAttLoc, &angle[0], 1, n, GL_DYNAMIC_DRAW);
+    int angleAttLoc = billboardShader.getAttributeLocation("angleAtt");
+    billboards.getVbo().setAttributeData(angleAttLoc, &angle[0], 1, n, GL_DYNAMIC_DRAW);
 
 //    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
 //    billboards.getVbo().setAttributeData(alphaAttLoc, &alpha[0], 1, n, GL_DYNAMIC_DRAW);
@@ -223,8 +224,8 @@ void CommonAssets::updateAttribtuteData()
 
     int divAttLoc = billboardShader.getAttributeLocation("divAtt");
     billboards.getVbo().updateAttributeData(divAttLoc,  &divAtt[0], n);
-//    int angleAttLoc = billboardShader.getAttributeLocation("angle");
-//    billboards.getVbo().updateAttributeData(angleAttLoc, &angle[0], n);
+    int angleAttLoc = billboardShader.getAttributeLocation("angleAtt");
+    billboards.getVbo().updateAttributeData(angleAttLoc, &angle[0], n);
 //    int alphaAttLoc = billboardShader.getAttributeLocation("alphaAtt");
 //    billboards.getVbo().updateAttributeData(alphaAttLoc, &alpha[0], n);
     
@@ -250,7 +251,7 @@ void CommonAssets::setParticleColor(int i, ofColor c)
     if(i < 0)                               i = 0;
     if(i > kParticles)   i = kParticles;
     billboards.setColor(i, c);
-//    alpha[i] = c.a;
+//    alpha[i] = c.a/255.0f;
 }
 void CommonAssets::setParticleVertex(int i, ofVec3f v)
 {
@@ -263,7 +264,10 @@ void CommonAssets::setParticleNormal(int i, ofVec3f v)
 {
     if(i < 0)                               i = 0;
     if(i > kParticles)   i = kParticles;
-     billboards.setNormal(i,v);
+    ofVec3f v2 = v*ofRandom(3,6);
+//    ofVec3f v3 = billboards.getVertices()[i] + (v2);
+     billboards.setNormal(i,v2);
+//    billboards.setVertex(i, v3);
 }
 
 void CommonAssets::setParticleTexCoords(int i, float columnID, float rowID)
@@ -310,11 +314,49 @@ void CommonAssets::setParticleTexCoords(int i, float columnID, float rowID)
     
     
 }
-
+void CommonAssets::setParticleAngle(int i, float _angle)
+{
+    if(i < 0)                               i = 0;
+    if(i > kParticles)   i = kParticles;
+    angle[i] = _angle;
+}
 void CommonAssets::reset()
 {
     for(int i = 0 ; i < kParticles ; i++)
     {
         setParticleVertex(i,ofVec3f::zero());
     }
+}
+string CommonAssets::getBGPath()
+{
+    if(bgDir.getFiles().size()>0)
+    {
+        imageIndex = (int)ofRandom(0,bgDir.getFiles().size());
+        return bgDir.getPath(imageIndex);
+    }
+    else
+    {
+        ofLogError() << "could not load image";
+        return "";
+    }
+}
+
+string CommonAssets::getLogoPath()
+{
+    if(imageIndex < logoDir.size())
+    {
+//        imageIndex = (int)ofRandom(0,logoDir.getFiles().size());
+        return logoDir.getPath(imageIndex);
+    }
+    else
+    {
+        ofLogError() << "could not load image";
+        return "";
+    }
+}
+
+void CommonAssets::nextImage()
+{
+    bg.loadImage(getBGPath());
+    logo.loadImage(getLogoPath());
 }

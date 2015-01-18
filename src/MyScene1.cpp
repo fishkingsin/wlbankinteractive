@@ -53,6 +53,11 @@ void MyScene1::update(float dt){ //update scene 1 here
         counter = ofGetElapsedTimeMillis();
     }
     
+    for (int i = 0 ; i < circles.size() ; i++) {
+        commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
+        commonAssets->setParticleVertex(i, circles[i]->getPosition());
+    }
+    commonAssets->updateAttribtuteData();
         
 };
 
@@ -60,15 +65,15 @@ void MyScene1::draw(){ //draw scene 1 here
     
     ofPopStyle();
     ofPushStyle();
-    
-    for(int i=0; i<circles.size(); i++) {
-        ofFill();
-        ofSetHexColor(0xf6c738);
-        circles[i].get()->draw();
+    commonAssets->draw();
+//    for(int i=0; i<circles.size(); i++) {
+//        ofFill();
+//        ofSetHexColor(0xf6c738);
+//        circles[i].get()->draw();
 #ifdef USE_TRIANGLE
         triangulation.addPoint(circles[i].get()->getPosition());
 #endif
-    }
+//    }
 #ifdef USE_TRIANGLE
     triangulation.triangulate();
 #endif
@@ -101,6 +106,13 @@ void MyScene1::keyPressed(int key)
             circles.back().get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-50, 50), CANVAS_HEIGHT*0.5+ofRandom(-50, 50), r);
             ofColor c = ofColor::white;
             circles.back().get()->setupTheCustomData(ofColor::fromHsb(c.getHue(),255,255),images[ofRandom(images.size())],r);
+            
+            commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
+            commonAssets->setParticleColor(circles.size()-1, ofColor::white);
+            commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius()*2,0,0));
+            
+            commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
+
         }
             break;
         case 's':
@@ -116,6 +128,7 @@ void MyScene1::mousePressed( int x, int y, int button ){
 
 //scene notifications
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
+    commonAssets->reset();
 };
 
 

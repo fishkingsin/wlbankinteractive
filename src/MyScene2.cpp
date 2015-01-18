@@ -16,7 +16,6 @@ void MyScene2::setup()
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
     
-    image.loadImage("bg.png");
     
     box2d.init();
     box2d.setGravity(0, 0);
@@ -30,28 +29,33 @@ void MyScene2::setup()
 //--------------------------------------------------------------------------------------------
 void MyScene2::init()
 {
+    image = commonAssets->bg;
+//    ofDirectory *dir = &commonAssets->dir;
+//    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
     float padding = 256;
     float maxVelocity = 0;
     
     int n = 500;
-    int maxRadius = ((CANVAS_WIDTH>CANVAS_HEIGHT)?CANVAS_WIDTH:CANVAS_HEIGHT)*0.75;
+    int maxR = ((CANVAS_WIDTH>CANVAS_HEIGHT)?CANVAS_WIDTH:CANVAS_HEIGHT)*0.75;
     int col = (int)ofRandom(0, commonAssets->cellColls );
     int row = (int)ofRandom(0, commonAssets->cellRows);
     for(int i = 0; i <n ; i++) {
         
         float x,y,xv,yv;
         float randomPI = ofRandom(-PI,PI);
-        x = (sin(randomPI)*maxRadius)+(sin(randomPI)*ofRandom(padding))+CANVAS_WIDTH*0.5;
-        y = (cos(randomPI)*maxRadius)+(cos(randomPI)*ofRandom(padding))+CANVAS_HEIGHT*0.5;
-        float r = ofRandom(8, 20);
+        x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+CANVAS_WIDTH*0.5;
+        y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+CANVAS_HEIGHT*0.5;
+        int min = (int)minRadius.get();
+        int max = (int)maxRadius.get();
+        float r = ofRandom(min ,max);
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
         ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-        circle.get()->setPhysics(10.0, 0.0, 10);
+        circle.get()->setPhysics(100, 0.0, 150);
         circle.get()->setup(box2d.getWorld(), x, y , r*0.5);
         circles.push_back(circle);
         
-        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
+        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255,((maxRadius.get()-r)/maxRadius.get())*255));
         commonAssets->setParticleNormal(i,ofVec3f(r,0,0));
         commonAssets->setParticleTexCoords(i,col,row );
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
@@ -78,9 +82,11 @@ void MyScene2::update(float dt)
         circles[i].get()->addAttractionPoint(ofVec2f(CANVAS_WIDTH*0.5,CANVAS_HEIGHT*0.5), (isStart)?0.5:0);
         ofVec2f pos = circles[i].get()->getPosition();
         commonAssets->setParticleVertex(i, pos);
+        commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
         if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())
         {
             ofColor c = image.getColor(pos.x, pos.y);
+            c.a = ofMap(maxRadius.get()-circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),10,255 );//((maxRadius.get()-circles[i].get()->getRadius())/maxRadius.get())*255;
             if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
         }
 
