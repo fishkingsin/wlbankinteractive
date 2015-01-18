@@ -51,6 +51,10 @@ public:
     vector< vector< ofPtr<ofImage> > > imagesSet;
     vector<ofImage> images;
     CommonAssets *commonAssets;
+    ofParameter<float>minRadius;
+    ofParameter<float>maxRadius;
+    ofParameter<string>numParticle;
+    ofParameter<int>maxParticle;
 };
 
 #endif

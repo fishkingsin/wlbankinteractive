@@ -31,7 +31,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
 
 void MyScene1::update(float dt){ //update scene 1 here
     
-    
+    numParticle  = ofToString(circles.size());
     
     box2d.update();
     while(circles.size()>5000)
@@ -99,16 +99,16 @@ void MyScene1::keyPressed(int key)
         case 'b':
         {
             circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-            float r = ofRandom(4, 20);
+            float r = ofRandom(minRadius, maxRadius);
             
             
             circles.back().get()->setPhysics(3.0, 0.53, 0.1);
             circles.back().get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-50, 50), CANVAS_HEIGHT*0.5+ofRandom(-50, 50), r);
-            ofColor c = ofColor::white;
-            circles.back().get()->setupTheCustomData(ofColor::fromHsb(c.getHue(),255,255),images[ofRandom(images.size())],r);
+            ofColor c = ofColor::fromHsb(0,0,255,ofMap(r,minRadius, maxRadius,255,10));
+            circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
             
             commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
-            commonAssets->setParticleColor(circles.size()-1, ofColor::white);
+            commonAssets->setParticleColor(circles.size()-1, c);
             commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius()*2,0,0));
             
             commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
@@ -147,14 +147,16 @@ void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
 
 void MyScene1::eventsIn(customeOSCData & data)
 {
+    if(circles.size()<maxParticle.get())
+    {
 
-    circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-    float r = ofRandom(4, 10);
-    
-    
-    circles.back().get()->setPhysics(3.0, 0.53, 0.1);
-    circles.back().get()->setup(box2d.getWorld(), data.pos.x*CANVAS_WIDTH, data.pos.y*CANVAS_HEIGHT, r);
-    ofColor c = ofColor::fromHsb(data.c.getHue(),MAX(data.c.getSaturation() ,200), MAX(data.c.getBrightness(),200));
-    circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
-    
+        circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
+        float r = ofRandom(4, 10);
+        
+        
+        circles.back().get()->setPhysics(3.0, 0.53, 0.1);
+        circles.back().get()->setup(box2d.getWorld(), data.pos.x*CANVAS_WIDTH, data.pos.y*CANVAS_HEIGHT, r);
+        ofColor c = ofColor::fromHsb(data.c.getHue(),MAX(data.c.getSaturation() ,200), MAX(data.c.getBrightness(),200));
+        circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
+    }
 }
