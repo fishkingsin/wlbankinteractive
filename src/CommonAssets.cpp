@@ -324,7 +324,7 @@ void CommonAssets::reset()
 {
     for(int i = 0 ; i < kParticles ; i++)
     {
-        setParticleVertex(i,ofVec3f::zero());
+        setParticleVertex(i,ofVec3f(-100,-100,0));
     }
 }
 string CommonAssets::getBGPath()

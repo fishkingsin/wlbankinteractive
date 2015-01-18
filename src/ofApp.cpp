@@ -130,6 +130,13 @@ void ofApp::setup(){
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     
+    //scene1
+    gui.setWhichPanel(1);
+    gui.setWhichColumn(0);
+    gui.addLabel(scene1->numParticle.set("PARTICLE_SIZE",""));
+    gui.addSlider(scene1->maxParticle.set("S1_MAX_PARTICLE",3000,1,10000));
+    gui.addSlider(scene1->minRadius.set("S1_MIN_RADIUS",8,1,50));
+    gui.addSlider(scene1->maxRadius.set("S1_MAX_RADIUS",20,1,50));
     //scene2
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
@@ -143,6 +150,7 @@ void ofApp::setup(){
     
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
+    gui.addSlider(scene4->maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
     gui.addSlider(scene4->initX.set("INIT_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
     gui.addSlider(scene4->initY.set("INIT_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
     gui.addSlider(scene4->minRadius.set("S4_MIN_RADIUS",8,1,50));

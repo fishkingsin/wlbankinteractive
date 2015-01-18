@@ -28,11 +28,11 @@ void MyScene4::init()
 //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
     col = (int)ofRandom(0, commonAssets->cellColls );
     row = (int)ofRandom(0, commonAssets->cellRows);
-    for(int i = 0 ; i < 400; i++)
+    for(int i = 0 ; i < maxParitcle.get(); i++)
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-        c.get()->setPhysics(1, 0.5, 0.5);
-        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-10,10), -i, ofRandom(minRadius.get(),maxRadius.get()));
+        c.get()->setPhysics(10, 0.1, 0.5);
+        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(),maxRadius.get()));
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
 
@@ -64,7 +64,7 @@ void MyScene4::update(float dt)
         if(pos.x>0 && pos.x < CANVAS_WIDTH && pos.y >0 && pos.y < CANVAS_HEIGHT)
         {
             ofColor c = image.getColor(pos.x, pos.y);
-            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),10,255);
+            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10);
             if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
         }
         
@@ -97,10 +97,10 @@ void MyScene4::keyPressed(int key)
     if(key == 'b') {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(1, 0.5, 0.5);
-        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5, 0, ofRandom(2,6));
+        c.get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5, 0, ofRandom(minRadius.get(),maxRadius.get()));
         
         circles.push_back(c);
-        commonAssets->setParticleColor(circles.size()-1, ofColor::fromHsb(0, 0, 255));
+        commonAssets->setParticleColor(circles.size()-1, ofColor::fromHsb(0, 0, 255));  
         commonAssets->setParticleTexCoords(circles.size()-1,col,row );
     }
     if(key == 'c') {
