@@ -9,6 +9,7 @@
 #include "MyScene4.h"
 #include "MyScene6.h"
 #include "MyScene7.h"
+#include "MyScene8.h"
 #include "LogoScene.h"
 #include "CommonAssets.h"
 #include "ofxOsc.h"
@@ -43,7 +44,7 @@ public:
     void toggleDebug(bool& _value);
     
     void nextScene();
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 , SCENE_7, SCENE_LOGO };
+    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 , SCENE_7,SCENE_8, SCENE_LOGO };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
     

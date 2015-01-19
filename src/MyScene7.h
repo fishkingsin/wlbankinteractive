@@ -52,6 +52,12 @@ public:
     ofParameter<float>maxR;
     ofParameter<float>maxOutterR;
     
+    ofParameter<int>maxStep;
+    ofParameter<int>minStep;
+    
+    ofParameter<int>maxDelay;
+    ofParameter<int>minDelay;
+    
     void tweenEnd(int &i);
     ofEvent<toNextScene>toNextSceneEvent;
     vector<ofPolyline> polylines;

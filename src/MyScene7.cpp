@@ -29,7 +29,8 @@ void MyScene7::init()
     int _index = (int)ofRandom(easings.size());
     ofxEasing * ease = easings[_index];
     ofLogVerbose() << "_index : " << _index;
-
+    delay.set(ofRandom(minDelay.get(),maxDelay.get()));
+    theStep.set(ofRandom(minStep.get(),maxStep.get()));
      polylines = createOutlineFromImage();
     int indexOfVertext=0;
     for(int i = 0 ; i < polylines.size() ; i++)

@@ -51,7 +51,7 @@
     <val_0>11.7423</val_0>
 </S4_MAX_RADIUS>
 <DEBUG_DRAW>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </DEBUG_DRAW>
 <audo>
     <val_0>0</val_0>
@@ -81,22 +81,22 @@
     <val_0>770</val_0>
 </S2_MAX_PARTICLE>
 <S6_MAX_PARTICLE>
-    <val_0>5923</val_0>
+    <val_0>3462</val_0>
 </S6_MAX_PARTICLE>
 <S6_MIN_RADIUS>
-    <val_0>4.39231</val_0>
+    <val_0>1</val_0>
 </S6_MIN_RADIUS>
 <S6_MAX_RADIUS>
-    <val_0>4.95769</val_0>
+    <val_0>3.82692</val_0>
 </S6_MAX_RADIUS>
 <S6_MAX_R>
-    <val_0>34.0846</val_0>
+    <val_0>6.49231</val_0>
 </S6_MAX_R>
 <S6_DELAY>
-    <val_0>0.191811</val_0>
+    <val_0>3.69231</val_0>
 </S6_DELAY>
 <S6_DURATION>
-    <val_0>4231.68</val_0>
+    <val_0>1539.43</val_0>
 </S6_DURATION>
 <STEP>
     <val_0>25</val_0>
@@ -114,7 +114,7 @@
     <val_0>240</val_0>
 </COMMON_CENER_Y>
 <AUDO_MODE>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </AUDO_MODE>
 <S3_TIEM_OUT>
     <val_0>5</val_0>
@@ -126,32 +126,47 @@
     <val_0>5</val_0>
 </SLOGO_TIME_OUT>
 <S6_STEP>
-    <val_0>1</val_0>
+    <val_0>57.6923</val_0>
 </S6_STEP>
 <S7_MAX_PARTICLE>
-    <val_0>3000</val_0>
+    <val_0>5577</val_0>
 </S7_MAX_PARTICLE>
 <S7_MIN_RADIUS>
-    <val_0>1.94231</val_0>
+    <val_0>1</val_0>
 </S7_MIN_RADIUS>
 <S7_MAX_RADIUS>
-    <val_0>2.88462</val_0>
+    <val_0>1.94231</val_0>
 </S7_MAX_RADIUS>
 <S7_MAX_R>
-    <val_0>211</val_0>
+    <val_0>141.208</val_0>
 </S7_MAX_R>
 <S7_MAX_OUTTER_R>
-    <val_0>844</val_0>
+    <val_0>1460.77</val_0>
 </S7_MAX_OUTTER_R>
 <S7_DELAY>
-    <val_0>0.923077</val_0>
+    <val_0>2.36919</val_0>
 </S7_DELAY>
 <S7_DURATION>
     <val_0>2693.25</val_0>
 </S7_DURATION>
 <S7_STEP>
-    <val_0>1</val_0>
+    <val_0>18.0317</val_0>
 </S7_STEP>
 <S7_DEBUG>
     <val_0>0</val_0>
 </S7_DEBUG>
+<S8_TIME_OUT>
+    <val_0>10</val_0>
+</S8_TIME_OUT>
+<S7_MIN_STEP>
+    <val_0>2</val_0>
+</S7_MIN_STEP>
+<S7_MAX_STEP>
+    <val_0>35</val_0>
+</S7_MAX_STEP>
+<S7_MIN_DELAY>
+    <val_0>0</val_0>
+</S7_MIN_DELAY>
+<S7_MAX_DELAY>
+    <val_0>6</val_0>
+</S7_MAX_DELAY>
