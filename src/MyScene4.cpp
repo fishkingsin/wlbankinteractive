@@ -11,26 +11,46 @@
 
 void MyScene4::setup()
 {
+    ofDisableArbTex();
     counter = 0 ;
-//    image.loadImage("bg.png");
+    //    image.loadImage("bg.png");
     box2d.init();
     box2d.setGravity(0, 30);
-//    box2d.createGround();
+    //    box2d.createGround();
     box2d.setFPS(30.0);
-//    setupEdge();
+    //    setupEdge();
+
+    
+
     
     
 }
 void MyScene4::init()
 {
-     prevElapse = ofGetElapsedTimef();
+//    maskFbo.begin();
+//    ofClear(0,0,0,0);
+//    maskFbo.end();
+    
+    commonAssets->fbo.begin();
+    ofClear(0,0,0,0);
+    commonAssets->fbo.end();
+
+    commonAssets->srcFbo.begin();
+    ofClear(0,0,0,0);
+    commonAssets->srcFbo.end();
+    
+//    maskFbo.begin();
+//    commonAssets->bg.draw(0,0);
+//    maskFbo.end();
+    
+    prevElapse = ofGetElapsedTimef();
     counter = 0;
     setupEdge();
     image = commonAssets->bg;
-//    ofDirectory *dir = &commonAssets->dir;
-//    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
-    col = (int)ofRandom(0, commonAssets->cellColls );
-    row = (int)ofRandom(0, commonAssets->cellRows);
+    //    ofDirectory *dir = &commonAssets->dir;
+    //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
+    col = 0;//(int)ofRandom(0, commonAssets->cellColls );
+    row = 2;//(int)ofRandom(0, commonAssets->cellRows);
     for(int i = 0 ; i < maxParitcle.get(); i++)
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
@@ -38,45 +58,63 @@ void MyScene4::init()
         c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(),maxRadius.get()));
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
-
+        
         commonAssets->setParticleVertex(i, pos);
-        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
-        commonAssets->setParticleNormal(i,ofVec3f(r,0,0));
-
+        float angle = (int)(352+ofRandom(-8,45))%360;
+        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(0.60,0.88)*255, ofRandom(0.6,1.0)*255,255));
+        commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(1,2),0,0));
+        
         commonAssets->setParticleTexCoords(i,col,row );
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
-
+        
         circles.push_back(c);
     }
-        commonAssets->updateAttribtuteData();
+    commonAssets->updateAttribtuteData();
     
 }
 void MyScene4::update(float dt)
 {
     
-     box2d.update();
+    box2d.update();
     for(int i=0; i<circles.size(); i++) {
         ofVec2f pos = circles[i].get()->getPosition();
         float r = circles[i].get()->getRadius();
         commonAssets->setParticleVertex(i, pos);
-        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
+        //        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
         commonAssets->setParticleAngle(i,(circles[i]->getRotation()/360.0f)*TWO_PI);
-//        commonAssets->setParticleNormal(i,ofVec3f(r*2,0,0));
-//        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
-
-        if(pos.x>0 && pos.x < CANVAS_WIDTH && pos.y >0 && pos.y < CANVAS_HEIGHT)
-        {
-            ofColor c = image.getColor(pos.x, pos.y);
-            if(c.a>0)
-            {
-            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10)*c.a;
-            if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
-            }
-        }
+        //        commonAssets->setParticleNormal(i,ofVec3f(r*2,0,0));
+        //        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         
+        //        if(pos.x>0 && pos.x < CANVAS_WIDTH && pos.y >0 && pos.y < CANVAS_HEIGHT)
+        //        {
+        //            ofColor c = image.getColor(pos.x, pos.y);
+        //            if(c.a>0)
+        //            {
+        //            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10)*c.a;
+        //            if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
+        //            }
+        //        }
+        //
     }
+    commonAssets->srcFbo.begin();
+    ofClear(0, 0, 0, 0);
+    commonAssets->draw();
+    commonAssets->srcFbo.end();
     commonAssets->updateAttribtuteData();
-   
+    
+    commonAssets->fbo.begin();
+    // Cleaning everthing with alpha mask on 0 in order to make it transparent for default
+    ofClear(0, 0, 0, 0);
+    
+    commonAssets->shader.begin();
+    commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
+    commonAssets->srcFbo.draw(0, 0);
+
+    
+    commonAssets->shader.end();
+    commonAssets->fbo.end();
+    
+    
     if(counter<timeOut.get())
     {
         
@@ -88,11 +126,12 @@ void MyScene4::update(float dt)
         ofNotifyEvent(toNextSceneEvent, tonextScene, this);
         counter=0;
     }
-        counterString = ofToString(counter);
+    counterString = ofToString(counter);
     prevElapse = ofGetElapsedTimef();
 }
 void MyScene4::draw()
 {
+        commonAssets->fbo.draw(0, 0);
     if(debugDraw.get())
     {
         ofSetColor(0);
@@ -108,9 +147,12 @@ void MyScene4::draw()
             circles[i]->draw();
         }
         ofPopStyle();
-        
+        ofSetColor(255);
+       commonAssets-> srcFbo.draw(0, 0);
+        commonAssets->bg.draw(0,0);
+
     }
-    commonAssets->draw();
+    
 }
 void MyScene4::keyPressed(int key)
 {
@@ -120,7 +162,7 @@ void MyScene4::keyPressed(int key)
         c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get(), 0, ofRandom(minRadius.get(),maxRadius.get()));
         
         circles.push_back(c);
-        commonAssets->setParticleColor(circles.size()-1, ofColor::fromHsb(0, 0, 255));  
+        commonAssets->setParticleColor(circles.size()-1, ofColor::fromHsb(0, 0, 255));
         commonAssets->setParticleTexCoords(circles.size()-1,col,row );
     }
     if(key == 'c') {
@@ -137,7 +179,7 @@ void MyScene4::mousePressed( int x, int y, int button )
 }
 void MyScene4::sceneWillAppear( ofxScene * fromScreen )
 {
-   
+    
     commonAssets->reset();
     
 }
@@ -158,7 +200,7 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
         
     }
     edges.clear();
-
+    
 }
 
 void MyScene4::setupEdge()
@@ -173,27 +215,27 @@ void MyScene4::setupEdge()
         edge.get()->create(box2d.getWorld());
         
     }
-
-
+    
+    
     edges.push_back(edge);
     //bound
-//     edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
-//    edge.get()->addVertex(CANVAS_WIDTH,0);
-//    edge.get()->addVertex(CANVAS_WIDTH,CANVAS_HEIGHT);
-//    edge.get()->addVertex(0,CANVAS_HEIGHT);
-//    edge.get()->addVertex(0,0);
-//
-//    edge.get()->create(box2d.getWorld());
-//        edges.push_back(edge);
-//
-//    vector<ofPolyline> polylines = createOutlineFromImage("logo01.jpg");
-//    
-//    for (int i = 0 ; i < polylines.size(); i++) {
-//         ofPtr <ofxBox2dEdge> _edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
-//        _edge.get()->addVertexes(polylines[i]);
-//        _edge.get()->create(box2d.getWorld());
-//        edges.push_back(_edge);
-//    }
+    //     edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
+    //    edge.get()->addVertex(CANVAS_WIDTH,0);
+    //    edge.get()->addVertex(CANVAS_WIDTH,CANVAS_HEIGHT);
+    //    edge.get()->addVertex(0,CANVAS_HEIGHT);
+    //    edge.get()->addVertex(0,0);
+    //
+    //    edge.get()->create(box2d.getWorld());
+    //        edges.push_back(edge);
+    //
+    //    vector<ofPolyline> polylines = createOutlineFromImage("logo01.jpg");
+    //
+    //    for (int i = 0 ; i < polylines.size(); i++) {
+    //         ofPtr <ofxBox2dEdge> _edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
+    //        _edge.get()->addVertexes(polylines[i]);
+    //        _edge.get()->create(box2d.getWorld());
+    //        edges.push_back(_edge);
+    //    }
     
     
 }
@@ -226,5 +268,5 @@ vector<ofPolyline> MyScene4::createOutlineFromImage(string path)
         polylines.push_back(cur);
     }
     return polylines;
-
+    
 }

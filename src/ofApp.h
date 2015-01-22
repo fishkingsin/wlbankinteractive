@@ -44,7 +44,8 @@ public:
     void toggleDebug(bool& _value);
     
     void nextScene();
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 , SCENE_7,SCENE_8, SCENE_LOGO };
+//    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_6, SCENE_7,SCENE_8, SCENE_LOGO };
+    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4  };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
     
@@ -61,5 +62,10 @@ public:
     
     
     void handleToNextScene(toNextScene &tonextscene);
+    //handle logo
+    void tweenEnd(int &i);
+    void tweenEasingOutEnd(int &i);
+    ofxEasingLinear easingeLinear;
+    ofxTween alphaTween;
     
 };

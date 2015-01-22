@@ -165,6 +165,72 @@ void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle
 }
 void CommonAssets::setup()
 {
+    int width = CANVAS_WIDTH;
+    int height = CANVAS_HEIGHT;
+    
+    fbo.allocate(width,height,GL_RGBA);
+    srcFbo.allocate(width,height,GL_RGBA);
+#ifdef TARGET_OPENGLES
+    shader.load("shaders_gles/alphamask.vert","shaders_gles/alphamask.frag");
+#else
+    if(ofGetGLProgrammableRenderer()){
+        string vertex = "#version 150\n\
+        \n\
+        uniform mat4 projectionMatrix;\n\
+        uniform mat4 modelViewMatrix;\n\
+        uniform mat4 modelViewProjectionMatrix;\n\
+        \n\
+        \n\
+        in vec4  position;\n\
+        in vec2  texcoord;\n\
+        \n\
+        out vec2 texCoordVarying;\n\
+        \n\
+        void main()\n\
+        {\n\
+        texCoordVarying = texcoord;\
+        gl_Position = modelViewProjectionMatrix * position;\n\
+        }";
+        string fragment = "#version 150\n\
+        \n\
+        uniform sampler2DRect tex0;\
+        uniform sampler2DRect maskTex;\
+        in vec2 texCoordVarying;\n\
+        \
+        out vec4 fragColor;\n\
+        void main (void){\
+        vec2 pos = texCoordVarying;\
+        \
+        vec3 src = texture(tex0, pos).rgb;\
+        float mask = 1.0-texture(maskTex, pos).r;\
+        \
+        fragColor = vec4( src , mask);\
+        }";
+        shader.setupShaderFromSource(GL_VERTEX_SHADER, vertex);
+        shader.setupShaderFromSource(GL_FRAGMENT_SHADER, fragment);
+        shader.bindDefaults();
+        shader.linkProgram();
+    }else{
+        string shaderProgram = "#version 120\n \
+        #extension GL_ARB_texture_rectangle : enable\n \
+        \
+        uniform sampler2D tex0;\
+        uniform sampler2D maskTex;\
+        \
+        void main (void){\
+        vec2 pos = gl_TexCoord[0].st;\
+        \
+        vec4 base = texture2D(tex0, pos);\
+        \
+        vec3 src = base.rgb;\
+        float mask = texture2D(maskTex, pos).a;\
+        \
+        gl_FragColor = vec4( src , (base.a*1.0-mask));\
+        }";
+        shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
+        shader.linkProgram();
+    }
+#endif
     bgDir.listDir("backgrounds/");
     logoDir.listDir("logos/");
     billboards.setUsage( GL_DYNAMIC_DRAW );
@@ -264,10 +330,8 @@ void CommonAssets::setParticleNormal(int i, ofVec3f v)
 {
     if(i < 0)                               i = 0;
     if(i > kParticles)   i = kParticles;
-    ofVec3f v2 = v*ofRandom(3,6);
-//    ofVec3f v3 = billboards.getVertices()[i] + (v2);
-     billboards.setNormal(i,v2);
-//    billboards.setVertex(i, v3);
+
+     billboards.setNormal(i,v*4);
 }
 
 void CommonAssets::setParticleTexCoords(int i, float columnID, float rowID)

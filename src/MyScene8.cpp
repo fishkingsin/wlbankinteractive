@@ -20,23 +20,28 @@ void MyScene8::init()
     ofClear(0, 0, 0,0);
     fbo.end();
     img = commonAssets->bg;
+    isStart = false;
 }
 //--------------------------------------------------------------
 void MyScene8::update(float dt){
-    
+    if(isStart)
+    {
     for (int i=0; i<particles.size(); i++) {
         particles[i].update();
     }
     ofSetColor(255);
     
     fbo.begin();
+
+    ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+
     for (int i=0; i<particles.size(); i++) {
         CircularParticle &p = particles[i];
         p.draw();
     }
     fbo.end();
     
-    for (int i=0; i<80; i++) {
+    for (int i=0; i<40; i++) {
         createParticle();
     }
     
@@ -56,26 +61,24 @@ void MyScene8::update(float dt){
     }
     counterString = ofToString(counter);
     prevElapse = ofGetElapsedTimef();
+    }
 }
 
 //--------------------------------------------------------------
 void MyScene8::draw(){
-    
     fbo.draw(0,0);
+
+    
 }
 
 void MyScene8::createParticle() {
     CircularParticle p;
     p.setup();
-    p.pos.set(ofRandomWidth(), ofRandomHeight());
-    if(p.pos.x >0 && p.pos.x < img.width && p.pos.y > 0 && p.pos.y < img.height)
-    {
-        p.color = img.getColor(p.pos.x,p.pos.y);
-    }
-    else{
-        p.color.set(255,255,255,0);
-    }
+    p.pos.set(ofRandom(img.getWidth()), ofRandom(img.getHeight()));
+
+    p.color = img.getColor(p.pos.x,p.pos.y);
     particles.push_back(p);
+
 }
 
 //--------------------------------------------------------------
@@ -91,7 +94,7 @@ void MyScene8::sceneWillDisappear( ofxScene * toScreen )
 }
 void MyScene8::sceneDidAppear()
 {
-    
+    isStart = true;
 }
 void MyScene8::sceneDidDisappear(ofxScene *fromScreen)
 {

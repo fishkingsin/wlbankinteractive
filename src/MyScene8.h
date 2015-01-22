@@ -26,7 +26,7 @@ public:
     
     void draw() {
         ofPushStyle();
-        ofSetLineWidth(2);
+        ofSetLineWidth(4);
         ofSetColor(color,ofMap(age,0,20,255,0,true));
         ofLine(oldpos,pos);
         ofPopStyle();
@@ -75,6 +75,7 @@ public:
         ofParameter<int>timeOut;
     ofParameter<string>counterString;
     ofEvent<toNextScene>toNextSceneEvent;
+    bool isStart;
 };
 
 

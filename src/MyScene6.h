@@ -50,6 +50,8 @@ public:
     ofParameter<float>delay;
     ofParameter<float>duration;
     ofParameter<float>theStep;
+    ofParameter<float>minStep;
+    ofParameter<float>maxStep;
     ofParameter<bool>bDebug;
     ofParameter<float>maxR;
     ofParameter<float>maxOutterR;

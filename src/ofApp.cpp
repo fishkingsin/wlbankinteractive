@@ -87,13 +87,10 @@ void ofApp::setup(){
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     ofAddListener(scene1->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-//    MyScene2* scene2 = new MyScene2();
-//    scene2->commonAssets = &commonAssets;
-//    sceneManager->addScene(scene2 , SCENE_2);
-    MyScene6* scene6 = new MyScene6();
-    scene6->commonAssets = &commonAssets;
-    sceneManager->addScene(scene6 , SCENE_2);
-    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    MyScene2* scene2 = new MyScene2();
+    scene2->commonAssets = &commonAssets;
+    sceneManager->addScene(scene2 , SCENE_2);
+    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     MyScene3* scene3 = new MyScene3();
     scene3->commonAssets = &commonAssets;
@@ -105,6 +102,12 @@ void ofApp::setup(){
     sceneManager->addScene(scene4 , SCENE_4);
     ofAddListener(scene4->toNextSceneEvent, this, &ofApp::handleToNextScene);
 
+    /*MyScene6* scene6 = new MyScene6();
+    scene6->commonAssets = &commonAssets;
+    sceneManager->addScene(scene6 , SCENE_6);
+    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);
+
+    
     MyScene7* scene7 = new MyScene7();
     scene7->commonAssets = &commonAssets;
     sceneManager->addScene(scene7 , SCENE_7);
@@ -114,30 +117,29 @@ void ofApp::setup(){
     scene8->commonAssets = &commonAssets;
     sceneManager->addScene(scene8 , SCENE_8);
     ofAddListener(scene8->toNextSceneEvent, this, &ofApp::handleToNextScene);
-    
-    
 
-    
     LogoScene* logoScene = new LogoScene();
     logoScene->commonAssets = &commonAssets;
     sceneManager->addScene(logoScene , SCENE_LOGO);
-    ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
     
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
     sceneManager->setCurtainStayTime(0.0);
     sceneManager->setCurtainRiseTime(1.0);
     sceneManager->setOverlapUpdate(true);
+    
+    gui.setBackgroundColor(0, 0, 0, 125);
 
     gui.loadFont("MONACO.TTF", 12);
     gui.setup("Settings", CANVAS_WIDTH, 0, ofGetWidth(), ofGetHeight());
     
-    gui.setBackgroundColor(0, 0, 0, 125);
-
     gui.addPanel("Scene1", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene2", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene3", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene4", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Scene5", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Scene6", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene7", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene8", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("SceneLogo", 4, false)->setBackgroundColor(0, 0, 0, 125);
@@ -159,7 +161,7 @@ void ofApp::setup(){
     gui.addSlider(commonAssets.elementCenterY.set("COMMON_CENER_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
     gui.addSlider( scene1->coolDown.set("coolDown",0,0,100000));
 //    gui.add( Mode.set("Mode",0,0,3));
-    gui.addToggle( bAuto.set("AUDO_MODE",false));
+    gui.addToggle( bAuto.set("AUTO_MODE",false));
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     
@@ -173,16 +175,11 @@ void ofApp::setup(){
     //scene2
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
-    gui.addSlider(scene6->maxParitcle.set("S6_MAX_PARTICLE",3000,1,10000));
-    gui.addSlider(scene6->minRadius.set("S6_MIN_RADIUS", 8,1,50));
-    gui.addSlider(scene6->maxRadius.set("S6_MAX_RADIUS", 20,1,50));
-    gui.addSlider(scene6->maxR.set("S6_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
-    gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
-    gui.addSlider(scene6->delay.set("S6_DELAY", 1, 0,20));
-    gui.addSlider(scene6->duration.set("S6_DURATION", 1000,1,50000));
-    gui.addSlider(scene6->theStep.set("S6_STEP", 1,0.0f,100));
-    gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));
-    
+    gui.addSlider(scene2->maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
+    gui.addSlider(scene2->minRadius.set("S2_MIN_RADIUS",8,1,50));
+    gui.addSlider(scene2->maxRadius.set("S2_MAX_RADIUS",20,1,50));
+    gui.addLabel(scene2->counterString.set("S2_COUNTER",""));
+    gui.addSlider(scene2->timeOut.set("S2_TIME_OUT",5,0,20));
     gui.setWhichPanel(3);
     gui.setWhichColumn(0);
     gui.addSlider(scene3->minRadius.set("S3_MIN_RADIUS", 8,1,50));
@@ -198,12 +195,24 @@ void ofApp::setup(){
     gui.addToggle(scene4->debugDraw.set("DEBUG_DRAW",false));
     gui.addSlider(scene4->timeOut.set("S4_TIME_OUT",5,0,20));
     gui.addLabel(scene4->counterString.set("S4_COUNTER",""));
-    gui.setWhichPanel(5);
-    gui.setWhichColumn(0);
-    gui.addSlider(logoScene->timeOut.set("SLOGO_TIME_OUT",5,0,20));
-    gui.addLabel(logoScene->counterString.set("SLOGO_COUNTER",""));
     
-    gui.setWhichPanel(6);
+    /*gui.setWhichPanel(5);
+    gui.setWhichColumn(0);
+    gui.addSlider(scene6->maxParitcle.set("S6_MAX_PARTICLE",3000,1,10000));
+    gui.addSlider(scene6->minRadius.set("S6_MIN_RADIUS", 8,1,50));
+    gui.addSlider(scene6->maxRadius.set("S6_MAX_RADIUS", 20,1,50));
+    gui.addSlider(scene6->maxR.set("S6_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
+    gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
+    gui.addSlider(scene6->delay.set("S6_DELAY", 1, 0,20));
+    gui.addSlider(scene6->duration.set("S6_DURATION", 1000,1,50000));
+    gui.addSlider(scene6->theStep.set("S6_STEP", 1,1.0f,1000));
+    gui.addSlider(scene6->minStep.set("S6_MIN_STEP", 1,1.0f,1000));
+    gui.addSlider(scene6->maxStep.set("S6_MAX_STEP", 1,1.0f,1000));
+
+    gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));
+
+    
+    gui.setWhichPanel(7);
     gui.setWhichColumn(0);
     gui.addSlider(scene7->maxParitcle.set("S7_MAX_PARTICLE",3000,1,10000));
     gui.addSlider(scene7->minRadius.set("S7_MIN_RADIUS", 8,1,50));
@@ -220,10 +229,16 @@ void ofApp::setup(){
     
     gui.addToggle(scene7->bDebug.set("S7_DEBUG",false));
     
-    gui.setWhichPanel(7);
+    gui.setWhichPanel(8);
     gui.setWhichColumn(0);
     gui.addSlider(scene8->timeOut.set("S8_TIME_OUT",5,0,20));
     gui.addLabel(scene8->counterString.set("S8_COUNTER",""));
+    
+    gui.setWhichPanel(9);
+    gui.setWhichColumn(0);
+    gui.addSlider(logoScene->timeOut.set("SLOGO_TIME_OUT",5,0,20));
+    gui.addLabel(logoScene->counterString.set("SLOGO_COUNTER",""));*/
+
     string output = "";
     
     string pointSprites = ((info.bPointSpritesSupported == true) ? "yes" : "no");
@@ -251,6 +266,8 @@ void ofApp::setup(){
 //    {
 //        ofSetWindowShape(player.getWidth(), player.getHeight());
 //    }
+    ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+
 }
 
 //--------------------------------------------------------------
@@ -300,6 +317,13 @@ void ofApp::draw(){
     
     
     sceneManager->draw();
+    if(sceneManager->getCurrentSceneID()!=SCENE_1)
+    {
+        ofPushStyle();
+        ofSetColor(255,alphaTween.update());
+        commonAssets.logo.draw(0,0);
+        ofPopStyle();
+    }
     if(toggleDrawGUI)
     {
         ofPushStyle();
@@ -322,7 +346,7 @@ void ofApp::keyPressed(int key){
             case '6':
            case '7':
            case '8':
-            commonAssets.nextImage();
+//            commonAssets.nextImage();
         {
             ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
             if(curtainColors.size()>0)
@@ -334,10 +358,10 @@ void ofApp::keyPressed(int key){
             if (key == '2') sceneManager->goToScene(SCENE_2);
             if (key == '3') sceneManager->goToScene(SCENE_3);
             if (key == '4') sceneManager->goToScene(SCENE_4);
-            if (key == '5') sceneManager->goToScene(SCENE_LOGO);
-            if (key == '6') sceneManager->goToScene(SCENE_7);
-            if (key == '8') sceneManager->goToScene(SCENE_8);
-            
+//            if (key == '6') sceneManager->goToScene(SCENE_6);
+//            if (key == '7') sceneManager->goToScene(SCENE_7);
+//            if (key == '8') sceneManager->goToScene(SCENE_8);
+//            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
 
         }
             break;
@@ -431,7 +455,7 @@ void ofApp::nextScene()
             //go to next scene 2-4
         {
             commonAssets.nextImage();
-            float rand = ofRandom(SCENE_2,SCENE_LOGO);
+            float rand = ofRandom(SCENE_2,SCENE_4+1);
             ofLogVerbose () << " rand: " << rand;
             Scenes scene = (Scenes)rand;
             ofLogVerbose () << " scene: " << scene;
@@ -441,25 +465,66 @@ void ofApp::nextScene()
         case SCENE_2:
         case SCENE_3:
         case SCENE_4:
-        case SCENE_7:
-        case SCENE_8:
+//        case SCENE_7:
+//        case SCENE_6:
+//        case SCENE_8:
 
-            sceneManager->goToScene(SCENE_LOGO);
-            break;
-        case SCENE_LOGO:
-            //loop back
             sceneManager->goToScene(SCENE_1);
             break;
+//        case SCENE_LOGO:
+//            //loop back
+//            sceneManager->goToScene(SCENE_1);
+//            break;
             
     }
 }
 void ofApp::handleToNextScene(toNextScene &tonextscene)
 {
+    
     if(bAuto)
     {
+        if(tonextscene.sceneID==1)
+        {
+            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
+            nextScene();
+
+        }
+        else{
+            
+            alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,0,255,1000,0);
+            ofAddListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+        }
+        
+    }
+    else{
+        ofLogWarning() << "Auto mode off has scene incoming";
+    }
+}
+
+void ofApp::tweenEnd(int &i)
+{
+    if(bAuto)
+    {
+        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+
+        alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,0,1000,1000);
+        ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
+    }
+    else{
+        ofLogWarning() << "Auto mode off has scene incoming";
+    }
+}
+
+void ofApp::tweenEasingOutEnd(int &i)
+{
+    if(bAuto)
+    {
+        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
         nextScene();
     }
     else{
-        ofLogWarning() << "Audo mode off has scene incoming";
+        ofLogWarning() << "Auto mode off has scene incoming";
     }
+
 }

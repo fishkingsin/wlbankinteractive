@@ -39,6 +39,7 @@ void MyScene1::update(float dt){ //update scene 1 here
         if(!isFireEvent)
         {
             toNextScene tonextScene;
+            tonextScene.sceneID=1;
             ofNotifyEvent(toNextSceneEvent, tonextScene, this);
             isFireEvent = true;
         }
@@ -104,21 +105,8 @@ void MyScene1::keyPressed(int key)
     {
         case 'b':
         {
-            circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-            float r = ofRandom(minRadius, maxRadius);
-            
-            
-            circles.back().get()->setPhysics(3.0, 0.53, 0.1);
-            circles.back().get()->setup(box2d.getWorld(), CANVAS_WIDTH*0.5+ofRandom(-50, 50), CANVAS_HEIGHT*0.5+ofRandom(-50, 50), r);
-            ofColor c = ofColor::fromHsb(0,0,255,ofMap(r,minRadius, maxRadius,255,10));
-            circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
-            
-            commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
-            commonAssets->setParticleColor(circles.size()-1, c);
-            commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius()*2,0,0));
-            
-            commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
 
+            createParticle( CANVAS_WIDTH*0.5+ofRandom(-50, 50), CANVAS_HEIGHT*0.5+ofRandom(-50, 50), ofColor::white);
         }
             break;
         case 's':
@@ -159,16 +147,35 @@ void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
 
 void MyScene1::eventsIn(customeOSCData & data)
 {
-    if(circles.size()<maxParticle.get())
-    {
+    createParticle(data.pos.x*CANVAS_WIDTH, data.pos.y*CANVAS_HEIGHT , ofColor::white);
+//    if(circles.size()<maxParticle.get())
+//    {
 
-        circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-        float r = ofRandom(4, 10);
-        
-        
-        circles.back().get()->setPhysics(3.0, 0.53, 0.1);
-        circles.back().get()->setup(box2d.getWorld(), data.pos.x*CANVAS_WIDTH, data.pos.y*CANVAS_HEIGHT, r);
-        ofColor c = ofColor::fromHsb(data.c.getHue(),MAX(data.c.getSaturation() ,200), MAX(data.c.getBrightness(),200));
-        circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
-    }
+//        circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
+//        float r = ofRandom(4, 10);
+//        
+//        
+//        circles.back().get()->setPhysics(3.0, 0.53, 0.1);
+//        circles.back().get()->setup(box2d.getWorld(), data.pos.x*CANVAS_WIDTH, data.pos.y*CANVAS_HEIGHT, r);
+//        ofColor c = ofColor::fromHsb(data.c.getHue(),MAX(data.c.getSaturation() ,200), MAX(data.c.getBrightness(),200));
+//        circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
+//    }
+}
+
+void MyScene1::createParticle(float x , float y , ofColor color)
+{
+    circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
+    float r = ofRandom(minRadius, maxRadius);
+    
+    
+    circles.back().get()->setPhysics(3.0, 0.53, 0.1);
+    circles.back().get()->setup(box2d.getWorld(),x,y, r);
+    ofColor c = ofColor::fromHsb(0,0,255,ofMap(r,minRadius, maxRadius,255,10));
+    circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
+    
+    commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
+    commonAssets->setParticleColor(circles.size()-1, c);
+    commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius(),0,0));
+    
+    commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
 }

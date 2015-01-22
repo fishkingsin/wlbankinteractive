@@ -27,7 +27,7 @@ void main (void) {
 
     vec2 texCoor = newcoords;
     vec4 base = texture2D(tex, texCoor*d+vec2(x,y));
-//    gl_FragColor = base*gl_Color;
+    gl_FragColor = base*gl_Color;
     if (!(gl_Color.r == 1.0 && gl_Color.g == 1.0  && gl_Color.b == 1.0) )
     {
         vec4 result =  mix(base, gl_Color, gl_Color.a);//vec4(1.0,1.0,1.0,1.0);
@@ -37,9 +37,9 @@ void main (void) {
     }
     else
     {
-        vec4 result =  mix(base, gl_Color,base.a);//vec4(1.0,1.0,1.0,1.0);
-        result.a = gl_Color.a*base.a;
-        gl_FragColor = result;
+//        vec4 result =  mix(base, gl_Color,base.a);//vec4(1.0,1.0,1.0,1.0);
+//        result.a = gl_Color.a*base.a;
+        gl_FragColor = base*gl_Color;
     }
 
 	 

@@ -10,6 +10,7 @@
 #define __wlbankinteractive__CommonAssets__
 #include "ofMain.h"
 #include "ofxAutoReloadedShader.h"
+#include "Constants.h"
 typedef struct {
     ofVec2f pos;
     ofColor c;
@@ -91,6 +92,12 @@ public:
     ofImage bg;
     ofParameter<int>elementCenterX;
     ofParameter<int>elementCenterY;
+    
+    
+    ofFbo       fbo;
+    ofFbo       srcFbo;
+    
+    ofShader    shader;
 };
 
 

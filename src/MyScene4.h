@@ -52,7 +52,7 @@ public:
     float prevElapse;
     ofParameter<string>counterString;
     ofEvent<toNextScene>toNextSceneEvent;
-    
+
 };
 
 

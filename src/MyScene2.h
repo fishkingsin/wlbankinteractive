@@ -46,6 +46,11 @@ public:
     ofParameter<int>maxParitcle;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
+    ofParameter<int>timeOut;
+    float counter;
+    float prevElapse;
+    ofParameter<string>counterString;
+    ofEvent<toNextScene>toNextSceneEvent;
 };
 
 

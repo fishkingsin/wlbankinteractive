@@ -36,6 +36,7 @@ public:
     
     void sceneDidDisappear( ofxScene * fromScreen );
     void eventsIn(customeOSCData & data);
+    void createParticle(float x , float y , ofColor color);
     //sencing
     
     ofParameter<int> coolDown;
@@ -52,6 +53,7 @@ public:
     vector< vector< ofPtr<ofImage> > > imagesSet;
     vector<ofImage> images;
     CommonAssets *commonAssets;
+    ofParameterGroup paraGroup;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
     ofParameter<string>numParticle;
