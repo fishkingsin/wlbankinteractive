@@ -15,9 +15,7 @@ typedef struct {
     ofVec2f pos;
     ofColor c;
 }customeOSCData;
-typedef struct {
-    int sceneID;
-}toNextScene;
+
 typedef struct {
     
     string version;

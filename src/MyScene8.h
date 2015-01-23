@@ -9,8 +9,7 @@
 #ifndef __wlbankinteractive__MyScene8__
 #define __wlbankinteractive__MyScene8__
 
-#include "ofMain.h"
-#include "ofxScene.h"
+#include "BaseScene.h"
 #include "Particle.h"
 #include "CommonAssets.h"
 #include "Constants.h"
@@ -39,7 +38,7 @@ public:
         pos += vel;
         age++;
     }
-
+    
     
     ofVec2f pos,vel,acc,oldpos;
     float angle;
@@ -48,20 +47,20 @@ public:
 };
 
 
-class MyScene8 : public ofxScene {
+class MyScene8 : public BaseScene {
 public:
     void setup();
     void init();
     void update(float dt);
     void draw();
     void keyPressed(int key);
-//    void mousePressed( int x, int y, int button );    //scene notifications
+    //    void mousePressed( int x, int y, int button );    //scene notifications
     void sceneWillAppear( ofxScene * fromScreen );
     //scene notifications
     void sceneWillDisappear( ofxScene * toScreen );
     void sceneDidAppear();
     void sceneDidDisappear(ofxScene *fromScreen);
-
+    
     void createParticle();
     
     ofImage img;
@@ -72,9 +71,9 @@ public:
     
     float counter;
     float prevElapse;
-        ofParameter<int>timeOut;
+    ofParameter<int>timeOut;
     ofParameter<string>counterString;
-    ofEvent<toNextScene>toNextSceneEvent;
+    
     bool isStart;
 };
 

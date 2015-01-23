@@ -10,6 +10,13 @@
 
 void MyScene2::setup()
 {
+    paraGroup.setName("Scene2");
+    paraGroup.add(maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
+    paraGroup.add(minRadius.set("S2_MIN_RADIUS",8,1,50));
+    paraGroup.add(maxRadius.set("S2_MAX_RADIUS",20,1,50));
+    paraGroup.add(counterString.set("S2_COUNTER",""));
+    paraGroup.add(timeOut.set("S2_TIME_OUT",5,0,20));
+    
     counter = 0 ;
     ofBackground(99);
     ofSetFrameRate(60);

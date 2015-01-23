@@ -10,15 +10,13 @@
 #define wlbankinteractive_MyScene1_h
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
-#include "ofMain.h"
-#include "ofxScene.h"
-
+#include "BaseScene.h"
 #include "Constants.h"
 
 #include "CustomParticle.h"
 #include "CommonAssets.h"
 
-class MyScene1 : public ofxScene{
+class MyScene1 : public BaseScene{
 public:
     MyScene1();
     void setup();
@@ -40,7 +38,7 @@ public:
     //sencing
     
     ofParameter<int> coolDown;
-    ofEvent<toNextScene>toNextSceneEvent;
+    
     
     
     float counter;

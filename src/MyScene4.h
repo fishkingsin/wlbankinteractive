@@ -11,13 +11,12 @@
 
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
-#include "ofMain.h"
-#include "ofxScene.h"
+#include "BaseScene.h"
 
 #include "Constants.h"
 #include "CommonAssets.h"
 
-class MyScene4 : public ofxScene{
+class MyScene4 : public BaseScene{
 public:
     
     void setup();
@@ -51,7 +50,7 @@ public:
     float counter;
     float prevElapse;
     ofParameter<string>counterString;
-    ofEvent<toNextScene>toNextSceneEvent;
+    
     bool isStart;
 
 };

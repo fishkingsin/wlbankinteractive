@@ -11,12 +11,11 @@
 
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
-#include "ofMain.h"
-#include "ofxScene.h"
+#include "BaseScene.h"
 
 #include "Constants.h"
 #include "CommonAssets.h"
-class LogoScene : public ofxScene{
+class LogoScene : public BaseScene{
 public:
     void setup();
     void init();
@@ -31,7 +30,7 @@ public:
     void sceneDidDisappear(ofxScene *fromScreen);
 
      CommonAssets *commonAssets;
-    ofEvent<toNextScene>toNextSceneEvent;
+    
     ofParameter<int>timeOut;
     float counter;
     ofParameter<string>counterString;

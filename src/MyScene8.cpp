@@ -9,6 +9,10 @@
 #include "MyScene8.h"
 //--------------------------------------------------------------
 void MyScene8::setup(){
+    paraGroup.setName("Scene8");
+    paraGroup.add(timeOut.set("S8_TIME_OUT",5,0,20));
+    paraGroup.add(counterString.set("S8_COUNTER",""));
+
     fbo.allocate(CANVAS_WIDTH, CANVAS_HEIGHT,GL_RGBA);
 }
 void MyScene8::init()

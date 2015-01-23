@@ -11,6 +11,13 @@
 
 void MyScene4::setup()
 {
+    paraGroup.setName("Scene4");
+    paraGroup.add(maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
+    paraGroup.add(minRadius.set("S4_MIN_RADIUS",8,1,50));
+    paraGroup.add(maxRadius.set("S4_MAX_RADIUS",20,1,50));
+    paraGroup.add(debugDraw.set("DEBUG_DRAW",false));
+    paraGroup.add(timeOut.set("S4_TIME_OUT",5,0,20));
+    paraGroup.add(counterString.set("S4_COUNTER",""));
     isStart = false;
     ofDisableArbTex();
     counter = 0 ;
@@ -56,7 +63,7 @@ void MyScene4::init()
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(10, 0.1, 0.5);
-        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(),maxRadius.get()));
+        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(), maxRadius.get()));
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
         
@@ -188,11 +195,7 @@ void MyScene4::sceneDidAppear()
 }
 void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 {
-    while(circles.size()>0)
-    {
-        circles.erase(circles.begin());
-        
-    }
+    circles.clear();
     edges.clear();
     isStart = false;
 }

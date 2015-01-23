@@ -8,7 +8,9 @@
 
 #include "LogoScene.h"
 void LogoScene::setup(){
-    
+    paraGroup.setName("LogoScene");
+    paraGroup.add(timeOut.set("SLOGO_TIME_OUT",5,0,20));
+    paraGroup.add(counterString.set("SLOGO_COUNTER",""));
 }
 void LogoScene::init(){
         prevElapse = ofGetElapsedTimef();
