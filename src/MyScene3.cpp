@@ -67,7 +67,7 @@ void MyScene3::init()
         }
     }
     
-    int mode = (int)ofRandom(0,4);
+    int mode = (int)ofRandom(0,6);
     
     for(int i = 0 ; i< MAX_POINTS ; i++)
     {
@@ -107,18 +107,20 @@ void MyScene3::init()
                 _y = -100;
                 break;
             default:
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
+                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+commonAssets->elementCenterY.get();
                 break;
         }
         points[i].set(_x, _y);
         
         
         ofPtr<ofxTween> tx = ofPtr<ofxTween>(new ofxTween);
-        tx.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,i);
+        tx.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,delay*i);
         tweensX.push_back(tx);
 
         
         ofPtr<ofxTween> ty = ofPtr<ofxTween>(new ofxTween);
-        ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
+        ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,delay*i);
         tweensY.push_back(ty);
         
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));

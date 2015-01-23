@@ -13,6 +13,7 @@
 #include "LogoScene.h"
 #include "CommonAssets.h"
 #include "ofxOsc.h"
+#include "ofxAnimatable.h"
 
 class ofApp : public ofBaseApp{
     
@@ -45,7 +46,7 @@ public:
     
     void nextScene();
 //    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_6, SCENE_7,SCENE_8, SCENE_LOGO };
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4  };
+    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_7 };
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
     

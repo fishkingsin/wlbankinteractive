@@ -38,6 +38,8 @@ public:
     CommonAssets *commonAssets;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
+    ofParameter<float>delay;
+        ofParameter<float>delayDensity;
     ofEvent<toNextScene>toNextSceneEvent;
     void tweenEnd(int &i);
 };

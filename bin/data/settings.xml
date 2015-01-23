@@ -182,3 +182,6 @@
 <AUTO_MODE>
     <val_0>1</val_0>
 </AUTO_MODE>
+<S3_DELAY>
+    <val_0>11</val_0>
+</S3_DELAY>

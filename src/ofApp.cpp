@@ -105,7 +105,7 @@ void ofApp::setup(){
     /*MyScene6* scene6 = new MyScene6();
     scene6->commonAssets = &commonAssets;
     sceneManager->addScene(scene6 , SCENE_6);
-    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
 
     
     MyScene7* scene7 = new MyScene7();
@@ -113,7 +113,7 @@ void ofApp::setup(){
     sceneManager->addScene(scene7 , SCENE_7);
     ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-    MyScene8* scene8 = new MyScene8();
+/*    MyScene8* scene8 = new MyScene8();
     scene8->commonAssets = &commonAssets;
     sceneManager->addScene(scene8 , SCENE_8);
     ofAddListener(scene8->toNextSceneEvent, this, &ofApp::handleToNextScene);
@@ -184,6 +184,8 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
     gui.addSlider(scene3->minRadius.set("S3_MIN_RADIUS", 8,1,50));
     gui.addSlider(scene3->maxRadius.set("S3_MAX_RADIUS", 20,1,50));
+        gui.addSlider(scene3->delay.set("S3_DELAY", 1, 0,20));
+    
     
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
@@ -209,7 +211,7 @@ void ofApp::setup(){
     gui.addSlider(scene6->minStep.set("S6_MIN_STEP", 1,1.0f,1000));
     gui.addSlider(scene6->maxStep.set("S6_MAX_STEP", 1,1.0f,1000));
 
-    gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));
+    gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));*/
 
     
     gui.setWhichPanel(7);
@@ -229,7 +231,7 @@ void ofApp::setup(){
     
     gui.addToggle(scene7->bDebug.set("S7_DEBUG",false));
     
-    gui.setWhichPanel(8);
+    /*gui.setWhichPanel(8);
     gui.setWhichColumn(0);
     gui.addSlider(scene8->timeOut.set("S8_TIME_OUT",5,0,20));
     gui.addLabel(scene8->counterString.set("S8_COUNTER",""));
@@ -317,13 +319,11 @@ void ofApp::draw(){
     
     
     sceneManager->draw();
-    if(sceneManager->getCurrentSceneID()!=SCENE_1)
-    {
-        ofPushStyle();
-        ofSetColor(255,alphaTween.update());
-        commonAssets.logo.draw(0,0);
-        ofPopStyle();
-    }
+
+    ofPushStyle();
+    ofSetColor(255,alphaTween.update());
+    commonAssets.logo.draw(0,0);
+    ofPopStyle();
     if(toggleDrawGUI)
     {
         ofPushStyle();
@@ -359,7 +359,7 @@ void ofApp::keyPressed(int key){
             if (key == '3') sceneManager->goToScene(SCENE_3);
             if (key == '4') sceneManager->goToScene(SCENE_4);
 //            if (key == '6') sceneManager->goToScene(SCENE_6);
-//            if (key == '7') sceneManager->goToScene(SCENE_7);
+            if (key == '7') sceneManager->goToScene(SCENE_7);
 //            if (key == '8') sceneManager->goToScene(SCENE_8);
 //            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
 
@@ -465,7 +465,7 @@ void ofApp::nextScene()
         case SCENE_2:
         case SCENE_3:
         case SCENE_4:
-//        case SCENE_7:
+        case SCENE_7:
 //        case SCENE_6:
 //        case SCENE_8:
 
@@ -508,7 +508,7 @@ void ofApp::tweenEnd(int &i)
     {
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
 
-        alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,0,1000,1000);
+        alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,255,2000,0);
         ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
     }
     else{
@@ -520,6 +520,7 @@ void ofApp::tweenEasingOutEnd(int &i)
 {
     if(bAuto)
     {
+                alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,0,1000,1000);
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
         nextScene();
     }

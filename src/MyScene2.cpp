@@ -88,60 +88,61 @@ void MyScene2::init()
 //--------------------------------------------------------------------------------------------
 void MyScene2::update(float dt)
 {
-
-
-    box2d.update();
-    // apply per-particle forces
-    for(int i=0; i<circles.size(); i++) {
-        circles[i].get()->addAttractionPoint(ofVec2f(CANVAS_WIDTH*0.5,CANVAS_HEIGHT*0.5), (isStart)?0.5:0);
-        ofVec2f pos = circles[i].get()->getPosition();
-        commonAssets->setParticleVertex(i, pos);
-        commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
-//        if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())
-//        {
-//            ofColor c = image.getColor(pos.x, pos.y);
-////            if(c.a > 0)
-//            {
-//                c.a = ofMap(maxRadius.get()-circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10 );//((maxRadius.get()-circles[i].get()->getRadius())/maxRadius.get())*255;
-//                if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
-//            }
-//        }
-
-    }
     
-    commonAssets->srcFbo.begin();
-    ofClear(0, 0, 0, 0);
-    commonAssets->draw();
-    commonAssets->srcFbo.end();
-    commonAssets->updateAttribtuteData();
-    
-    commonAssets->fbo.begin();
-    // Cleaning everthing with alpha mask on 0 in order to make it transparent for default
-    ofClear(0, 0, 0, 0);
-    
-    commonAssets->shader.begin();
-    commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
-    commonAssets->srcFbo.draw(0, 0);
-    
-    
-    commonAssets->shader.end();
-    commonAssets->fbo.end();
-    
-    commonAssets->updateAttribtuteData();
-    if(counter<timeOut.get())
-    {
+    if(isStart){
+        box2d.update();
+        // apply per-particle forces
+        for(int i=0; i<circles.size(); i++) {
+            circles[i].get()->addAttractionPoint(ofVec2f(CANVAS_WIDTH*0.5,CANVAS_HEIGHT*0.5), (isStart)?0.5:0);
+            ofVec2f pos = circles[i].get()->getPosition();
+            commonAssets->setParticleVertex(i, pos);
+            commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
+            //        if(pos.x>0 && pos.x < image.getWidth() && pos.y >0 && pos.y < image.getHeight())
+            //        {
+            //            ofColor c = image.getColor(pos.x, pos.y);
+            ////            if(c.a > 0)
+            //            {
+            //                c.a = ofMap(maxRadius.get()-circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10 );//((maxRadius.get()-circles[i].get()->getRadius())/maxRadius.get())*255;
+            //                if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
+            //            }
+            //        }
+            
+        }
         
-        counter+=ofGetElapsedTimef()-prevElapse;
+        commonAssets->srcFbo.begin();
+        ofClear(0, 0, 0, 0);
+        commonAssets->draw();
+        commonAssets->srcFbo.end();
+        commonAssets->updateAttribtuteData();
+        
+        commonAssets->fbo.begin();
+        // Cleaning everthing with alpha mask on 0 in order to make it transparent for default
+        ofClear(0, 0, 0, 0);
+        
+        commonAssets->shader.begin();
+        commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
+        commonAssets->srcFbo.draw(0, 0);
+        
+        
+        commonAssets->shader.end();
+        commonAssets->fbo.end();
+        
+        commonAssets->updateAttribtuteData();
+        if(counter<timeOut.get())
+        {
+            
+            counter+=ofGetElapsedTimef()-prevElapse;
+        }
+        else{
+            ofLogVerbose() << "counter : " << counter;
+            toNextScene tonextScene;
+            tonextScene.sceneID = 2;
+            ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+            counter=0;
+        }
+        counterString = ofToString(counter);
+        prevElapse = ofGetElapsedTimef();
     }
-    else{
-        ofLogVerbose() << "counter : " << counter;
-        toNextScene tonextScene;
-        tonextScene.sceneID = 2;
-        ofNotifyEvent(toNextSceneEvent, tonextScene, this);
-        counter=0;
-    }
-    counterString = ofToString(counter);
-    prevElapse = ofGetElapsedTimef();
 }
 void MyScene2::draw()
 {
@@ -175,6 +176,8 @@ void MyScene2::sceneWillAppear( ofxScene * fromScreen )
 {
     commonAssets->reset();
         init();
+    prevElapse = ofGetElapsedTimef();
+    counter = 0 ;
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )
@@ -199,4 +202,5 @@ void MyScene2::sceneDidDisappear(ofxScene *fromScreen)
         circles.erase(circles.begin());
         
     }
+    isStart = false;
 }

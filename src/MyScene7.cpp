@@ -91,7 +91,7 @@ void MyScene7::init()
     }
     if(tweensY.size()>0)
     {
-    ofAddListener(tweensY.back()->end_E, this, &MyScene7::tweenEnd);
+        ofAddListener(tweensY.back()->end_E, this, &MyScene7::tweenEnd);
     }
     commonAssets->updateAttribtuteData();
 }
