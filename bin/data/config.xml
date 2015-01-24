@@ -1,0 +1,27 @@
+<XML>
+    <CURTAIN_COLORS>
+        <COLOR>
+            <R>255</R>
+            <G>255</G>
+            <B>255</B>
+        </COLOR>
+        <!-- <COLOR>
+            <R>0</R>
+            <G>0</G>
+            <B>0</B>
+        </COLOR> -->
+<!--         <COLOR>
+            <R>255</R>
+            <G>255</G>
+            <B>0</B>
+        </COLOR> -->
+    </CURTAIN_COLORS>
+    <SHAPE>
+        <WIDTH>1024</WIDTH>
+        <HEIGHT>768</HEIGHT>
+    </SHAPE>
+    <POSITION>
+        <X>0</X>
+        <Y>0</Y>
+    </POSITION>
+</XML>
