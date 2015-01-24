@@ -11,6 +11,17 @@
 
 void MyScene4::setup()
 {
+    paraGroup.setName("Scene4");
+    paraGroup.add(maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
+    paraGroup.add(minRadius.set("S4_MIN_RADIUS",8,1,50));
+    paraGroup.add(maxRadius.set("S4_MAX_RADIUS",20,1,50));
+    paraGroup.add(minRScale.set("S4_MIN_R_SCALE",1,0,2));
+    paraGroup.add(maxRScale.set("S4_MAX_R_SCALE",1,0,2));
+
+    paraGroup.add(debugDraw.set("DEBUG_DRAW",false));
+    paraGroup.add(timeOut.set("S4_TIME_OUT",5,0,20));
+    paraGroup.add(counterString.set("S4_COUNTER",""));
+    isStart = false;
     ofDisableArbTex();
     counter = 0 ;
     //    image.loadImage("bg.png");
@@ -55,14 +66,14 @@ void MyScene4::init()
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(10, 0.1, 0.5);
-        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(),maxRadius.get()));
+        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(), maxRadius.get()));
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
         
         commonAssets->setParticleVertex(i, pos);
         float angle = (int)(352+ofRandom(-8,45))%360;
         commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(0.60,0.88)*255, ofRandom(0.6,1.0)*255,255));
-        commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(1,2),0,0));
+        commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(minRScale,maxRScale),0,0));
         
         commonAssets->setParticleTexCoords(i,col,row );
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
@@ -74,60 +85,47 @@ void MyScene4::init()
 }
 void MyScene4::update(float dt)
 {
-    
-    box2d.update();
-    for(int i=0; i<circles.size(); i++) {
-        ofVec2f pos = circles[i].get()->getPosition();
-        float r = circles[i].get()->getRadius();
-        commonAssets->setParticleVertex(i, pos);
-        //        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255));
-        commonAssets->setParticleAngle(i,(circles[i]->getRotation()/360.0f)*TWO_PI);
-        //        commonAssets->setParticleNormal(i,ofVec3f(r*2,0,0));
-        //        commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
+    if(isStart){
+        box2d.update();
+        for(int i=0; i<circles.size(); i++) {
+            ofVec2f pos = circles[i].get()->getPosition();
+            float r = circles[i].get()->getRadius();
+            commonAssets->setParticleVertex(i, pos);
+            commonAssets->setParticleAngle(i,(circles[i]->getRotation()/360.0f)*TWO_PI);
+        }
+        commonAssets->srcFbo.begin();
+        ofClear(0, 0, 0, 0);
+        commonAssets->draw();
+        commonAssets->srcFbo.end();
+        commonAssets->updateAttribtuteData();
         
-        //        if(pos.x>0 && pos.x < CANVAS_WIDTH && pos.y >0 && pos.y < CANVAS_HEIGHT)
-        //        {
-        //            ofColor c = image.getColor(pos.x, pos.y);
-        //            if(c.a>0)
-        //            {
-        //            c.a = ofMap(circles[i].get()->getRadius(),minRadius.get(),maxRadius.get(),255,10)*c.a;
-        //            if(c.r > 0 && c.g > 0 && c.b > 0 )commonAssets->setParticleColor(i, c);
-        //            }
-        //        }
-        //
-    }
-    commonAssets->srcFbo.begin();
-    ofClear(0, 0, 0, 0);
-    commonAssets->draw();
-    commonAssets->srcFbo.end();
-    commonAssets->updateAttribtuteData();
-    
-    commonAssets->fbo.begin();
-    // Cleaning everthing with alpha mask on 0 in order to make it transparent for default
-    ofClear(0, 0, 0, 0);
-    
-    commonAssets->shader.begin();
-    commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
-    commonAssets->srcFbo.draw(0, 0);
-
-    
-    commonAssets->shader.end();
-    commonAssets->fbo.end();
-    
-    
-    if(counter<timeOut.get())
-    {
+        commonAssets->fbo.begin();
+        // Cleaning everthing with alpha mask on 0 in order to make it transparent for default
+        ofClear(0, 0, 0, 0);
         
-        counter+=ofGetElapsedTimef()-prevElapse;
+        commonAssets->shader.begin();
+        commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
+        commonAssets->srcFbo.draw(0, 0);
+        
+        
+        commonAssets->shader.end();
+        commonAssets->fbo.end();
+        
+        
+        if(counter<timeOut.get())
+        {
+            
+            counter+=ofGetElapsedTimef()-prevElapse;
+        }
+        else{
+            ofLogVerbose() << "counter : " << counter;
+            toNextScene tonextScene;
+            ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+            counter=0;
+        }
+        counterString = ofToString(counter);
+        prevElapse = ofGetElapsedTimef();
     }
-    else{
-        ofLogVerbose() << "counter : " << counter;
-        toNextScene tonextScene;
-        ofNotifyEvent(toNextSceneEvent, tonextScene, this);
-        counter=0;
-    }
-    counterString = ofToString(counter);
-    prevElapse = ofGetElapsedTimef();
 }
 void MyScene4::draw()
 {
@@ -181,7 +179,9 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
 {
     
     commonAssets->reset();
-    
+    counter = 0;
+    prevElapse = ofGetElapsedTimef();
+    init();
 }
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
@@ -190,17 +190,17 @@ void MyScene4::sceneWillDisappear( ofxScene * toScreen )
 }
 void MyScene4::sceneDidAppear()
 {
-    init();
+
+    counter = 0;
+    prevElapse = ofGetElapsedTimef();
+    isStart = true;
+
 }
 void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 {
-    while(circles.size()>0)
-    {
-        circles.erase(circles.begin());
-        
-    }
+    circles.clear();
     edges.clear();
-    
+    isStart = false;
 }
 
 void MyScene4::setupEdge()

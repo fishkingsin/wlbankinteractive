@@ -10,6 +10,22 @@
 
 void MyScene7::setup()
 {
+    paraGroup.setName("Scene7");
+    paraGroup.add(maxParitcle.set("S7_MAX_PARTICLE",3000,1,10000));
+    paraGroup.add(minRadius.set("S7_MIN_RADIUS", 8,1,50));
+    paraGroup.add(maxRadius.set("S7_MAX_RADIUS", 20,1,50));
+    paraGroup.add(maxR.set("S7_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
+    paraGroup.add(maxOutterR.set("S7_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
+    paraGroup.add(delay.set("S7_DELAY", 1, 0,20));
+    paraGroup.add(duration.set("S7_DURATION", 1000,1,50000));
+    paraGroup.add(theStep.set("S7_STEP", 1,50.0f,100));
+    paraGroup.add(minStep.set("S7_MIN_STEP", 1,0.0f,100));
+    paraGroup.add(maxStep.set("S7_MAX_STEP", 50,0.0f,100));
+    paraGroup.add(minDelay.set("S7_MIN_DELAY", 0,0.0f,100));
+    paraGroup.add(maxDelay.set("S7_MAX_DELAY", 50,0.0f,100));
+        paraGroup.add(maxDensity.set("S7_MAX_DENSITY", 50,0.0f,100));
+
+    paraGroup.add(bDebug.set("S7_DEBUG",false));
     easings.push_back(&easingExpo);
     easings.push_back(&easingSine);
     easings.push_back(& easingLinear);
@@ -36,7 +52,7 @@ void MyScene7::init()
     for(int i = 0 ; i < polylines.size() ; i++)
     {
         vector<ofVec3f> v =  polylines[i].getVertices();
-        for(int j = 0 ; j < v.size() ;j++)
+        for(int j = 0 ; j < v.size() ;j+=maxDensity)
         {
             
             
@@ -91,7 +107,7 @@ void MyScene7::init()
     }
     if(tweensY.size()>0)
     {
-    ofAddListener(tweensY.back()->end_E, this, &MyScene7::tweenEnd);
+        ofAddListener(tweensY.back()->end_E, this, &MyScene7::tweenEnd);
     }
     commonAssets->updateAttribtuteData();
 }

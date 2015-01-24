@@ -10,13 +10,12 @@
 #define __wlbankinteractive__MyScene6__
 
 
-#include "ofMain.h"
-#include "ofxScene.h"
+#include "BaseScene.h"
 #include "ofxTween.h"
 #include "CommonAssets.h"
 #include "Constants.h"
 class CustomParticle;
-class MyScene6 : public ofxScene{
+class MyScene6 : public BaseScene{
 public:
     
     void setup();
@@ -57,7 +56,7 @@ public:
     ofParameter<float>maxOutterR;
     
     void tweenEnd(int &i);
-    ofEvent<toNextScene>toNextSceneEvent;
+
     
     
     

@@ -10,12 +10,11 @@
 #define __wlbankinteractive__MyScene5__
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
-#include "ofMain.h"
-#include "ofxScene.h"
+#include "BaseScene.h"
 
 #include "Constants.h"
 #include "CommonAssets.h"
-class MyScene5 : public ofxScene{
+class MyScene5 : public BaseScene{
 public:
     void setup();
     void init();

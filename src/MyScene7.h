@@ -9,14 +9,13 @@
 #ifndef __wlbankinteractive__MyScene7__
 #define __wlbankinteractive__MyScene7__
 
-#include "ofMain.h"
-#include "ofxScene.h"
+#include "BaseScene.h"
 #include "ofxTween.h"
 #include "CommonAssets.h"
 #include "Constants.h"
 #include "ofxOpenCv.h"
 class CustomParticle;
-class MyScene7 : public ofxScene{
+class MyScene7 : public BaseScene{
 public:
     
     void setup();
@@ -57,9 +56,9 @@ public:
     
     ofParameter<int>maxDelay;
     ofParameter<int>minDelay;
-    
+    ofParameter<int>maxDensity;
     void tweenEnd(int &i);
-    ofEvent<toNextScene>toNextSceneEvent;
+    
     vector<ofPolyline> polylines;
     
     

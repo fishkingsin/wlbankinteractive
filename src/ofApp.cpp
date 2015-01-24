@@ -105,7 +105,7 @@ void ofApp::setup(){
     /*MyScene6* scene6 = new MyScene6();
     scene6->commonAssets = &commonAssets;
     sceneManager->addScene(scene6 , SCENE_6);
-    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
 
     
     MyScene7* scene7 = new MyScene7();
@@ -113,7 +113,7 @@ void ofApp::setup(){
     sceneManager->addScene(scene7 , SCENE_7);
     ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-    MyScene8* scene8 = new MyScene8();
+/*    MyScene8* scene8 = new MyScene8();
     scene8->commonAssets = &commonAssets;
     sceneManager->addScene(scene8 , SCENE_8);
     ofAddListener(scene8->toNextSceneEvent, this, &ofApp::handleToNextScene);
@@ -168,76 +168,37 @@ void ofApp::setup(){
     //scene1
     gui.setWhichPanel(1);
     gui.setWhichColumn(0);
-    gui.addLabel(scene1->numParticle.set("PARTICLE_SIZE",""));
-    gui.addSlider(scene1->maxParticle.set("S1_MAX_PARTICLE",3000,1,10000));
-    gui.addSlider(scene1->minRadius.set("S1_MIN_RADIUS",8,1,50));
-    gui.addSlider(scene1->maxRadius.set("S1_MAX_RADIUS",20,1,50));
+ 
+    gui.addGroup(scene1->paraGroup);
     //scene2
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
-    gui.addSlider(scene2->maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
-    gui.addSlider(scene2->minRadius.set("S2_MIN_RADIUS",8,1,50));
-    gui.addSlider(scene2->maxRadius.set("S2_MAX_RADIUS",20,1,50));
-    gui.addLabel(scene2->counterString.set("S2_COUNTER",""));
-    gui.addSlider(scene2->timeOut.set("S2_TIME_OUT",5,0,20));
+    gui.addGroup(scene2->paraGroup);
+    
     gui.setWhichPanel(3);
     gui.setWhichColumn(0);
-    gui.addSlider(scene3->minRadius.set("S3_MIN_RADIUS", 8,1,50));
-    gui.addSlider(scene3->maxRadius.set("S3_MAX_RADIUS", 20,1,50));
-    
+    gui.addGroup(scene3->paraGroup);;
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
-    gui.addSlider(scene4->maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
-//    gui.addSlider(scene4->initX.set("INIT_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
-//    gui.addSlider(scene4->initY.set("INIT_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
-    gui.addSlider(scene4->minRadius.set("S4_MIN_RADIUS",8,1,50));
-    gui.addSlider(scene4->maxRadius.set("S4_MAX_RADIUS",20,1,50));
-    gui.addToggle(scene4->debugDraw.set("DEBUG_DRAW",false));
-    gui.addSlider(scene4->timeOut.set("S4_TIME_OUT",5,0,20));
-    gui.addLabel(scene4->counterString.set("S4_COUNTER",""));
-    
+    gui.addGroup(scene4->paraGroup);
+
     /*gui.setWhichPanel(5);
     gui.setWhichColumn(0);
-    gui.addSlider(scene6->maxParitcle.set("S6_MAX_PARTICLE",3000,1,10000));
-    gui.addSlider(scene6->minRadius.set("S6_MIN_RADIUS", 8,1,50));
-    gui.addSlider(scene6->maxRadius.set("S6_MAX_RADIUS", 20,1,50));
-    gui.addSlider(scene6->maxR.set("S6_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
-    gui.addSlider(scene6->maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
-    gui.addSlider(scene6->delay.set("S6_DELAY", 1, 0,20));
-    gui.addSlider(scene6->duration.set("S6_DURATION", 1000,1,50000));
-    gui.addSlider(scene6->theStep.set("S6_STEP", 1,1.0f,1000));
-    gui.addSlider(scene6->minStep.set("S6_MIN_STEP", 1,1.0f,1000));
-    gui.addSlider(scene6->maxStep.set("S6_MAX_STEP", 1,1.0f,1000));
-
-    gui.addToggle(scene6->bDebug.set("S6_DEBUG",false));
+     gui.addGroup(scene6->paraGroup);
+*/
 
     
     gui.setWhichPanel(7);
     gui.setWhichColumn(0);
-    gui.addSlider(scene7->maxParitcle.set("S7_MAX_PARTICLE",3000,1,10000));
-    gui.addSlider(scene7->minRadius.set("S7_MIN_RADIUS", 8,1,50));
-    gui.addSlider(scene7->maxRadius.set("S7_MAX_RADIUS", 20,1,50));
-    gui.addSlider(scene7->maxR.set("S7_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
-    gui.addSlider(scene7->maxOutterR.set("S7_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
-    gui.addSlider(scene7->delay.set("S7_DELAY", 1, 0,20));
-    gui.addSlider(scene7->duration.set("S7_DURATION", 1000,1,50000));
-    gui.addSlider(scene7->theStep.set("S7_STEP", 1,50.0f,100));
-    gui.addSlider(scene7->minStep.set("S7_MIN_STEP", 1,0.0f,100));
-    gui.addSlider(scene7->maxStep.set("S7_MAX_STEP", 50,0.0f,100));
-    gui.addSlider(scene7->minDelay.set("S7_MIN_DELAY", 0,0.0f,100));
-    gui.addSlider(scene7->maxDelay.set("S7_MAX_DELAY", 50,0.0f,100));
+    gui.addGroup(scene7->paraGroup);
     
-    gui.addToggle(scene7->bDebug.set("S7_DEBUG",false));
-    
-    gui.setWhichPanel(8);
+    /*gui.setWhichPanel(8);
     gui.setWhichColumn(0);
-    gui.addSlider(scene8->timeOut.set("S8_TIME_OUT",5,0,20));
-    gui.addLabel(scene8->counterString.set("S8_COUNTER",""));
-    
+     gui.addGroup(scene8->paraGroup);
     gui.setWhichPanel(9);
     gui.setWhichColumn(0);
-    gui.addSlider(logoScene->timeOut.set("SLOGO_TIME_OUT",5,0,20));
-    gui.addLabel(logoScene->counterString.set("SLOGO_COUNTER",""));*/
+     gui.addGroup(logoScene->paraGroup);
+*/
 
     string output = "";
     
@@ -317,13 +278,11 @@ void ofApp::draw(){
     
     
     sceneManager->draw();
-    if(sceneManager->getCurrentSceneID()!=SCENE_1)
-    {
-        ofPushStyle();
-        ofSetColor(255,alphaTween.update());
-        commonAssets.logo.draw(0,0);
-        ofPopStyle();
-    }
+
+    ofPushStyle();
+    ofSetColor(255,alphaTween.update());
+    commonAssets.logo.draw(0,0);
+    ofPopStyle();
     if(toggleDrawGUI)
     {
         ofPushStyle();
@@ -359,7 +318,7 @@ void ofApp::keyPressed(int key){
             if (key == '3') sceneManager->goToScene(SCENE_3);
             if (key == '4') sceneManager->goToScene(SCENE_4);
 //            if (key == '6') sceneManager->goToScene(SCENE_6);
-//            if (key == '7') sceneManager->goToScene(SCENE_7);
+            if (key == '7') sceneManager->goToScene(SCENE_7);
 //            if (key == '8') sceneManager->goToScene(SCENE_8);
 //            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
 
@@ -465,7 +424,7 @@ void ofApp::nextScene()
         case SCENE_2:
         case SCENE_3:
         case SCENE_4:
-//        case SCENE_7:
+        case SCENE_7:
 //        case SCENE_6:
 //        case SCENE_8:
 
@@ -508,7 +467,7 @@ void ofApp::tweenEnd(int &i)
     {
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
 
-        alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,0,1000,1000);
+        alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,255,2000,0);
         ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
     }
     else{
@@ -520,6 +479,7 @@ void ofApp::tweenEasingOutEnd(int &i)
 {
     if(bAuto)
     {
+                alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,0,1000,1000);
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
         nextScene();
     }

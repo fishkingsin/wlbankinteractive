@@ -12,7 +12,12 @@ MyScene1::MyScene1()
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
-    
+    paraGroup.setName("Scene1");
+    paraGroup.add(numParticle.set("PARTICLE_SIZE",""));
+    paraGroup.add(maxParticle.set("S1_MAX_PARTICLE",3000,1,10000));
+    paraGroup.add(minRadius.set("S1_MIN_RADIUS",8,1,50));
+    paraGroup.add(maxRadius.set("S1_MAX_RADIUS",20,1,50));
+
     box2d.init();
     box2d.setGravity(0, -50);
     box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);

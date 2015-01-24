@@ -9,6 +9,19 @@
 #include "MyScene6.h"
 void MyScene6::setup()
 {
+    paraGroup.setName("Scene6");
+    paraGroup.add(maxParitcle.set("S6_MAX_PARTICLE",3000,1,10000));
+    paraGroup.add(minRadius.set("S6_MIN_RADIUS", 8,1,50));
+    paraGroup.add(maxRadius.set("S6_MAX_RADIUS", 20,1,50));
+    paraGroup.add(maxR.set("S6_MAX_R",CANVAS_WIDTH*0.5, 0,CANVAS_WIDTH));
+    paraGroup.add(maxOutterR.set("S6_MAX_OUTTER_R", CANVAS_WIDTH*2,0,CANVAS_WIDTH*5));
+    paraGroup.add(delay.set("S6_DELAY", 1, 0,20));
+    paraGroup.add(duration.set("S6_DURATION", 1000,1,50000));
+    paraGroup.add(theStep.set("S6_STEP", 1,1.0f,1000));
+    paraGroup.add(minStep.set("S6_MIN_STEP", 1,1.0f,1000));
+    paraGroup.add(maxStep.set("S6_MAX_STEP", 1,1.0f,1000));
+    paraGroup.add(bDebug.set("S6_DEBUG",false));
+    
     easings.push_back(&easingExpo);
     easings.push_back(&easingSine);
     easings.push_back(& easingLinear);

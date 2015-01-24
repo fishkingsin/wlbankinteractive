@@ -9,6 +9,20 @@
 #include "MyScene3.h"
 void MyScene3::setup()
 {
+    easings.push_back(ofPtr<ofxEasingElastic>(new ofxEasingElastic));
+//    easings.push_back(ofPtr<ofxEasingQuad>(new ofxEasingQuad));
+//    easings.push_back(ofPtr<ofxEasingCubic>(new ofxEasingCubic));
+//    easings.push_back(ofPtr<ofxEasingLinear>(new ofxEasingLinear));
+    paraGroup.setName("Scene3");
+    paraGroup.add(dutaion.set("S3_DURATION", 1, 100,10000));
+    paraGroup.add(minRadius.set("S3_MIN_RADIUS", 8,1,50));
+    paraGroup.add(maxRadius.set("S3_MAX_RADIUS", 20,1,50));
+    paraGroup.add(minRScale.set("S3_MIN_R_SCALE",1,0,2));
+    paraGroup.add(maxRScale.set("S3_MAX_R_SCALE",1,0,2));
+    paraGroup.add(theDensity.set("S3_DELAY_CONSTANTS", 1, 0,2000));
+    paraGroup.add(delay.set("S3_DELAY", 1, 0,200));
+    paraGroup.add(delayDensity.set("S3_DELAY_DENSITY", 0.5,-2.0,2.0));
+    paraGroup.add(isRepeat.set("REPEAT", false));
     image = commonAssets->bg;
 //    image.loadImage("backgrounds/bg.png");
     step = 4;
@@ -67,8 +81,9 @@ void MyScene3::init()
         }
     }
     
-    int mode = (int)ofRandom(0,4);
-    
+    int mode = (int)ofRandom(0,6);
+    float density = theDensity;
+    ofPtr<ofxEasing>  easing = easings[(int)ofRandom(easings.size())];
     for(int i = 0 ; i< MAX_POINTS ; i++)
     {
         float randomPI = ofRandom(-PI,PI);
@@ -107,22 +122,25 @@ void MyScene3::init()
                 _y = -100;
                 break;
             default:
+                _x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
+                _y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+commonAssets->elementCenterY.get();
                 break;
         }
         points[i].set(_x, _y);
         
         
         ofPtr<ofxTween> tx = ofPtr<ofxTween>(new ofxTween);
-        tx.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].x,targets[i].x,10000,i);
+        tx.get()->setParameters(5,*easing.get(),ofxTween::easeOut,points[i].x,targets[i].x,dutaion,i*delay);
         tweensX.push_back(tx);
 
         
         ofPtr<ofxTween> ty = ofPtr<ofxTween>(new ofxTween);
-        ty.get()->setParameters(5,easingelastic,ofxTween::easeOut,points[i].y,targets[i].y,10000,i);
+        ty.get()->setParameters(5,*easing.get(),ofxTween::easeOut,points[i].y,targets[i].y,dutaion,i*delay);
         tweensY.push_back(ty);
+        density*=delayDensity;
         
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
-        ofVec3f particleSize = ofVec3f(ofRandom(minRadius.get(), maxRadius.get()));
+        ofVec3f particleSize = ofVec3f(sin(ofRandom(minRadius.get(), maxRadius.get()))*maxRadius.get());
         ofColor c = image.getColor(targets[i].x,targets[i].y);//ofColor::fromHsb(0, 0, 255);
         c.a = ofMap(particleSize.x,minRadius.get(), maxRadius.get(),255,10);
         commonAssets->setParticleColor(i,c );
@@ -182,7 +200,18 @@ void MyScene3::sceneDidDisappear(ofxScene *fromScreen)
 }
 void MyScene3::tweenEnd(int &i)
 {
+    if(isRepeat)
+    {
+        tweensX.clear();
+        tweensY.clear();
+        commonAssets->reset();
+
+        init();
+    }
+    else{
     toNextScene tonextScene;
+    
     ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+    }
 
 }

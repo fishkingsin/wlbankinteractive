@@ -154,6 +154,7 @@
 		1A5DCA9D1A6B4C5C00F7F140 /* Sine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA911A6B4C5C00F7F140 /* Sine.cpp */; };
 		1A5DCAA11A6BA83100F7F140 /* MyScene6.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCA9F1A6BA83100F7F140 /* MyScene6.cpp */; };
 		1A5DCAA61A6C02F400F7F140 /* MyScene7.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DCAA41A6C02F400F7F140 /* MyScene7.cpp */; };
+		1AC324D01A729DEC00BEE697 /* BaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC324CE1A729DEC00BEE697 /* BaseScene.cpp */; };
 		1AE25EEB1A34B54E005B2732 /* MyScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE25EE91A34B54E005B2732 /* MyScene2.cpp */; };
 		1AE7DCA91A624BC50089D362 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7DC741A624BC50089D362 /* guiBaseObject.cpp */; };
 		1AE7DCAA1A624BC50089D362 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7DC761A624BC50089D362 /* guiCallback.cpp */; };
@@ -722,6 +723,8 @@
 		1A5DCAA01A6BA83100F7F140 /* MyScene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene6.h; sourceTree = "<group>"; };
 		1A5DCAA41A6C02F400F7F140 /* MyScene7.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene7.cpp; sourceTree = "<group>"; };
 		1A5DCAA51A6C02F400F7F140 /* MyScene7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene7.h; sourceTree = "<group>"; };
+		1AC324CE1A729DEC00BEE697 /* BaseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseScene.cpp; sourceTree = "<group>"; };
+		1AC324CF1A729DEC00BEE697 /* BaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScene.h; sourceTree = "<group>"; };
 		1AE25EE91A34B54E005B2732 /* MyScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyScene2.cpp; sourceTree = "<group>"; };
 		1AE25EEA1A34B54E005B2732 /* MyScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene2.h; sourceTree = "<group>"; };
 		1AE7DC741A624BC50089D362 /* guiBaseObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
@@ -2063,6 +2066,8 @@
 				1A5DCAA51A6C02F400F7F140 /* MyScene7.h */,
 				1A129AA41A6D3D54005B13D8 /* MyScene8.cpp */,
 				1A129AA51A6D3D54005B13D8 /* MyScene8.h */,
+				1AC324CE1A729DEC00BEE697 /* BaseScene.cpp */,
+				1AC324CF1A729DEC00BEE697 /* BaseScene.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3332,6 +3337,7 @@
 				1A0E02821A56660400D5DA5E /* ofxEasingQuint.cpp in Sources */,
 				1A07F6DC1A2F7D200001394E /* HarrisCornerDetectionFilter.cpp in Sources */,
 				6FCE95D2EF10ACCEC2724688 /* b2Island.cpp in Sources */,
+				1AC324D01A729DEC00BEE697 /* BaseScene.cpp in Sources */,
 				AC527216645D66921FB3E36F /* b2World.cpp in Sources */,
 				1A07F6E91A2F7D200001394E /* SaturationFilter.cpp in Sources */,
 				1A5DCA9A1A6B4C5C00F7F140 /* Quad.cpp in Sources */,
