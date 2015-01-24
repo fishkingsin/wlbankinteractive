@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/MyScene2.cpp"
-            timestampString = "443720299.148258"
+            timestampString = "443767643.285032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "MyScene2::init()"
             landmarkType = "5">
          </BreakpointContent>

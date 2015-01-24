@@ -12,6 +12,6 @@
 #define VIDEO_WIDTH 160
 #define VIDEO_HEIGHT 120
 #define CANVAS_WIDTH 422 
-#define CANVAS_HEIGHT 448
+#define CANVAS_HEIGHT 480
 
 #endif

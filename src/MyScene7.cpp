@@ -23,6 +23,7 @@ void MyScene7::setup()
     paraGroup.add(maxStep.set("S7_MAX_STEP", 50,0.0f,100));
     paraGroup.add(minDelay.set("S7_MIN_DELAY", 0,0.0f,100));
     paraGroup.add(maxDelay.set("S7_MAX_DELAY", 50,0.0f,100));
+        paraGroup.add(maxDensity.set("S7_MAX_DENSITY", 50,0.0f,100));
 
     paraGroup.add(bDebug.set("S7_DEBUG",false));
     easings.push_back(&easingExpo);
@@ -51,7 +52,7 @@ void MyScene7::init()
     for(int i = 0 ; i < polylines.size() ; i++)
     {
         vector<ofVec3f> v =  polylines[i].getVertices();
-        for(int j = 0 ; j < v.size() ;j++)
+        for(int j = 0 ; j < v.size() ;j+=maxDensity)
         {
             
             

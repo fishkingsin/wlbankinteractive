@@ -190,13 +190,13 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>3000</val_0>
+        <val_0>4039</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
-        <val_0>8</val_0>
+        <val_0>6.65385</val_0>
     </S1_MIN_RADIUS>
     <S1_MAX_RADIUS>
-        <val_0>20</val_0>
+        <val_0>13.0615</val_0>
     </S1_MAX_RADIUS>
 </Scene1>
 <Scene2>
@@ -207,18 +207,24 @@
         <val_0>4.76923</val_0>
     </S2_MIN_RADIUS>
     <S2_MAX_RADIUS>
-        <val_0>20</val_0>
+        <val_0>10.0462</val_0>
     </S2_MAX_RADIUS>
     <S2_TIME_OUT>
         <val_0>5</val_0>
     </S2_TIME_OUT>
+    <S2_MIN_R_SCALE>
+        <val_0>0.976923</val_0>
+    </S2_MIN_R_SCALE>
+    <S2_MAX_R_SCALE>
+        <val_0>1.03846</val_0>
+    </S2_MAX_R_SCALE>
 </Scene2>
 <Scene3>
     <S3_MIN_RADIUS>
         <val_0>2.50769</val_0>
     </S3_MIN_RADIUS>
     <S3_MAX_RADIUS>
-        <val_0>16.2654</val_0>
+        <val_0>10.9885</val_0>
     </S3_MAX_RADIUS>
     <S3_DELAY>
         <val_0>1.53846</val_0>
@@ -230,18 +236,27 @@
         <val_0>100</val_0>
     </S3_DELAY_CONSTANTS>
     <S3_DURATION>
-        <val_0>4288</val_0>
+        <val_0>5430</val_0>
     </S3_DURATION>
+    <S3_MIN_R_SCALE>
+        <val_0>1</val_0>
+    </S3_MIN_R_SCALE>
+    <S3_MAX_R_SCALE>
+        <val_0>1</val_0>
+    </S3_MAX_R_SCALE>
+    <REPEAT>
+        <val_0>0</val_0>
+    </REPEAT>
 </Scene3>
 <Scene4>
     <S4_MAX_PARTICLE>
-        <val_0>458</val_0>
+        <val_0>592</val_0>
     </S4_MAX_PARTICLE>
     <S4_MIN_RADIUS>
-        <val_0>9.29231</val_0>
+        <val_0>3.07308</val_0>
     </S4_MIN_RADIUS>
     <S4_MAX_RADIUS>
-        <val_0>18.5269</val_0>
+        <val_0>11.1769</val_0>
     </S4_MAX_RADIUS>
     <DEBUG_DRAW>
         <val_0>0</val_0>
@@ -249,16 +264,22 @@
     <S4_TIME_OUT>
         <val_0>5</val_0>
     </S4_TIME_OUT>
+    <S4_MIN_R_SCALE>
+        <val_0>0.969231</val_0>
+    </S4_MIN_R_SCALE>
+    <S4_MAX_R_SCALE>
+        <val_0>1.04615</val_0>
+    </S4_MAX_R_SCALE>
 </Scene4>
 <Scene7>
     <S7_MAX_PARTICLE>
         <val_0>3000</val_0>
     </S7_MAX_PARTICLE>
     <S7_MIN_RADIUS>
-        <val_0>8</val_0>
+        <val_0>2.69615</val_0>
     </S7_MIN_RADIUS>
     <S7_MAX_RADIUS>
-        <val_0>20</val_0>
+        <val_0>8.16154</val_0>
     </S7_MAX_RADIUS>
     <S7_MAX_R>
         <val_0>211</val_0>
@@ -267,27 +288,30 @@
         <val_0>844</val_0>
     </S7_MAX_OUTTER_R>
     <S7_DELAY>
-        <val_0>1</val_0>
+        <val_0>9.83994</val_0>
     </S7_DELAY>
     <S7_DURATION>
         <val_0>1000</val_0>
     </S7_DURATION>
     <S7_STEP>
-        <val_0>1</val_0>
+        <val_0>25.5378</val_0>
     </S7_STEP>
     <S7_MIN_STEP>
-        <val_0>1</val_0>
+        <val_0>2</val_0>
     </S7_MIN_STEP>
     <S7_MAX_STEP>
-        <val_0>50</val_0>
+        <val_0>57</val_0>
     </S7_MAX_STEP>
     <S7_MIN_DELAY>
         <val_0>0</val_0>
     </S7_MIN_DELAY>
     <S7_MAX_DELAY>
-        <val_0>50</val_0>
+        <val_0>23</val_0>
     </S7_MAX_DELAY>
     <S7_DEBUG>
         <val_0>0</val_0>
     </S7_DEBUG>
+    <S7_MAX_DENSITY>
+        <val_0>5</val_0>
+    </S7_MAX_DENSITY>
 </Scene7>

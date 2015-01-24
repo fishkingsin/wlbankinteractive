@@ -47,6 +47,8 @@ public:
     ofParameter<float>maxRadius;
     ofParameter<bool>debugDraw;
     ofParameter<int>timeOut;
+    ofParameter<float>minRScale;
+    ofParameter<float>maxRScale;
     float counter;
     float prevElapse;
     ofParameter<string>counterString;

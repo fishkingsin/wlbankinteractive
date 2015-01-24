@@ -56,7 +56,7 @@ public:
     
     ofParameter<int>maxDelay;
     ofParameter<int>minDelay;
-    
+    ofParameter<int>maxDensity;
     void tweenEnd(int &i);
     
     vector<ofPolyline> polylines;

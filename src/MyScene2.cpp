@@ -15,6 +15,8 @@ void MyScene2::setup()
     paraGroup.add(minRadius.set("S2_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S2_MAX_RADIUS",20,1,50));
     paraGroup.add(counterString.set("S2_COUNTER",""));
+    paraGroup.add(minRScale.set("S2_MIN_R_SCALE",1,0,2));
+    paraGroup.add(maxRScale.set("S2_MAX_R_SCALE",1,0,2));
     paraGroup.add(timeOut.set("S2_TIME_OUT",5,0,20));
     
     counter = 0 ;
@@ -75,7 +77,7 @@ void MyScene2::init()
         float angle = (int)(352+ofRandom(-8,45))%360;
         commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(0.60,0.88)*255, ofRandom(0.6,1.0)*255,255));
 //        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255,ofMap(r, minRadius.get(), maxRadius.get() , 255, 100)));
-        commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(1,2),0,0));
+        commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(minRScale,maxRScale),0,0));
         int col = (int)ofRandom(0, commonAssets->cellColls );
         int row = (int)ofRandom(0, commonAssets->cellRows);
         commonAssets->setParticleTexCoords(i,col,row );
@@ -165,9 +167,9 @@ void MyScene2::draw()
     ofFill();
     commonAssets->fbo.draw(0, 0);
 //    commonAssets->draw();
-    ofDrawBitmapString(ofToString(commonAssets->kParticles) + "k particles", 32, 32);
+//    ofDrawBitmapString(ofToString(commonAssets->kParticles) + "k particles", 32, 32);
     
-    ofDrawBitmapString(ofToString((int) ofGetFrameRate()) + " fps", 32, 52);
+//    ofDrawBitmapString(ofToString((int) ofGetFrameRate()) + " fps", 32, 52);
 }
 void MyScene2::keyPressed(int key)
 {

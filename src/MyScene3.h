@@ -29,20 +29,24 @@ public:
     vector<ofPtr<ofxTween> > tweensX;
     vector<ofPtr<ofxTween> > tweensY;
     vector<ofPtr<ofxEasing> > easings;
-
+    
     int count;
     int interval;
     int MAX_POINTS;
     ofImage image;
     int step;
     CommonAssets *commonAssets;
-
+    
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
     ofParameter<float>delay;
     ofParameter<float>theDensity;
-        ofParameter<float>delayDensity;
-            ofParameter<int>dutaion;
+    ofParameter<float>delayDensity;
+    ofParameter<int>dutaion;
+    ofParameter<float>minRScale;
+    ofParameter<float>maxRScale;
+    ofParameter<bool>isRepeat;
     void tweenEnd(int &i);
+    
 };
 #endif /* defined(__wlbankinteractive__MeScene3__) */

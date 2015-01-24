@@ -47,6 +47,8 @@ public:
     float counter;
     float prevElapse;
     ofParameter<string>counterString;
+    ofParameter<float>minRScale;
+        ofParameter<float>maxRScale;
 };
 
 

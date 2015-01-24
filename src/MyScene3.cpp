@@ -10,17 +10,19 @@
 void MyScene3::setup()
 {
     easings.push_back(ofPtr<ofxEasingElastic>(new ofxEasingElastic));
-    easings.push_back(ofPtr<ofxEasingQuad>(new ofxEasingQuad));
-    easings.push_back(ofPtr<ofxEasingCubic>(new ofxEasingCubic));
-    easings.push_back(ofPtr<ofxEasingLinear>(new ofxEasingLinear));
+//    easings.push_back(ofPtr<ofxEasingQuad>(new ofxEasingQuad));
+//    easings.push_back(ofPtr<ofxEasingCubic>(new ofxEasingCubic));
+//    easings.push_back(ofPtr<ofxEasingLinear>(new ofxEasingLinear));
     paraGroup.setName("Scene3");
     paraGroup.add(dutaion.set("S3_DURATION", 1, 100,10000));
     paraGroup.add(minRadius.set("S3_MIN_RADIUS", 8,1,50));
     paraGroup.add(maxRadius.set("S3_MAX_RADIUS", 20,1,50));
+    paraGroup.add(minRScale.set("S3_MIN_R_SCALE",1,0,2));
+    paraGroup.add(maxRScale.set("S3_MAX_R_SCALE",1,0,2));
     paraGroup.add(theDensity.set("S3_DELAY_CONSTANTS", 1, 0,2000));
-
     paraGroup.add(delay.set("S3_DELAY", 1, 0,200));
     paraGroup.add(delayDensity.set("S3_DELAY_DENSITY", 0.5,-2.0,2.0));
+    paraGroup.add(isRepeat.set("REPEAT", false));
     image = commonAssets->bg;
 //    image.loadImage("backgrounds/bg.png");
     step = 4;
@@ -198,7 +200,18 @@ void MyScene3::sceneDidDisappear(ofxScene *fromScreen)
 }
 void MyScene3::tweenEnd(int &i)
 {
+    if(isRepeat)
+    {
+        tweensX.clear();
+        tweensY.clear();
+        commonAssets->reset();
+
+        init();
+    }
+    else{
     toNextScene tonextScene;
+    
     ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+    }
 
 }
