@@ -96,6 +96,16 @@ public:
     ofFbo       srcFbo;
     
     ofShader    shader;
+    
+    //colorTheme
+    ofParameterGroup paraGroup;
+    ofParameter<float>minHue;
+    ofParameter<float>maxHue;
+    ofParameter<float>minBright;
+    ofParameter<float>maxBright;
+    ofParameter<float>minSaturation;
+    ofParameter<float>maxSaturation;
+    
 };
 
 

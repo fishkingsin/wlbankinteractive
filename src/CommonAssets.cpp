@@ -165,6 +165,13 @@ void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle
 }
 void CommonAssets::setup()
 {
+    paraGroup.setName("CommonAsset");
+    paraGroup.add(minHue.set("MIN_HUE",0,-360,360));
+    paraGroup.add(maxHue.set("MAX_HUE",0,-360,360));
+    paraGroup.add(minBright.set("MIN_BRIGHT",0.5,0,1));
+    paraGroup.add(maxBright.set("MAX_BRIGHT",0.5,0,1));
+    paraGroup.add(minSaturation.set("MIN_SATURATE",0.5,0,1));
+    paraGroup.add(maxSaturation.set("MAX_SATURATE",0.5,0,1));
     int width = CANVAS_WIDTH;
     int height = CANVAS_HEIGHT;
     

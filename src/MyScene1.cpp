@@ -175,7 +175,8 @@ void MyScene1::createParticle(float x , float y , ofColor color)
     
     circles.back().get()->setPhysics(3.0, 0.53, 0.1);
     circles.back().get()->setup(box2d.getWorld(),x,y, r);
-    ofColor c = ofColor::fromHsb(0,0,255,ofMap(r,minRadius, maxRadius,255,10));
+    float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
+    ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255);
     circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
     
     commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );

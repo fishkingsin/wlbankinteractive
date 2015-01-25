@@ -71,8 +71,8 @@ void MyScene4::init()
         float r = c.get()->getRadius();
         
         commonAssets->setParticleVertex(i, pos);
-        float angle = (int)(352+ofRandom(-8,45))%360;
-        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(0.60,0.88)*255, ofRandom(0.6,1.0)*255,255));
+        float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
+        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255));
         commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(minRScale,maxRScale),0,0));
         
         commonAssets->setParticleTexCoords(i,col,row );

@@ -21,7 +21,7 @@ void MyScene3::setup()
     paraGroup.add(maxRScale.set("S3_MAX_R_SCALE",1,0,2));
     paraGroup.add(theDensity.set("S3_DELAY_CONSTANTS", 1, 0,2000));
     paraGroup.add(delay.set("S3_DELAY", 1, 0,200));
-    paraGroup.add(delayDensity.set("S3_DELAY_DENSITY", 0.5,-2.0,2.0));
+    paraGroup.add(delayDensity.set("S3_DELAY_DENSITY", 5,0,100));
     paraGroup.add(isRepeat.set("REPEAT", false));
     image = commonAssets->bg;
 //    image.loadImage("backgrounds/bg.png");
@@ -83,6 +83,7 @@ void MyScene3::init()
     
     int mode = (int)ofRandom(0,6);
     float density = theDensity;
+    float varDelay = delay;
     ofPtr<ofxEasing>  easing = easings[(int)ofRandom(easings.size())];
     for(int i = 0 ; i< MAX_POINTS ; i++)
     {
@@ -130,20 +131,23 @@ void MyScene3::init()
         
         
         ofPtr<ofxTween> tx = ofPtr<ofxTween>(new ofxTween);
-        tx.get()->setParameters(5,*easing.get(),ofxTween::easeOut,points[i].x,targets[i].x,dutaion,i*delay);
+        tx.get()->setParameters(5,*easing.get(),ofxTween::easeOut,points[i].x,targets[i].x,dutaion,(i*delay)+varDelay);
         tweensX.push_back(tx);
 
         
         ofPtr<ofxTween> ty = ofPtr<ofxTween>(new ofxTween);
-        ty.get()->setParameters(5,*easing.get(),ofxTween::easeOut,points[i].y,targets[i].y,dutaion,i*delay);
+        ty.get()->setParameters(5,*easing.get(),ofxTween::easeOut,points[i].y,targets[i].y,dutaion,(i*delay)+varDelay);
         tweensY.push_back(ty);
-        density*=delayDensity;
+        if(varDelay>0)varDelay-=delayDensity;
+//        density*=delayDensity;
         
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
-        ofVec3f particleSize = ofVec3f(sin(ofRandom(minRadius.get(), maxRadius.get()))*maxRadius.get());
-        ofColor c = image.getColor(targets[i].x,targets[i].y);//ofColor::fromHsb(0, 0, 255);
-        c.a = ofMap(particleSize.x,minRadius.get(), maxRadius.get(),255,10);
-        commonAssets->setParticleColor(i,c );
+        ofVec3f particleSize = ofVec3f(ofRandom(minRadius.get(), maxRadius.get()));
+        float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
+        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255));
+//        ofColor c = image.getColor(targets[i].x,targets[i].y);//ofColor::fromHsb(0, 0, 255);
+//        c.a = ofMap(particleSize.x,minRadius.get(), maxRadius.get(),255,10);
+//        commonAssets->setParticleColor(i,c );
         commonAssets->setParticleNormal(i,particleSize);
         commonAssets->setParticleTexCoords(i, (int)ofRandom(0, commonAssets->cellColls ), (int)ofRandom(0, commonAssets->cellRows));
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;

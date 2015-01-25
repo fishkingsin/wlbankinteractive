@@ -78,6 +78,7 @@ void ofApp::setup(){
     commonAssets.loadImage("particleGrid.png",4,4,8);
     commonAssets.setup();
     commonAssets.nextImage();
+    
     ///////////////////////////////////////
     
     sceneManager = ofxSceneManager::instance();
@@ -133,7 +134,6 @@ void ofApp::setup(){
 
     gui.loadFont("MONACO.TTF", 12);
     gui.setup("Settings", CANVAS_WIDTH, 0, ofGetWidth(), ofGetHeight());
-    
     gui.addPanel("Scene1", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene2", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene3", 4, false)->setBackgroundColor(0, 0, 0, 125);
@@ -146,6 +146,7 @@ void ofApp::setup(){
     gui.setWhichPanel(0);
     gui.setWhichColumn(0);
     gui.addToggle(toggleDrawGUI.set("DEBUG_TOGGLE", true));
+    gui.addGroup(commonAssets.paraGroup);
 
     toggleDrawGUI.addListener(this, &ofApp::toggleDebug);
 
