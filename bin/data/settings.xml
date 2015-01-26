@@ -224,7 +224,7 @@
         <val_0>1</val_0>
     </S3_MIN_RADIUS>
     <S3_MAX_RADIUS>
-        <val_0>3.82692</val_0>
+        <val_0>12.3077</val_0>
     </S3_MAX_RADIUS>
     <S3_DELAY>
         <val_0>5.38462</val_0>
@@ -334,4 +334,10 @@
     <MAX_SATURATE>
         <val_0>1</val_0>
     </MAX_SATURATE>
+    <MIN_RADIUS>
+        <val_0>3.24615</val_0>
+    </MIN_RADIUS>
+    <MAX_RADIUS>
+        <val_0>36.9231</val_0>
+    </MAX_RADIUS>
 </CommonAsset>

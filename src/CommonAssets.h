@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "ofxAutoReloadedShader.h"
 #include "Constants.h"
+static const float kGoldenRatio = (1 + sqrt(5.0)) / 2;
 typedef struct {
     ofVec2f pos;
     ofColor c;
@@ -99,6 +100,8 @@ public:
     
     //colorTheme
     ofParameterGroup paraGroup;
+    ofParameter<float>minRadius;
+    ofParameter<float>maxRadius;
     ofParameter<float>minHue;
     ofParameter<float>maxHue;
     ofParameter<float>minBright;
@@ -106,6 +109,8 @@ public:
     ofParameter<float>minSaturation;
     ofParameter<float>maxSaturation;
     
+    vector<float>goldenRatioBank;
+    void onRadiusSettingsChanged(float &radius);
 };
 
 

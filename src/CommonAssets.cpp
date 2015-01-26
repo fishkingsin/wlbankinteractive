@@ -165,7 +165,13 @@ void CommonAssets::loadImage(string filePath , int col , int row ,int  nParticle
 }
 void CommonAssets::setup()
 {
+
+
     paraGroup.setName("CommonAsset");
+    paraGroup.add(minRadius.set("MIN_RADIUS",1,0,CANVAS_WIDTH));
+    paraGroup.add(maxRadius.set("MAX_RADIUS",50,0,CANVAS_HEIGHT));
+    minRadius.addListener( this, &CommonAssets::onRadiusSettingsChanged);
+    maxRadius.addListener( this, &CommonAssets::onRadiusSettingsChanged);
     paraGroup.add(minHue.set("MIN_HUE",0,-360,360));
     paraGroup.add(maxHue.set("MAX_HUE",0,-360,360));
     paraGroup.add(minBright.set("MIN_BRIGHT",0.5,0,1));
@@ -284,6 +290,7 @@ void CommonAssets::setup()
     billboardShader.end();
     
     updateAttribtuteData();
+    
 
 }
 void CommonAssets::updateAttribtuteData()
@@ -430,4 +437,24 @@ void CommonAssets::nextImage()
 {
     bg.loadImage(getBGPath());
     logo.loadImage(getLogoPath());
+}
+void CommonAssets::onRadiusSettingsChanged(float &radius)
+{
+    goldenRatioBank.clear();
+    int initNum=1;
+    float initSize = maxRadius;
+    for(int i = 0 ; i < kParticles ; i++)
+    {
+        initSize = 1 / kGoldenRatio *initSize ;
+        if(initSize<minRadius)
+        {
+            break;
+        }
+        initNum = maxRadius/initSize;
+        for(int j = 0 ; j < initNum ;j++)
+        {
+            goldenRatioBank.push_back(initSize);
+        }
+    }
+
 }

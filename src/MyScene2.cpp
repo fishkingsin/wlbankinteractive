@@ -64,9 +64,7 @@ void MyScene2::init()
         float randomPI = ofRandom(-PI,PI);
         x = (sin(randomPI)*maxR)+(sin(randomPI)*ofRandom(padding))+commonAssets->elementCenterX.get();
         y = (cos(randomPI)*maxR)+(cos(randomPI)*ofRandom(padding))+commonAssets->elementCenterY.get();
-        float min = minRadius.get();
-        float max = maxRadius.get();
-        float r = ofRandom(min ,max);
+        float r = commonAssets->goldenRatioBank[i%commonAssets->goldenRatioBank.size()];
         xv = ofRandom(-maxVelocity, maxVelocity);
         yv = ofRandom(-maxVelocity, maxVelocity);
         ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);

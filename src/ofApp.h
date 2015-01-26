@@ -68,5 +68,8 @@ public:
     void tweenEasingOutEnd(int &i);
     ofxEasingLinear easingeLinear;
     ofxTween alphaTween;
-    
+    simpleFileLister videoFileLister;
+    void eventsIn(guiCallbackData & data);
+
+
 };

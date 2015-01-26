@@ -38,6 +38,22 @@ void MyScene4::setup()
 }
 void MyScene4::init()
 {
+    commonAssets->goldenRatioBank.clear();
+    int initNum=1;
+    float initSize = commonAssets->maxRadius;
+    for(int i = 0 ; i < commonAssets->kParticles ; i++)
+    {
+        initSize = 1 / kGoldenRatio *initSize ;
+        if(initSize<commonAssets->minRadius)
+        {
+            break;
+        }
+        initNum = commonAssets->maxRadius/initSize;
+        for(int j = 0 ; j < initNum ;j++)
+        {
+            commonAssets->goldenRatioBank.push_back(initSize);
+        }
+    }
 //    maskFbo.begin();
 //    ofClear(0,0,0,0);
 //    maskFbo.end();
@@ -66,7 +82,7 @@ void MyScene4::init()
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(10, 0.1, 0.5);
-        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, ofRandom(minRadius.get(), maxRadius.get()));
+        c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, commonAssets->goldenRatioBank[i%commonAssets->goldenRatioBank.size()]);
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
         

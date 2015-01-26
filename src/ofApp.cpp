@@ -65,9 +65,7 @@ void ofApp::setup(){
         ofLogVerbose() << curtainColors[i];
     }
     
-    player.loadMovie("movies/CNY theme.mov");
-    player.setLoopState(OF_LOOP_NORMAL);
-    player.play();
+
     
     
     receiver.setup(PORT);
@@ -165,7 +163,20 @@ void ofApp::setup(){
     gui.addToggle( bAuto.set("AUTO_MODE",false));
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
-    
+    gui.setWhichColumn(1);
+
+    gui.addFileLister("VideoFiles", &videoFileLister, 200, 100);
+    int numFile = videoFileLister.listDir("movies");
+    if(numFile>0)
+    {
+    player.loadMovie(videoFileLister.getPath(0));
+    player.setLoopState(OF_LOOP_NORMAL);
+    player.play();
+    }
+    else{
+        ofLogError() << "0 file in "<< videoFileLister.getOriginalDirectory();
+    }
+//    ofAddListener(videoFileLister,this,ofApp::filechanges);
     //scene1
     gui.setWhichPanel(1);
     gui.setWhichColumn(0);
@@ -222,16 +233,40 @@ void ofApp::setup(){
     status = "first frame";
     gui.setStatusMessage(status.set("glStatus",output));
     gui.loadSettings("settings.xml");
-    
+    gui.enableEvents();
+    ofAddListener(gui.guiEvent, this, &ofApp::eventsIn);
     sceneManager->setDrawDebug(toggleDrawGUI);
-//    if(player.isLoaded())
-//    {
-//        ofSetWindowShape(player.getWidth(), player.getHeight());
-//    }
     ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+    
 
 }
-
+void ofApp::eventsIn(guiCallbackData & data){
+    // print to terminal if you want to
+    //this code prints out the name of the events coming in and all the variables passed
+    printf("ofApp::eventsIn - name is %s - \n", data.getXmlName().c_str());
+    if( data.getDisplayName() != "" ){
+        printf(" element name is %s \n", data.getDisplayName().c_str());
+    }
+    for(int k = 0; k < data.getNumValues(); k++){
+        if( data.getType(k) == CB_VALUE_FLOAT ){
+            printf("%i float  value = %f \n", k, data.getFloat(k));
+        }
+        else if( data.getType(k) == CB_VALUE_INT ){
+            printf("%i int    value = %i \n", k, data.getInt(k));
+        }
+        else if( data.getType(k) == CB_VALUE_STRING ){
+            printf("%i string value = %s \n", k, data.getString(k).c_str());
+        }
+    }
+    
+    printf("\n");
+    
+    if( data.getXmlName() == "VIDEOFILES" ){
+        player.loadMovie(data.getString(1));
+        player.setLoopState(OF_LOOP_NORMAL);
+        player.play();
+    }
+}
 //--------------------------------------------------------------
 void ofApp::update(){
     status = "App running at " + ofToString(ofGetFrameRate());

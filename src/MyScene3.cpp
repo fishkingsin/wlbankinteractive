@@ -84,6 +84,24 @@ void MyScene3::init()
     int mode = (int)ofRandom(0,6);
     float density = theDensity;
     float varDelay = delay;
+    
+    int initNum=1;
+    float initSize = maxRadius;
+    vector<float>goldenRatioBank;
+    for(int i = 0 ; i < MAX_POINTS; i++)
+    {
+        initSize = 1 / kGoldenRatio *initSize ;
+        if(initSize<minRadius)
+        {
+            initSize = maxRadius;
+        }
+        initNum = maxRadius/initSize;
+        for(int j = 0 ; j < initNum ;j++)
+        {
+            goldenRatioBank.push_back(initSize);
+        }
+    }
+    
     ofPtr<ofxEasing>  easing = easings[(int)ofRandom(easings.size())];
     for(int i = 0 ; i< MAX_POINTS ; i++)
     {
@@ -142,9 +160,9 @@ void MyScene3::init()
 //        density*=delayDensity;
         
         commonAssets->setParticleVertex(i, ofVec3f(points[i].x,points[i].y,0));
-        ofVec3f particleSize = ofVec3f(ofRandom(minRadius.get(), maxRadius.get()));
+        ofVec3f particleSize = ofVec3f(goldenRatioBank[i%goldenRatioBank.size()],0,0);
         float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
-        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255));
+        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,ofMap(particleSize.x, minRadius, maxRadius, 255, 100)));
 //        ofColor c = image.getColor(targets[i].x,targets[i].y);//ofColor::fromHsb(0, 0, 255);
 //        c.a = ofMap(particleSize.x,minRadius.get(), maxRadius.get(),255,10);
 //        commonAssets->setParticleColor(i,c );
