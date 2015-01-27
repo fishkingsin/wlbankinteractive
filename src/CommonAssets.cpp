@@ -451,6 +451,7 @@ void CommonAssets::onRadiusSettingsChanged(float &radius)
             break;
         }
         initNum = maxRadius/initSize;
+
         for(int j = 0 ; j < initNum ;j++)
         {
             goldenRatioBank.push_back(initSize);
