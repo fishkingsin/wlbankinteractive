@@ -14,6 +14,7 @@
 #include "CommonAssets.h"
 #include "ofxOsc.h"
 #include "ofxAnimatable.h"
+#include "MySceneLiquidfun.h"
 
 class ofApp : public ofBaseApp{
     
@@ -46,7 +47,7 @@ public:
     
     void nextScene();
 //    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_6, SCENE_7,SCENE_8, SCENE_LOGO };
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_7 };
+    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_7 ,SCENE_10};
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
     
@@ -70,6 +71,6 @@ public:
     ofxTween alphaTween;
     simpleFileLister videoFileLister;
     void eventsIn(guiCallbackData & data);
-
+    MySceneLiquidfun sceneLiquidfun;
 
 };

@@ -18,6 +18,7 @@
 		168C43F69AF6A8042EA0B13F /* easing_terms_of_use.html in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEF50558BBDBEB5260FC35 /* easing_terms_of_use.html */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
 		18D50A5E9090B08B5C379765 /* b2PolygonAndCircleContact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F531CAC5B6483B4596C50946 /* b2PolygonAndCircleContact.cpp */; };
+		1A14FD921A778EAE0036C377 /* MySceneLiquidfun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A14FD901A778EAE0036C377 /* MySceneLiquidfun.cpp */; };
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */; };
 		2023EF517ED2D8B397511D4B /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9076967F8C54A04362C04AA /* Helpers.cpp */; };
@@ -275,6 +276,8 @@
 		19572082584CC5A6F350437C /* b2DynamicTree.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2DynamicTree.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Collision/b2DynamicTree.cpp; sourceTree = SOURCE_ROOT; };
 		1991F7C61286728A79805701 /* ParticleSystem.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ParticleSystem.cpp; path = src/ParticleSystem.cpp; sourceTree = SOURCE_ROOT; };
 		199901E3C0391D3CA940B595 /* b2PolygonContact.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2PolygonContact.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Contacts/b2PolygonContact.cpp; sourceTree = SOURCE_ROOT; };
+		1A14FD901A778EAE0036C377 /* MySceneLiquidfun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MySceneLiquidfun.cpp; sourceTree = "<group>"; };
+		1A14FD911A778EAE0036C377 /* MySceneLiquidfun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySceneLiquidfun.h; sourceTree = "<group>"; };
 		1A87B105AE081FF640774141 /* ofxBox2d.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBox2d.cpp; path = ../../../addons/ofxLiquidFun/src/ofxBox2d.cpp; sourceTree = SOURCE_ROOT; };
 		1B13FF6ADCC7F1B311AC63F4 /* ofxBox2dBaseShape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBox2dBaseShape.cpp; path = ../../../addons/ofxLiquidFun/src/ofxBox2dBaseShape.cpp; sourceTree = SOURCE_ROOT; };
 		1C085E327DAB912CFA2A443D /* ofxTCPServer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPServer.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPServer.cpp; sourceTree = SOURCE_ROOT; };
@@ -858,6 +861,8 @@
 				33175B3E93A28128FD1DDEB2 /* MyScene9.h */,
 				4F5DBF068B8DFFC78AEE500E /* MySceneFlow.cpp */,
 				DF300F0F8A29BE5561D0F5F0 /* MySceneFlow.h */,
+				1A14FD901A778EAE0036C377 /* MySceneLiquidfun.cpp */,
+				1A14FD911A778EAE0036C377 /* MySceneLiquidfun.h */,
 			);
 			name = Sceces;
 			sourceTree = "<group>";
@@ -2174,6 +2179,7 @@
 				A33E832937B9A5A6FDF4BE47 /* ofxBox2dRect.cpp in Sources */,
 				56949DDBF017687AEE523F16 /* b2BroadPhase.cpp in Sources */,
 				A483B57249A34514377C5AE8 /* b2CollideCircle.cpp in Sources */,
+				1A14FD921A778EAE0036C377 /* MySceneLiquidfun.cpp in Sources */,
 				CF3A676E14EE72552C5CF31A /* b2CollideEdge.cpp in Sources */,
 				4728C070EE48C34814B7ADDD /* b2CollidePolygon.cpp in Sources */,
 				4334242E763D1D8FF8FB1E43 /* b2Collision.cpp in Sources */,

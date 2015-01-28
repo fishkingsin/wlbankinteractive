@@ -122,6 +122,11 @@ void ofApp::setup(){
     sceneManager->addScene(logoScene , SCENE_LOGO);
     ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
     
+    MySceneLiquidfun *sceneLiquidfun = new MySceneLiquidfun();
+    sceneLiquidfun->commonAssets = &commonAssets;
+    sceneManager->addScene(sceneLiquidfun , SCENE_10);
+    ofAddListener(sceneLiquidfun->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
     sceneManager->setCurtainStayTime(0.0);
@@ -141,6 +146,7 @@ void ofApp::setup(){
     gui.addPanel("Scene7", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("Scene8", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("SceneLogo", 4, false)->setBackgroundColor(0, 0, 0, 125);
+    gui.addPanel("Liquidfun", 4, false)->setBackgroundColor(0, 0, 0, 125);
     gui.setWhichPanel(0);
     gui.setWhichColumn(0);
     gui.addToggle(toggleDrawGUI.set("DEBUG_TOGGLE", true));
@@ -211,6 +217,9 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
      gui.addGroup(logoScene->paraGroup);
 */
+    gui.setWhichPanel(10);
+    gui.setWhichColumn(0);
+    gui.addGroup(sceneLiquidfun->paraGroup);
 
     string output = "";
     
@@ -341,6 +350,7 @@ void ofApp::keyPressed(int key){
             case '6':
            case '7':
            case '8':
+            case '0':
 //            commonAssets.nextImage();
         {
             ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
@@ -357,6 +367,7 @@ void ofApp::keyPressed(int key){
             if (key == '7') sceneManager->goToScene(SCENE_7);
 //            if (key == '8') sceneManager->goToScene(SCENE_8);
 //            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
+            if(key == '0')sceneManager->goToScene(SCENE_10);
 
         }
             break;

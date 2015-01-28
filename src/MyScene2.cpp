@@ -127,6 +127,7 @@ void MyScene2::update(float dt)
         ofClear(0, 0, 0, 0);
         
         commonAssets->shader.begin();
+        commonAssets->shader.setUniform1f("time", counter/timeOut );
         commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
         

@@ -229,6 +229,7 @@ void CommonAssets::setup()
         \
         uniform sampler2D tex0;\
         uniform sampler2D maskTex;\
+        uniform float time;\
         \
         void main (void){\
         vec2 pos = gl_TexCoord[0].st;\
@@ -238,7 +239,15 @@ void CommonAssets::setup()
         vec3 src = base.rgb;\
         float mask = texture2D(maskTex, pos).a;\
         \
-        gl_FragColor = vec4( src , (base.a*1.0-mask));\
+        if(mask==1.0)\
+        {\
+        gl_FragColor = vec4( 1.0,1.0,1.0,1.0) ;\
+        }\
+        else\
+        {\
+        gl_FragColor = vec4( src , (base.a * 1.0 - mask)) ;\
+        } \
+        \
         }";
         shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
         shader.linkProgram();
