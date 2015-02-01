@@ -111,7 +111,7 @@
     <val_0>211</val_0>
 </COMMON_CENER_X>
 <COMMON_CENER_Y>
-    <val_0>240</val_0>
+    <val_0>308</val_0>
 </COMMON_CENER_Y>
 <AUDO_MODE>
     <val_0>0</val_0>
@@ -180,7 +180,7 @@
     <val_0>342.965</val_0>
 </S6_MAX_STEP>
 <AUTO_MODE>
-    <val_0>0</val_0>
+    <val_0>1</val_0>
 </AUTO_MODE>
 <S3_DELAY>
     <val_0>20</val_0>
@@ -196,7 +196,7 @@
         <val_0>6.65385</val_0>
     </S1_MIN_RADIUS>
     <S1_MAX_RADIUS>
-        <val_0>13.0615</val_0>
+        <val_0>16.2654</val_0>
     </S1_MAX_RADIUS>
 </Scene1>
 <Scene2>
@@ -210,13 +210,13 @@
         <val_0>5.9</val_0>
     </S2_MAX_RADIUS>
     <S2_TIME_OUT>
-        <val_0>5</val_0>
+        <val_0>10</val_0>
     </S2_TIME_OUT>
     <S2_MIN_R_SCALE>
         <val_0>0.976923</val_0>
     </S2_MIN_R_SCALE>
     <S2_MAX_R_SCALE>
-        <val_0>1.03846</val_0>
+        <val_0>1.12308</val_0>
     </S2_MAX_R_SCALE>
 </Scene2>
 <Scene3>
@@ -262,7 +262,7 @@
         <val_0>0</val_0>
     </DEBUG_DRAW>
     <S4_TIME_OUT>
-        <val_0>14</val_0>
+        <val_0>15</val_0>
     </S4_TIME_OUT>
     <S4_MIN_R_SCALE>
         <val_0>0.969231</val_0>
@@ -335,10 +335,10 @@
         <val_0>1</val_0>
     </MAX_SATURATE>
     <MIN_RADIUS>
-        <val_0>6.49231</val_0>
+        <val_0>3.24615</val_0>
     </MIN_RADIUS>
     <MAX_RADIUS>
-        <val_0>44.3077</val_0>
+        <val_0>22.1538</val_0>
     </MAX_RADIUS>
 </CommonAsset>
 <MySceneLiquidfun>
@@ -364,3 +364,6 @@
         <val_0>5</val_0>
     </SLQF_TIME_OUT>
 </MySceneLiquidfun>
+<ENABLE_LOG_TO_FILE>
+    <val_0>1</val_0>
+</ENABLE_LOG_TO_FILE>

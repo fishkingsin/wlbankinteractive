@@ -8,6 +8,7 @@ void ofApp::setup(){
     info.bVboSupported = false;
     info.bShadersSupported = false;
     info.bPointSpritesSupported = false;
+    dirVideo.listDir("congrad_movies");
     if(glewIsSupported("GL_VERSION_1_4  GL_ARB_point_sprite")) {
         info.bPointSpritesSupported = true;
     }
@@ -86,15 +87,15 @@ void ofApp::setup(){
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     ofAddListener(scene1->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-    MyScene2* scene2 = new MyScene2();
-    scene2->commonAssets = &commonAssets;
-    sceneManager->addScene(scene2 , SCENE_2);
-    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
-    
-    MyScene3* scene3 = new MyScene3();
-    scene3->commonAssets = &commonAssets;
-    sceneManager->addScene(scene3 , SCENE_3);
-    ofAddListener(scene3->toNextSceneEvent, this, &ofApp::handleToNextScene);
+//    MyScene2* scene2 = new MyScene2();
+//    scene2->commonAssets = &commonAssets;
+//    sceneManager->addScene(scene2 , SCENE_2);
+//    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
+//    
+//    MyScene3* scene3 = new MyScene3();
+//    scene3->commonAssets = &commonAssets;
+//    sceneManager->addScene(scene3 , SCENE_3);
+//    ofAddListener(scene3->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     MyScene4* scene4 = new MyScene4();
     scene4->commonAssets = &commonAssets;
@@ -107,10 +108,10 @@ void ofApp::setup(){
     ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
 
     
-    MyScene7* scene7 = new MyScene7();
-    scene7->commonAssets = &commonAssets;
-    sceneManager->addScene(scene7 , SCENE_7);
-    ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
+//    MyScene7* scene7 = new MyScene7();
+//    scene7->commonAssets = &commonAssets;
+//    sceneManager->addScene(scene7 , SCENE_7);
+//    ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
 /*    MyScene8* scene8 = new MyScene8();
     scene8->commonAssets = &commonAssets;
@@ -122,10 +123,10 @@ void ofApp::setup(){
     sceneManager->addScene(logoScene , SCENE_LOGO);
     ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
     
-    MySceneLiquidfun *sceneLiquidfun = new MySceneLiquidfun();
-    sceneLiquidfun->commonAssets = &commonAssets;
-    sceneManager->addScene(sceneLiquidfun , SCENE_10);
-    ofAddListener(sceneLiquidfun->toNextSceneEvent, this, &ofApp::handleToNextScene);
+//    MySceneLiquidfun *sceneLiquidfun = new MySceneLiquidfun();
+//    sceneLiquidfun->commonAssets = &commonAssets;
+//    sceneManager->addScene(sceneLiquidfun , SCENE_10);
+//    ofAddListener(sceneLiquidfun->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
@@ -153,7 +154,8 @@ void ofApp::setup(){
     gui.addGroup(commonAssets.paraGroup);
 
     toggleDrawGUI.addListener(this, &ofApp::toggleDebug);
-
+    gui.addToggle(bLogFile.set("ENABLE_LOG_TO_FILE",false));
+    bLogFile.addListener( this, &ofApp::enableLogToFile);
     gui.addLabel(fps.set("fps",""));
     gui.addLabel(currentIdleString.set("Idle",""));
     gui.addLabel("USAGE:\n\
@@ -189,13 +191,13 @@ void ofApp::setup(){
  
     gui.addGroup(scene1->paraGroup);
     //scene2
-    gui.setWhichPanel(2);
-    gui.setWhichColumn(0);
-    gui.addGroup(scene2->paraGroup);
-    
-    gui.setWhichPanel(3);
-    gui.setWhichColumn(0);
-    gui.addGroup(scene3->paraGroup);;
+//    gui.setWhichPanel(2);
+//    gui.setWhichColumn(0);
+//    gui.addGroup(scene2->paraGroup);
+//    
+//    gui.setWhichPanel(3);
+//    gui.setWhichColumn(0);
+//    gui.addGroup(scene3->paraGroup);;
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
     gui.addGroup(scene4->paraGroup);
@@ -206,9 +208,9 @@ void ofApp::setup(){
 */
 
     
-    gui.setWhichPanel(7);
-    gui.setWhichColumn(0);
-    gui.addGroup(scene7->paraGroup);
+//    gui.setWhichPanel(7);
+//    gui.setWhichColumn(0);
+//    gui.addGroup(scene7->paraGroup);
     
     /*gui.setWhichPanel(8);
     gui.setWhichColumn(0);
@@ -217,9 +219,9 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
      gui.addGroup(logoScene->paraGroup);
 */
-    gui.setWhichPanel(10);
-    gui.setWhichColumn(0);
-    gui.addGroup(sceneLiquidfun->paraGroup);
+//    gui.setWhichPanel(10);
+//    gui.setWhichColumn(0);
+//    gui.addGroup(sceneLiquidfun->paraGroup);
 
     string output = "";
     
@@ -248,6 +250,10 @@ void ofApp::setup(){
     ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
     
 
+}
+void ofApp::exit()
+{
+    ofLogToConsole();
 }
 void ofApp::eventsIn(guiCallbackData & data){
     // print to terminal if you want to
@@ -278,7 +284,12 @@ void ofApp::eventsIn(guiCallbackData & data){
 }
 //--------------------------------------------------------------
 void ofApp::update(){
+    
     status = "App running at " + ofToString(ofGetFrameRate());
+    if(congradVideo.isLoaded())
+    {
+        congradVideo.update();
+    }
     player.update();
     gui.update();
     // check for waiting messages
@@ -326,7 +337,9 @@ void ofApp::draw(){
 
     ofPushStyle();
     ofSetColor(255,alphaTween.update());
-    commonAssets.logo.draw(0,0);
+    congradVideo.draw(0,0);
+//    commonAssets.player.draw(0,0);
+//    commonAssets.logo.draw(0,0);
     ofPopStyle();
     if(toggleDrawGUI)
     {
@@ -461,7 +474,8 @@ void ofApp::nextScene()
             //go to next scene 2-4
         {
             commonAssets.nextImage();
-            float rand = ofRandom(SCENE_2,SCENE_4+1);
+//            float rand = ofRandom(SCENE_2,SCENE_4+1);
+            int rand=SCENE_4;
             ofLogVerbose () << " rand: " << rand;
             Scenes scene = (Scenes)rand;
             ofLogVerbose () << " scene: " << scene;
@@ -498,7 +512,16 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
         }
         else{
             
+            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
+            if(congradVideo.loadMovie( dirVideo.getPath(commonAssets.imageIndex) ))
+            {
+                congradVideo.play();
+                congradVideo.setLoopState(OF_LOOP_PALINDROME);
+            }
+            nextScene();
             alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,0,255,1000,0);
+
             ofAddListener(alphaTween.end_E, this, &ofApp::tweenEnd);
         }
         
@@ -513,8 +536,7 @@ void ofApp::tweenEnd(int &i)
     if(bAuto)
     {
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-
-        alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,255,2000,0);
+        alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,congradVideo.getDuration()*1000);
         ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
     }
     else{
@@ -526,12 +548,18 @@ void ofApp::tweenEasingOutEnd(int &i)
 {
     if(bAuto)
     {
-                alphaTween.setParameters(0,easingeLinear,ofxTween::easeOut,255,0,1000,1000);
+
+        congradVideo.stop();
+
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-        nextScene();
+
     }
     else{
         ofLogWarning() << "Auto mode off has scene incoming";
     }
 
+}
+void ofApp::enableLogToFile(bool &b)
+{
+    ofLogToFile(ofGetTimestampString()+".txt", b);
 }

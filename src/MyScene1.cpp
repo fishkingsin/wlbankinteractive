@@ -116,6 +116,7 @@ void MyScene1::keyPressed(int key)
             break;
         case 's':
         {
+            createParticle(ofRandom( CANVAS_WIDTH), CANVAS_HEIGHT*0.5+ofRandom(0, 50), ofColor::white);
         }
             break;
             case 'c':
@@ -172,11 +173,11 @@ void MyScene1::createParticle(float x , float y , ofColor color)
     circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
     float r = ofRandom(minRadius, maxRadius);
     
-    
     circles.back().get()->setPhysics(3.0, 0.53, 0.1);
     circles.back().get()->setup(box2d.getWorld(),x,y, r);
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
-    ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255);
+    ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, ofMap(r, minRadius, maxRadius, 255,100));
+    
     circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
     
     commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );

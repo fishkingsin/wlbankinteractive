@@ -239,14 +239,7 @@ void CommonAssets::setup()
         vec3 src = base.rgb;\
         float mask = texture2D(maskTex, pos).a;\
         \
-        if(mask==1.0)\
-        {\
-        gl_FragColor = vec4( 1.0,1.0,1.0,1.0) ;\
-        }\
-        else\
-        {\
         gl_FragColor = vec4( src , (base.a * 1.0 - mask)) ;\
-        } \
         \
         }";
         shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
@@ -440,13 +433,15 @@ string CommonAssets::getLogoPath()
         ofLogError() << "could not load image";
         return "";
     }
+    
 }
-
 void CommonAssets::nextImage()
 {
     bg.loadImage(getBGPath());
     logo.loadImage(getLogoPath());
+//    player.loadMovie(getCongradPath());
 }
+
 void CommonAssets::onRadiusSettingsChanged(float &radius)
 {
     goldenRatioBank.clear();

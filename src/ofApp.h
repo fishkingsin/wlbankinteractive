@@ -20,9 +20,10 @@ class ofApp : public ofBaseApp{
     
 public:
     void setup();
+    void exit();
     void update();
     void draw();
-    
+
     void keyPressed(int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y );
@@ -58,7 +59,8 @@ public:
     ofVideoPlayer player;
     commonOpenGlInfo info;
     ofParameter <string> status;
-
+    ofParameter<bool>bLogFile;
+    void enableLogToFile(bool &b);
     ofxXmlSettings settings;
     vector<ofColor>curtainColors;
     
@@ -72,5 +74,7 @@ public:
     simpleFileLister videoFileLister;
     void eventsIn(guiCallbackData & data);
     MySceneLiquidfun sceneLiquidfun;
+    ofVideoPlayer congradVideo;
+    ofDirectory dirVideo;
 
 };

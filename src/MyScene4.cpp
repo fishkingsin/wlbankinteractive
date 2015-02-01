@@ -38,6 +38,7 @@ void MyScene4::setup()
 }
 void MyScene4::init()
 {
+    ofRemove(circles, ofxBox2dCircle::shouldRemoveOffScreen);
     commonAssets->goldenRatioBank.clear();
     int initNum=1;
     float initSize = commonAssets->maxRadius;
@@ -146,6 +147,10 @@ void MyScene4::update(float dt)
 }
 void MyScene4::draw()
 {
+    ofPushStyle();
+    ofSetColor(255);
+    ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ofPopStyle();
         commonAssets->fbo.draw(0, 0);
     if(debugDraw.get())
     {
@@ -223,7 +228,7 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 void MyScene4::setupEdge()
 {
     int density = 10;
-    float radius =  CANVAS_HEIGHT*0.40;
+    float radius =  CANVAS_HEIGHT*0.25;
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
     for (int i=-180+density+25; i<180-25; i+=density) {
         float x = sin(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterX.get();
