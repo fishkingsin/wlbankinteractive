@@ -259,7 +259,7 @@
         <val_0>11.1769</val_0>
     </S4_MAX_RADIUS>
     <DEBUG_DRAW>
-        <val_0>1</val_0>
+        <val_0>0</val_0>
     </DEBUG_DRAW>
     <S4_TIME_OUT>
         <val_0>15</val_0>
