@@ -108,7 +108,7 @@
     <val_0>933.269</val_0>
 </S6_MAX_OUTTER_R>
 <COMMON_CENER_X>
-    <val_0>211</val_0>
+    <val_0>264</val_0>
 </COMMON_CENER_X>
 <COMMON_CENER_Y>
     <val_0>308</val_0>
@@ -180,7 +180,7 @@
     <val_0>342.965</val_0>
 </S6_MAX_STEP>
 <AUTO_MODE>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </AUTO_MODE>
 <S3_DELAY>
     <val_0>20</val_0>
@@ -259,7 +259,7 @@
         <val_0>11.1769</val_0>
     </S4_MAX_RADIUS>
     <DEBUG_DRAW>
-        <val_0>0</val_0>
+        <val_0>1</val_0>
     </DEBUG_DRAW>
     <S4_TIME_OUT>
         <val_0>15</val_0>
@@ -367,3 +367,15 @@
 <ENABLE_LOG_TO_FILE>
     <val_0>1</val_0>
 </ENABLE_LOG_TO_FILE>
+<blockRectX>
+    <val_0>0</val_0>
+</blockRectX>
+<blockRectY>
+    <val_0>267</val_0>
+</blockRectY>
+<blockRectW>
+    <val_0>94</val_0>
+</blockRectW>
+<blockRectH>
+    <val_0>216</val_0>
+</blockRectH>

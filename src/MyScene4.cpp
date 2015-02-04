@@ -228,7 +228,7 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 void MyScene4::setupEdge()
 {
     int density = 10;
-    float radius =  CANVAS_HEIGHT*0.25;
+    float radius =  CANVAS_HEIGHT*0.2;
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
     for (int i=-180+density+25; i<180-25; i+=density) {
         float x = sin(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterX.get();

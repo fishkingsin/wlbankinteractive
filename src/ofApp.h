@@ -76,5 +76,9 @@ public:
     MySceneLiquidfun sceneLiquidfun;
     ofVideoPlayer congradVideo;
     ofDirectory dirVideo;
-
+    
+    ofParameter<int> blockRectX;
+    ofParameter<int> blockRectY;
+    ofParameter<int> blockRectW;
+    ofParameter<int> blockRectH;
 };

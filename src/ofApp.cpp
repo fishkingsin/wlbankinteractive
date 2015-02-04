@@ -167,6 +167,12 @@ void ofApp::setup(){
     gui.addSlider(commonAssets.elementCenterX.set("COMMON_CENER_X",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
     gui.addSlider(commonAssets.elementCenterY.set("COMMON_CENER_Y",CANVAS_HEIGHT*0.5,0,CANVAS_HEIGHT));
     gui.addSlider( scene1->coolDown.set("coolDown",0,0,100000));
+    gui.setWhichColumn(1);
+    gui.addSlider( blockRectX.set("blockRectX",0,0,CANVAS_WIDTH));
+    gui.addSlider( blockRectY.set("blockRectY",0,0,CANVAS_HEIGHT));
+    gui.addSlider( blockRectW.set("blockRectW",0,0,CANVAS_WIDTH));
+    gui.addSlider( blockRectH.set("blockRectH",0,0,CANVAS_HEIGHT));
+    
 //    gui.add( Mode.set("Mode",0,0,3));
     gui.addToggle( bAuto.set("AUTO_MODE",false));
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
@@ -349,6 +355,10 @@ void ofApp::draw(){
         ofPopMatrix();
         ofPopStyle();
     }
+    ofPushStyle();
+    ofSetColor(0);
+    ofRect(blockRectX, blockRectY, blockRectW, blockRectH);
+    ofPopStyle();
 }
 
 //--------------------------------------------------------------

@@ -19,7 +19,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(maxRadius.set("S1_MAX_RADIUS",20,1,50));
 
     box2d.init();
-    box2d.setGravity(0, -50);
+    box2d.setGravity(0, -10);
     box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     box2d.setFPS(60.0);
     box2d.registerGrabbing();
@@ -128,7 +128,7 @@ void MyScene1::keyPressed(int key)
     
 }
 void MyScene1::mousePressed( int x, int y, int button ){
-    
+    createParticle( x,y, ofColor::white);
 }
 
 //scene notifications
