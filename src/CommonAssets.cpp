@@ -229,6 +229,7 @@ void CommonAssets::setup()
         \
         uniform sampler2D tex0;\
         uniform sampler2D maskTex;\
+        uniform float time;\
         \
         void main (void){\
         vec2 pos = gl_TexCoord[0].st;\
@@ -238,7 +239,8 @@ void CommonAssets::setup()
         vec3 src = base.rgb;\
         float mask = texture2D(maskTex, pos).a;\
         \
-        gl_FragColor = vec4( src , (base.a*1.0-mask));\
+        gl_FragColor = vec4( src , (base.a * 1.0 - mask)) ;\
+        \
         }";
         shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
         shader.linkProgram();
@@ -431,13 +433,15 @@ string CommonAssets::getLogoPath()
         ofLogError() << "could not load image";
         return "";
     }
+    
 }
-
 void CommonAssets::nextImage()
 {
     bg.loadImage(getBGPath());
     logo.loadImage(getLogoPath());
+//    player.loadMovie(getCongradPath());
 }
+
 void CommonAssets::onRadiusSettingsChanged(float &radius)
 {
     goldenRatioBank.clear();
@@ -451,6 +455,7 @@ void CommonAssets::onRadiusSettingsChanged(float &radius)
             break;
         }
         initNum = maxRadius/initSize;
+
         for(int j = 0 ; j < initNum ;j++)
         {
             goldenRatioBank.push_back(initSize);

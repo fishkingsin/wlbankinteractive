@@ -13,7 +13,7 @@
 #include "CommonAssets.h"
 #include "Constants.h"
 #include "ofxOpenCv.h"
-#include "ofxTriangleMesh.h"
+//#include "ofxTriangleMesh.h"
 class MyScene9 : public BaseScene {
 public:
     void setup();
@@ -21,8 +21,8 @@ public:
     void draw();
     void sceneWillAppear(ofxScene *fromScreen);
     ofImage image;
-    vector<ofxTriangleMesh> triangleMesh;
-    vector<ofxTriangleMesh> tirangulateFromImage();
+//    vector<ofxTriangleMesh> triangleMesh;
+//    vector<ofxTriangleMesh> tirangulateFromImage();
     CommonAssets *commonAssets;
 };
 #endif /* defined(__wlbankinteractive__MyScene9__) */

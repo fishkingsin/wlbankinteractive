@@ -189,6 +189,10 @@ void MyScene3::update(float dt)
 }
 void MyScene3::draw()
 {
+    ofPushStyle();
+    ofSetColor(255);
+    ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ofPopStyle();
 //    ofSetColor(255, 255, 255);
     commonAssets->draw();
 }

@@ -127,6 +127,7 @@ void MyScene2::update(float dt)
         ofClear(0, 0, 0, 0);
         
         commonAssets->shader.begin();
+        commonAssets->shader.setUniform1f("time", counter/timeOut );
         commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
         
@@ -153,6 +154,10 @@ void MyScene2::update(float dt)
 }
 void MyScene2::draw()
 {
+    ofPushStyle();
+    ofSetColor(255);
+    ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ofPopStyle();
 
 #if DEBUG
     for(int i=0; i<circles.size(); i++) {

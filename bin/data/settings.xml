@@ -108,10 +108,10 @@
     <val_0>933.269</val_0>
 </S6_MAX_OUTTER_R>
 <COMMON_CENER_X>
-    <val_0>211</val_0>
+    <val_0>264</val_0>
 </COMMON_CENER_X>
 <COMMON_CENER_Y>
-    <val_0>240</val_0>
+    <val_0>308</val_0>
 </COMMON_CENER_Y>
 <AUDO_MODE>
     <val_0>0</val_0>
@@ -180,7 +180,7 @@
     <val_0>342.965</val_0>
 </S6_MAX_STEP>
 <AUTO_MODE>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </AUTO_MODE>
 <S3_DELAY>
     <val_0>20</val_0>
@@ -190,33 +190,33 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>4039</val_0>
+        <val_0>385</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
         <val_0>6.65385</val_0>
     </S1_MIN_RADIUS>
     <S1_MAX_RADIUS>
-        <val_0>13.0615</val_0>
+        <val_0>16.2654</val_0>
     </S1_MAX_RADIUS>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
-        <val_0>3000</val_0>
+        <val_0>500</val_0>
     </S2_MAX_PARTICLE>
     <S2_MIN_RADIUS>
-        <val_0>4.76923</val_0>
+        <val_0>1.94231</val_0>
     </S2_MIN_RADIUS>
     <S2_MAX_RADIUS>
-        <val_0>10.0462</val_0>
+        <val_0>5.9</val_0>
     </S2_MAX_RADIUS>
     <S2_TIME_OUT>
-        <val_0>5</val_0>
+        <val_0>10</val_0>
     </S2_TIME_OUT>
     <S2_MIN_R_SCALE>
         <val_0>0.976923</val_0>
     </S2_MIN_R_SCALE>
     <S2_MAX_R_SCALE>
-        <val_0>1.03846</val_0>
+        <val_0>1.12308</val_0>
     </S2_MAX_R_SCALE>
 </Scene2>
 <Scene3>
@@ -250,7 +250,7 @@
 </Scene3>
 <Scene4>
     <S4_MAX_PARTICLE>
-        <val_0>592</val_0>
+        <val_0>273</val_0>
     </S4_MAX_PARTICLE>
     <S4_MIN_RADIUS>
         <val_0>3.07308</val_0>
@@ -262,7 +262,7 @@
         <val_0>0</val_0>
     </DEBUG_DRAW>
     <S4_TIME_OUT>
-        <val_0>14</val_0>
+        <val_0>15</val_0>
     </S4_TIME_OUT>
     <S4_MIN_R_SCALE>
         <val_0>0.969231</val_0>
@@ -338,6 +338,44 @@
         <val_0>3.24615</val_0>
     </MIN_RADIUS>
     <MAX_RADIUS>
-        <val_0>36.9231</val_0>
+        <val_0>22.1538</val_0>
     </MAX_RADIUS>
 </CommonAsset>
+<MySceneLiquidfun>
+    <SLQF_MAX_PARTICLE>
+        <val_0>1212</val_0>
+    </SLQF_MAX_PARTICLE>
+    <SLQF_MIN_RADIUS>
+        <val_0>8</val_0>
+    </SLQF_MIN_RADIUS>
+    <SLQF_MAX_RADIUS>
+        <val_0>20</val_0>
+    </SLQF_MAX_RADIUS>
+    <SLQF_MIN_R_SCALE>
+        <val_0>1</val_0>
+    </SLQF_MIN_R_SCALE>
+    <SLQF_MAX_R_SCALE>
+        <val_0>1</val_0>
+    </SLQF_MAX_R_SCALE>
+    <SLQF_DEBUG_DRAW>
+        <val_0>0</val_0>
+    </SLQF_DEBUG_DRAW>
+    <SLQF_TIME_OUT>
+        <val_0>5</val_0>
+    </SLQF_TIME_OUT>
+</MySceneLiquidfun>
+<ENABLE_LOG_TO_FILE>
+    <val_0>1</val_0>
+</ENABLE_LOG_TO_FILE>
+<blockRectX>
+    <val_0>0</val_0>
+</blockRectX>
+<blockRectY>
+    <val_0>267</val_0>
+</blockRectY>
+<blockRectW>
+    <val_0>94</val_0>
+</blockRectW>
+<blockRectH>
+    <val_0>216</val_0>
+</blockRectH>
