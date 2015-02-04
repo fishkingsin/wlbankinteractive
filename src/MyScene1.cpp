@@ -20,7 +20,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
 
     box2d.init();
     box2d.setGravity(0, -10);
-    box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+//    box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     box2d.setFPS(60.0);
     box2d.registerGrabbing();
     
@@ -43,6 +43,7 @@ void MyScene1::update(float dt){ //update scene 1 here
     {
         if(!isFireEvent)
         {
+            edges.clear();
             toNextScene tonextScene;
             tonextScene.sceneID=1;
             ofNotifyEvent(toNextSceneEvent, tonextScene, this);
@@ -135,6 +136,7 @@ void MyScene1::mousePressed( int x, int y, int button ){
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
     commonAssets->reset();
     isFireEvent = false;
+    setupEdge();
 };
 
 
@@ -185,4 +187,30 @@ void MyScene1::createParticle(float x , float y , ofColor color)
     commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius(),0,0));
     
     commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
+}
+
+void MyScene1::setupEdge()
+{
+    
+    //bound
+    ofPtr<ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
+    edge.get()->addVertex(0,0);
+    edge.get()->addVertex(CANVAS_WIDTH,0);
+    edge.get()->addVertex(CANVAS_WIDTH,CANVAS_HEIGHT);
+    edge.get()->addVertex(0,CANVAS_HEIGHT);
+    edge.get()->addVertex(0,0);
+
+    edge.get()->create(box2d.getWorld());
+    edges.push_back(edge);
+    
+//    commonAssets.blockRectX, commonAssets.blockRectY, commonAssets.blockRectW, commonAssets.blockRectH
+    edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
+    edge.get()->addVertex(commonAssets->blockRectX,commonAssets->blockRectY);
+    edge.get()->addVertex(commonAssets->blockRectX+commonAssets->blockRectW,commonAssets->blockRectY);
+    edge.get()->addVertex(commonAssets->blockRectX+commonAssets->blockRectW,commonAssets->blockRectY+commonAssets->blockRectH);
+    edge.get()->addVertex(commonAssets->blockRectX,commonAssets->blockRectY+commonAssets->blockRectH);
+    edge.get()->addVertex(commonAssets->blockRectX,commonAssets->blockRectY);
+    
+    edge.get()->create(box2d.getWorld());
+    edges.push_back(edge);
 }

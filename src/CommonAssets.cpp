@@ -178,6 +178,12 @@ void CommonAssets::setup()
     paraGroup.add(maxBright.set("MAX_BRIGHT",0.5,0,1));
     paraGroup.add(minSaturation.set("MIN_SATURATE",0.5,0,1));
     paraGroup.add(maxSaturation.set("MAX_SATURATE",0.5,0,1));
+    
+    paraGroup.add(blockRectX.set("blockRectX",0,0,CANVAS_WIDTH));
+    paraGroup.add(blockRectY.set("blockRectY",0,0,CANVAS_HEIGHT));
+    paraGroup.add( blockRectW.set("blockRectW",0,0,CANVAS_WIDTH));
+    paraGroup.add( blockRectH.set("blockRectH",0,0,CANVAS_HEIGHT));
+
     int width = CANVAS_WIDTH;
     int height = CANVAS_HEIGHT;
     

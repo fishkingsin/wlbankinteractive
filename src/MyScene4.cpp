@@ -204,6 +204,7 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
     counter = 0;
     prevElapse = ofGetElapsedTimef();
     init();
+    isStart = true;
 }
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
@@ -215,7 +216,7 @@ void MyScene4::sceneDidAppear()
 
     counter = 0;
     prevElapse = ofGetElapsedTimef();
-    isStart = true;
+    
 
 }
 void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
@@ -228,17 +229,30 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 void MyScene4::setupEdge()
 {
     int density = 10;
-    float radius =  CANVAS_HEIGHT*0.2;
+    float radius =  CANVAS_HEIGHT*0.3;
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
-    for (int i=-180+density+25; i<180-25; i+=density) {
+    edge.get()->addVertex(sin(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterX.get(),
+                          cos(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
+    for (int i=-180+density+90; i<180-90; i+=density) {
         float x = sin(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterX.get();
         float y = cos(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterY.get();
         edge.get()->addVertex(x, y);
-        edge.get()->create(box2d.getWorld());
+        
         
     }
+    edge.get()->addVertex(sin(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterX.get(),
+                          cos(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
+    edge.get()->create(box2d.getWorld());
+    edges.push_back(edge);
     
+    edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
+    edge.get()->addVertex(commonAssets->blockRectX,commonAssets->blockRectY);
+    edge.get()->addVertex(commonAssets->blockRectX+commonAssets->blockRectW,commonAssets->blockRectY);
+    edge.get()->addVertex(commonAssets->blockRectX+commonAssets->blockRectW,commonAssets->blockRectY+commonAssets->blockRectH);
+    edge.get()->addVertex(commonAssets->blockRectX,commonAssets->blockRectY+commonAssets->blockRectH);
+    edge.get()->addVertex(commonAssets->blockRectX,commonAssets->blockRectY);
     
+    edge.get()->create(box2d.getWorld());
     edges.push_back(edge);
     //bound
     //     edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);

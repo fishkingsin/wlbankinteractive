@@ -111,6 +111,12 @@ public:
     
     vector<float>goldenRatioBank;
     void onRadiusSettingsChanged(float &radius);
+    
+    ofParameter<int> blockRectX;
+    ofParameter<int> blockRectY;
+    ofParameter<int> blockRectW;
+    ofParameter<int> blockRectH;
+
 };
 
 

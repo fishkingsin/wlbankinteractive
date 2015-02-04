@@ -45,6 +45,8 @@ public:
     //box2d
     ofxBox2d                            box2d;			  //	the box2d world
     vector    <ofPtr<CustomParticle> >	circles;		  //	default box2d circles
+    vector <ofPtr<ofxBox2dEdge> >       edges;
+    void setupEdge();
 #ifdef USE_TRIANGLE
     ofxDelaunay triangulation;
 #endif
