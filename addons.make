@@ -6,7 +6,7 @@ ofxXmlSettings
 ofxAnimatable
 ofxAnimation
 ofxAutoReloadedShader
-ofxCv
+ofxControlPanel
 ofxDelaunay
 ofxLiquidFun
 ofxSceneManager

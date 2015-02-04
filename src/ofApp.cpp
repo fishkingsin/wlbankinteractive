@@ -450,7 +450,7 @@ void ofApp::nextScene()
             //go to next scene 2-4
         {
             commonAssets.nextImage();
-            float rand = ofRandom(SCENE_2,SCENE_4+1);
+            int rand = ofRandom(SCENE_2,SCENE_4+1);
             ofLogVerbose () << " rand: " << rand;
             Scenes scene = (Scenes)rand;
             ofLogVerbose () << " scene: " << scene;

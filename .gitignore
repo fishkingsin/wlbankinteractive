@@ -7,3 +7,5 @@ bin/wlBankInteractive_debug.exp
 wlBankInteractive.opensdf
 wlBankInteractive.sdf
 bin/wlBankInteractive.exp
+*.DS_Store
+*._*
