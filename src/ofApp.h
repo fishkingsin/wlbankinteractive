@@ -14,7 +14,7 @@
 #include "CommonAssets.h"
 #include "ofxOsc.h"
 #include "ofxAnimatable.h"
-#include "MySceneLiquidfun.h"
+//#include "MySceneLiquidfun.h"
 
 class ofApp : public ofBaseApp{
     
@@ -73,7 +73,7 @@ public:
     ofxTween alphaTween;
     simpleFileLister videoFileLister;
     void eventsIn(guiCallbackData & data);
-    MySceneLiquidfun sceneLiquidfun;
+    //MySceneLiquidfun sceneLiquidfun;
     ofVideoPlayer congradVideo;
     ofDirectory dirVideo;
     
