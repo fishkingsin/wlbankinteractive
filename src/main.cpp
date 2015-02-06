@@ -5,6 +5,12 @@
 #endif
 //========================================================================
 int main( ){
+#if TARGET_OS_WIN32
+    HWND handleWindow;
+    AllocConsole();
+    handleWindow = FindWindowA("ConsoleWindowClass", NULL);
+    ShowWindow(handleWindow, 0);
+#endif
 #ifdef 	USE_PROGRAMMABLE_GL
     ofPtr<ofBaseRenderer> renderer(new ofGLProgrammableRenderer(false));
     ofSetCurrentRenderer(renderer, false);
