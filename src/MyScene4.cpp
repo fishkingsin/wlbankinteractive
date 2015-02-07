@@ -151,7 +151,7 @@ void MyScene4::draw()
     ofSetColor(255);
     ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     ofPopStyle();
-        commonAssets->fbo.draw(0, 0);
+    commonAssets->fbo.draw(0, 0);
     if(debugDraw.get())
     {
         ofSetColor(0);

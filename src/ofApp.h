@@ -76,5 +76,8 @@ public:
     //MySceneLiquidfun sceneLiquidfun;
     ofVideoPlayer congradVideo;
     ofDirectory dirVideo;
-    
+    ofParameter<bool>toggleMinimize;
+    ofParameter<int> windowPositionX;
+    ofParameter<int> windowPositionY;
+    void enableMinize(bool &b);
 };
