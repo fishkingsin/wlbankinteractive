@@ -2,6 +2,7 @@
 #define PORT 12345
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofSetFrameRate(60);
     info.version = (char*)glGetString(GL_VERSION);
     info.vendor = (char*)glGetString(GL_VENDOR);
     info.renderer = (char*)glGetString(GL_RENDERER);

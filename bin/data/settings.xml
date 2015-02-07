@@ -190,7 +190,7 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>385</val_0>
+        <val_0>193</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
         <val_0>6.65385</val_0>
@@ -347,7 +347,7 @@
         <val_0>267</val_0>
     </blockRectY>
     <blockRectW>
-        <val_0>87</val_0>
+        <val_0>82</val_0>
     </blockRectW>
     <blockRectH>
         <val_0>216</val_0>
