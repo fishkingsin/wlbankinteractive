@@ -15,6 +15,7 @@
 
 #include "CustomParticle.h"
 #include "CommonAssets.h"
+#include "ofxTween.h"
 
 class MyScene1 : public BaseScene{
 public:
@@ -59,6 +60,16 @@ public:
     ofParameter<string>numParticle;
     ofParameter<int>maxParticle;
     bool isFireEvent;
+    
+    //coldown;
+    ofPoint prevPoint;
+    ofPoint currPoint;
+    ofParameter<float >minDis;
+    ofParameter<float >density;
+    ofParameter<float >bounce;
+    ofParameter<float >fiction;
+    ofParameter<float >minAlpha;
+    vector<ofxTween> tweens;
 };
 
 #endif

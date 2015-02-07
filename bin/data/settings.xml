@@ -180,7 +180,7 @@
     <val_0>342.965</val_0>
 </S6_MAX_STEP>
 <AUTO_MODE>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </AUTO_MODE>
 <S3_DELAY>
     <val_0>20</val_0>
@@ -198,6 +198,21 @@
     <S1_MAX_RADIUS>
         <val_0>16.2654</val_0>
     </S1_MAX_RADIUS>
+    <MIN_DISTANCE>
+        <val_0>41.5385</val_0>
+    </MIN_DISTANCE>
+    <DENSITY>
+        <val_0>1.92308</val_0>
+    </DENSITY>
+    <BOUNCE>
+        <val_0>0.0576923</val_0>
+    </BOUNCE>
+    <FICTION>
+        <val_0>2.69231</val_0>
+    </FICTION>
+    <MIN_ALPHA>
+        <val_0>255</val_0>
+    </MIN_ALPHA>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
@@ -250,7 +265,7 @@
 </Scene3>
 <Scene4>
     <S4_MAX_PARTICLE>
-        <val_0>273</val_0>
+        <val_0>308</val_0>
     </S4_MAX_PARTICLE>
     <S4_MIN_RADIUS>
         <val_0>3.07308</val_0>
