@@ -66,14 +66,14 @@ void ofApp::setup(){
         ofLogVerbose() << curtainColors[i];
     }
     
-
+    
     
     
     receiver.setup(PORT);
     
     
-
-
+    
+    
     commonAssets.loadImage("particleGrid.png",4,4,8);
     commonAssets.setup();
     commonAssets.nextImage();
@@ -87,46 +87,46 @@ void ofApp::setup(){
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     ofAddListener(scene1->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-//    MyScene2* scene2 = new MyScene2();
-//    scene2->commonAssets = &commonAssets;
-//    sceneManager->addScene(scene2 , SCENE_2);
-//    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
-//    
-//    MyScene3* scene3 = new MyScene3();
-//    scene3->commonAssets = &commonAssets;
-//    sceneManager->addScene(scene3 , SCENE_3);
-//    ofAddListener(scene3->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    //    MyScene2* scene2 = new MyScene2();
+    //    scene2->commonAssets = &commonAssets;
+    //    sceneManager->addScene(scene2 , SCENE_2);
+    //    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    //
+    //    MyScene3* scene3 = new MyScene3();
+    //    scene3->commonAssets = &commonAssets;
+    //    sceneManager->addScene(scene3 , SCENE_3);
+    //    ofAddListener(scene3->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     MyScene4* scene4 = new MyScene4();
     scene4->commonAssets = &commonAssets;
     sceneManager->addScene(scene4 , SCENE_4);
     ofAddListener(scene4->toNextSceneEvent, this, &ofApp::handleToNextScene);
-
+    
     /*MyScene6* scene6 = new MyScene6();
-    scene6->commonAssets = &commonAssets;
-    sceneManager->addScene(scene6 , SCENE_6);
-    ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
-
+     scene6->commonAssets = &commonAssets;
+     sceneManager->addScene(scene6 , SCENE_6);
+     ofAddListener(scene6->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
     
-//    MyScene7* scene7 = new MyScene7();
-//    scene7->commonAssets = &commonAssets;
-//    sceneManager->addScene(scene7 , SCENE_7);
-//    ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-/*    MyScene8* scene8 = new MyScene8();
-    scene8->commonAssets = &commonAssets;
-    sceneManager->addScene(scene8 , SCENE_8);
-    ofAddListener(scene8->toNextSceneEvent, this, &ofApp::handleToNextScene);
-
-    LogoScene* logoScene = new LogoScene();
-    logoScene->commonAssets = &commonAssets;
-    sceneManager->addScene(logoScene , SCENE_LOGO);
-    ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
+    //    MyScene7* scene7 = new MyScene7();
+    //    scene7->commonAssets = &commonAssets;
+    //    sceneManager->addScene(scene7 , SCENE_7);
+    //    ofAddListener(scene7->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-//    MySceneLiquidfun *sceneLiquidfun = new MySceneLiquidfun();
-//    sceneLiquidfun->commonAssets = &commonAssets;
-//    sceneManager->addScene(sceneLiquidfun , SCENE_10);
-//    ofAddListener(sceneLiquidfun->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    /*    MyScene8* scene8 = new MyScene8();
+     scene8->commonAssets = &commonAssets;
+     sceneManager->addScene(scene8 , SCENE_8);
+     ofAddListener(scene8->toNextSceneEvent, this, &ofApp::handleToNextScene);
+     
+     LogoScene* logoScene = new LogoScene();
+     logoScene->commonAssets = &commonAssets;
+     sceneManager->addScene(logoScene , SCENE_LOGO);
+     ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
+    
+    //    MySceneLiquidfun *sceneLiquidfun = new MySceneLiquidfun();
+    //    sceneLiquidfun->commonAssets = &commonAssets;
+    //    sceneManager->addScene(sceneLiquidfun , SCENE_10);
+    //    ofAddListener(sceneLiquidfun->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
     sceneManager->setDrawDebug(true);
     sceneManager->setCurtainDropTime(1.0);
@@ -135,7 +135,7 @@ void ofApp::setup(){
     sceneManager->setOverlapUpdate(true);
     
     gui.setBackgroundColor(0, 0, 0, 125);
-
+    
     gui.loadFont("MONACO.TTF", 12);
     gui.setup("Settings", CANVAS_WIDTH, 0, ofGetWidth(), ofGetHeight());
     gui.addPanel("Scene1", 4, false)->setBackgroundColor(0, 0, 0, 125);
@@ -152,7 +152,7 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
     gui.addToggle(toggleDrawGUI.set("DEBUG_TOGGLE", true));
     gui.addGroup(commonAssets.paraGroup);
-
+    
     toggleDrawGUI.addListener(this, &ofApp::toggleDebug);
     gui.addToggle(bLogFile.set("ENABLE_LOG_TO_FILE",false));
     bLogFile.addListener( this, &ofApp::enableLogToFile);
@@ -169,62 +169,62 @@ void ofApp::setup(){
     gui.addSlider( scene1->coolDown.set("coolDown",0,0,100000));
     gui.setWhichColumn(1);
     
-//    gui.add( Mode.set("Mode",0,0,3));
+    //    gui.add( Mode.set("Mode",0,0,3));
     gui.addToggle( bAuto.set("AUTO_MODE",false));
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     gui.setWhichColumn(1);
-
+    
     gui.addFileLister("VideoFiles", &videoFileLister, 200, 100);
     int numFile = videoFileLister.listDir("movies");
     if(numFile>0)
     {
-    player.loadMovie(videoFileLister.getPath(0));
-    player.setLoopState(OF_LOOP_NORMAL);
-    player.play();
+        player.loadMovie(videoFileLister.getPath(0));
+        player.setLoopState(OF_LOOP_NORMAL);
+        player.play();
     }
     else{
         ofLogError() << "0 file in "<< videoFileLister.getOriginalDirectory();
     }
-//    ofAddListener(videoFileLister,this,ofApp::filechanges);
+    //    ofAddListener(videoFileLister,this,ofApp::filechanges);
     //scene1
     gui.setWhichPanel(1);
     gui.setWhichColumn(0);
- 
+    
     gui.addGroup(scene1->paraGroup);
     //scene2
-//    gui.setWhichPanel(2);
-//    gui.setWhichColumn(0);
-//    gui.addGroup(scene2->paraGroup);
-//    
-//    gui.setWhichPanel(3);
-//    gui.setWhichColumn(0);
-//    gui.addGroup(scene3->paraGroup);;
+    //    gui.setWhichPanel(2);
+    //    gui.setWhichColumn(0);
+    //    gui.addGroup(scene2->paraGroup);
+    //
+    //    gui.setWhichPanel(3);
+    //    gui.setWhichColumn(0);
+    //    gui.addGroup(scene3->paraGroup);;
     gui.setWhichPanel(4);
     gui.setWhichColumn(0);
     gui.addGroup(scene4->paraGroup);
-
-    /*gui.setWhichPanel(5);
-    gui.setWhichColumn(0);
-     gui.addGroup(scene6->paraGroup);
-*/
-
     
-//    gui.setWhichPanel(7);
-//    gui.setWhichColumn(0);
-//    gui.addGroup(scene7->paraGroup);
+    /*gui.setWhichPanel(5);
+     gui.setWhichColumn(0);
+     gui.addGroup(scene6->paraGroup);
+     */
+    
+    
+    //    gui.setWhichPanel(7);
+    //    gui.setWhichColumn(0);
+    //    gui.addGroup(scene7->paraGroup);
     
     /*gui.setWhichPanel(8);
-    gui.setWhichColumn(0);
+     gui.setWhichColumn(0);
      gui.addGroup(scene8->paraGroup);
-    gui.setWhichPanel(9);
-    gui.setWhichColumn(0);
+     gui.setWhichPanel(9);
+     gui.setWhichColumn(0);
      gui.addGroup(logoScene->paraGroup);
-*/
-//    gui.setWhichPanel(10);
-//    gui.setWhichColumn(0);
-//    gui.addGroup(sceneLiquidfun->paraGroup);
-
+     */
+    //    gui.setWhichPanel(10);
+    //    gui.setWhichColumn(0);
+    //    gui.addGroup(sceneLiquidfun->paraGroup);
+    
     string output = "";
     
     string pointSprites = ((info.bPointSpritesSupported == true) ? "yes" : "no");
@@ -251,7 +251,7 @@ void ofApp::setup(){
     sceneManager->setDrawDebug(toggleDrawGUI);
     ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
     
-
+    
 }
 void ofApp::exit()
 {
@@ -295,7 +295,7 @@ void ofApp::update(){
     player.update();
     gui.update();
     // check for waiting messages
-
+    
     while(receiver.hasWaitingMessages()){
         // get the next message
         ofParameterGroup p;
@@ -322,9 +322,9 @@ void ofApp::update(){
         }
     }
     fps = ofToString(ofGetFrameRate());
-
+    
     float dt = 0.016666666;
-        sceneManager->update( dt );
+    sceneManager->update( dt );
     
 }
 
@@ -336,12 +336,12 @@ void ofApp::draw(){
     
     
     sceneManager->draw();
-
+    
     ofPushStyle();
     ofSetColor(255,alphaTween.update());
     congradVideo.draw(0,0);
-//    commonAssets.player.draw(0,0);
-//    commonAssets.logo.draw(0,0);
+    //    commonAssets.player.draw(0,0);
+    //    commonAssets.logo.draw(0,0);
     ofPopStyle();
     if(toggleDrawGUI)
     {
@@ -362,15 +362,15 @@ void ofApp::keyPressed(int key){
     switch (key)
     {
         case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-           case '7':
-           case '8':
-            case '0':
-//            commonAssets.nextImage();
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '0':
+            //            commonAssets.nextImage();
         {
             ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
             if(curtainColors.size()>0)
@@ -382,12 +382,12 @@ void ofApp::keyPressed(int key){
             if (key == '2') sceneManager->goToScene(SCENE_2);
             if (key == '3') sceneManager->goToScene(SCENE_3);
             if (key == '4') sceneManager->goToScene(SCENE_4);
-//            if (key == '6') sceneManager->goToScene(SCENE_6);
+            //            if (key == '6') sceneManager->goToScene(SCENE_6);
             if (key == '7') sceneManager->goToScene(SCENE_7);
-//            if (key == '8') sceneManager->goToScene(SCENE_8);
-//            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
+            //            if (key == '8') sceneManager->goToScene(SCENE_8);
+            //            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
             if(key == '0')sceneManager->goToScene(SCENE_10);
-
+            
         }
             break;
         case 'f':
@@ -399,6 +399,9 @@ void ofApp::keyPressed(int key){
             
             
             break;
+        case  's':
+            gui.saveSettings();
+        break;
         case OF_KEY_RIGHT:
             nextScene();
             break;
@@ -406,7 +409,7 @@ void ofApp::keyPressed(int key){
             sceneManager->keyPressed(key);
             break;
     }
-
+    
 }
 
 //--------------------------------------------------------------
@@ -473,16 +476,16 @@ void ofApp::nextScene()
         cColor = curtainColors[int(ofRandom(curtainColors.size()))];
     }
     sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b);
-
+    
     switch(sceneID)
     {
         case SCENE_1:
             //go to next scene 2-4
         {
             commonAssets.nextImage();
-
+            
             int rand=SCENE_4;
-
+            
             ofLogVerbose () << " rand: " << rand;
             Scenes scene = (Scenes)rand;
             ofLogVerbose () << " scene: " << scene;
@@ -493,15 +496,15 @@ void ofApp::nextScene()
         case SCENE_3:
         case SCENE_4:
         case SCENE_7:
-//        case SCENE_6:
-//        case SCENE_8:
-
+            //        case SCENE_6:
+            //        case SCENE_8:
+            
             sceneManager->goToScene(SCENE_1);
             break;
-//        case SCENE_LOGO:
-//            //loop back
-//            sceneManager->goToScene(SCENE_1);
-//            break;
+            //        case SCENE_LOGO:
+            //            //loop back
+            //            sceneManager->goToScene(SCENE_1);
+            //            break;
             
     }
 }
@@ -515,7 +518,7 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
             ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
             ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
             nextScene();
-
+            
         }
         else{
             
@@ -528,7 +531,7 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
             }
             nextScene();
             alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,0,255,1000,0);
-
+            
             ofAddListener(alphaTween.end_E, this, &ofApp::tweenEnd);
         }
         
@@ -555,16 +558,16 @@ void ofApp::tweenEasingOutEnd(int &i)
 {
     if(bAuto)
     {
-
+        
         congradVideo.stop();
-
+        
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-
+        
     }
     else{
         ofLogWarning() << "Auto mode off has scene incoming";
     }
-
+    
 }
 void ofApp::enableLogToFile(bool &b)
 {
