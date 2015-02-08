@@ -21,8 +21,13 @@ void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int siz
     theData->image = &image;
     theData->r = ofRandom(size,size*2);
     theData->color.a = ofMap(theData->r,size,size*2,255,10,true);
+    targetR = size;
 }
-
+void CustomParticle::update()
+{
+    float r = getRadius()+((targetR-getRadius())*0.01);
+    setRadius(r);
+}
 void CustomParticle::draw() {
     Data* theData = (Data*)getData();
     if(theData) {
@@ -42,4 +47,7 @@ void CustomParticle::draw() {
         ofPopMatrix();
         ofPopMatrix();
     }
+}
+bool CustomParticle::shouldRemoveOffScreen(ofPtr<CustomParticle> shape) {
+    return !ofRectangle(-100, -100, ofGetWidth()+100, ofGetHeight()+100).inside(shape.get()->getPosition());
 }

@@ -100,6 +100,7 @@ public:
     
     //colorTheme
     ofParameterGroup paraGroup;
+        ofParameter<bool> bAuto;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
     ofParameter<float>minHue;

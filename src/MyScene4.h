@@ -49,6 +49,8 @@ public:
     ofParameter<int>timeOut;
     ofParameter<float>minRScale;
     ofParameter<float>maxRScale;
+    ofParameter<float>radius;
+        ofParameter<float>pot_radius;
     float counter;
     float prevElapse;
     ofParameter<string>counterString;

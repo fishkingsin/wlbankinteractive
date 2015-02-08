@@ -85,6 +85,8 @@ void ofApp::setup(){
     scene1 = new MyScene1();
     scene1->commonAssets = &commonAssets;
     sceneManager->addScene(scene1 , SCENE_1);
+
+    sceneManager->setCurtainTimes(10,10,10);
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     ofAddListener(scene1->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
@@ -171,7 +173,7 @@ void ofApp::setup(){
     gui.setWhichColumn(1);
     
     //    gui.add( Mode.set("Mode",0,0,3));
-    gui.addToggle( bAuto.set("AUTO_MODE",false));
+
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     gui.setWhichColumn(1);
@@ -378,7 +380,7 @@ void ofApp::keyPressed(int key){
             {
                 cColor = curtainColors[int(ofRandom(curtainColors.size()))];
             }
-            sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b);
+            sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b , 0);
             if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
             if (key == '2') sceneManager->goToScene(SCENE_2);
             if (key == '3') sceneManager->goToScene(SCENE_3);
@@ -476,7 +478,7 @@ void ofApp::nextScene()
     {
         cColor = curtainColors[int(ofRandom(curtainColors.size()))];
     }
-    sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b);
+    sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b , 0);
     
     switch(sceneID)
     {
@@ -512,7 +514,7 @@ void ofApp::nextScene()
 void ofApp::handleToNextScene(toNextScene &tonextscene)
 {
     
-    if(bAuto)
+    if(commonAssets.bAuto)
     {
         if(tonextscene.sceneID==1)
         {
@@ -544,7 +546,7 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
 
 void ofApp::tweenEnd(int &i)
 {
-    if(bAuto)
+    if(commonAssets.bAuto)
     {
         ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
         alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,congradVideo.getDuration()*1000);
@@ -557,7 +559,7 @@ void ofApp::tweenEnd(int &i)
 
 void ofApp::tweenEasingOutEnd(int &i)
 {
-    if(bAuto)
+    if(commonAssets.bAuto)
     {
         
         congradVideo.stop();

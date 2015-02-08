@@ -65,10 +65,12 @@ public:
     ofPoint prevPoint;
     ofPoint currPoint;
     ofParameter<float >minDis;
+        ofParameter<float >offSetPower;
     ofParameter<float >density;
     ofParameter<float >bounce;
     ofParameter<float >fiction;
     ofParameter<float >minAlpha;
+    ofParameter<bool>bAuto;
     vector<ofxTween> tweens;
 };
 

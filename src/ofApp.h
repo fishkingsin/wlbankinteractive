@@ -36,7 +36,7 @@ public:
     
     
     ofParameter<string>fps;
-    ofParameter<bool> bAuto;
+
     ofParameter<bool> timePriority;
     ofParameter<float> maxIdleTime;
     ofParameter<string> currentIdleString;

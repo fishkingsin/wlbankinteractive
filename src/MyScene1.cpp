@@ -14,16 +14,18 @@ MyScene1::MyScene1()
 void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.setName("Scene1");
     paraGroup.add(numParticle.set("PARTICLE_SIZE",""));
-    paraGroup.add(maxParticle.set("S1_MAX_PARTICLE",3000,1,10000));
+    paraGroup.add(maxParticle.set("S1_MAX_PARTICLE",100,1,1000));
     paraGroup.add(minRadius.set("S1_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S1_MAX_RADIUS",20,1,50));
     paraGroup.add(minDis.set("MIN_DISTANCE",0,0,100));
+    paraGroup.add(    offSetPower.set("OFFSET_POWER",0,0,20));
     paraGroup.add(density.set("DENSITY",0,0,100));
     paraGroup.add(bounce.set("BOUNCE",0,0,3));
     paraGroup.add(fiction.set("FICTION",0,0,100));
     paraGroup.add(minAlpha.set("MIN_ALPHA", 0, 0, 255));
+
     box2d.init();
-    box2d.setGravity(0, -10);
+    box2d.setGravity(0, -5);
     //    box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     box2d.setFPS(60.0);
     box2d.registerGrabbing();
@@ -35,6 +37,8 @@ void MyScene1::setup(){  //load your scene 1 assets here...
         images[i].loadImage("images/"+ofToString(i+1)+".png");
     }
     
+   
+    
 };
 
 
@@ -43,15 +47,32 @@ void MyScene1::update(float dt){ //update scene 1 here
     numParticle  = ofToString(circles.size());
     
     box2d.update();
+    if(isFireEvent)
+    {
+        if(circles.size()==0)
+        {
+            toNextScene tonextScene;
+            tonextScene.sceneID=1;
+            ofNotifyEvent(toNextSceneEvent, tonextScene, this);
+            isFireEvent = false;
+        }
+        
+    }
     if(circles.size()>maxParticle)
     {
         if(!isFireEvent)
         {
-            edges.clear();
-            toNextScene tonextScene;
-            tonextScene.sceneID=1;
-            ofNotifyEvent(toNextSceneEvent, tonextScene, this);
-            isFireEvent = true;
+            if(commonAssets->bAuto)
+            {
+                edges.clear();
+                isFireEvent = true;
+            
+            }
+            else{
+                circles.clear();
+                commonAssets->reset();
+            }
+            
         }
         //        circles.erase(circles.begin());
         
@@ -71,11 +92,14 @@ void MyScene1::update(float dt){ //update scene 1 here
     //    }
     
     for (int i = 0 ; i < circles.size() ; i++) {
-        commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
-        commonAssets->setParticleVertex(i, circles[i]->getPosition());
+        circles[i]->update();
+        commonAssets->setParticleAngle(circles[i]->index, (circles[i]->getRotation()/360.0f)*TWO_PI);
+        commonAssets->setParticleVertex(circles[i]->index, circles[i]->getPosition());
+        commonAssets->setParticleNormal(circles[i]->index, ofVec3f(circles[i]->getRadius(),0,0));
+
     }
     commonAssets->updateAttribtuteData();
-    
+    ofRemove(circles, CustomParticle::shouldRemoveOffScreen);
 };
 
 void MyScene1::draw(){ //draw scene 1 here
@@ -134,7 +158,10 @@ void MyScene1::keyPressed(int key)
     
 }
 void MyScene1::mousePressed( int x, int y, int button ){
+    if(ofRectangle(0,0,CANVAS_WIDTH,CANVAS_HEIGHT).inside(x, y))
+    {
     createParticle( x,y, ofColor::white);
+    }
 }
 
 //scene notifications
@@ -147,7 +174,7 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
 
 //scene notifications
 void MyScene1::sceneWillDisappear( ofxScene * toScreen ){
-    
+    commonAssets->reset();
 }
 void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
 {
@@ -160,10 +187,17 @@ void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
 
 void MyScene1::eventsIn(customeOSCData & data)
 {
-    if(prevPoint.distance(ofPoint(data.pos.x*CANVAS_WIDTH, CANVAS_HEIGHT*0.9))>minDis)
+    if(!isFireEvent)
     {
-        createParticle(data.pos.x*CANVAS_WIDTH, CANVAS_HEIGHT*0.9 , ofColor::white);
-        prevPoint = ofPoint(data.pos.x*CANVAS_WIDTH, CANVAS_HEIGHT*0.9) ;
+    currPoint.set(ofPoint(data.pos.x*CANVAS_WIDTH, CANVAS_HEIGHT*0.9));
+    float distance = prevPoint.distance(currPoint);
+    
+    if(abs(distance)>minDis)
+    {
+
+        createParticle(currPoint.x, currPoint.y , ofColor::white);
+//        createParticle(currPoint.x-(distance*offSetPower), currPoint.y , ofColor::white);
+        prevPoint = currPoint ;
     }
     //    if(circles.size()<maxParticle.get())
     //    {
@@ -177,20 +211,23 @@ void MyScene1::eventsIn(customeOSCData & data)
     //        ofColor c = ofColor::fromHsb(data.c.getHue(),MAX(data.c.getSaturation() ,200), MAX(data.c.getBrightness(),200));
     //        circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
     //    }
+    }
 }
 
-void MyScene1::createParticle(float x , float y , ofColor color)
+void MyScene1::createParticle(float _x , float _y , ofColor color)
 {
+    float x = MIN(MAX(0,_x),CANVAS_WIDTH);
+    float y = MIN(MAX(0,_y),CANVAS_HEIGHT);
     circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
     float r = ofRandom(minRadius, maxRadius);
     circles.back().get()->addForce(ofVec2f(0,10), 10);
     circles.back().get()->setPhysics(density,bounce,fiction);
-    circles.back().get()->setup(box2d.getWorld(),x,y, r);
+    circles.back().get()->setup(box2d.getWorld(),x,y, r*0.1);
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
     ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, ofMap(r, minRadius, maxRadius, 255,minAlpha));
     
     circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
-    
+    circles.back().get()->index = circles.size()-1;
     commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
     commonAssets->setParticleColor(circles.size()-1, c);
     commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius(),0,0));

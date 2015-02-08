@@ -168,6 +168,7 @@ void CommonAssets::setup()
 
 
     paraGroup.setName("CommonAsset");
+    paraGroup.add(bAuto.set("AUTO",false));
     paraGroup.add(minRadius.set("MIN_RADIUS",1,0,CANVAS_WIDTH));
     paraGroup.add(maxRadius.set("MAX_RADIUS",50,0,CANVAS_HEIGHT));
     minRadius.addListener( this, &CommonAssets::onRadiusSettingsChanged);

@@ -108,7 +108,7 @@
     <val_0>933.269</val_0>
 </S6_MAX_OUTTER_R>
 <COMMON_CENER_X>
-    <val_0>264</val_0>
+    <val_0>241</val_0>
 </COMMON_CENER_X>
 <COMMON_CENER_Y>
     <val_0>308</val_0>
@@ -190,7 +190,7 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>193</val_0>
+        <val_0>74</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
         <val_0>6.65385</val_0>
@@ -199,7 +199,7 @@
         <val_0>16.2654</val_0>
     </S1_MAX_RADIUS>
     <MIN_DISTANCE>
-        <val_0>41.5385</val_0>
+        <val_0>6.53846</val_0>
     </MIN_DISTANCE>
     <DENSITY>
         <val_0>1.92308</val_0>
@@ -213,6 +213,12 @@
     <MIN_ALPHA>
         <val_0>255</val_0>
     </MIN_ALPHA>
+    <S1_AUTO>
+        <val_0>0</val_0>
+    </S1_AUTO>
+    <OFFSET_POWER>
+        <val_0>5.92308</val_0>
+    </OFFSET_POWER>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
@@ -285,6 +291,12 @@
     <S4_MAX_R_SCALE>
         <val_0>1.04615</val_0>
     </S4_MAX_R_SCALE>
+    <S4_LOGO_RADIUS>
+        <val_0>131.469</val_0>
+    </S4_LOGO_RADIUS>
+    <S4_POT_RADIUS>
+        <val_0>126.6</val_0>
+    </S4_POT_RADIUS>
 </Scene4>
 <Scene7>
     <S7_MAX_PARTICLE>
@@ -359,7 +371,7 @@
         <val_0>0</val_0>
     </blockRectX>
     <blockRectY>
-        <val_0>267</val_0>
+        <val_0>328</val_0>
     </blockRectY>
     <blockRectW>
         <val_0>82</val_0>
@@ -367,6 +379,9 @@
     <blockRectH>
         <val_0>216</val_0>
     </blockRectH>
+    <AUTO>
+        <val_0>1</val_0>
+    </AUTO>
 </CommonAsset>
 <MySceneLiquidfun>
     <SLQF_MAX_PARTICLE>

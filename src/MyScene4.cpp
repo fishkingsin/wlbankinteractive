@@ -15,9 +15,12 @@ void MyScene4::setup()
     paraGroup.add(maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
     paraGroup.add(minRadius.set("S4_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S4_MAX_RADIUS",20,1,50));
+    paraGroup.add(radius.set("S4_LOGO_RADIUS",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
+    paraGroup.add(pot_radius.set("S4_POT_RADIUS",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
+    
     paraGroup.add(minRScale.set("S4_MIN_R_SCALE",1,0,2));
     paraGroup.add(maxRScale.set("S4_MAX_R_SCALE",1,0,2));
-
+    
     paraGroup.add(debugDraw.set("DEBUG_DRAW",false));
     paraGroup.add(timeOut.set("S4_TIME_OUT",5,0,20));
     paraGroup.add(counterString.set("S4_COUNTER",""));
@@ -30,15 +33,15 @@ void MyScene4::setup()
     //    box2d.createGround();
     box2d.setFPS(30.0);
     //    setupEdge();
-
     
-
+    
+    
     
     
 }
 void MyScene4::init()
 {
-    ofRemove(circles, ofxBox2dCircle::shouldRemoveOffScreen);
+    
     commonAssets->goldenRatioBank.clear();
     int initNum=1;
     float initSize = commonAssets->maxRadius;
@@ -55,21 +58,21 @@ void MyScene4::init()
             commonAssets->goldenRatioBank.push_back(initSize);
         }
     }
-//    maskFbo.begin();
-//    ofClear(0,0,0,0);
-//    maskFbo.end();
+    //    maskFbo.begin();
+    //    ofClear(0,0,0,0);
+    //    maskFbo.end();
     
     commonAssets->fbo.begin();
     ofClear(0,0,0,0);
     commonAssets->fbo.end();
-
+    
     commonAssets->srcFbo.begin();
     ofClear(0,0,0,0);
     commonAssets->srcFbo.end();
     
-//    maskFbo.begin();
-//    commonAssets->bg.draw(0,0);
-//    maskFbo.end();
+    //    maskFbo.begin();
+    //    commonAssets->bg.draw(0,0);
+    //    maskFbo.end();
     
     prevElapse = ofGetElapsedTimef();
     counter = 0;
@@ -121,6 +124,7 @@ void MyScene4::update(float dt)
         ofClear(0, 0, 0, 0);
         
         commonAssets->shader.begin();
+        
         commonAssets->shader.setUniform1f("time", counter/timeOut );
         commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
@@ -139,7 +143,7 @@ void MyScene4::update(float dt)
             ofLogVerbose() << "counter : " << counter;
             toNextScene tonextScene;
             ofNotifyEvent(toNextSceneEvent, tonextScene, this);
-            counter=0;
+            counter = 0;
         }
         counterString = ofToString(counter);
         prevElapse = ofGetElapsedTimef();
@@ -148,8 +152,10 @@ void MyScene4::update(float dt)
 void MyScene4::draw()
 {
     ofPushStyle();
-    ofSetColor(255);
-    ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ofSetColor(255,255*((counter*2)/timeOut));
+    //    float radius =  CANVAS_HEIGHT*0.3;
+    ofCircle(commonAssets->elementCenterX.get(),
+             commonAssets->elementCenterY.get(), radius);
     ofPopStyle();
     commonAssets->fbo.draw(0, 0);
     if(debugDraw.get())
@@ -168,9 +174,9 @@ void MyScene4::draw()
         }
         ofPopStyle();
         ofSetColor(255);
-       commonAssets-> srcFbo.draw(0, 0);
+        commonAssets-> srcFbo.draw(0, 0);
         commonAssets->bg.draw(0,0);
-
+        
     }
     
 }
@@ -213,11 +219,11 @@ void MyScene4::sceneWillDisappear( ofxScene * toScreen )
 }
 void MyScene4::sceneDidAppear()
 {
-
+    
     counter = 0;
     prevElapse = ofGetElapsedTimef();
     
-
+    
 }
 void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 {
@@ -229,17 +235,17 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 void MyScene4::setupEdge()
 {
     int density = 10;
-    float radius =  CANVAS_HEIGHT*0.3;
+    //    float radius =  CANVAS_HEIGHT*0.3;
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
-//    edge.get()->addVertex(sin(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterX.get(),cos(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
+    //    edge.get()->addVertex(sin(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterX.get(),cos(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
     for (int i=-180+density+25; i<180-25; i+=density) {
-        float x = sin(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterX.get();
-        float y = cos(TWO_PI*(i/360.0f))*radius+commonAssets->elementCenterY.get();
+        float x = sin(TWO_PI*(i/360.0f))*pot_radius+commonAssets->elementCenterX.get();
+        float y = cos(TWO_PI*(i/360.0f))*pot_radius+commonAssets->elementCenterY.get();
         edge.get()->addVertex(x, y);
         
         
     }
-//    edge.get()->addVertex(sin(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterX.get(),                    cos(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
+    //    edge.get()->addVertex(sin(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterX.get(),                    cos(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
     edge.get()->create(box2d.getWorld());
     edges.push_back(edge);
     
