@@ -52,6 +52,7 @@ public:
     ofParameter<float>radius;
         ofParameter<float>pot_radius;
     float counter;
+        float counterForAlpha;
     float prevElapse;
     ofParameter<string>counterString;
     

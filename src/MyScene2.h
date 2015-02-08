@@ -43,12 +43,14 @@ public:
     ofParameter<int>maxParitcle;
     ofParameter<float>minRadius;
     ofParameter<float>maxRadius;
+    ofParameter<float>radius;
     ofParameter<int>timeOut;
     float counter;
     float prevElapse;
     ofParameter<string>counterString;
     ofParameter<float>minRScale;
         ofParameter<float>maxRScale;
+    float counterForAlpha;
 };
 
 

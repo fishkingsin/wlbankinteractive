@@ -4,17 +4,21 @@
             <R>255</R>
             <G>255</G>
             <B>255</B>
+            <A>255</A>
         </COLOR>
-        <!-- <COLOR>
-            <R>0</R>
-            <G>0</G>
-            <B>0</B>
-        </COLOR> -->
-<!--         <COLOR>
+        <COLOR>
             <R>255</R>
             <G>255</G>
-            <B>0</B>
-        </COLOR> -->
+            <B>255</B>
+            <A>0</A>
+        </COLOR>
+        <COLOR>
+            <R>255</R>
+            <G>255</G>
+            <B>255</B>
+            <A>255</A>
+        </COLOR>
+        
     </CURTAIN_COLORS>
     <SHAPE>
         <WIDTH>1024</WIDTH>

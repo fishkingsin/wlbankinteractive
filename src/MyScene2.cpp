@@ -14,14 +14,14 @@ void MyScene2::setup()
     paraGroup.add(maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
     paraGroup.add(minRadius.set("S2_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S2_MAX_RADIUS",20,1,50));
+    paraGroup.add(radius.set("S2_LOGO_RADIUS",CANVAS_WIDTH*0.5,0,CANVAS_WIDTH));
     paraGroup.add(counterString.set("S2_COUNTER",""));
     paraGroup.add(minRScale.set("S2_MIN_R_SCALE",1,0,2));
     paraGroup.add(maxRScale.set("S2_MAX_R_SCALE",1,0,2));
     paraGroup.add(timeOut.set("S2_TIME_OUT",5,0,20));
     
+    
     counter = 0 ;
-    ofBackground(99);
-    ofSetFrameRate(60);
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
@@ -100,7 +100,7 @@ void MyScene2::update(float dt)
         box2d.update();
         // apply per-particle forces
         for(int i=0; i<circles.size(); i++) {
-            circles[i].get()->addAttractionPoint(ofVec2f(CANVAS_WIDTH*0.5,CANVAS_HEIGHT*0.5), (isStart)?0.5:0);
+            circles[i].get()->addAttractionPoint(ofVec2f(commonAssets->elementCenterX,commonAssets->elementCenterY), (isStart)?0.5:0);
             ofVec2f pos = circles[i].get()->getPosition();
             commonAssets->setParticleVertex(i, pos);
             commonAssets->setParticleAngle(i, (circles[i]->getRotation()/360.0f)*TWO_PI);
@@ -127,7 +127,8 @@ void MyScene2::update(float dt)
         ofClear(0, 0, 0, 0);
         
         commonAssets->shader.begin();
-        commonAssets->shader.setUniform1f("time", counter/timeOut );
+        counterForAlpha = MAX(counterForAlpha,counter/timeOut);
+        commonAssets->shader.setUniform1f("time", counterForAlpha );
         commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
         
@@ -154,11 +155,16 @@ void MyScene2::update(float dt)
 }
 void MyScene2::draw()
 {
+//    ofPushStyle();
+//    ofSetColor(255);
+//    ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+//    ofPopStyle();
     ofPushStyle();
-    ofSetColor(255);
-    ofRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ofSetColor(255,255*((counter*2)/timeOut));
+    //    float radius =  CANVAS_HEIGHT*0.3;
+    ofCircle(commonAssets->elementCenterX.get(),
+             commonAssets->elementCenterY.get(), radius);
     ofPopStyle();
-
 #if DEBUG
     for(int i=0; i<circles.size(); i++) {
         ofFill();
@@ -190,6 +196,10 @@ void MyScene2::sceneWillAppear( ofxScene * fromScreen )
         init();
     prevElapse = ofGetElapsedTimef();
     counter = 0 ;
+    counterForAlpha = 0;
+    isStart = true;
+    prevElapse = ofGetElapsedTimef();
+    counter = 0 ;
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )
@@ -201,9 +211,7 @@ void MyScene2::sceneWillDisappear( ofxScene * toScreen )
 void MyScene2::sceneDidAppear()
 {
     //    printf("ofxScene::sceneDidAppear() :: %d\n", sceneID);
-        isStart = true;
-    prevElapse = ofGetElapsedTimef();
-    counter = 0 ;
+    
 
 }
 

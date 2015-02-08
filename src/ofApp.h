@@ -39,7 +39,9 @@ public:
 
     ofParameter<bool> timePriority;
     ofParameter<float> maxIdleTime;
-    ofParameter<string> currentIdleString;
+//    ofParameter<string> currentIdleString;
+    ofParameter<string> currentSceneIndex;
+    ofParameter<string> currentSceneID;
     float currentIdleTime;
 //    ofxPanel gui;
     ofxControlPanel gui;
@@ -48,7 +50,7 @@ public:
     
     void nextScene();
 //    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_6, SCENE_7,SCENE_8, SCENE_LOGO };
-    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_7 ,SCENE_10};
+    enum Scenes{ SCENE_1 = 0, SCENE_2=1, SCENE_4=2 ,SCENE_LOGO=3};
     ofxSceneManager *		sceneManager;
     MyScene1 *scene1;
     
@@ -67,17 +69,19 @@ public:
     
     void handleToNextScene(toNextScene &tonextscene);
     //handle logo
-    void tweenEnd(int &i);
-    void tweenEasingOutEnd(int &i);
-    ofxEasingLinear easingeLinear;
-    ofxTween alphaTween;
+//    void tweenEnd(int &i);
+//    void tweenEasingOutEnd(int &i);
+//    ofxEasingLinear easingeLinear;
+//    ofxTween alphaTween;
     simpleFileLister videoFileLister;
     void eventsIn(guiCallbackData & data);
     //MySceneLiquidfun sceneLiquidfun;
-    ofVideoPlayer congradVideo;
-    ofDirectory dirVideo;
+
+//    ofDirectory dirVideo;
     ofParameter<bool>toggleMinimize;
     ofParameter<int> windowPositionX;
     ofParameter<int> windowPositionY;
     void enableMinize(bool &b);
+    vector<int>sceneSequence;
+    int sceneIndex;
 };

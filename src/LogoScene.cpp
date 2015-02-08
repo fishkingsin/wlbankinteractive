@@ -14,10 +14,19 @@ void LogoScene::setup(){
 }
 void LogoScene::init(){
         prevElapse = ofGetElapsedTimef();
-    logo = commonAssets->logo;
+//    logo = commonAssets->logo;
+    if(congradVideo.loadMovie( commonAssets->getVideoPath() ))
+    {
+        congradVideo.play();
+        congradVideo.setLoopState(OF_LOOP_PALINDROME);
+    }
     counter = 0;
 }
 void LogoScene::update(float dt){
+    if(congradVideo.isLoaded())
+    {
+        congradVideo.update();
+    }
     if(counter<timeOut.get())
     {
         counter+=ofGetElapsedTimef()-prevElapse;
@@ -31,7 +40,7 @@ void LogoScene::update(float dt){
     prevElapse = ofGetElapsedTimef();
 }
 void LogoScene::draw(){
-    logo.draw(0,0);
+    congradVideo.draw(0,0);
 }
 void LogoScene::keyPressed(int key){
 }

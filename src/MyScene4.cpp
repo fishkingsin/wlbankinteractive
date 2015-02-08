@@ -124,8 +124,9 @@ void MyScene4::update(float dt)
         ofClear(0, 0, 0, 0);
         
         commonAssets->shader.begin();
-        
-        commonAssets->shader.setUniform1f("time", counter/timeOut );
+        counterForAlpha = MAX(counterForAlpha,counter/timeOut);
+        ofLogVerbose()<<"counterForAlpha"<<counterForAlpha;
+        commonAssets->shader.setUniform1f("time", counterForAlpha );
         commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
         
@@ -208,6 +209,7 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
     
     commonAssets->reset();
     counter = 0;
+    counterForAlpha = 0;
     prevElapse = ofGetElapsedTimef();
     init();
     isStart = true;

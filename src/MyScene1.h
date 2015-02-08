@@ -15,7 +15,6 @@
 
 #include "CustomParticle.h"
 #include "CommonAssets.h"
-#include "ofxTween.h"
 
 class MyScene1 : public BaseScene{
 public:
@@ -70,8 +69,8 @@ public:
     ofParameter<float >bounce;
     ofParameter<float >fiction;
     ofParameter<float >minAlpha;
-    ofParameter<bool>bAuto;
-    vector<ofxTween> tweens;
+    
+
 };
 
 #endif

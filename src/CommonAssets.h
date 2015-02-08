@@ -118,6 +118,8 @@ public:
     ofParameter<int> blockRectW;
     ofParameter<int> blockRectH;
 
+    ofDirectory dirVideo;
+    string getVideoPath();
 };
 
 

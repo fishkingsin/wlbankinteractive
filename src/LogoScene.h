@@ -36,6 +36,6 @@ public:
     ofParameter<string>counterString;
     float prevElapse;
 private:
-    ofImage logo;
+    ofVideoPlayer congradVideo;
 };
 #endif /* defined(__wlbankinteractive__LogoScene__) */

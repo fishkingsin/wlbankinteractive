@@ -255,6 +255,7 @@ void CommonAssets::setup()
 #endif
     bgDir.listDir("backgrounds/");
     logoDir.listDir("logos/");
+    dirVideo.listDir("congrad_movies");
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     
@@ -418,7 +419,8 @@ string CommonAssets::getBGPath()
 {
     if(bgDir.getFiles().size()>0)
     {
-        imageIndex = (int)ofRandom(0,bgDir.getFiles().size());
+        imageIndex++;
+        imageIndex%=bgDir.getFiles().size();
         return bgDir.getPath(imageIndex);
     }
     else
@@ -427,7 +429,19 @@ string CommonAssets::getBGPath()
         return "";
     }
 }
-
+string CommonAssets::getVideoPath()
+{
+    if(imageIndex < dirVideo.size())
+    {
+        //        imageIndex = (int)ofRandom(0,logoDir.getFiles().size());
+        return dirVideo.getPath(imageIndex);
+    }
+    else
+    {
+        ofLogError() << "could not load image";
+        return "";
+    }
+}
 string CommonAssets::getLogoPath()
 {
     if(imageIndex < logoDir.size())

@@ -16,6 +16,7 @@ typedef struct {
 class BaseScene : public ofxScene
 {
     public :
+    virtual void createParticle(float x , float y , ofColor color){};
     ofParameterGroup paraGroup;
     ofEvent<toNextScene>toNextSceneEvent;
 

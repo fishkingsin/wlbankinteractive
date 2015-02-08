@@ -7,7 +7,7 @@
 //
 
 #include "CustomParticle.h"
-void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int size) {
+void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int size , float _startSize) {
     
     // we are using a Data pointer because
     // box2d needs to have a pointer not
@@ -22,11 +22,13 @@ void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int siz
     theData->r = ofRandom(size,size*2);
     theData->color.a = ofMap(theData->r,size,size*2,255,10,true);
     targetR = size;
+    tween.setParameters(0,easing,ofxTween::easeOut,_startSize, size,2000,0);
+    ofAddListener(tween.end_E, this, &CustomParticle::tweenEnd);
 }
 void CustomParticle::update()
 {
-    float r = getRadius()+((targetR-getRadius())*0.01);
-    setRadius(r);
+//    float r = getRadius()+((targetR-getRadius())*0.01);
+    setRadius(tween.update());
 }
 void CustomParticle::draw() {
     Data* theData = (Data*)getData();
@@ -50,4 +52,12 @@ void CustomParticle::draw() {
 }
 bool CustomParticle::shouldRemoveOffScreen(ofPtr<CustomParticle> shape) {
     return !ofRectangle(-100, -100, ofGetWidth()+100, ofGetHeight()+100).inside(shape.get()->getPosition());
+}
+void CustomParticle::tweenEnd(int &i)
+{
+    //        particle->setPhysics(_density,_bounce,_fiction);
+    //        particle->addForce(ofVec2f(0,-1), 1);
+    //        scene->createParticle(this->x , this->y, ofColor::white);
+    ofLogVerbose("tweenEnd") << i;
+    
 }

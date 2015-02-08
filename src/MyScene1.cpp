@@ -25,7 +25,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(minAlpha.set("MIN_ALPHA", 0, 0, 255));
 
     box2d.init();
-    box2d.setGravity(0, -5);
+    box2d.setGravity(0, -2);
     //    box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     box2d.setFPS(60.0);
     box2d.registerGrabbing();
@@ -107,6 +107,7 @@ void MyScene1::draw(){ //draw scene 1 here
     ofPopStyle();
     ofPushStyle();
     commonAssets->draw();
+
     //    for(int i=0; i<circles.size(); i++) {
     //        ofFill();
     //        ofSetHexColor(0xf6c738);
@@ -140,7 +141,7 @@ void MyScene1::keyPressed(int key)
         case 'b':
         {
             
-            createParticle( CANVAS_WIDTH*0.5+ofRandom(-50, 50), CANVAS_HEIGHT*0.5+ofRandom(-50, 50), ofColor::white);
+            createParticle( CANVAS_WIDTH*0.5+ofRandom(-CANVAS_WIDTH*0.5, CANVAS_WIDTH*0.5), CANVAS_HEIGHT*0.8+ofRandom(-50, 50), ofColor::white);
         }
             break;
         case 's':
@@ -160,7 +161,7 @@ void MyScene1::keyPressed(int key)
 void MyScene1::mousePressed( int x, int y, int button ){
     if(ofRectangle(0,0,CANVAS_WIDTH,CANVAS_HEIGHT).inside(x, y))
     {
-    createParticle( x,y, ofColor::white);
+        createParticle(x, y, ofColor::white);
     }
 }
 
@@ -199,9 +200,8 @@ void MyScene1::eventsIn(customeOSCData & data)
 //        createParticle(currPoint.x-(distance*offSetPower), currPoint.y , ofColor::white);
         prevPoint = currPoint ;
     }
-    //    if(circles.size()<maxParticle.get())
-    //    {
     
+
     //        circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
     //        float r = ofRandom(4, 10);
     //
@@ -216,24 +216,27 @@ void MyScene1::eventsIn(customeOSCData & data)
 
 void MyScene1::createParticle(float _x , float _y , ofColor color)
 {
+
     float x = MIN(MAX(0,_x),CANVAS_WIDTH);
     float y = MIN(MAX(0,_y),CANVAS_HEIGHT);
     circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
     float r = ofRandom(minRadius, maxRadius);
-    circles.back().get()->addForce(ofVec2f(0,10), 10);
-    circles.back().get()->setPhysics(density,bounce,fiction);
+//    circles.back().get()->addForce(ofVec2f(0,10), 10);
+    circles.back().get()->setPhysics(density+r,bounce,fiction);
     circles.back().get()->setup(box2d.getWorld(),x,y, r*0.1);
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
     ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, ofMap(r, minRadius, maxRadius, 255,minAlpha));
     
-    circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
+    circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r,5);
     circles.back().get()->index = circles.size()-1;
     commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
     commonAssets->setParticleColor(circles.size()-1, c);
     commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius(),0,0));
     
     commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
+
 }
+
 
 void MyScene1::setupEdge()
 {
@@ -260,3 +263,4 @@ void MyScene1::setupEdge()
     edge.get()->create(box2d.getWorld());
     edges.push_back(edge);
 }
+

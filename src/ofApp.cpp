@@ -2,14 +2,27 @@
 #define PORT 12345
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofSetFrameRate(60);
+    ofSetFrameRate(60);
     info.version = (char*)glGetString(GL_VERSION);
     info.vendor = (char*)glGetString(GL_VENDOR);
     info.renderer = (char*)glGetString(GL_RENDERER);
     info.bVboSupported = false;
     info.bShadersSupported = false;
     info.bPointSpritesSupported = false;
-    dirVideo.listDir("congrad_movies");
+    
+    sceneSequence.push_back(SCENE_1);
+    sceneSequence.push_back(SCENE_2);
+    sceneSequence.push_back(SCENE_LOGO);
+    sceneSequence.push_back(SCENE_1);
+    sceneSequence.push_back(SCENE_2);
+    sceneSequence.push_back(SCENE_LOGO);
+    sceneSequence.push_back(SCENE_1);
+    sceneSequence.push_back(SCENE_4);
+    sceneSequence.push_back(SCENE_LOGO);
+    sceneSequence.push_back(SCENE_1);
+    sceneSequence.push_back(SCENE_4);
+    sceneSequence.push_back(SCENE_LOGO);
+    sceneIndex = 1;
     if(glewIsSupported("GL_VERSION_1_4  GL_ARB_point_sprite")) {
         info.bPointSpritesSupported = true;
     }
@@ -41,7 +54,7 @@ void ofApp::setup(){
             {
                 if(settings.pushTag("COLOR",i))
                 {
-                    ofColor c(settings.getValue("R", 255),settings.getValue("G", 255),settings.getValue("B", 255));
+                    ofColor c(settings.getValue("R", 255),settings.getValue("G", 255),settings.getValue("B", 255),settings.getValue("A", 0));
                     curtainColors.push_back(c);
                     settings.popTag();
                     
@@ -85,15 +98,15 @@ void ofApp::setup(){
     scene1 = new MyScene1();
     scene1->commonAssets = &commonAssets;
     sceneManager->addScene(scene1 , SCENE_1);
-
+    
     sceneManager->setCurtainTimes(10,10,10);
     ofAddListener(trackerEvent, scene1, &MyScene1::eventsIn);
     ofAddListener(scene1->toNextSceneEvent, this, &ofApp::handleToNextScene);
     
-    //    MyScene2* scene2 = new MyScene2();
-    //    scene2->commonAssets = &commonAssets;
-    //    sceneManager->addScene(scene2 , SCENE_2);
-    //    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
+    MyScene2* scene2 = new MyScene2();
+    scene2->commonAssets = &commonAssets;
+    sceneManager->addScene(scene2 , SCENE_2);
+    ofAddListener(scene2->toNextSceneEvent, this, &ofApp::handleToNextScene);
     //
     //    MyScene3* scene3 = new MyScene3();
     //    scene3->commonAssets = &commonAssets;
@@ -121,11 +134,11 @@ void ofApp::setup(){
      sceneManager->addScene(scene8 , SCENE_8);
      ofAddListener(scene8->toNextSceneEvent, this, &ofApp::handleToNextScene);
      
-     LogoScene* logoScene = new LogoScene();
-     logoScene->commonAssets = &commonAssets;
-     sceneManager->addScene(logoScene , SCENE_LOGO);
-     ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);*/
-    
+     */
+    LogoScene* logoScene = new LogoScene();
+    logoScene->commonAssets = &commonAssets;
+    sceneManager->addScene(logoScene , SCENE_LOGO);
+    ofAddListener(logoScene->toNextSceneEvent, this, &ofApp::handleToNextScene);
     //    MySceneLiquidfun *sceneLiquidfun = new MySceneLiquidfun();
     //    sceneLiquidfun->commonAssets = &commonAssets;
     //    sceneManager->addScene(sceneLiquidfun , SCENE_10);
@@ -160,7 +173,10 @@ void ofApp::setup(){
     gui.addToggle(bLogFile.set("ENABLE_LOG_TO_FILE",false));
     bLogFile.addListener( this, &ofApp::enableLogToFile);
     gui.addLabel(fps.set("fps",""));
-    gui.addLabel(currentIdleString.set("Idle",""));
+    gui.addLabel(currentSceneIndex.set("Scene Index",""));
+    gui.addLabel(currentSceneID.set("Scene ID",""));
+    
+    //    gui.addLabel(currentIdleString.set("Idle",""));
     gui.addLabel("USAGE:\n\
                  1-5 :changing Scene\n\
                  right arrow:next scene\n\
@@ -173,7 +189,7 @@ void ofApp::setup(){
     gui.setWhichColumn(1);
     
     //    gui.add( Mode.set("Mode",0,0,3));
-
+    
     gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
     gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     gui.setWhichColumn(1);
@@ -196,10 +212,10 @@ void ofApp::setup(){
     
     gui.addGroup(scene1->paraGroup);
     //scene2
-    //    gui.setWhichPanel(2);
-    //    gui.setWhichColumn(0);
-    //    gui.addGroup(scene2->paraGroup);
-    //
+    gui.setWhichPanel(2);
+    gui.setWhichColumn(0);
+    gui.addGroup(scene2->paraGroup);
+    
     //    gui.setWhichPanel(3);
     //    gui.setWhichColumn(0);
     //    gui.addGroup(scene3->paraGroup);;
@@ -217,13 +233,13 @@ void ofApp::setup(){
     //    gui.setWhichColumn(0);
     //    gui.addGroup(scene7->paraGroup);
     
-    /*gui.setWhichPanel(8);
-     gui.setWhichColumn(0);
-     gui.addGroup(scene8->paraGroup);
-     gui.setWhichPanel(9);
-     gui.setWhichColumn(0);
-     gui.addGroup(logoScene->paraGroup);
-     */
+    //    gui.setWhichPanel(8);
+    //     gui.setWhichColumn(0);
+    //     gui.addGroup(scene8->paraGroup);
+    gui.setWhichPanel(9);
+    gui.setWhichColumn(0);
+    gui.addGroup(logoScene->paraGroup);
+    
     //    gui.setWhichPanel(10);
     //    gui.setWhichColumn(0);
     //    gui.addGroup(sceneLiquidfun->paraGroup);
@@ -251,8 +267,8 @@ void ofApp::setup(){
     gui.loadSettings("settings.xml");
     gui.enableEvents();
     ofAddListener(gui.guiEvent, this, &ofApp::eventsIn);
-    sceneManager->setDrawDebug(toggleDrawGUI);
-    ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+    
+    //    ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
     
     
 }
@@ -291,10 +307,10 @@ void ofApp::eventsIn(guiCallbackData & data){
 void ofApp::update(){
     
     status = "App running at " + ofToString(ofGetFrameRate());
-    if(congradVideo.isLoaded())
-    {
-        congradVideo.update();
-    }
+    //    if(congradVideo.isLoaded())
+    //    {
+    //        congradVideo.update();
+    //    }
     player.update();
     gui.update();
     // check for waiting messages
@@ -317,7 +333,7 @@ void ofApp::update(){
     if(timePriority)
     {
         int idle = ofGetElapsedTimef() - currentIdleTime;
-        currentIdleString = ofToString(idle);
+        //        currentIdleString = ofToString(idle);
         if(idle>(maxIdleTime*60))
         {
             currentIdleTime = ofGetElapsedTimef();
@@ -340,12 +356,9 @@ void ofApp::draw(){
     
     sceneManager->draw();
     
-    ofPushStyle();
-    ofSetColor(255,alphaTween.update());
-    congradVideo.draw(0,0);
-    //    commonAssets.player.draw(0,0);
-    //    commonAssets.logo.draw(0,0);
-    ofPopStyle();
+    //    ofPushStyle();
+    //    ofSetColor(255,alphaTween.update());
+    //    ofPopStyle();
     if(toggleDrawGUI)
     {
         ofPushStyle();
@@ -383,13 +396,13 @@ void ofApp::keyPressed(int key){
             sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b , 0);
             if (key == '1') sceneManager->goToScene(SCENE_1, true); /* true >> regardless of curtain state (so u can change state while curtain is moving)*/
             if (key == '2') sceneManager->goToScene(SCENE_2);
-            if (key == '3') sceneManager->goToScene(SCENE_3);
+            //            if (key == '3') sceneManager->goToScene(SCENE_3);
             if (key == '4') sceneManager->goToScene(SCENE_4);
             //            if (key == '6') sceneManager->goToScene(SCENE_6);
-            if (key == '7') sceneManager->goToScene(SCENE_7);
+            //            if (key == '7') sceneManager->goToScene(SCENE_7);
             //            if (key == '8') sceneManager->goToScene(SCENE_8);
-            //            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
-            if(key == '0')sceneManager->goToScene(SCENE_10);
+            if (key == '9') sceneManager->goToScene(SCENE_LOGO);
+            //            if(key == '0')sceneManager->goToScene(SCENE_10);
             
         }
             break;
@@ -404,7 +417,7 @@ void ofApp::keyPressed(int key){
             break;
         case  's':
             gui.saveSettings();
-        break;
+            break;
         case OF_KEY_RIGHT:
             nextScene();
             break;
@@ -472,106 +485,83 @@ void ofApp::toggleDebug(bool& _value)
 }
 void ofApp::nextScene()
 {
-    int sceneID = sceneManager->getCurrentSceneID();
-    ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
-    if(curtainColors.size()>0)
-    {
-        cColor = curtainColors[int(ofRandom(curtainColors.size()))];
-    }
-    sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b , 0);
-    
-    switch(sceneID)
-    {
-        case SCENE_1:
-            //go to next scene 2-4
+    if (!sceneManager->isTransitioning()) {
+        
+        
+        int sceneID = sceneManager->getCurrentSceneID();
+        ofColor cColor = ofColor::fromHsb(ofRandom(360), 255, 255);
+        
+        if(curtainColors.size()>0)
         {
-            commonAssets.nextImage();
-            
-            int rand=SCENE_4;
-            
-            ofLogVerbose () << " rand: " << rand;
-            Scenes scene = (Scenes)rand;
-            ofLogVerbose () << " scene: " << scene;
-            sceneManager->goToScene(scene);
+            int curtainIndex = sceneIndex%curtainColors.size();
+            cColor = curtainColors[curtainIndex];
         }
-            break;
-        case SCENE_2:
-        case SCENE_3:
-        case SCENE_4:
-        case SCENE_7:
-            //        case SCENE_6:
-            //        case SCENE_8:
-            
-            sceneManager->goToScene(SCENE_1);
-            break;
-            //        case SCENE_LOGO:
-            //            //loop back
-            //            sceneManager->goToScene(SCENE_1);
-            //            break;
-            
+        ofLogNotice()<<"curtainColors "<< cColor ;
+        sceneManager->setCurtainColor(cColor.r,cColor.g,cColor.b , cColor.a);
+        
+        switch(sceneID)
+        {
+            case SCENE_1:
+                //go to next scene 2-4
+            {
+                commonAssets.nextImage();
+                
+                
+            }
+                break;
+                
+        }
+        
+        int nextSceneID = sceneSequence[sceneIndex];
+        currentSceneIndex = ofToString(sceneIndex);
+        currentSceneID = ofToString(nextSceneID);
+        sceneManager->goToScene(nextSceneID);
+        sceneIndex++;
+        //    printf("sceneIndex %i",sceneIndex);
+        sceneIndex%=sceneSequence.size();
     }
+    
 }
 void ofApp::handleToNextScene(toNextScene &tonextscene)
 {
     
     if(commonAssets.bAuto)
     {
-        if(tonextscene.sceneID==1)
-        {
-            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-            nextScene();
-            
-        }
-        else{
-            
-            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-            ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-            if(congradVideo.loadMovie( dirVideo.getPath(commonAssets.imageIndex) ))
-            {
-                congradVideo.play();
-                congradVideo.setLoopState(OF_LOOP_PALINDROME);
-            }
-            nextScene();
-            alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,0,255,1000,0);
-            
-            ofAddListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-        }
-        
+        nextScene();
     }
     else{
         ofLogWarning() << "Auto mode off has scene incoming";
     }
 }
 
-void ofApp::tweenEnd(int &i)
-{
-    if(commonAssets.bAuto)
-    {
-        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-        alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,congradVideo.getDuration()*1000);
-        ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-    }
-    else{
-        ofLogWarning() << "Auto mode off has scene incoming";
-    }
-}
-
-void ofApp::tweenEasingOutEnd(int &i)
-{
-    if(commonAssets.bAuto)
-    {
-        
-        congradVideo.stop();
-        
-        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-        
-    }
-    else{
-        ofLogWarning() << "Auto mode off has scene incoming";
-    }
-    
-}
+//void ofApp::tweenEnd(int &i)
+//{
+//    if(commonAssets.bAuto)
+//    {
+//        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
+////        alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,congradVideo.getDuration()*1000);
+//        ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
+//    }
+//    else{
+//        ofLogWarning() << "Auto mode off has scene incoming";
+//    }
+//}
+//
+//void ofApp::tweenEasingOutEnd(int &i)
+//{
+//    if(commonAssets.bAuto)
+//    {
+//
+////        congradVideo.stop();
+//
+//        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
+//        
+//    }
+//    else{
+//        ofLogWarning() << "Auto mode off has scene incoming";
+//    }
+//    
+//}
 void ofApp::enableLogToFile(bool &b)
 {
     ofLogToFile(ofGetTimestampString()+".txt", b);
