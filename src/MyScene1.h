@@ -69,6 +69,8 @@ public:
     ofParameter<float >bounce;
     ofParameter<float >fiction;
     ofParameter<float >minAlpha;
+    ofParameter<float> maxInputY;
+    ofParameter<float> minInputY;
     
 
 };
