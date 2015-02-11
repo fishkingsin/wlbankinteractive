@@ -29,6 +29,7 @@ public:
     void mousePressed( int x, int y, int button );
     //scene notifications
     void sceneWillAppear( ofxScene * fromScreen );
+    void sceneDidAppear();
     //scene notifications
     void sceneWillDisappear( ofxScene * toScreen );
     
@@ -72,7 +73,8 @@ public:
     ofParameter<float> maxInputY;
     ofParameter<float> minInputY;
     
-
+    ofImage image;
+    bool isStart;
 };
 
 #endif

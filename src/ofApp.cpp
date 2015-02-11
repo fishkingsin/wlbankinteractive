@@ -307,9 +307,9 @@ void ofApp::eventsIn(guiCallbackData & data){
 void ofApp::update(){
     
     status = "App running at " + ofToString(ofGetFrameRate());
-    //    if(congradVideo.isLoaded())
+    //    if(messageVideo.isLoaded())
     //    {
-    //        congradVideo.update();
+    //        messageVideo.update();
     //    }
     player.update();
     gui.update();
@@ -539,7 +539,7 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
 //    if(commonAssets.bAuto)
 //    {
 //        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-////        alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,congradVideo.getDuration()*1000);
+////        alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,messageVideo.getDuration()*1000);
 //        ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
 //    }
 //    else{
@@ -552,7 +552,7 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
 //    if(commonAssets.bAuto)
 //    {
 //
-////        congradVideo.stop();
+////        messageVideo.stop();
 //
 //        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
 //        

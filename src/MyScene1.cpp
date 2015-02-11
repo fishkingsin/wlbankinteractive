@@ -12,13 +12,14 @@ MyScene1::MyScene1()
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
+    image.loadImage("scene1/question-01.png");
     paraGroup.setName("Scene1");
     paraGroup.add(numParticle.set("PARTICLE_SIZE",""));
     paraGroup.add(maxParticle.set("S1_MAX_PARTICLE",100,1,1000));
     paraGroup.add(minRadius.set("S1_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S1_MAX_RADIUS",20,1,50));
     paraGroup.add(minInputY.set("S1_MIN_INPUT_Y",CANVAS_HEIGHT*0.9,1,CANVAS_HEIGHT));
-    paraGroup.add(minInputY.set("S1_MAX_INOUT_Y",CANVAS_HEIGHT*0.95,1,CANVAS_HEIGHT));
+    paraGroup.add(maxInputY.set("S1_MAX_INOUT_Y",CANVAS_HEIGHT*0.95,1,CANVAS_HEIGHT));
     paraGroup.add(minDis.set("MIN_DISTANCE",0,0,100));
     paraGroup.add(    offSetPower.set("OFFSET_POWER",0,0,20));
     paraGroup.add(density.set("DENSITY",0,0,100));
@@ -107,6 +108,8 @@ void MyScene1::update(float dt){ //update scene 1 here
 void MyScene1::draw(){ //draw scene 1 here
     
     ofPopStyle();
+    ofSetColor(255);
+    image.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     ofPushStyle();
     commonAssets->draw();
 
@@ -172,12 +175,16 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
     commonAssets->reset();
     isFireEvent = false;
     setupEdge();
+    isStart = false;
 };
 
-
+void MyScene1::sceneDidAppear() {
+    isStart = true;
+}
 //scene notifications
 void MyScene1::sceneWillDisappear( ofxScene * toScreen ){
     commonAssets->reset();
+    
 }
 void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
 {
@@ -186,34 +193,25 @@ void MyScene1::sceneDidDisappear( ofxScene * fromScreen )
         circles.erase(circles.begin());
         
     }
+    isStart = false;
 }
 
 void MyScene1::eventsIn(customeOSCData & data)
 {
-    if(!isFireEvent)
+    if(!isFireEvent && isStart)
     {
-    currPoint.set(ofPoint(data.pos.x*CANVAS_WIDTH, ofMap(data.pos.y,0,1,minInputY,maxInputY)));
-    float distance = prevPoint.distance(currPoint);
-    
-    if(abs(distance)>minDis)
-    {
-
-        createParticle(currPoint.x, currPoint.y , ofColor::white);
-//        createParticle(currPoint.x-(distance*offSetPower), currPoint.y , ofColor::white);
-        prevPoint = currPoint ;
+        currPoint.set(ofPoint(data.pos.x*CANVAS_WIDTH, ofMap(data.pos.y,0,1,minInputY,maxInputY)));
+        float distance = prevPoint.distance(currPoint);
+        
+        if(abs(distance)>minDis)
+        {
+            
+            createParticle(currPoint.x, currPoint.y , ofColor::white);
+            
+            prevPoint = currPoint ;
+        }
     }
-    
 
-    //        circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-    //        float r = ofRandom(4, 10);
-    //
-    //
-    //        circles.back().get()->setPhysics(3.0, 0.53, 0.1);
-    //        circles.back().get()->setup(box2d.getWorld(), data.pos.x*CANVAS_WIDTH, data.pos.y*CANVAS_HEIGHT, r);
-    //        ofColor c = ofColor::fromHsb(data.c.getHue(),MAX(data.c.getSaturation() ,200), MAX(data.c.getBrightness(),200));
-    //        circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r);
-    //    }
-    }
 }
 
 void MyScene1::createParticle(float _x , float _y , ofColor color)

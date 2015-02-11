@@ -9,23 +9,24 @@
 #include "LogoScene.h"
 void LogoScene::setup(){
     paraGroup.setName("LogoScene");
-    paraGroup.add(timeOut.set("SLOGO_TIME_OUT",5,0,20));
+    paraGroup.add(timeOut.set("SLOGO_TIME_OUT",5,0,1000));
     paraGroup.add(counterString.set("SLOGO_COUNTER",""));
 }
 void LogoScene::init(){
         prevElapse = ofGetElapsedTimef();
 //    logo = commonAssets->logo;
-    if(congradVideo.loadMovie( commonAssets->getVideoPath() ))
+    if(messageVideo.loadMovie( commonAssets->getVideoPath() ))
     {
-        congradVideo.play();
-        congradVideo.setLoopState(OF_LOOP_PALINDROME);
+        messageVideo.play();
+        messageVideo.setLoopState(OF_LOOP_PALINDROME);
+//        timeOut = messageVideo.getDuration();
     }
     counter = 0;
 }
 void LogoScene::update(float dt){
-    if(congradVideo.isLoaded())
+    if(messageVideo.isLoaded())
     {
-        congradVideo.update();
+        messageVideo.update();
     }
     if(counter<timeOut.get())
     {
@@ -40,7 +41,7 @@ void LogoScene::update(float dt){
     prevElapse = ofGetElapsedTimef();
 }
 void LogoScene::draw(){
-    congradVideo.draw(0,0);
+    messageVideo.draw(0,0);
 }
 void LogoScene::keyPressed(int key){
 }
@@ -56,4 +57,5 @@ void LogoScene::sceneWillDisappear( ofxScene * toScreen ){
 void LogoScene::sceneDidAppear(){
 }
 void LogoScene::sceneDidDisappear(ofxScene *fromScreen){
+    messageVideo.close();
 }

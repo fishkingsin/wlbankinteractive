@@ -255,7 +255,7 @@ void CommonAssets::setup()
 #endif
     bgDir.listDir("backgrounds/");
     logoDir.listDir("logos/");
-    dirVideo.listDir("congrad_movies");
+    dirVideo.listDir("message_movies");
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     

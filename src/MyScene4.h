@@ -15,7 +15,7 @@
 
 #include "Constants.h"
 #include "CommonAssets.h"
-
+#include "ofxTween.h"
 class MyScene4 : public BaseScene{
 public:
     
@@ -52,7 +52,8 @@ public:
     ofParameter<float>radius;
         ofParameter<float>pot_radius;
     float counter;
-        float counterForAlpha;
+        ofxEasingLinear linear;
+    ofxTween  counterForAlpha;
     float prevElapse;
     ofParameter<string>counterString;
     

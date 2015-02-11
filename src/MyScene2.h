@@ -14,7 +14,7 @@
 #include "BaseScene.h"
 #include "Constants.h"
 #include "CommonAssets.h"
-
+#include "ofxTween.h"
 class CustomParticle;
 class MyScene2 : public BaseScene{
 public:
@@ -50,7 +50,8 @@ public:
     ofParameter<string>counterString;
     ofParameter<float>minRScale;
         ofParameter<float>maxRScale;
-    float counterForAlpha;
+    ofxTween counterForAlpha;
+    ofxEasingLinear linear;
 };
 
 

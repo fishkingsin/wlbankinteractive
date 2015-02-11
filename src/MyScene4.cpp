@@ -124,9 +124,9 @@ void MyScene4::update(float dt)
         ofClear(0, 0, 0, 0);
         
         commonAssets->shader.begin();
-        counterForAlpha = MAX(counterForAlpha,counter/timeOut);
-        ofLogVerbose()<<"counterForAlpha"<<counterForAlpha;
-        commonAssets->shader.setUniform1f("time", counterForAlpha );
+//        counterForAlpha = MAX(counterForAlpha,counter/timeOut);
+//        ofLogVerbose()<<"counterForAlpha"<<counterForAlpha;
+//        commonAssets->shader.setUniform1f("time", counterForAlpha.update() );
         commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
         
@@ -153,7 +153,7 @@ void MyScene4::update(float dt)
 void MyScene4::draw()
 {
     ofPushStyle();
-    ofSetColor(255,255*((counter*2)/timeOut));
+    ofSetColor(255,counterForAlpha.update());
     //    float radius =  CANVAS_HEIGHT*0.3;
     ofCircle(commonAssets->elementCenterX.get(),
              commonAssets->elementCenterY.get(), radius);
@@ -209,10 +209,12 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
     
     commonAssets->reset();
     counter = 0;
-    counterForAlpha = 0;
+//    counterForAlpha = 0;
     prevElapse = ofGetElapsedTimef();
     init();
     isStart = true;
+
+    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,0);
 }
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
