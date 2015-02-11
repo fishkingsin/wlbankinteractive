@@ -20,6 +20,8 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(maxRadius.set("S1_MAX_RADIUS",20,1,50));
     paraGroup.add(minInputY.set("S1_MIN_INPUT_Y",CANVAS_HEIGHT*0.9,1,CANVAS_HEIGHT));
     paraGroup.add(maxInputY.set("S1_MAX_INOUT_Y",CANVAS_HEIGHT*0.95,1,CANVAS_HEIGHT));
+    paraGroup.add(minInputX.set("S1_MIN_INPUT_X",CANVAS_WIDTH*0.2,1,CANVAS_WIDTH));
+    paraGroup.add(maxInputX.set("S1_MAX_INOUT_X",CANVAS_WIDTH,1,CANVAS_WIDTH));
     paraGroup.add(minDis.set("MIN_DISTANCE",0,0,100));
     paraGroup.add(    offSetPower.set("OFFSET_POWER",0,0,20));
     paraGroup.add(density.set("DENSITY",0,0,100));
@@ -200,7 +202,7 @@ void MyScene1::eventsIn(customeOSCData & data)
 {
     if(!isFireEvent && isStart)
     {
-        currPoint.set(ofPoint(data.pos.x*CANVAS_WIDTH, ofMap(data.pos.y,0,1,minInputY,maxInputY)));
+        currPoint.set(ofPoint(ofMap(data.pos.x,0,1,minInputX,maxInputX), ofMap(data.pos.y,0,1,minInputY,maxInputY)));
         float distance = prevPoint.distance(currPoint);
         
         if(abs(distance)>minDis)

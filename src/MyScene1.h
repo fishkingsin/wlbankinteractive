@@ -72,6 +72,8 @@ public:
     ofParameter<float >minAlpha;
     ofParameter<float> maxInputY;
     ofParameter<float> minInputY;
+    ofParameter<float> maxInputX;
+    ofParameter<float> minInputX;
     
     ofImage image;
     bool isStart;
