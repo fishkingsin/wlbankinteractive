@@ -2,11 +2,12 @@ ofxGui
 ofxNetwork
 ofxOpenCv
 ofxOsc
+ofxSvg
 ofxXmlSettings
 ofxAnimatable
-ofxAnimation
 ofxAutoReloadedShader
 ofxControlPanel
+ofxCv
 ofxDelaunay
 ofxLiquidFun
 ofxSceneManager
