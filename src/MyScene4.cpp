@@ -44,15 +44,15 @@ void MyScene4::init()
     
     commonAssets->goldenRatioBank.clear();
     int initNum=1;
-    float initSize = commonAssets->maxRadius;
+    float initSize = maxRadius;
     for(int i = 0 ; i < commonAssets->kParticles ; i++)
     {
         initSize = 1 / kGoldenRatio *initSize ;
-        if(initSize<commonAssets->minRadius)
+        if(initSize<minRadius)
         {
             break;
         }
-        initNum = commonAssets->maxRadius/initSize;
+        initNum = maxRadius/initSize;
         for(int j = 0 ; j < initNum ;j++)
         {
             commonAssets->goldenRatioBank.push_back(initSize);
@@ -154,9 +154,10 @@ void MyScene4::draw()
 {
     ofPushStyle();
     ofSetColor(255,counterForAlpha.update());
-    //    float radius =  CANVAS_HEIGHT*0.3;
-    ofCircle(commonAssets->elementCenterX.get(),
-             commonAssets->elementCenterY.get(), radius);
+    svg.draw();
+//    //    float radius =  CANVAS_HEIGHT*0.3;
+//    ofCircle(commonAssets->elementCenterX.get(),
+//             commonAssets->elementCenterY.get(), radius);
     ofPopStyle();
     commonAssets->fbo.draw(0, 0);
     if(debugDraw.get())
@@ -239,16 +240,36 @@ void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 void MyScene4::setupEdge()
 {
     int density = 10;
-    //    float radius =  CANVAS_HEIGHT*0.3;
+
+    //start shape
     ofPtr <ofxBox2dEdge> edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);
     //    edge.get()->addVertex(sin(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterX.get(),cos(TWO_PI*(-90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
-    for (int i=-180+density+25; i<180-25; i+=density) {
-        float x = sin(TWO_PI*(i/360.0f))*pot_radius+commonAssets->elementCenterX.get();
-        float y = cos(TWO_PI*(i/360.0f))*pot_radius+commonAssets->elementCenterY.get();
-        edge.get()->addVertex(x, y);
-        
-        
+//    for (int i=-180+density+25; i<180-25; i+=density) {
+//        float x = sin(TWO_PI*(i/360.0f))*pot_radius+commonAssets->elementCenterX.get();
+//        float y = cos(TWO_PI*(i/360.0f))*pot_radius+commonAssets->elementCenterY.get();
+//        edge.get()->addVertex(x, y);
+//        
+//        
+//    }
+    
+    //custom shape pot
+
+    svg.load("pot.svg");
+    for (int i = 0; i < svg.getNumPath(); i++){
+        ofPath p = svg.getPathAt(i);
+        // svg defaults to non zero winding which doesn't look so good as contours
+        p.setPolyWindingMode(OF_POLY_WINDING_ODD);
+        vector<ofPolyline>& lines = p.getOutline();
+        for(int j=0;j<(int)lines.size();j++){
+            vector<ofVec3f>points  = lines[j].getVertices();
+            for(int k = 0 ; k < points.size() ; k++ )
+            {
+                edge.get()->addVertex(points[k]);
+            }
+        }
     }
+
+    //end shape
     //    edge.get()->addVertex(sin(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterX.get(),                    cos(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
     edge.get()->create(box2d.getWorld());
     edges.push_back(edge);

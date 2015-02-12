@@ -19,6 +19,11 @@
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
 		18D50A5E9090B08B5C379765 /* b2PolygonAndCircleContact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F531CAC5B6483B4596C50946 /* b2PolygonAndCircleContact.cpp */; };
 		1A14FD921A778EAE0036C377 /* MySceneLiquidfun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A14FD901A778EAE0036C377 /* MySceneLiquidfun.cpp */; };
+		1A4158A71A8BA44A00866F4D /* ofxSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A41589C1A8BA44A00866F4D /* ofxSvg.cpp */; };
+		1A4158A81A8BA44A00866F4D /* src_colors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A4158A11A8BA44A00866F4D /* src_colors.cpp */; };
+		1A4158A91A8BA44A00866F4D /* svgtiny.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A4158A21A8BA44A00866F4D /* svgtiny.cpp */; };
+		1A4158AA1A8BA44A00866F4D /* svgtiny_gradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A4158A41A8BA44A00866F4D /* svgtiny_gradient.cpp */; };
+		1A4158AB1A8BA44A00866F4D /* svgtiny_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A4158A61A8BA44A00866F4D /* svgtiny_list.cpp */; };
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */; };
 		2023EF517ED2D8B397511D4B /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9076967F8C54A04362C04AA /* Helpers.cpp */; };
@@ -278,6 +283,14 @@
 		199901E3C0391D3CA940B595 /* b2PolygonContact.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2PolygonContact.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Contacts/b2PolygonContact.cpp; sourceTree = SOURCE_ROOT; };
 		1A14FD901A778EAE0036C377 /* MySceneLiquidfun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MySceneLiquidfun.cpp; sourceTree = "<group>"; };
 		1A14FD911A778EAE0036C377 /* MySceneLiquidfun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySceneLiquidfun.h; sourceTree = "<group>"; };
+		1A41589C1A8BA44A00866F4D /* ofxSvg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSvg.cpp; sourceTree = "<group>"; };
+		1A41589D1A8BA44A00866F4D /* ofxSvg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSvg.h; sourceTree = "<group>"; };
+		1A4158A11A8BA44A00866F4D /* src_colors.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = src_colors.cpp; sourceTree = "<group>"; };
+		1A4158A21A8BA44A00866F4D /* svgtiny.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny.cpp; sourceTree = "<group>"; };
+		1A4158A31A8BA44A00866F4D /* svgtiny.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = svgtiny.h; sourceTree = "<group>"; };
+		1A4158A41A8BA44A00866F4D /* svgtiny_gradient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny_gradient.cpp; sourceTree = "<group>"; };
+		1A4158A51A8BA44A00866F4D /* svgtiny_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = svgtiny_internal.h; sourceTree = "<group>"; };
+		1A4158A61A8BA44A00866F4D /* svgtiny_list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny_list.cpp; sourceTree = "<group>"; };
 		1A87B105AE081FF640774141 /* ofxBox2d.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBox2d.cpp; path = ../../../addons/ofxLiquidFun/src/ofxBox2d.cpp; sourceTree = SOURCE_ROOT; };
 		1B13FF6ADCC7F1B311AC63F4 /* ofxBox2dBaseShape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBox2dBaseShape.cpp; path = ../../../addons/ofxLiquidFun/src/ofxBox2dBaseShape.cpp; sourceTree = SOURCE_ROOT; };
 		1C085E327DAB912CFA2A443D /* ofxTCPServer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPServer.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPServer.cpp; sourceTree = SOURCE_ROOT; };
@@ -832,6 +845,55 @@
 				219374A14594D121F27FED3A /* src */,
 			);
 			name = ofxNetwork;
+			sourceTree = "<group>";
+		};
+		1A41589A1A8BA44A00866F4D /* ofxSvg */ = {
+			isa = PBXGroup;
+			children = (
+				1A41589B1A8BA44A00866F4D /* src */,
+				1A41589E1A8BA44A00866F4D /* libs */,
+			);
+			name = ofxSvg;
+			sourceTree = "<group>";
+		};
+		1A41589B1A8BA44A00866F4D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1A41589C1A8BA44A00866F4D /* ofxSvg.cpp */,
+				1A41589D1A8BA44A00866F4D /* ofxSvg.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxSvg/src;
+			sourceTree = "<group>";
+		};
+		1A41589E1A8BA44A00866F4D /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				1A41589F1A8BA44A00866F4D /* svgTiny */,
+			);
+			name = libs;
+			path = ../../../addons/ofxSvg/libs;
+			sourceTree = "<group>";
+		};
+		1A41589F1A8BA44A00866F4D /* svgTiny */ = {
+			isa = PBXGroup;
+			children = (
+				1A4158A01A8BA44A00866F4D /* src */,
+			);
+			path = svgTiny;
+			sourceTree = "<group>";
+		};
+		1A4158A01A8BA44A00866F4D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1A4158A11A8BA44A00866F4D /* src_colors.cpp */,
+				1A4158A21A8BA44A00866F4D /* svgtiny.cpp */,
+				1A4158A31A8BA44A00866F4D /* svgtiny.h */,
+				1A4158A41A8BA44A00866F4D /* svgtiny_gradient.cpp */,
+				1A4158A51A8BA44A00866F4D /* svgtiny_internal.h */,
+				1A4158A61A8BA44A00866F4D /* svgtiny_list.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		1ABE43521A77847A0080F69C /* Sceces */ = {
@@ -1587,6 +1649,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				1A41589A1A8BA44A00866F4D /* ofxSvg */,
 				480A780D8D0308AE4A368801 /* ofxGui */,
 				18240ECCE4076FB0833A8578 /* ofxNetwork */,
 				A0B90D3B0ADB9C1716816714 /* ofxOpenCv */,
@@ -2095,6 +2158,7 @@
 				4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */,
 				640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
+				1A4158A91A8BA44A00866F4D /* svgtiny.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
@@ -2106,6 +2170,7 @@
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,
 				63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */,
 				933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */,
+				1A4158AA1A8BA44A00866F4D /* svgtiny_gradient.cpp in Sources */,
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
 				52C77060FBB9307AEFDAE8C6 /* ofxAnimatable.cpp in Sources */,
@@ -2142,6 +2207,7 @@
 				6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */,
 				85A41526FDFA1A8CDAEE81F7 /* ofxEasingQuart.cpp in Sources */,
 				7E769097DE6561633305B24C /* ofxEasingQuint.cpp in Sources */,
+				1A4158AB1A8BA44A00866F4D /* svgtiny_list.cpp in Sources */,
 				FE278F5F783581237AE8ECB2 /* ofxEasingSine.cpp in Sources */,
 				32FC7731C1EF7B87E491C93D /* ofxTween.cpp in Sources */,
 				CBA68AD61765B24C0BFD9886 /* guiBaseObject.cpp in Sources */,
@@ -2175,6 +2241,7 @@
 				C456A2128B1FD676B183B037 /* ofxBox2dEdge.cpp in Sources */,
 				E68D55BE4AE4CA5B729522EA /* ofxBox2dJoint.cpp in Sources */,
 				81E8321493F1FC980D766F87 /* ofxBox2dParticleSystem.cpp in Sources */,
+				1A4158A81A8BA44A00866F4D /* src_colors.cpp in Sources */,
 				2524F40639A33E4A34DF0F1C /* ofxBox2dPolygon.cpp in Sources */,
 				A33E832937B9A5A6FDF4BE47 /* ofxBox2dRect.cpp in Sources */,
 				56949DDBF017687AEE523F16 /* b2BroadPhase.cpp in Sources */,
@@ -2203,6 +2270,7 @@
 				A6006EAA2C95A6A9BEB9CDC4 /* b2ContactManager.cpp in Sources */,
 				6C849FD52946FEAFF7BD6AC0 /* b2Fixture.cpp in Sources */,
 				C3D11D4FFE1DE2FCC7662FDB /* b2Island.cpp in Sources */,
+				1A4158A71A8BA44A00866F4D /* ofxSvg.cpp in Sources */,
 				5A13697438B702582D30D374 /* b2World.cpp in Sources */,
 				BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */,
 				B427DFF6B9AB0E77D6DA6FEF /* b2ChainAndCircleContact.cpp in Sources */,
@@ -2558,6 +2626,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2643,6 +2712,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -16,6 +16,8 @@
 #include "Constants.h"
 #include "CommonAssets.h"
 #include "ofxTween.h"
+#include "ofxSvg.h"
+
 class MyScene4 : public BaseScene{
 public:
     
@@ -57,7 +59,10 @@ public:
     float prevElapse;
     ofParameter<string>counterString;
     
+    
     bool isStart;
+    
+    ofxSVG svg;
 
 };
 

@@ -175,9 +175,29 @@ void MyScene1::mousePressed( int x, int y, int button ){
 //scene notifications
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
     commonAssets->reset();
+    
+    
     isFireEvent = false;
     setupEdge();
     isStart = false;
+    
+    commonAssets->goldenRatioBank.clear();
+    int initNum=1;
+    float initSize = maxRadius;
+    for(int i = 0 ; i < commonAssets->kParticles ; i++)
+    {
+        initSize = 1 / kGoldenRatio *initSize ;
+        if(initSize<minRadius)
+        {
+            break;
+        }
+        initNum = maxRadius/initSize;
+        for(int j = 0 ; j < initNum ;j++)
+        {
+            commonAssets->goldenRatioBank.push_back(initSize);
+        }
+    }
+
 };
 
 void MyScene1::sceneDidAppear() {
@@ -222,7 +242,7 @@ void MyScene1::createParticle(float _x , float _y , ofColor color)
     float x = MIN(MAX(0,_x),CANVAS_WIDTH);
     float y = MIN(MAX(0,_y),CANVAS_HEIGHT);
     circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
-    float r = ofRandom(minRadius, maxRadius);
+    float r = commonAssets->goldenRatioBank[circles.size()%commonAssets->goldenRatioBank.size()];
 //    circles.back().get()->addForce(ofVec2f(0,10), 10);
     circles.back().get()->setPhysics(density+r,bounce,fiction);
     circles.back().get()->setup(box2d.getWorld(),x,y, r*0.1);

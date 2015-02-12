@@ -39,6 +39,22 @@ void MyScene2::setup()
 //--------------------------------------------------------------------------------------------
 void MyScene2::init()
 {
+    commonAssets->goldenRatioBank.clear();
+    int initNum=1;
+    float initSize = commonAssets->maxRadius;
+    for(int i = 0 ; i < commonAssets->kParticles ; i++)
+    {
+        initSize = 1 / kGoldenRatio *initSize ;
+        if(initSize<commonAssets->minRadius)
+        {
+            break;
+        }
+        initNum = commonAssets->maxRadius/initSize;
+        for(int j = 0 ; j < initNum ;j++)
+        {
+            commonAssets->goldenRatioBank.push_back(initSize);
+        }
+    }
     commonAssets->fbo.begin();
     ofClear(0,0,0,0);
     commonAssets->fbo.end();
