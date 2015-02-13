@@ -256,7 +256,11 @@ void CommonAssets::setup()
     }
 #endif
     bgDir.listDir("backgrounds/");
+    bgDir.allowExt("jpg");
+    bgDir.allowExt("png");
     logoDir.listDir("logos/");
+    logoDir.allowExt("jpg");
+    logoDir.allowExt("png");
     dirVideo.listDir("message_movies");
     dirVideo.allowExt("mp4");
     dirVideo.allowExt("mov");
