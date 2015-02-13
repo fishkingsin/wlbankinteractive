@@ -255,15 +255,16 @@ void CommonAssets::setup()
         shader.linkProgram();
     }
 #endif
-    bgDir.listDir("backgrounds/");
     bgDir.allowExt("jpg");
     bgDir.allowExt("png");
-    logoDir.listDir("logos/");
+    bgDir.listDir("backgrounds/");
     logoDir.allowExt("jpg");
     logoDir.allowExt("png");
-    dirVideo.listDir("message_movies");
+    logoDir.listDir("logos/");
     dirVideo.allowExt("mp4");
     dirVideo.allowExt("mov");
+    dirVideo.listDir("message_movies");
+
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     
