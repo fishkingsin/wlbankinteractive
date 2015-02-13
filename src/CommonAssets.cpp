@@ -184,6 +184,8 @@ void CommonAssets::setup()
     paraGroup.add(blockRectY.set("blockRectY",0,0,CANVAS_HEIGHT));
     paraGroup.add( blockRectW.set("blockRectW",0,0,CANVAS_WIDTH));
     paraGroup.add( blockRectH.set("blockRectH",0,0,CANVAS_HEIGHT));
+    
+    paraGroup.add( maskWhite.set("maskWhite",0,1,255));
 
     int width = CANVAS_WIDTH;
     int height = CANVAS_HEIGHT;
@@ -256,6 +258,8 @@ void CommonAssets::setup()
     bgDir.listDir("backgrounds/");
     logoDir.listDir("logos/");
     dirVideo.listDir("message_movies");
+    dirVideo.allowExt("mp4");
+    dirVideo.allowExt("mov");
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     

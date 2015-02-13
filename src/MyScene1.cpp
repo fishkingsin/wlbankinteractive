@@ -12,6 +12,7 @@ MyScene1::MyScene1()
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
+    font.loadFont("LiHei.ttf", 20);
     image.loadImage("scene1/question-01.png");
     paraGroup.setName("Scene1");
     paraGroup.add(numParticle.set("PARTICLE_SIZE",""));
@@ -28,12 +29,29 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(bounce.set("BOUNCE",0,0,3));
     paraGroup.add(fiction.set("FICTION",0,0,100));
     paraGroup.add(minAlpha.set("MIN_ALPHA", 0, 0, 255));
-
+    
+    //extra text object
+    paraGroup.add(bDebug.set("bDebug",false));
+    paraGroup.add(minObjectAppearLeft.set("minObjectAppearLeft",0,0,CANVAS_WIDTH));
+    paraGroup.add(maxObjectAppearLeft.set("maxObjectAppearLeft",0,0,CANVAS_WIDTH));
+    paraGroup.add(minObjectAppearRight.set("minObjectAppearRight",0,0,CANVAS_WIDTH));
+    paraGroup.add(maxObjectAppearRight.set("maxObjectAppearRight",0,0,CANVAS_WIDTH));
+    
+    minInputY.addListener(this, &MyScene1::objectAppearRegionUpdate);
+    maxInputY.addListener(this, &MyScene1::objectAppearRegionUpdate);
+    minObjectAppearLeft.addListener(this, &MyScene1::objectAppearRegionUpdate);
+    maxObjectAppearLeft.addListener(this, &MyScene1::objectAppearRegionUpdate);
+    minObjectAppearRight.addListener(this, &MyScene1::objectAppearRegionUpdate);
+    maxObjectAppearRight.addListener(this, &MyScene1::objectAppearRegionUpdate);
+    
+    paraGroup.add(objectDecay.set("objectDecay",0,0,1));
+    paraGroup.add(objectAge.set("objectAge",0,0,10));
+    paraGroup.add(objectDuration.set("objectDuration",1000,1000,100000));
     box2d.init();
     box2d.setGravity(0, -2);
     //    box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     box2d.setFPS(60.0);
-    box2d.registerGrabbing();
+//    box2d.registerGrabbing();
     
     counter = 0;
     images.resize(8);
@@ -42,7 +60,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
         images[i].loadImage("images/"+ofToString(i+1)+".png");
     }
     
-   
+    
     
 };
 
@@ -71,7 +89,7 @@ void MyScene1::update(float dt){ //update scene 1 here
             {
                 edges.clear();
                 isFireEvent = true;
-            
+                
             }
             else{
                 circles.clear();
@@ -83,28 +101,24 @@ void MyScene1::update(float dt){ //update scene 1 here
         
     }
     float diff = ofGetElapsedTimeMillis() - counter;
-    //    if(diff > coolDown)
-    //    {
-    //        int n = ofRandom(1,10);
-    //        if(n<circles.size())
-    //        {
-    //            for (int i = 0 ; i < n ; i++)
-    //            {
-    //                circles.erase(circles.begin());
-    //            }
-    //        }
-    //        counter = ofGetElapsedTimeMillis();
-    //    }
-    
+
     for (int i = 0 ; i < circles.size() ; i++) {
         circles[i]->update();
         commonAssets->setParticleAngle(circles[i]->index, (circles[i]->getRotation()/360.0f)*TWO_PI);
         commonAssets->setParticleVertex(circles[i]->index, circles[i]->getPosition());
         commonAssets->setParticleNormal(circles[i]->index, ofVec3f(circles[i]->getRadius(),0,0));
-
+        
     }
     commonAssets->updateAttribtuteData();
     ofRemove(circles, CustomParticle::shouldRemoveOffScreen);
+    if(objectAge>0)
+    {
+        objectAge -= objectDecay;
+    }
+    else
+    {
+        objectX.setDuration(0);
+    }
 };
 
 void MyScene1::draw(){ //draw scene 1 here
@@ -114,15 +128,43 @@ void MyScene1::draw(){ //draw scene 1 here
     image.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     ofPushStyle();
     commonAssets->draw();
+    float _x = objectX.update();
+    if(objectAge>0 && objectX.isRunning())
+    {
+        ofPushStyle();
+        ofSetColor(ofColor::white);
+        font.drawString("DRAM", _x, minInputY);
+        ofPopStyle();
+    }
+    if(bDebug)
+    {
+        
+        ofPushStyle();
+        ofNoFill();
+        ofSetColor(ofColor::wheat);
+        ofRect( minInputX , minInputY, maxInputX - minInputX , maxInputY-minInputY ) ;
 
-    //    for(int i=0; i<circles.size(); i++) {
-    //        ofFill();
-    //        ofSetHexColor(0xf6c738);
-    //        circles[i].get()->draw();
+        ofSetColor(ofColor::yellow);
+        ofRect( minObjectAppearLeft , minInputY, maxObjectAppearLeft - minObjectAppearLeft , maxInputY-minInputY ) ;
+        ofSetColor(ofColor::red);
+        ofRect( minObjectAppearRight , minInputY, maxObjectAppearRight - minObjectAppearRight , maxInputY-minInputY ) ;
+        if(objectAge>0 && objectX.isRunning())
+        {
+            ofSetColor(ofColor::cyan);
+            ofLine(_x-20,minInputY+10,_x+20,minInputY+10);
+            ofSetColor(ofColor::gold);
+            ofLine(_x,minInputY-20+10,_x,minInputY+20+10);
+        }
+            ofSetColor(ofColor::purple);
+            ofLine( prevPoint , currPoint);
+        
+
+        ofPopStyle();
+        
+    }
 #ifdef USE_TRIANGLE
     triangulation.addPoint(circles[i].get()->getPosition());
 #endif
-    //    }
 #ifdef USE_TRIANGLE
     triangulation.triangulate();
 #endif
@@ -176,7 +218,7 @@ void MyScene1::mousePressed( int x, int y, int button ){
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
     commonAssets->reset();
     
-    
+    objectAge.set(objectAge.getMax());
     isFireEvent = false;
     setupEdge();
     isStart = false;
@@ -197,7 +239,7 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
             commonAssets->goldenRatioBank.push_back(initSize);
         }
     }
-
+    
 };
 
 void MyScene1::sceneDidAppear() {
@@ -222,9 +264,21 @@ void MyScene1::eventsIn(customeOSCData & data)
 {
     if(!isFireEvent && isStart)
     {
+        
         currPoint.set(ofPoint(ofMap(data.pos.x,0,1,minInputX,maxInputX), ofMap(data.pos.y,0,1,minInputY,maxInputY)));
         float distance = prevPoint.distance(currPoint);
-        
+        if(objectX.isCompleted())
+        {
+        if(objectAppearLeft.inside(currPoint) && objectAppearLeft.inside(prevPoint) && currPoint.x>prevPoint.x)
+        {
+            objectX.setParameters(0, linearEasing, ofxTween::easeOut, minObjectAppearLeft, maxObjectAppearRight, objectDuration, 0);
+        }
+        else if(objectAppearRight.inside(currPoint) && objectAppearRight.inside(prevPoint) && currPoint.x<prevPoint.x )
+        {
+            objectX.setParameters(0, linearEasing, ofxTween::easeOut, maxObjectAppearRight, minObjectAppearLeft, objectDuration, 0);
+        }
+        }
+        objectAge.set(objectAge.getMax());
         if(abs(distance)>minDis)
         {
             
@@ -233,17 +287,17 @@ void MyScene1::eventsIn(customeOSCData & data)
             prevPoint = currPoint ;
         }
     }
-
+    
 }
 
 void MyScene1::createParticle(float _x , float _y , ofColor color)
 {
-
+    
     float x = MIN(MAX(0,_x),CANVAS_WIDTH);
     float y = MIN(MAX(0,_y),CANVAS_HEIGHT);
     circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
     float r = commonAssets->goldenRatioBank[circles.size()%commonAssets->goldenRatioBank.size()];
-//    circles.back().get()->addForce(ofVec2f(0,10), 10);
+    //    circles.back().get()->addForce(ofVec2f(0,10), 10);
     circles.back().get()->setPhysics(density+r,bounce,fiction);
     circles.back().get()->setup(box2d.getWorld(),x,y, r*0.1);
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
@@ -256,7 +310,7 @@ void MyScene1::createParticle(float _x , float _y , ofColor color)
     commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius(),0,0));
     
     commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;
-
+    
 }
 
 
@@ -286,3 +340,9 @@ void MyScene1::setupEdge()
     edges.push_back(edge);
 }
 
+void MyScene1::objectAppearRegionUpdate(float &f)
+{
+    objectAppearLeft.set( minObjectAppearLeft , minInputY, maxObjectAppearLeft - minObjectAppearLeft , maxInputY-minInputY );
+    
+    objectAppearRight.set( minObjectAppearRight , minInputY, maxObjectAppearRight - minObjectAppearRight , maxInputY-minInputY );
+}
