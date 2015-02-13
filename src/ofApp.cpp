@@ -195,6 +195,8 @@ void ofApp::setup(){
     gui.setWhichColumn(1);
     
     gui.addFileLister("VideoFiles", &videoFileLister, 200, 100);
+    videoFileLister.allowExt("mp4");
+    videoFileLister.allowExt("mov");
     int numFile = videoFileLister.listDir("movies");
     if(numFile>0)
     {
@@ -307,11 +309,10 @@ void ofApp::eventsIn(guiCallbackData & data){
 void ofApp::update(){
     
     status = "App running at " + ofToString(ofGetFrameRate());
-    //    if(messageVideo.isLoaded())
-    //    {
-    //        messageVideo.update();
-    //    }
-    player.update();
+    if(sceneManager->getCurrentSceneID()!=SCENE_LOGO)
+    {
+        player.update();
+    }
     gui.update();
     // check for waiting messages
     
@@ -351,7 +352,10 @@ void ofApp::update(){
 void ofApp::draw(){
     ofBackground(0);
     ofSetColor(255);
-    player.draw(0, 0);
+    if(sceneManager->getCurrentSceneID()!=SCENE_LOGO)
+    {
+        player.draw(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
     
     
     sceneManager->draw();

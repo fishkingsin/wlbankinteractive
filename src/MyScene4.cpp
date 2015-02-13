@@ -11,6 +11,11 @@
 
 void MyScene4::setup()
 {
+    svg.load("pot.svg");
+    for(int i = 0 ; i < svg.getNumPath(); i++)
+    {
+        svg.getPathAt(i).setUseShapeColor(false);
+    }
     paraGroup.setName("Scene4");
     paraGroup.add(maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
     paraGroup.add(minRadius.set("S4_MIN_RADIUS",8,1,50));
@@ -153,8 +158,11 @@ void MyScene4::update(float dt)
 void MyScene4::draw()
 {
     ofPushStyle();
-    ofSetColor(255,counterForAlpha.update());
+    ofEnableAlphaBlending();
+    ofSetColor(commonAssets->maskWhite, commonAssets->maskWhite, commonAssets->maskWhite,counterForAlpha.update());
+    ofPushMatrix();
     svg.draw();
+    ofPopMatrix();
 //    //    float radius =  CANVAS_HEIGHT*0.3;
 //    ofCircle(commonAssets->elementCenterX.get(),
 //             commonAssets->elementCenterY.get(), radius);
@@ -162,7 +170,7 @@ void MyScene4::draw()
     commonAssets->fbo.draw(0, 0);
     if(debugDraw.get())
     {
-        ofSetColor(0);
+        ofSetColor(ofColor::yellow);
         for(int i = 0 ; i < edges.size() ; i++)
         {
             edges[i]->draw();
@@ -251,10 +259,13 @@ void MyScene4::setupEdge()
 //        
 //        
 //    }
-    
+//
+//end shape
+//    edge.get()->addVertex(sin(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterX.get(),                    cos(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
+
     //custom shape pot
 
-    svg.load("pot.svg");
+
     for (int i = 0; i < svg.getNumPath(); i++){
         ofPath p = svg.getPathAt(i);
         // svg defaults to non zero winding which doesn't look so good as contours
@@ -265,13 +276,12 @@ void MyScene4::setupEdge()
             for(int k = 0 ; k < points.size() ; k++ )
             {
                 edge.get()->addVertex(points[k]);
+                
             }
         }
     }
-
-    //end shape
-    //    edge.get()->addVertex(sin(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterX.get(),                    cos(TWO_PI*(90/360.0f))*radius+commonAssets->elementCenterY.get()-100);
     edge.get()->create(box2d.getWorld());
+    
     edges.push_back(edge);
     
     edge = ofPtr<ofxBox2dEdge>(new ofxBox2dEdge);

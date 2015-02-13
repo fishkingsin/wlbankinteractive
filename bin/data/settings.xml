@@ -111,7 +111,7 @@
     <val_0>241</val_0>
 </COMMON_CENER_X>
 <COMMON_CENER_Y>
-    <val_0>308</val_0>
+    <val_0>304</val_0>
 </COMMON_CENER_Y>
 <AUDO_MODE>
     <val_0>0</val_0>
@@ -252,7 +252,7 @@
         <val_0>1.12308</val_0>
     </S2_MAX_R_SCALE>
     <S2_LOGO_RADIUS>
-        <val_0>84.4</val_0>
+        <val_0>89.2692</val_0>
     </S2_LOGO_RADIUS>
 </Scene2>
 <Scene3>
@@ -292,7 +292,7 @@
         <val_0>3.07308</val_0>
     </S4_MIN_RADIUS>
     <S4_MAX_RADIUS>
-        <val_0>17.5846</val_0>
+        <val_0>20.6</val_0>
     </S4_MAX_RADIUS>
     <DEBUG_DRAW>
         <val_0>0</val_0>
@@ -380,7 +380,7 @@
         <val_0>6.49231</val_0>
     </MIN_RADIUS>
     <MAX_RADIUS>
-        <val_0>99.6923</val_0>
+        <val_0>53.5385</val_0>
     </MAX_RADIUS>
     <blockRectX>
         <val_0>0</val_0>
@@ -395,8 +395,11 @@
         <val_0>216</val_0>
     </blockRectH>
     <AUTO>
-        <val_0>0</val_0>
+        <val_0>1</val_0>
     </AUTO>
+    <maskWhite>
+        <val_0>255</val_0>
+    </maskWhite>
 </CommonAsset>
 <MySceneLiquidfun>
     <SLQF_MAX_PARTICLE>

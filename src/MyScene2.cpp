@@ -174,7 +174,7 @@ void MyScene2::update(float dt)
 void MyScene2::draw()
 {
     ofPushStyle();
-    ofSetColor(255,counterForAlpha.update());
+    ofSetColor( commonAssets->maskWhite, commonAssets->maskWhite, commonAssets->maskWhite ,counterForAlpha.update());
     ofCircle(commonAssets->elementCenterX.get(),
              commonAssets->elementCenterY.get(), radius);
     ofPopStyle();

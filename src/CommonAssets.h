@@ -91,6 +91,7 @@ public:
     ofImage bg;
     ofParameter<int>elementCenterX;
     ofParameter<int>elementCenterY;
+    ofParameter<int>maskWhite;
     
     
     ofFbo       fbo;
