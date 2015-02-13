@@ -75,8 +75,24 @@ public:
     ofParameter<float> maxInputX;
     ofParameter<float> minInputX;
     
+    ofParameter<bool>bDebug;
+    ofParameter<float> minObjectAppearLeft;
+    ofParameter<float> maxObjectAppearLeft;
+    ofParameter<float> minObjectAppearRight;
+    ofParameter<float> maxObjectAppearRight;
+    ofParameter<float> objectDecay;
+    ofxTween objectX;
+    ofxEasingLinear linearEasing;
+    ofParameter<float> objectAge;
+    ofParameter<float>objectDuration;
+    ofRectangle objectAppearLeft;
+    ofRectangle objectAppearRight;
+    
+    void objectAppearRegionUpdate(float &f);
+    
     ofImage image;
     bool isStart;
+    ofTrueTypeFont font;
 };
 
 #endif

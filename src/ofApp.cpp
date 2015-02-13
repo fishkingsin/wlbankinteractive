@@ -444,7 +444,9 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    
+    customeOSCData data;
+    data.pos.set((x*1.0)/CANVAS_WIDTH,(y*1.0)/CANVAS_HEIGHT);
+    scene1->eventsIn(data);
 }
 
 //--------------------------------------------------------------

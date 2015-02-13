@@ -223,7 +223,7 @@
         <val_0>456</val_0>
     </S1_MAX_INOUT_Y>
     <S1_MIN_INPUT_Y>
-        <val_0>432</val_0>
+        <val_0>409.992</val_0>
     </S1_MIN_INPUT_Y>
     <S1_MIN_INPUT_X>
         <val_0>84.4</val_0>
@@ -231,6 +231,30 @@
     <S1_MAX_INOUT_X>
         <val_0>422</val_0>
     </S1_MAX_INOUT_X>
+    <bDebug>
+        <val_0>1</val_0>
+    </bDebug>
+    <minObjectAppearLeft>
+        <val_0>108.746</val_0>
+    </minObjectAppearLeft>
+    <maxObjectAppearLeft>
+        <val_0>157.438</val_0>
+    </maxObjectAppearLeft>
+    <minObjectAppearRight>
+        <val_0>373.308</val_0>
+    </minObjectAppearRight>
+    <maxObjectAppearRight>
+        <val_0>422</val_0>
+    </maxObjectAppearRight>
+    <objectDecay>
+        <val_0>0.142308</val_0>
+    </objectDecay>
+    <objectAge>
+        <val_0>-0.103878</val_0>
+    </objectAge>
+    <objectDuration>
+        <val_0>4046.15</val_0>
+    </objectDuration>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
@@ -395,7 +419,7 @@
         <val_0>216</val_0>
     </blockRectH>
     <AUTO>
-        <val_0>1</val_0>
+        <val_0>0</val_0>
     </AUTO>
     <maskWhite>
         <val_0>255</val_0>
