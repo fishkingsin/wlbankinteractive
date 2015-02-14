@@ -139,6 +139,9 @@ void MyScene1::draw(){ //draw scene 1 here
     if(objectAge>0 && objectX.isRunning())
     {
             anchor.setPosition(textObject);
+//        circlesForBalloon.back()->setPosition(textObject.x,textObject.y-50);
+
+
         ofPushStyle();
         ofSetColor(balloonR,balloonG,balloonB);
         ofPath path;
@@ -344,11 +347,19 @@ void MyScene1::eventsIn(customeOSCData & data)
             {
                 objectX.setParameters(0, linearEasing, ofxTween::easeOut, minObjectAppearLeft, maxObjectAppearRight, objectDuration, 0);
                 textObject = currPoint;
+                for (int i=0; i<circlesForBalloon.size(); i++) {
+                    circlesForBalloon[i]->setPosition(minObjectAppearLeft, circlesForBalloon[i]->getPosition().y);
+
+                }
             }
             else if(objectAppearRight.inside(currPoint) && objectAppearRight.inside(prevPoint) && currPoint.x<prevPoint.x )
             {
                 objectX.setParameters(0, linearEasing, ofxTween::easeOut, maxObjectAppearRight, minObjectAppearLeft, objectDuration, 0);
                 textObject = currPoint;
+                for (int i=0; i<circlesForBalloon.size(); i++) {
+                    circlesForBalloon[i]->setPosition(maxObjectAppearRight, circlesForBalloon[i]->getPosition().y);
+                    
+                }
             }
         }
 
