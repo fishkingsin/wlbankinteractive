@@ -54,28 +54,20 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(objectAge.set("objectAge",0,0,10));
     paraGroup.add(objectDuration.set("objectDuration",1000,1000,100000));
     
-    paraGroup.add(    strokeWidth.set("strokeWidth",1,1,20));
-    paraGroup.add(    balloonR.set("balloonR",1,1,255));
-    paraGroup.add(    balloonG.set("balloonG",1,1,255));
-    paraGroup.add(    balloonB.set("balloonB",1,1,255));;
+    paraGroup.add( strokeWidth.set("strokeWidth",1,1,20));
+    paraGroup.add( balloonR.set("balloonR",1,1,255));
+    paraGroup.add( balloonG.set("balloonG",1,1,255));
+    paraGroup.add( balloonB.set("balloonB",1,1,255));;
     box2d.init();
     box2d.setGravity(0, -2);
     box2d.setFPS(60.0);
     
     
     box2dForBalloon.init();
-    box2dForBalloon.setGravity(0, -50);
+    box2dForBalloon.setGravity(0, -10);
     box2dForBalloon.setFPS(60.0);
     isSetupBalloon = false;
     counter = 0;
-//    images.resize(8);
-//    for(int i = 0; i < 8 ; i++)
-//    {
-//        images[i].loadImage("images/"+ofToString(i+1)+".png");
-//    }
-    
-    
-    
 };
 
 
@@ -143,9 +135,10 @@ void MyScene1::draw(){ //draw scene 1 here
     ofPushStyle();
     commonAssets->draw();
     textObject.x = objectX.update();
-    anchor.setPosition(textObject);
+
     if(objectAge>0 && objectX.isRunning())
     {
+            anchor.setPosition(textObject);
         ofPushStyle();
         ofSetColor(balloonR,balloonG,balloonB);
         ofPath path;
@@ -265,13 +258,13 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
     {
         isSetupBalloon = true;
         //box2d for balloon
-        anchor.setup(box2dForBalloon.getWorld(), minInputX, minInputY, 2);
+        anchor.setup(box2dForBalloon.getWorld(), minInputX, minInputY, 1);
         
         // first we add just a few circles
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<10; i++) {
             ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-            circle.get()->setPhysics(500, 0.0, 500);
-            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i*10), 2);
+            circle.get()->setPhysics(10, 0.0, 100);
+            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i*5), 1);
             circlesForBalloon.push_back(circle);
         }
         
@@ -288,8 +281,9 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
                 joint.get()->setup(box2dForBalloon.getWorld(), circlesForBalloon[i-1].get()->body, circlesForBalloon[i].get()->body);
             }
             
-            joint.get()->setLength(0.5);
-            
+            joint.get()->setLength(1);
+//            joint.get()->setFrequency(1000);
+            joint.get()->setDamping(0.5);
             joints.push_back(joint);
         }
     }
