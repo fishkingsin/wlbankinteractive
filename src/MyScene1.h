@@ -87,12 +87,14 @@ public:
     ofParameter<float>objectDuration;
     ofRectangle objectAppearLeft;
     ofRectangle objectAppearRight;
+    ofPoint textObject;
     
     void objectAppearRegionUpdate(float &f);
     
     ofImage image;
     bool isStart;
     ofTrueTypeFont font;
+    string theText;
 };
 
 #endif

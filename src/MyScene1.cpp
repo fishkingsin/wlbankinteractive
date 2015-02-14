@@ -12,6 +12,10 @@ MyScene1::MyScene1()
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
+    ofFile file;
+    file.open("string.txt");
+    ofBuffer buf = file.readToBuffer();
+    theText = buf.getText();
     font.loadFont("LiHei.ttf", 20);
     image.loadImage("scene1/question-01.png");
     paraGroup.setName("Scene1");
@@ -44,6 +48,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     minObjectAppearRight.addListener(this, &MyScene1::objectAppearRegionUpdate);
     maxObjectAppearRight.addListener(this, &MyScene1::objectAppearRegionUpdate);
     
+
     paraGroup.add(objectDecay.set("objectDecay",0,0,1));
     paraGroup.add(objectAge.set("objectAge",0,0,10));
     paraGroup.add(objectDuration.set("objectDuration",1000,1000,100000));
@@ -128,12 +133,13 @@ void MyScene1::draw(){ //draw scene 1 here
     image.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     ofPushStyle();
     commonAssets->draw();
-    float _x = objectX.update();
+    textObject.x = objectX.update();
     if(objectAge>0 && objectX.isRunning())
     {
         ofPushStyle();
         ofSetColor(ofColor::white);
-        font.drawString("DRAM", _x, minInputY);
+        ofRectangle rect = font.getStringBoundingBox(theText, textObject.x,textObject.y);
+        font.drawString(theText, rect.x-rect.width*0.5,rect.y);
         ofPopStyle();
     }
     if(bDebug)
@@ -151,9 +157,9 @@ void MyScene1::draw(){ //draw scene 1 here
         if(objectAge>0 && objectX.isRunning())
         {
             ofSetColor(ofColor::cyan);
-            ofLine(_x-20,minInputY+10,_x+20,minInputY+10);
+            ofLine(textObject.x-20,minInputY,textObject.x+20,textObject.y);
             ofSetColor(ofColor::gold);
-            ofLine(_x,minInputY-20+10,_x,minInputY+20+10);
+            ofLine(textObject.x,textObject.y-20,textObject.x,textObject.y+20);
         }
             ofSetColor(ofColor::purple);
             ofLine( prevPoint , currPoint);
@@ -269,16 +275,20 @@ void MyScene1::eventsIn(customeOSCData & data)
         float distance = prevPoint.distance(currPoint);
         if(objectX.isCompleted())
         {
-        if(objectAppearLeft.inside(currPoint) && objectAppearLeft.inside(prevPoint) && currPoint.x>prevPoint.x)
-        {
-            objectX.setParameters(0, linearEasing, ofxTween::easeOut, minObjectAppearLeft, maxObjectAppearRight, objectDuration, 0);
+            if(objectAppearLeft.inside(currPoint) && objectAppearLeft.inside(prevPoint) && currPoint.x>prevPoint.x)
+            {
+                objectX.setParameters(0, linearEasing, ofxTween::easeOut, minObjectAppearLeft, maxObjectAppearRight, objectDuration, 0);
+                textObject = currPoint;
+            }
+            else if(objectAppearRight.inside(currPoint) && objectAppearRight.inside(prevPoint) && currPoint.x<prevPoint.x )
+            {
+                objectX.setParameters(0, linearEasing, ofxTween::easeOut, maxObjectAppearRight, minObjectAppearLeft, objectDuration, 0);
+                textObject = currPoint;
+            }
         }
-        else if(objectAppearRight.inside(currPoint) && objectAppearRight.inside(prevPoint) && currPoint.x<prevPoint.x )
-        {
-            objectX.setParameters(0, linearEasing, ofxTween::easeOut, maxObjectAppearRight, minObjectAppearLeft, objectDuration, 0);
-        }
-        }
-        objectAge.set(objectAge.getMax());
+
+            objectAge.set(objectAge.getMax());
+
         if(abs(distance)>minDis)
         {
             
