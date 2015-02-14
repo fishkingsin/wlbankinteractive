@@ -12,7 +12,7 @@ class Data {
 public:
     ofColor color;
     int		id;
-    ofImage *image;
+//    ofImage *image;
     float r;
    
 };
@@ -21,7 +21,7 @@ class CustomParticle : public ofxBox2dCircle {
     
 public:
     
-    void setupTheCustomData(ofColor color , ofImage &image , int size , float _startSize);
+    void setupTheCustomData(ofColor color , int size , float _startSize);
     void update();
     void draw();
     static bool shouldRemoveOffScreen(ofPtr<CustomParticle> shape);

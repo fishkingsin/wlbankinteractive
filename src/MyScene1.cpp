@@ -12,6 +12,7 @@ MyScene1::MyScene1()
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
+    balloonImage.loadImage("balloon.png");
     ofFile file;
     file.open("string.txt");
     ofBuffer buf = file.readToBuffer();
@@ -52,18 +53,26 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(objectDecay.set("objectDecay",0,0,1));
     paraGroup.add(objectAge.set("objectAge",0,0,10));
     paraGroup.add(objectDuration.set("objectDuration",1000,1000,100000));
+    
+    paraGroup.add(    strokeWidth.set("strokeWidth",1,1,20));
+    paraGroup.add(    balloonR.set("balloonR",1,1,255));
+    paraGroup.add(    balloonG.set("balloonG",1,1,255));
+    paraGroup.add(    balloonB.set("balloonB",1,1,255));;
     box2d.init();
     box2d.setGravity(0, -2);
-    //    box2d.createBounds(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     box2d.setFPS(60.0);
-//    box2d.registerGrabbing();
     
+    
+    box2dForBalloon.init();
+    box2dForBalloon.setGravity(0, -50);
+    box2dForBalloon.setFPS(60.0);
+    isSetupBalloon = false;
     counter = 0;
-    images.resize(8);
-    for(int i = 0; i < 8 ; i++)
-    {
-        images[i].loadImage("images/"+ofToString(i+1)+".png");
-    }
+//    images.resize(8);
+//    for(int i = 0; i < 8 ; i++)
+//    {
+//        images[i].loadImage("images/"+ofToString(i+1)+".png");
+//    }
     
     
     
@@ -73,7 +82,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
 void MyScene1::update(float dt){ //update scene 1 here
     
     numParticle  = ofToString(circles.size());
-    
+    box2dForBalloon.update();
     box2d.update();
     if(isFireEvent)
     {
@@ -134,13 +143,28 @@ void MyScene1::draw(){ //draw scene 1 here
     ofPushStyle();
     commonAssets->draw();
     textObject.x = objectX.update();
+    anchor.setPosition(textObject);
     if(objectAge>0 && objectX.isRunning())
     {
         ofPushStyle();
-        ofSetColor(ofColor::white);
-        ofRectangle rect = font.getStringBoundingBox(theText, textObject.x,textObject.y);
-        font.drawString(theText, rect.x-rect.width*0.5,rect.y);
-        ofPopStyle();
+        ofSetColor(balloonR,balloonG,balloonB);
+        ofPath path;
+        path.setFilled(false);
+        path.setStrokeWidth(strokeWidth);
+        path.setStrokeColor(ofColor(balloonR,balloonG,balloonB));
+        for(int i=0; i<joints.size(); i++) {
+            b2Vec2 p1 = joints[i].get()->joint->GetAnchorA();
+            b2Vec2 p2 = joints[i].get()->joint->GetAnchorB();
+            p1 *= OFX_BOX2D_SCALE;
+            p2 *= OFX_BOX2D_SCALE;
+            path.lineTo(p1.x,p1.y);
+                        path.lineTo(p2.x,p2.y);
+        }
+        path.draw();
+        ofPoint point = circlesForBalloon.back()->getPosition();
+        balloonImage.draw(point.x-balloonImage.width*0.5 , point.y-balloonImage.height);
+
+        
     }
     if(bDebug)
     {
@@ -166,6 +190,21 @@ void MyScene1::draw(){ //draw scene 1 here
         
 
         ofPopStyle();
+        
+        
+        
+        anchor.draw();
+        
+        for(int i=0; i<circlesForBalloon.size(); i++) {
+            ofFill();
+            ofSetHexColor(0x01b1f2);
+            circlesForBalloon[i].get()->draw();
+        }
+        
+        for(int i=0; i<joints.size(); i++) {
+            ofSetHexColor(0x444342);
+            joints[i].get()->draw();
+        }
         
     }
 #ifdef USE_TRIANGLE
@@ -222,6 +261,38 @@ void MyScene1::mousePressed( int x, int y, int button ){
 
 //scene notifications
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
+    if(!isSetupBalloon)
+    {
+        isSetupBalloon = true;
+        //box2d for balloon
+        anchor.setup(box2dForBalloon.getWorld(), minInputX, minInputY, 2);
+        
+        // first we add just a few circles
+        for (int i=0; i<5; i++) {
+            ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
+            circle.get()->setPhysics(500, 0.0, 500);
+            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i*10), 2);
+            circlesForBalloon.push_back(circle);
+        }
+        
+        // now connect each circle with a joint
+        for (int i=0; i<circlesForBalloon.size(); i++) {
+            
+            ofPtr<ofxBox2dJoint> joint = ofPtr<ofxBox2dJoint>(new ofxBox2dJoint);
+            
+            // if this is the first point connect to the top anchor.
+            if(i == 0) {
+                joint.get()->setup(box2dForBalloon.getWorld(), anchor.body, circlesForBalloon[i].get()->body);
+            }
+            else {
+                joint.get()->setup(box2dForBalloon.getWorld(), circlesForBalloon[i-1].get()->body, circlesForBalloon[i].get()->body);
+            }
+            
+            joint.get()->setLength(0.5);
+            
+            joints.push_back(joint);
+        }
+    }
     commonAssets->reset();
     
     objectAge.set(objectAge.getMax());
@@ -313,7 +384,7 @@ void MyScene1::createParticle(float _x , float _y , ofColor color)
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
     ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, ofMap(r, minRadius, maxRadius, 255,minAlpha));
     
-    circles.back().get()->setupTheCustomData(c,images[ofRandom(images.size())],r,5);
+    circles.back().get()->setupTheCustomData(c,r,5);
     circles.back().get()->index = circles.size()-1;
     commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
     commonAssets->setParticleColor(circles.size()-1, c);

@@ -52,7 +52,7 @@ public:
     ofxDelaunay triangulation;
 #endif
     vector< vector< ofPtr<ofImage> > > imagesSet;
-    vector<ofImage> images;
+    //    vector<ofImage> images;
     CommonAssets *commonAssets;
     ofParameterGroup paraGroup;
     ofParameter<float>minRadius;
@@ -65,7 +65,7 @@ public:
     ofPoint prevPoint;
     ofPoint currPoint;
     ofParameter<float >minDis;
-        ofParameter<float >offSetPower;
+    ofParameter<float >offSetPower;
     ofParameter<float >density;
     ofParameter<float >bounce;
     ofParameter<float >fiction;
@@ -88,13 +88,25 @@ public:
     ofRectangle objectAppearLeft;
     ofRectangle objectAppearRight;
     ofPoint textObject;
-    ofxBox2dCircle dream;
+    //box2d for dream balloon
+    bool isSetupBalloon;
+    ofxBox2dCircle                          anchor;			  //	fixed anchor
+    vector		<ofPtr<ofxBox2dCircle> >	circlesForBalloon;		  //	default box2d circles
+    vector		<ofPtr<ofxBox2dJoint> >		joints;
+    ofxBox2d                                box2dForBalloon;
+    ofImage balloonImage;
+    
     void objectAppearRegionUpdate(float &f);
     
     ofImage image;
     bool isStart;
     ofTrueTypeFont font;
     string theText;
+    
+    ofParameter<int>strokeWidth;
+    ofParameter<int>balloonR;
+    ofParameter<int>balloonG;
+    ofParameter<int>balloonB;
 };
 
 #endif

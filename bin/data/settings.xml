@@ -232,7 +232,7 @@
         <val_0>422</val_0>
     </S1_MAX_INOUT_X>
     <bDebug>
-        <val_0>1</val_0>
+        <val_0>0</val_0>
     </bDebug>
     <minObjectAppearLeft>
         <val_0>108.746</val_0>
@@ -255,6 +255,18 @@
     <objectDuration>
         <val_0>2523.08</val_0>
     </objectDuration>
+    <strokeWidth>
+        <val_0>5</val_0>
+    </strokeWidth>
+    <balloonR>
+        <val_0>255</val_0>
+    </balloonR>
+    <balloonG>
+        <val_0>1</val_0>
+    </balloonG>
+    <balloonB>
+        <val_0>255</val_0>
+    </balloonB>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
@@ -389,13 +401,13 @@
         <val_0>44.3077</val_0>
     </MAX_HUE>
     <MIN_BRIGHT>
-        <val_0>0.596154</val_0>
+        <val_0>0.826923</val_0>
     </MIN_BRIGHT>
     <MAX_BRIGHT>
-        <val_0>0.880769</val_0>
+        <val_0>1</val_0>
     </MAX_BRIGHT>
     <MIN_SATURATE>
-        <val_0>0.603846</val_0>
+        <val_0>0.869231</val_0>
     </MIN_SATURATE>
     <MAX_SATURATE>
         <val_0>1</val_0>

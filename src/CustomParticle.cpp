@@ -7,7 +7,7 @@
 //
 
 #include "CustomParticle.h"
-void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int size , float _startSize) {
+void CustomParticle::setupTheCustomData(ofColor color , int size , float _startSize) {
     
     // we are using a Data pointer because
     // box2d needs to have a pointer not
@@ -18,7 +18,7 @@ void CustomParticle::setupTheCustomData(ofColor color , ofImage &image , int siz
     theData->id = ofRandom(0, 100);
     
     theData->color = color;
-    theData->image = &image;
+//    theData->image = &image;
     theData->r = ofRandom(size,size*2);
     theData->color.a = ofMap(theData->r,size,size*2,255,10,true);
     targetR = size;
@@ -45,7 +45,8 @@ void CustomParticle::draw() {
         ofRotateZ(getRotation());
         ofSetColor(theData->color);
         ofPushMatrix();
-        theData->image->draw(-radius,-radius,radius*2,radius*2);
+        ofCircle(-radius,-radius,radius*2);
+//        theData->image->draw(-radius,-radius,radius*2,radius*2);
         ofPopMatrix();
         ofPopMatrix();
     }
