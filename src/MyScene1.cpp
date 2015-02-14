@@ -145,7 +145,7 @@ void MyScene1::draw(){ //draw scene 1 here
         ofPushStyle();
         ofSetColor(balloonR,balloonG,balloonB);
         ofPath path;
-        path.setFilledx(false);
+        path.setFilled(false);
         path.setStrokeWidth(strokeWidth);
         path.setStrokeColor(ofColor(balloonR,balloonG,balloonB));
         for(int i=0; i<joints.size(); i++) {
