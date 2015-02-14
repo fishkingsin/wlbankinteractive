@@ -95,7 +95,7 @@ void MyScene1::update(float dt){ //update scene 1 here
             {
                 edges.clear();
                 isFireEvent = true;
-                
+                isStart = false;
             }
             else{
                 circles.clear();
@@ -145,7 +145,7 @@ void MyScene1::draw(){ //draw scene 1 here
         ofPushStyle();
         ofSetColor(balloonR,balloonG,balloonB);
         ofPath path;
-        path.setFilled(false);
+        path.setFilledx(false);
         path.setStrokeWidth(strokeWidth);
         path.setStrokeColor(ofColor(balloonR,balloonG,balloonB));
         for(int i=0; i<joints.size(); i++) {
