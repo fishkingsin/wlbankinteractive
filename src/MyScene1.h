@@ -88,7 +88,7 @@ public:
     ofRectangle objectAppearLeft;
     ofRectangle objectAppearRight;
     ofPoint textObject;
-    
+    ofxBox2dCircle dream;
     void objectAppearRegionUpdate(float &f);
     
     ofImage image;
