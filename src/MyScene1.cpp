@@ -129,10 +129,7 @@ void MyScene1::update(float dt){ //update scene 1 here
 
 void MyScene1::draw(){ //draw scene 1 here
     
-    ofPopStyle();
-    ofSetColor(255);
-    image.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-    ofPushStyle();
+
     commonAssets->draw();
     textObject.x = objectX.update();
 
@@ -221,7 +218,10 @@ void MyScene1::draw(){ //draw scene 1 here
 #ifdef USE_TRIANGLE
     triangulation.reset();
 #endif
-    
+    ofPopStyle();
+    ofSetColor(255);
+    image.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+    ofPushStyle();
 };
 
 void MyScene1::keyPressed(int key)
