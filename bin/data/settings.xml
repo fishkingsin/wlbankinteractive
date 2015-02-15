@@ -468,3 +468,9 @@
         <val_0>34</val_0>
     </SLOGO_TIME_OUT>
 </LogoScene>
+<MINIMIZE>
+    <val_0>0</val_0>
+</MINIMIZE>
+<ALWAYS_ON_TOP>
+    <val_0>0</val_0>
+</ALWAYS_ON_TOP>

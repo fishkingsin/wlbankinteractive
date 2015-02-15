@@ -42,11 +42,24 @@ public:
 //    ofParameter<string> currentIdleString;
     ofParameter<string> currentSceneIndex;
     ofParameter<string> currentSceneID;
-    float currentIdleTime;
-//    ofxPanel gui;
-    ofxControlPanel gui;
+    ofParameter <string> status;
+    ofParameter<bool>bLogFile;
+    
     ofParameter<bool> toggleDrawGUI;
+    ofParameter<bool>toggleMinimize;
+    ofParameter<int> windowPositionX;
+    ofParameter<int> windowPositionY;
+    ofParameter<bool>bAlwaysOnTop;
+    
+
+    
+    float currentIdleTime;
+    
+    ofxControlPanel gui;
+    void enableLogToFile(bool &b);
+    void enableMinize(bool &b);
     void toggleDebug(bool& _value);
+    void enableAlwaysOnTop(bool &b);
     
     void nextScene();
 //    enum Scenes{ SCENE_1 = 1, SCENE_2, SCENE_3 , SCENE_4 ,SCENE_6, SCENE_7,SCENE_8, SCENE_LOGO };
@@ -60,9 +73,7 @@ public:
     ofEvent <customeOSCData> trackerEvent;
     ofVideoPlayer player;
     commonOpenGlInfo info;
-    ofParameter <string> status;
-    ofParameter<bool>bLogFile;
-    void enableLogToFile(bool &b);
+    
     ofxXmlSettings settings;
     vector<ofColor>curtainColors;
     
@@ -78,10 +89,7 @@ public:
     //MySceneLiquidfun sceneLiquidfun;
 
 //    ofDirectory dirVideo;
-    ofParameter<bool>toggleMinimize;
-    ofParameter<int> windowPositionX;
-    ofParameter<int> windowPositionY;
-    void enableMinize(bool &b);
     vector<int>sceneSequence;
     int sceneIndex;
+    
 };

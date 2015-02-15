@@ -65,12 +65,15 @@ void ofApp::setup(){
         }
         if(settings.pushTag("SHAPE"))
         {
+
             ofSetWindowShape(settings.getValue("WIDTH", 422), settings.getValue("HEIGHT", 480));
             settings.popTag();
         }
         if(settings.pushTag("POSITION"))
         {
-            ofSetWindowPosition(settings.getValue("X", 0), settings.getValue("Y", 0));
+            windowPositionX = settings.getValue("X", 0);
+            windowPositionY =  settings.getValue("Y", 0);
+
             settings.popTag();
         }
         settings.popTag();
@@ -167,6 +170,10 @@ void ofApp::setup(){
     gui.setWhichPanel(0);
     gui.setWhichColumn(0);
     gui.addToggle(toggleDrawGUI.set("DEBUG_TOGGLE", true));
+    gui.addToggle(toggleMinimize.set("MINIMIZE", true));
+    gui.addToggle(bAlwaysOnTop.set("ALWAYS_ON_TOP", true));
+    toggleMinimize.addListener(this, &ofApp::enableMinize);
+    bAlwaysOnTop.addListener(this, &ofApp::enableAlwaysOnTop);
     gui.addGroup(commonAssets.paraGroup);
     
     toggleDrawGUI.addListener(this, &ofApp::toggleDebug);
@@ -425,9 +432,13 @@ void ofApp::keyPressed(int key){
         case OF_KEY_RIGHT:
             nextScene();
             break;
+        case 'm':
+            toggleMinimize.set(!toggleMinimize.get());
+            break;
         default:
             sceneManager->keyPressed(key);
             break;
+            
     }
     
 }
@@ -540,35 +551,63 @@ void ofApp::handleToNextScene(toNextScene &tonextscene)
     }
 }
 
-//void ofApp::tweenEnd(int &i)
-//{
-//    if(commonAssets.bAuto)
-//    {
-//        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEnd);
-////        alphaTween.setParameters(0,easingeLinear,ofxTween::easeIn,255,0,1000,messageVideo.getDuration()*1000);
-//        ofAddListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-//    }
-//    else{
-//        ofLogWarning() << "Auto mode off has scene incoming";
-//    }
-//}
-//
-//void ofApp::tweenEasingOutEnd(int &i)
-//{
-//    if(commonAssets.bAuto)
-//    {
-//
-////        messageVideo.stop();
-//
-//        ofRemoveListener(alphaTween.end_E, this, &ofApp::tweenEasingOutEnd);
-//        
-//    }
-//    else{
-//        ofLogWarning() << "Auto mode off has scene incoming";
-//    }
-//    
-//}
 void ofApp::enableLogToFile(bool &b)
 {
     ofLogToFile(ofGetTimestampString()+".txt", b);
+}
+void ofApp::enableMinize(bool &b)
+{
+    if(b)
+    {
+        
+        ofSetWindowShape(CANVAS_WIDTH, CANVAS_HEIGHT);
+        ofSetWindowPosition(windowPositionX , windowPositionY);
+    }
+    else{
+        ofSetWindowShape(1024,768);
+        ofSetWindowPosition(windowPositionX , windowPositionY);
+    }
+}
+void ofApp::enableAlwaysOnTop(bool &b)
+{
+    if(b)
+    {
+#if TARGET_OS_WIN32
+        CRect rect;
+        
+        // get the current window size and position
+        GetWindowRect( rect );
+        
+        // now change the size, position, and Z order
+        // of the window.
+        ::SetWindowPos(m_hWnd ,       // handle to window
+                       HWND_TOPMOST,  // placement-order handle
+                       rect.left,     // horizontal position
+                       rect.top,      // vertical position
+                       rect.Width(),  // width
+                       rect.Height(), // height
+                       SWP_SHOWWINDOW // window-positioning options);
+                       }
+#endif
+    }
+    else{
+#if TARGET_OS_WIN32
+        CRect rect;
+        
+        // get the current window size and position
+        GetWindowRect( rect );
+        
+        // now change the size, position, and Z order
+        // of the window.
+        ::SetWindowPos(m_hWnd ,       // handle to window
+                       HWND_NOTOPMOST,  // placement-order handle
+                       rect.left,     // horizontal position
+                       rect.top,      // vertical position
+                       rect.Width(),  // width
+                       rect.Height(), // height
+                       SWP_SHOWWINDOW // window-positioning options);
+        }
+#endif
+        
+    }
 }
