@@ -572,41 +572,16 @@ void ofApp::enableAlwaysOnTop(bool &b)
 {
     if(b)
     {
-#if TARGET_OS_WIN32
-        CRect rect;
-        
-        // get the current window size and position
-        GetWindowRect( rect );
-        
-        // now change the size, position, and Z order
-        // of the window.
-        ::SetWindowPos(m_hWnd ,       // handle to window
-                       HWND_TOPMOST,  // placement-order handle
-                       rect.left,     // horizontal position
-                       rect.top,      // vertical position
-                       rect.Width(),  // width
-                       rect.Height(), // height
-                       SWP_SHOWWINDOW // window-positioning options);
-                       }
+#if TARGET_OS_WIN32 
+		HWND AppWindow = GetActiveWindow();
+			SetWindowPos(AppWindow, HWND_TOPMOST, NULL, NULL, NULL, NULL, SWP_NOMOVE | SWP_NOSIZE);
 #endif
     }
     else{
 #if TARGET_OS_WIN32
-        CRect rect;
-        
-        // get the current window size and position
-        GetWindowRect( rect );
-        
-        // now change the size, position, and Z order
-        // of the window.
-        ::SetWindowPos(m_hWnd ,       // handle to window
-                       HWND_NOTOPMOST,  // placement-order handle
-                       rect.left,     // horizontal position
-                       rect.top,      // vertical position
-                       rect.Width(),  // width
-                       rect.Height(), // height
-                       SWP_SHOWWINDOW // window-positioning options);
-        }
+        HWND AppWindow = GetActiveWindow();
+			SetWindowPos(AppWindow, HWND_NOTOPMOST, NULL, NULL, NULL, NULL, SWP_NOMOVE | SWP_NOSIZE);
+			
 #endif
         
     }
