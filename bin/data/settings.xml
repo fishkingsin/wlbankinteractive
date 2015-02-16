@@ -193,10 +193,10 @@
         <val_0>135</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
-        <val_0>10.4231</val_0>
+        <val_0>5.9</val_0>
     </S1_MIN_RADIUS>
     <S1_MAX_RADIUS>
-        <val_0>38.1269</val_0>
+        <val_0>24.3692</val_0>
     </S1_MAX_RADIUS>
     <MIN_DISTANCE>
         <val_0>14.6154</val_0>
@@ -472,5 +472,5 @@
     <val_0>0</val_0>
 </MINIMIZE>
 <ALWAYS_ON_TOP>
-    <val_0>0</val_0>
+    <val_0>1</val_0>
 </ALWAYS_ON_TOP>
