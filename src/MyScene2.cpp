@@ -175,8 +175,8 @@ void MyScene2::draw()
 {
     ofPushStyle();
     ofSetColor( commonAssets->maskWhite, commonAssets->maskWhite, commonAssets->maskWhite ,counterForAlpha.update());
-    ofCircle(commonAssets->elementCenterX.get(),
-             commonAssets->elementCenterY.get(), radius);
+    image.draw(0,0);
+
     ofPopStyle();
 #if DEBUG
     for(int i=0; i<circles.size(); i++) {
@@ -215,7 +215,7 @@ void MyScene2::sceneWillAppear( ofxScene * fromScreen )
     counter = 0 ;
 
     
-    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,0);
+    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,1000);
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )

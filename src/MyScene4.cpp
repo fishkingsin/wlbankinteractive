@@ -162,6 +162,7 @@ void MyScene4::draw()
     ofSetColor(commonAssets->maskWhite, commonAssets->maskWhite, commonAssets->maskWhite,counterForAlpha.update());
     ofPushMatrix();
     svg.draw();
+    image.draw(0,0);
     ofPopMatrix();
 //    //    float radius =  CANVAS_HEIGHT*0.3;
 //    ofCircle(commonAssets->elementCenterX.get(),
@@ -223,7 +224,7 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
     init();
     isStart = true;
 
-    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,0);
+    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,1000);
 }
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
