@@ -37,8 +37,6 @@ public:
     
     ofParameter<string>fps;
 
-    ofParameter<bool> timePriority;
-    ofParameter<float> maxIdleTime;
 //    ofParameter<string> currentIdleString;
     ofParameter<string> currentSceneIndex;
     ofParameter<string> currentSceneID;
@@ -53,7 +51,6 @@ public:
     
 
     
-    float currentIdleTime;
     
     ofxControlPanel gui;
     void enableLogToFile(bool &b);

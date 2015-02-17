@@ -108,6 +108,11 @@ public:
     ofParameter<int>balloonG;
     ofParameter<int>balloonB;
     ofParameter<float>balloonScale;
+    ofParameter<bool> timePriority;
+    ofParameter<float> maxIdleTime;
+    
+    float currentIdleTime;
+        ofParameter<string> idleTime;
 };
 
 #endif

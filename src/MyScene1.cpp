@@ -20,6 +20,9 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     font.loadFont("LiHei.ttf", 20);
     image.loadImage("scene1/question-01.png");
     paraGroup.setName("Scene1");
+    paraGroup.add( timePriority.set("Toggle Time Prioirty",false));
+    paraGroup.add( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
+    paraGroup.add(idleTime.set("idleTime",""));
     paraGroup.add(numParticle.set("PARTICLE_SIZE",""));
     paraGroup.add(maxParticle.set("S1_MAX_PARTICLE",100,1,1000));
     paraGroup.add(minRadius.set("S1_MIN_RADIUS",8,1,50));
@@ -73,7 +76,30 @@ void MyScene1::setup(){  //load your scene 1 assets here...
 
 
 void MyScene1::update(float dt){ //update scene 1 here
-    
+    if(timePriority)
+    {
+        int idle = ofGetElapsedTimef() - currentIdleTime;
+        //        currentIdleString = ofToString(idle);
+        if(idle>(maxIdleTime*60))
+        {
+            currentIdleTime = ofGetElapsedTimef();
+            if(!isFireEvent)
+            {
+                if(commonAssets->bAuto)
+                {
+                    edges.clear();
+                    isFireEvent = true;
+                    isStart = false;
+                }
+                else{
+                    circles.clear();
+                    commonAssets->reset();
+                }
+                
+            }
+        }
+        idleTime = ofToString(idle);
+    }
     numParticle  = ofToString(circles.size());
     box2dForBalloon.update();
     box2d.update();

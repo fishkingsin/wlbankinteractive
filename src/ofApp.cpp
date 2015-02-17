@@ -197,8 +197,6 @@ void ofApp::setup(){
     
     //    gui.add( Mode.set("Mode",0,0,3));
     
-    gui.addToggle( timePriority.set("Toggle Time Prioirty",false));
-    gui.addSlider( maxIdleTime.set("Max Idle(min)",0.5,0,60.0f));
     gui.setWhichColumn(1);
     
     gui.addFileLister("VideoFiles", &videoFileLister, 200, 100);
@@ -338,16 +336,7 @@ void ofApp::update(){
         ofNotifyEvent(trackerEvent,data,this);
         
     }
-    if(timePriority)
-    {
-        int idle = ofGetElapsedTimef() - currentIdleTime;
-        //        currentIdleString = ofToString(idle);
-        if(idle>(maxIdleTime*60))
-        {
-            currentIdleTime = ofGetElapsedTimef();
-            nextScene();
-        }
-    }
+
     fps = ofToString(ofGetFrameRate());
     
     float dt = 0.016666666;
