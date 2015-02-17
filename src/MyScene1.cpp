@@ -291,6 +291,7 @@ void MyScene1::mousePressed( int x, int y, int button ){
 
 //scene notifications
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
+    currentIdleTime = ofGetElapsedTimef();
     if(!isSetupBalloon)
     {
         isSetupBalloon = true;
