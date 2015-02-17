@@ -301,8 +301,8 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
         // first we add just a few circles
         for (int i=0; i<8; i++) {
             ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-            circle.get()->setPhysics(1, 0.0, 500);
-            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i), 1);
+            circle.get()->setPhysics(500, 0.0, 500);
+            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i*2), (i==7)?10:4);
             circlesForBalloon.push_back(circle);
         }
         
