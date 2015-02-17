@@ -549,7 +549,7 @@ void ofApp::enableMinize(bool &b)
     if(b)
     {
         
-        ofSetWindowShape(CANVAS_WIDTH, CANVAS_HEIGHT);
+        ofSetWindowShape(CANVAS_WIDTH*2, CANVAS_HEIGHT);
         ofSetWindowPosition(windowPositionX , windowPositionY);
     }
     else{
