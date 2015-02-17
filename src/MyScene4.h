@@ -52,7 +52,9 @@ public:
     ofParameter<float>minRScale;
     ofParameter<float>maxRScale;
     ofParameter<float>radius;
-        ofParameter<float>pot_radius;
+    ofParameter<float>pot_radius;
+    ofParameter<float>logoTimeout;
+    ofParameter<float>logoDelay;
     float counter;
         ofxEasingLinear linear;
     ofxTween  counterForAlpha;

@@ -7,7 +7,7 @@
 //
 
 #include "CustomParticle.h"
-void CustomParticle::setupTheCustomData(ofColor color , int size , float _startSize) {
+void CustomParticle::setupTheCustomData(ofColor color , int size , float _startSize , float col , float row) {
     
     // we are using a Data pointer because
     // box2d needs to have a pointer not
@@ -16,11 +16,12 @@ void CustomParticle::setupTheCustomData(ofColor color , int size , float _startS
     Data * theData = (Data*)getData();
     
     theData->id = ofRandom(0, 100);
-    
+    theData->cellCol = col;
+    theData->cellRow = row;
     theData->color = color;
 //    theData->image = &image;
     theData->r = ofRandom(size,size*2);
-    theData->color.a = ofMap(theData->r,size,size*2,255,10,true);
+//    theData->color.a = ofMap(theData->r,size,size*2,255,10,true);
     targetR = size;
     tween.setParameters(0,easing,ofxTween::easeOut,_startSize, size,2000,0);
     ofAddListener(tween.end_E, this, &CustomParticle::tweenEnd);

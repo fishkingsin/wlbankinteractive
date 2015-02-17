@@ -17,6 +17,8 @@ void MyScene4::setup()
         svg.getPathAt(i).setUseShapeColor(false);
     }
     paraGroup.setName("Scene4");
+    paraGroup.add(logoTimeout.set("S4_LOGO_TIMEOUT",5000,1000,10000));
+    paraGroup.add(logoDelay.set("S4_LOGO_DELAY",5000,1000,10000));
     paraGroup.add(maxParitcle.set("S4_MAX_PARTICLE",400,1,1000));
     paraGroup.add(minRadius.set("S4_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S4_MAX_RADIUS",20,1,50));
@@ -224,7 +226,7 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
     init();
     isStart = true;
 
-    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,1000);
+    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,logoTimeout,logoDelay);
 }
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )

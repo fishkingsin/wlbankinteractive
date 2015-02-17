@@ -11,6 +11,8 @@
 void MyScene2::setup()
 {
     paraGroup.setName("Scene2");
+    paraGroup.add(logoTimeout.set("S2_LOGO_TIMEOUT",5000,1000,10000));
+    paraGroup.add(logoDelay.set("S2_LOGO_DELAY",5000,1000,10000));
     paraGroup.add(maxParitcle.set("S2_MAX_PARTICLE",3000,1,10000));
     paraGroup.add(minRadius.set("S2_MIN_RADIUS",8,1,50));
     paraGroup.add(maxRadius.set("S2_MAX_RADIUS",20,1,50));
@@ -215,7 +217,7 @@ void MyScene2::sceneWillAppear( ofxScene * fromScreen )
     counter = 0 ;
 
     
-    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,timeOut*1000*0.5,1000);
+    counterForAlpha.setParameters(0,linear,ofxTween::easeOut,0,255,logoTimeout,logoDelay);
 }
 //scene notifications
 void MyScene2::sceneWillDisappear( ofxScene * toScreen )

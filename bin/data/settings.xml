@@ -190,7 +190,7 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>350</val_0>
+        <val_0>177</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
         <val_0>3.82692</val_0>
@@ -270,6 +270,12 @@
     <balloonScale>
         <val_0>0.619231</val_0>
     </balloonScale>
+    <Toggle_Time_Prioirty>
+        <val_0>1</val_0>
+    </Toggle_Time_Prioirty>
+    <Max_Idle_min_>
+        <val_0>4.38462</val_0>
+    </Max_Idle_min_>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
@@ -293,6 +299,12 @@
     <S2_LOGO_RADIUS>
         <val_0>89.2692</val_0>
     </S2_LOGO_RADIUS>
+    <S2_LOGO_TIMEOUT>
+        <val_0>5000</val_0>
+    </S2_LOGO_TIMEOUT>
+    <S2_LOGO_DELAY>
+        <val_0>5000</val_0>
+    </S2_LOGO_DELAY>
 </Scene2>
 <Scene3>
     <S3_MIN_RADIUS>
@@ -351,6 +363,12 @@
     <S4_POT_RADIUS>
         <val_0>126.6</val_0>
     </S4_POT_RADIUS>
+    <S4_LOGO_TIMEOUT>
+        <val_0>5000</val_0>
+    </S4_LOGO_TIMEOUT>
+    <S4_LOGO_DELAY>
+        <val_0>5000</val_0>
+    </S4_LOGO_DELAY>
 </Scene4>
 <Scene7>
     <S7_MAX_PARTICLE>

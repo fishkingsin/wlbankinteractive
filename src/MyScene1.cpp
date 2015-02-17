@@ -114,7 +114,7 @@ void MyScene1::update(float dt){ //update scene 1 here
         }
         
     }
-    if(circles.size()>maxParticle)
+    if(circles.size()>maxParticle && timePriority)
     {
         if(!isFireEvent)
         {
@@ -137,9 +137,12 @@ void MyScene1::update(float dt){ //update scene 1 here
     
     for (int i = 0 ; i < circles.size() ; i++) {
         circles[i]->update();
+        Data* theData = (Data*)circles[i].get()->getData();
         commonAssets->setParticleAngle(circles[i]->index, (circles[i]->getRotation()/360.0f)*TWO_PI);
         commonAssets->setParticleVertex(circles[i]->index, circles[i]->getPosition());
         commonAssets->setParticleNormal(circles[i]->index, ofVec3f(circles[i]->getRadius(),0,0));
+        commonAssets->setParticleTexCoords(circles[i]->index, theData->cellCol, theData->cellRow);
+        commonAssets->setParticleColor(circles[i]->index, theData->color);
         
     }
     commonAssets->updateAttribtuteData();
@@ -295,10 +298,10 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
         anchor.setup(box2dForBalloon.getWorld(), minInputX, minInputY, 1);
         
         // first we add just a few circles
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<8; i++) {
             ofPtr<ofxBox2dCircle> circle = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-            circle.get()->setPhysics(10, 0.0, 100);
-            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i*5), 1);
+            circle.get()->setPhysics(1, 0.0, 1);
+            circle.get()->setup(box2dForBalloon.getWorld(), minInputX, minInputY - (i), 1);
             circlesForBalloon.push_back(circle);
         }
         
@@ -414,16 +417,16 @@ void MyScene1::createParticle(float _x , float _y , ofColor color)
     float y = MIN(MAX(0,_y),CANVAS_HEIGHT);
     circles.push_back(ofPtr<CustomParticle>(new CustomParticle));
     float r = commonAssets->goldenRatioBank[circles.size()%commonAssets->goldenRatioBank.size()];
-    //    circles.back().get()->addForce(ofVec2f(0,10), 10);
     circles.back().get()->setPhysics(density+r,bounce,fiction);
     circles.back().get()->setup(box2d.getWorld(),x,y, r*0.1);
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
-    ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, ofMap(r, minRadius, maxRadius, 255,minAlpha));
-    
-    circles.back().get()->setupTheCustomData(c,r,5);
+    ofColor c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, 255);
+
+    circles.back().get()->setupTheCustomData(c,r,5 ,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows));
     circles.back().get()->index = circles.size()-1;
-    commonAssets->setParticleTexCoords(circles.size()-1,(int)ofRandom(commonAssets->cellColls),(int)ofRandom(commonAssets->cellRows) );
-    commonAssets->setParticleColor(circles.size()-1, c);
+    Data* theData = (Data*)circles.back().get()->getData();
+    commonAssets->setParticleTexCoords(circles.size()-1, theData->cellCol, theData->cellRow);
+    commonAssets->setParticleColor(circles.size()-1, theData->color);
     commonAssets->setParticleNormal(circles.size()-1,ofVec3f(circles.back().get()->getRadius(),0,0));
     
     commonAssets->divAtt[circles.size()-1] = 1.0f/commonAssets->cellColls;

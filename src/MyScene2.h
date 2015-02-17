@@ -30,11 +30,11 @@ public:
     void sceneWillDisappear( ofxScene * toScreen );
     void sceneDidAppear();
     void sceneDidDisappear(ofxScene *fromScreen);
-//    ParticleSystem particleSystem;
-
+    //    ParticleSystem particleSystem;
+    
     ofImage image;
     bool isStart;
-
+    
     CommonAssets *commonAssets;
     
     //box2d
@@ -49,7 +49,9 @@ public:
     float prevElapse;
     ofParameter<string>counterString;
     ofParameter<float>minRScale;
-        ofParameter<float>maxRScale;
+    ofParameter<float>maxRScale;
+    ofParameter<float>logoTimeout;
+    ofParameter<float>logoDelay;
     ofxTween counterForAlpha;
     ofxEasingLinear linear;
 };
