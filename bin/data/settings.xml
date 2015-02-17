@@ -190,7 +190,7 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>177</val_0>
+        <val_0>346</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
         <val_0>3.82692</val_0>
@@ -300,7 +300,7 @@
         <val_0>89.2692</val_0>
     </S2_LOGO_RADIUS>
     <S2_LOGO_TIMEOUT>
-        <val_0>5000</val_0>
+        <val_0>2557.69</val_0>
     </S2_LOGO_TIMEOUT>
     <S2_LOGO_DELAY>
         <val_0>5000</val_0>
@@ -364,7 +364,7 @@
         <val_0>126.6</val_0>
     </S4_POT_RADIUS>
     <S4_LOGO_TIMEOUT>
-        <val_0>5000</val_0>
+        <val_0>2800</val_0>
     </S4_LOGO_TIMEOUT>
     <S4_LOGO_DELAY>
         <val_0>5000</val_0>

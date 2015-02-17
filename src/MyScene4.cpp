@@ -11,7 +11,7 @@
 
 void MyScene4::setup()
 {
-    image.loadImage("backgrounds/02.logo02-01.png");
+    
     svg.load("pot.svg");
     for(int i = 0 ; i < svg.getNumPath(); i++)
     {
@@ -81,6 +81,7 @@ void MyScene4::init()
     prevElapse = ofGetElapsedTimef();
     counter = 0;
     setupEdge();
+    image = commonAssets->bg;
 
     //    ofDirectory *dir = &commonAssets->dir;
     //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));

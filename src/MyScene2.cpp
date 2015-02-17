@@ -89,14 +89,17 @@ void MyScene2::init()
         circle.get()->setPhysics(100, 0.0, 150);
         circle.get()->setup(box2d.getWorld(), x, y , r);
         circles.push_back(circle);
-//        ((maxRadius.get()-r)/maxRadius.get())*255
         float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
-//        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255));
-        commonAssets->setParticleColor(i, ofColor::white);
+        ofColor c = ofColor::white;
+        float col = (int)ofRandom(commonAssets->cellColls);
+        float row = (int)ofRandom(commonAssets->cellRows);
+        if(row!=0)
+        {
+            c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, 255);
+        }
+        commonAssets->setParticleColor(i, c);
 
         commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(minRScale,maxRScale),0,0));
-        int col = (int)ofRandom(0, commonAssets->cellColls );
-        int row = (int)ofRandom(0, commonAssets->cellRows);
         commonAssets->setParticleTexCoords(i,col,row );
         commonAssets->divAtt[i] = 1.0f/commonAssets->cellColls;
         //        commonAssets->angle[i] = PI;//ofRandom(-PI,PI);
