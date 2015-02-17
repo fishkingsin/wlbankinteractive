@@ -107,6 +107,7 @@ public:
     ofParameter<int>balloonR;
     ofParameter<int>balloonG;
     ofParameter<int>balloonB;
+    ofParameter<float>balloonScale;
 };
 
 #endif

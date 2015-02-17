@@ -49,7 +49,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     minObjectAppearRight.addListener(this, &MyScene1::objectAppearRegionUpdate);
     maxObjectAppearRight.addListener(this, &MyScene1::objectAppearRegionUpdate);
     
-
+    
     paraGroup.add(objectDecay.set("objectDecay",0,0,1));
     paraGroup.add(objectAge.set("objectAge",0,0,10));
     paraGroup.add(objectDuration.set("objectDuration",1000,1000,100000));
@@ -58,6 +58,7 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add( balloonR.set("balloonR",1,1,255));
     paraGroup.add( balloonG.set("balloonG",1,1,255));
     paraGroup.add( balloonB.set("balloonB",1,1,255));;
+    paraGroup.add( balloonScale .set("balloonScale",1,0,1));;
     box2d.init();
     box2d.setGravity(0, -2);
     box2d.setFPS(60.0);
@@ -107,7 +108,7 @@ void MyScene1::update(float dt){ //update scene 1 here
         
     }
     float diff = ofGetElapsedTimeMillis() - counter;
-
+    
     for (int i = 0 ; i < circles.size() ; i++) {
         circles[i]->update();
         commonAssets->setParticleAngle(circles[i]->index, (circles[i]->getRotation()/360.0f)*TWO_PI);
@@ -129,16 +130,16 @@ void MyScene1::update(float dt){ //update scene 1 here
 
 void MyScene1::draw(){ //draw scene 1 here
     
-
+    
     commonAssets->draw();
     textObject.x = objectX.update();
-
+    
     if(objectAge>0 && objectX.isRunning())
     {
-            anchor.setPosition(textObject);
-//        circlesForBalloon.back()->setPosition(textObject.x,textObject.y-50);
-
-
+        anchor.setPosition(textObject);
+        //        circlesForBalloon.back()->setPosition(textObject.x,textObject.y-50);
+        
+        
         ofPushStyle();
         ofSetColor(balloonR,balloonG,balloonB);
         ofPath path;
@@ -151,12 +152,16 @@ void MyScene1::draw(){ //draw scene 1 here
             p1 *= OFX_BOX2D_SCALE;
             p2 *= OFX_BOX2D_SCALE;
             path.lineTo(p1.x,p1.y);
-                        path.lineTo(p2.x,p2.y);
+            path.lineTo(p2.x,p2.y);
         }
         path.draw();
         ofPoint point = circlesForBalloon.back()->getPosition();
-        balloonImage.draw(point.x-balloonImage.width*0.5 , point.y-balloonImage.height);
-
+        ofPushMatrix();
+        ofTranslate(point.x, point.y);
+        ofScale(balloonScale, balloonScale);
+        balloonImage.draw(-balloonImage.width*0.5 , -balloonImage.height);
+        ofPopMatrix();
+        
         
     }
     if(bDebug)
@@ -166,7 +171,7 @@ void MyScene1::draw(){ //draw scene 1 here
         ofNoFill();
         ofSetColor(ofColor::wheat);
         ofRect( minInputX , minInputY, maxInputX - minInputX , maxInputY-minInputY ) ;
-
+        
         ofSetColor(ofColor::yellow);
         ofRect( minObjectAppearLeft , minInputY, maxObjectAppearLeft - minObjectAppearLeft , maxInputY-minInputY ) ;
         ofSetColor(ofColor::red);
@@ -178,10 +183,10 @@ void MyScene1::draw(){ //draw scene 1 here
             ofSetColor(ofColor::gold);
             ofLine(textObject.x,textObject.y-20,textObject.x,textObject.y+20);
         }
-            ofSetColor(ofColor::purple);
-            ofLine( prevPoint , currPoint);
+        ofSetColor(ofColor::purple);
+        ofLine( prevPoint , currPoint);
         
-
+        
         ofPopStyle();
         
         
@@ -285,7 +290,7 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
             }
             
             joint.get()->setLength(1);
-//            joint.get()->setFrequency(1000);
+            //            joint.get()->setFrequency(1000);
             joint.get()->setDamping(0.5);
             joints.push_back(joint);
         }
@@ -349,7 +354,7 @@ void MyScene1::eventsIn(customeOSCData & data)
                 textObject = currPoint;
                 for (int i=0; i<circlesForBalloon.size(); i++) {
                     circlesForBalloon[i]->setPosition(minObjectAppearLeft, circlesForBalloon[i]->getPosition().y);
-
+                    
                 }
             }
             else if(objectAppearRight.inside(currPoint) && objectAppearRight.inside(prevPoint) && currPoint.x<prevPoint.x )
@@ -362,9 +367,9 @@ void MyScene1::eventsIn(customeOSCData & data)
                 }
             }
         }
-
-            objectAge.set(objectAge.getMax());
-
+        
+        objectAge.set(objectAge.getMax());
+        
         if(abs(distance)>minDis)
         {
             
