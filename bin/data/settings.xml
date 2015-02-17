@@ -190,13 +190,13 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>135</val_0>
+        <val_0>223</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
-        <val_0>5.9</val_0>
+        <val_0>6.46538</val_0>
     </S1_MIN_RADIUS>
     <S1_MAX_RADIUS>
-        <val_0>24.3692</val_0>
+        <val_0>38.6923</val_0>
     </S1_MAX_RADIUS>
     <MIN_DISTANCE>
         <val_0>14.6154</val_0>
@@ -267,6 +267,9 @@
     <balloonB>
         <val_0>255</val_0>
     </balloonB>
+    <balloonScale>
+        <val_0>1</val_0>
+    </balloonScale>
 </Scene1>
 <Scene2>
     <S2_MAX_PARTICLE>
