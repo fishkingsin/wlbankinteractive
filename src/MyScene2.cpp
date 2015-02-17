@@ -91,8 +91,9 @@ void MyScene2::init()
         circles.push_back(circle);
 //        ((maxRadius.get()-r)/maxRadius.get())*255
         float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
-        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255));
-//        commonAssets->setParticleColor(i, ofColor::fromHsb(0, 0, 255,ofMap(r, minRadius.get(), maxRadius.get() , 255, 100)));
+//        commonAssets->setParticleColor(i, ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255,255));
+        commonAssets->setParticleColor(i, ofColor::white);
+
         commonAssets->setParticleNormal(i,ofVec3f(r*ofRandom(minRScale,maxRScale),0,0));
         int col = (int)ofRandom(0, commonAssets->cellColls );
         int row = (int)ofRandom(0, commonAssets->cellRows);

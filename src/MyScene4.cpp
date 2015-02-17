@@ -11,6 +11,7 @@
 
 void MyScene4::setup()
 {
+    image.loadImage("backgrounds/02.logo02-01.png");
     svg.load("pot.svg");
     for(int i = 0 ; i < svg.getNumPath(); i++)
     {
@@ -77,14 +78,10 @@ void MyScene4::init()
     ofClear(0,0,0,0);
     commonAssets->srcFbo.end();
     
-    //    maskFbo.begin();
-    //    commonAssets->bg.draw(0,0);
-    //    maskFbo.end();
-    
     prevElapse = ofGetElapsedTimef();
     counter = 0;
     setupEdge();
-    image = commonAssets->bg;
+
     //    ofDirectory *dir = &commonAssets->dir;
     //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
     col = 0;//(int)ofRandom(0, commonAssets->cellColls );
@@ -134,7 +131,7 @@ void MyScene4::update(float dt)
 //        counterForAlpha = MAX(counterForAlpha,counter/timeOut);
 //        ofLogVerbose()<<"counterForAlpha"<<counterForAlpha;
 //        commonAssets->shader.setUniform1f("time", counterForAlpha.update() );
-        commonAssets->shader.setUniformTexture("maskTex", commonAssets->bg.getTextureReference(), 1 );
+        commonAssets->shader.setUniformTexture("maskTex", image.getTextureReference(), 1 );
         commonAssets->srcFbo.draw(0, 0);
         
         
@@ -188,7 +185,7 @@ void MyScene4::draw()
         ofPopStyle();
         ofSetColor(255);
         commonAssets-> srcFbo.draw(0, 0);
-        commonAssets->bg.draw(0,0);
+        image.draw(0,0);
         
     }
     
