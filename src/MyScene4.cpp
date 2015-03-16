@@ -7,11 +7,8 @@
 //
 
 #include "MyScene4.h"
-
-
 void MyScene4::setup()
 {
-    
     svg.load("pot.svg");
     for(int i = 0 ; i < svg.getNumPath(); i++)
     {
@@ -43,8 +40,15 @@ void MyScene4::setup()
     //    setupEdge();
     
     
+    ofFile file("./scene4/sequence.txt");
+    string s = file.readToBuffer().getText();
     
-    
+    vector <string> sequence = ofSplitString(s, ",");
+    for(int i = 0 ; i < sequence.size() ; i++)
+    {
+        particleSequence.push_back(ofToInt(sequence[i]));
+    }
+    particleSequenceIndex = 0;
     
 }
 void MyScene4::init()
@@ -82,11 +86,10 @@ void MyScene4::init()
     counter = 0;
     setupEdge();
     image = commonAssets->bg;
-
     //    ofDirectory *dir = &commonAssets->dir;
     //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
-    col = 0;//(int)ofRandom(0, commonAssets->cellColls );
-    row = 2;//(int)ofRandom(0, commonAssets->cellRows);
+    col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
+    row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
     for(int i = 0 ; i < maxParitcle.get(); i++)
     {
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
@@ -229,7 +232,8 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
 {
-    
+    particleSequenceIndex++;
+    particleSequenceIndex %= particleSequence.size();
 }
 void MyScene4::sceneDidAppear()
 {

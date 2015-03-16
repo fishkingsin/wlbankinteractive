@@ -65,7 +65,8 @@ public:
     bool isStart;
     
     ofxSVG svg;
-
+    vector<int> particleSequence;
+    int particleSequenceIndex;
 };
 
 
