@@ -57,7 +57,7 @@
     <val_0>0</val_0>
 </audo>
 <DEBUG_TOGGLE>
-    <val_0>0</val_0>
+    <val_0>1</val_0>
 </DEBUG_TOGGLE>
 <S3_MIN_RADIUS>
     <val_0>2.69615</val_0>
@@ -337,7 +337,7 @@
 </Scene3>
 <Scene4>
     <S4_MAX_PARTICLE>
-        <val_0>273</val_0>
+        <val_0>319</val_0>
     </S4_MAX_PARTICLE>
     <S4_MIN_RADIUS>
         <val_0>3.07308</val_0>
@@ -352,10 +352,10 @@
         <val_0>15</val_0>
     </S4_TIME_OUT>
     <S4_MIN_R_SCALE>
-        <val_0>0.969231</val_0>
+        <val_0>1.13077</val_0>
     </S4_MIN_R_SCALE>
     <S4_MAX_R_SCALE>
-        <val_0>1.04615</val_0>
+        <val_0>1.21538</val_0>
     </S4_MAX_R_SCALE>
     <S4_LOGO_RADIUS>
         <val_0>131.469</val_0>
