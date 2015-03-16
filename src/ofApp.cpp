@@ -16,12 +16,21 @@ void ofApp::setup(){
 //    sceneSequence.push_back(SCENE_1);
 //    sceneSequence.push_back(SCENE_2);
 //    sceneSequence.push_back(SCENE_LOGO);
-    sceneSequence.push_back(SCENE_1);
-    sceneSequence.push_back(SCENE_4);
-    sceneSequence.push_back(SCENE_LOGO);
-    sceneSequence.push_back(SCENE_1);
-    sceneSequence.push_back(SCENE_4);
-    sceneSequence.push_back(SCENE_LOGO);
+    ofFile file("sequence.txt");
+    string s = file.readToBuffer().getText();
+    
+    vector <string> sequence = ofSplitString(s, ",");
+    for(int i = 0 ; i < sequence.size() ; i++)
+    {
+        sceneSequence.push_back(ofToInt(sequence[i]));
+    }
+
+//    sceneSequence.push_back(SCENE_1);
+//    sceneSequence.push_back(SCENE_4);
+//    sceneSequence.push_back(SCENE_LOGO);
+//    sceneSequence.push_back(SCENE_1);
+//    sceneSequence.push_back(SCENE_4);
+//    sceneSequence.push_back(SCENE_LOGO);
     sceneIndex = 1;
     if(glewIsSupported("GL_VERSION_1_4  GL_ARB_point_sprite")) {
         info.bPointSpritesSupported = true;

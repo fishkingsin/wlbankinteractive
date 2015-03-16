@@ -9,6 +9,15 @@
 #include "MyScene1.h"
 MyScene1::MyScene1()
 {
+    ofFile file("./scene1/sequence.txt");
+    string s = file.readToBuffer().getText();
+    
+    vector <string> sequence = ofSplitString(s, ",");
+    for(int i = 0 ; i < sequence.size() ; i++)
+    {
+        particleSequence.push_back(ofToInt(sequence[i]));
+    }
+    particleSequenceIndex = 0;
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
@@ -437,8 +446,9 @@ void MyScene1::createParticle(float _x , float _y , ofColor color)
     float angle = (int)(352+ofRandom(commonAssets->minHue,commonAssets->maxHue))%360;
     
     ofColor c = ofColor::white;
-    float col = (int)ofRandom(commonAssets->cellColls);
-    float row = (int)ofRandom(commonAssets->cellRows);
+    particleSequenceIndex = ofRandom(particleSequence.size());
+    int col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
+    int row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
     if(row!=0)
     {
         c = ofColor::fromHsb(angle, ofRandom(commonAssets->minSaturation,commonAssets->maxSaturation)*255, ofRandom(commonAssets->minBright,commonAssets->maxBright)*255, 255);

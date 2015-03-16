@@ -29,6 +29,7 @@ void MyScene4::setup()
     paraGroup.add(debugDraw.set("DEBUG_DRAW",false));
     paraGroup.add(timeOut.set("S4_TIME_OUT",5,0,20));
     paraGroup.add(counterString.set("S4_COUNTER",""));
+    paraGroup.add(bDrawShape.set("S4_DRAWSHAPE",false));
     isStart = false;
     ofDisableArbTex();
     counter = 0 ;
@@ -49,6 +50,9 @@ void MyScene4::setup()
         particleSequence.push_back(ofToInt(sequence[i]));
     }
     particleSequenceIndex = 0;
+    
+    player.loadMovie("scene4/scene4.mov");
+    player.setLoopState(OF_LOOP_NORMAL);
     
 }
 void MyScene4::init()
@@ -88,10 +92,13 @@ void MyScene4::init()
     image = commonAssets->bg;
     //    ofDirectory *dir = &commonAssets->dir;
     //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
-    col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
-    row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
+    
     for(int i = 0 ; i < maxParitcle.get(); i++)
     {
+        particleSequenceIndex = ofRandom(particleSequence.size());
+        col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
+        row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
+        
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(10, 0.1, 0.5);
         c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, commonAssets->goldenRatioBank[i%commonAssets->goldenRatioBank.size()]);
@@ -114,6 +121,10 @@ void MyScene4::init()
 void MyScene4::update(float dt)
 {
     if(isStart){
+        if(player.isLoaded())
+        {
+            player.update();
+        }
         box2d.update();
         for(int i=0; i<circles.size(); i++) {
             ofVec2f pos = circles[i].get()->getPosition();
@@ -160,11 +171,18 @@ void MyScene4::update(float dt)
 }
 void MyScene4::draw()
 {
+    if(player.isLoaded())
+    {
+        player.draw(0,0);
+    }
     ofPushStyle();
     ofEnableAlphaBlending();
     ofSetColor(commonAssets->maskWhite, commonAssets->maskWhite, commonAssets->maskWhite,counterForAlpha.update());
     ofPushMatrix();
-    svg.draw();
+    if(bDrawShape)
+    {
+        svg.draw();
+    }
     image.draw(0,0);
     ofPopMatrix();
 //    //    float radius =  CANVAS_HEIGHT*0.3;

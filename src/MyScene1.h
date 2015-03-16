@@ -114,6 +114,9 @@ public:
     
     float currentIdleTime;
         ofParameter<string> idleTime;
+    
+    vector<int> particleSequence;
+    int particleSequenceIndex;
 };
 
 #endif

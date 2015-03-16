@@ -55,6 +55,7 @@ public:
     ofParameter<float>pot_radius;
     ofParameter<float>logoTimeout;
     ofParameter<float>logoDelay;
+    ofParameter<bool>bDrawShape;
     float counter;
         ofxEasingLinear linear;
     ofxTween  counterForAlpha;
@@ -67,6 +68,7 @@ public:
     ofxSVG svg;
     vector<int> particleSequence;
     int particleSequenceIndex;
+    ofVideoPlayer player;
 };
 
 
