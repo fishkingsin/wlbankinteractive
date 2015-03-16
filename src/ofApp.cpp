@@ -10,12 +10,12 @@ void ofApp::setup(){
     info.bShadersSupported = false;
     info.bPointSpritesSupported = false;
     
-    sceneSequence.push_back(SCENE_1);
-    sceneSequence.push_back(SCENE_2);
-    sceneSequence.push_back(SCENE_LOGO);
-    sceneSequence.push_back(SCENE_1);
-    sceneSequence.push_back(SCENE_2);
-    sceneSequence.push_back(SCENE_LOGO);
+//    sceneSequence.push_back(SCENE_1);
+//    sceneSequence.push_back(SCENE_2);
+//    sceneSequence.push_back(SCENE_LOGO);
+//    sceneSequence.push_back(SCENE_1);
+//    sceneSequence.push_back(SCENE_2);
+//    sceneSequence.push_back(SCENE_LOGO);
     sceneSequence.push_back(SCENE_1);
     sceneSequence.push_back(SCENE_4);
     sceneSequence.push_back(SCENE_LOGO);
