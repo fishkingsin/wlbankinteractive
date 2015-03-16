@@ -12,11 +12,13 @@ MyScene1::MyScene1()
     
 }
 void MyScene1::setup(){  //load your scene 1 assets here...
+#ifdef    USE_BALLOON
     balloonImage.loadImage("balloon.png");
-    ofFile file;
-    file.open("string.txt");
-    ofBuffer buf = file.readToBuffer();
-    theText = buf.getText();
+#endif
+//    ofFile file;
+//    file.open("string.txt");
+//    ofBuffer buf = file.readToBuffer();
+//    theText = buf.getText();
     font.loadFont("LiHei.ttf", 20);
     image.loadImage("scene1/question-01.png");
     paraGroup.setName("Scene1");
@@ -56,21 +58,23 @@ void MyScene1::setup(){  //load your scene 1 assets here...
     paraGroup.add(objectDecay.set("objectDecay",0,0,1));
     paraGroup.add(objectAge.set("objectAge",0,0,10));
     paraGroup.add(objectDuration.set("objectDuration",1000,1000,100000));
-    
+#ifdef    USE_BALLOON
     paraGroup.add( strokeWidth.set("strokeWidth",1,1,20));
     paraGroup.add( balloonR.set("balloonR",1,1,255));
     paraGroup.add( balloonG.set("balloonG",1,1,255));
     paraGroup.add( balloonB.set("balloonB",1,1,255));;
     paraGroup.add( balloonScale .set("balloonScale",1,0,1));;
+#endif
     box2d.init();
     box2d.setGravity(0, -2);
     box2d.setFPS(60.0);
     
-    
+#ifdef    USE_BALLOON
     box2dForBalloon.init();
     box2dForBalloon.setGravity(0, -10);
     box2dForBalloon.setFPS(60.0);
     isSetupBalloon = false;
+#endif
     counter = 0;
 };
 
@@ -101,7 +105,9 @@ void MyScene1::update(float dt){ //update scene 1 here
         idleTime = ofToString(idle);
     }
     numParticle  = ofToString(circles.size());
+    #ifdef    USE_BALLOON
     box2dForBalloon.update();
+#endif
     box2d.update();
     if(isFireEvent)
     {
@@ -162,7 +168,7 @@ void MyScene1::draw(){ //draw scene 1 here
     
     commonAssets->draw();
     textObject.x = objectX.update();
-    
+#ifdef    USE_BALLOON
     if(objectAge>0 && objectX.isRunning())
     {
         anchor.setPosition(textObject);
@@ -193,6 +199,7 @@ void MyScene1::draw(){ //draw scene 1 here
         
         
     }
+#endif
     if(bDebug)
     {
         
@@ -219,7 +226,7 @@ void MyScene1::draw(){ //draw scene 1 here
         ofPopStyle();
         
         
-        
+#ifdef    USE_BALLOON
         anchor.draw();
         
         for(int i=0; i<circlesForBalloon.size(); i++) {
@@ -232,6 +239,7 @@ void MyScene1::draw(){ //draw scene 1 here
             ofSetHexColor(0x444342);
             joints[i].get()->draw();
         }
+#endif
         
     }
 #ifdef USE_TRIANGLE
@@ -292,6 +300,7 @@ void MyScene1::mousePressed( int x, int y, int button ){
 //scene notifications
 void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene when we appear
     currentIdleTime = ofGetElapsedTimef();
+#ifdef    USE_BALLOON
     if(!isSetupBalloon)
     {
         isSetupBalloon = true;
@@ -325,6 +334,7 @@ void MyScene1::sceneWillAppear( ofxScene * fromScreen ){  // reset our scene whe
             joints.push_back(joint);
         }
     }
+#endif
     commonAssets->reset();
     
     objectAge.set(objectAge.getMax());
@@ -382,19 +392,23 @@ void MyScene1::eventsIn(customeOSCData & data)
             {
                 objectX.setParameters(0, linearEasing, ofxTween::easeOut, minObjectAppearLeft, maxObjectAppearRight, objectDuration, 0);
                 textObject = currPoint;
+#ifdef    USE_BALLOON
                 for (int i=0; i<circlesForBalloon.size(); i++) {
                     circlesForBalloon[i]->setPosition(minObjectAppearLeft, circlesForBalloon[i]->getPosition().y);
                     
                 }
+#endif
             }
             else if(objectAppearRight.inside(currPoint) && objectAppearRight.inside(prevPoint) && currPoint.x<prevPoint.x )
             {
                 objectX.setParameters(0, linearEasing, ofxTween::easeOut, maxObjectAppearRight, minObjectAppearLeft, objectDuration, 0);
                 textObject = currPoint;
+#ifdef    USE_BALLOON
                 for (int i=0; i<circlesForBalloon.size(); i++) {
                     circlesForBalloon[i]->setPosition(maxObjectAppearRight, circlesForBalloon[i]->getPosition().y);
                     
                 }
+#endif
             }
         }
         

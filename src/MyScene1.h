@@ -15,7 +15,7 @@
 
 #include "CustomParticle.h"
 #include "CommonAssets.h"
-
+//#define USE_BALLOON
 class MyScene1 : public BaseScene{
 public:
     MyScene1();
@@ -89,13 +89,14 @@ public:
     ofRectangle objectAppearRight;
     ofPoint textObject;
     //box2d for dream balloon
+#ifdef    USE_BALLOON
     bool isSetupBalloon;
     ofxBox2dCircle                          anchor;			  //	fixed anchor
     vector		<ofPtr<ofxBox2dCircle> >	circlesForBalloon;		  //	default box2d circles
     vector		<ofPtr<ofxBox2dJoint> >		joints;
     ofxBox2d                                box2dForBalloon;
     ofImage balloonImage;
-    
+#endif
     void objectAppearRegionUpdate(float &f);
     
     ofImage image;
