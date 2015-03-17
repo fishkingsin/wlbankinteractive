@@ -67,7 +67,7 @@ public:
     
     ofxSVG svg;
     vector< vector<int> > particleSequences;
-    vector<int> particleSequence;
+
     int particleSequencesIndex;
     ofVideoPlayer player;
 };

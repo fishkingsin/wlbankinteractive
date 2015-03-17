@@ -48,7 +48,7 @@ void MyScene4::setup()
     {
         vector <string> sequence = ofSplitString(sequences[j], ",");
             
-        
+        vector<int> particleSequence;
         for(int i = 0 ; i < sequence.size() ; i++)
         {
             particleSequence.push_back(ofToInt(sequence[i]));
@@ -103,8 +103,8 @@ void MyScene4::init()
     for(int i = 0 ; i < maxParitcle.get(); i++)
     {
         int particleSequenceIndex = ofRandom(sequence.size());
-        col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
-        row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
+        col = round(sequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
+        row = sequence[ particleSequenceIndex] % commonAssets->cellRows;
         
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
         c.get()->setPhysics(10, 0.1, 0.5);
