@@ -42,14 +42,21 @@ void MyScene4::setup()
     
     
     ofFile file("./scene4/sequence.txt");
-    string s = file.readToBuffer().getText();
-    
-    vector <string> sequence = ofSplitString(s, ",");
-    for(int i = 0 ; i < sequence.size() ; i++)
+    string originalString = file.readToBuffer().getText();
+    vector <string> sequences = ofSplitString(originalString, "\n");
+    for(int j = 0 ; j < sequences.size() ; j++)
     {
-        particleSequence.push_back(ofToInt(sequence[i]));
+        vector <string> sequence = ofSplitString(sequences[j], ",");
+            
+        
+        for(int i = 0 ; i < sequence.size() ; i++)
+        {
+            particleSequence.push_back(ofToInt(sequence[i]));
+        }
+        particleSequences.push_back(particleSequence);
+        
     }
-    particleSequenceIndex = 0;
+    particleSequencesIndex = 0;
     
     player.loadMovie("scene4/scene4.mov");
     player.setLoopState(OF_LOOP_NORMAL);
@@ -92,10 +99,10 @@ void MyScene4::init()
     image = commonAssets->bg;
     //    ofDirectory *dir = &commonAssets->dir;
     //    image.loadImage(dir->getFile(((int)ofRandom(dir->getFiles().size()-1))));
-    
+    vector<int>sequence = particleSequences[particleSequencesIndex];
     for(int i = 0 ; i < maxParitcle.get(); i++)
     {
-        particleSequenceIndex = ofRandom(particleSequence.size());
+        int particleSequenceIndex = ofRandom(sequence.size());
         col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
         row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
         
@@ -250,8 +257,8 @@ void MyScene4::sceneWillAppear( ofxScene * fromScreen )
 //scene notifications
 void MyScene4::sceneWillDisappear( ofxScene * toScreen )
 {
-    particleSequenceIndex++;
-    particleSequenceIndex %= particleSequence.size();
+    particleSequencesIndex++;
+    particleSequencesIndex %= particleSequences.size();
 }
 void MyScene4::sceneDidAppear()
 {

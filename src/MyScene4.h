@@ -66,8 +66,9 @@ public:
     bool isStart;
     
     ofxSVG svg;
+    vector< vector<int> > particleSequences;
     vector<int> particleSequence;
-    int particleSequenceIndex;
+    int particleSequencesIndex;
     ofVideoPlayer player;
 };
 
