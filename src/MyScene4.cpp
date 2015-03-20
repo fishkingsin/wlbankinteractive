@@ -103,7 +103,7 @@ void MyScene4::init()
     for(int i = 0 ; i < maxParitcle.get(); i++)
     {
         int particleSequenceIndex = ofRandom(sequence.size());
-        col = round(sequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
+        col = (sequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
         row = sequence[ particleSequenceIndex] % commonAssets->cellRows;
         
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);

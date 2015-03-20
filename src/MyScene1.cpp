@@ -447,7 +447,7 @@ void MyScene1::createParticle(float _x , float _y , ofColor color)
     
     ofColor c = ofColor::white;
     particleSequenceIndex = ofRandom(particleSequence.size());
-    int col = round(particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
+    int col = (particleSequence[ particleSequenceIndex]  / commonAssets->cellColls) ;
     int row = particleSequence[ particleSequenceIndex] % commonAssets->cellRows;
     if(row!=0)
     {
