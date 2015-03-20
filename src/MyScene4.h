@@ -56,6 +56,13 @@ public:
     ofParameter<float>logoTimeout;
     ofParameter<float>logoDelay;
     ofParameter<bool>bDrawShape;
+    
+//    ofParameterGroup particlePhysic;
+    ofParameter<float>mass;
+    ofParameter<float>bounce;
+    ofParameter<float>fiction;
+    
+    
     float counter;
         ofxEasingLinear linear;
     ofxTween  counterForAlpha;

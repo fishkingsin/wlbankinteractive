@@ -30,6 +30,13 @@ void MyScene4::setup()
     paraGroup.add(timeOut.set("S4_TIME_OUT",5,0,20));
     paraGroup.add(counterString.set("S4_COUNTER",""));
     paraGroup.add(bDrawShape.set("S4_DRAWSHAPE",false));
+    
+//    particlePhysic.setName("PARTICLE_PHYSIC");
+    
+    paraGroup.add( mass.set("PARTICLE_PHYSIC_MASS",1,0,2));
+    paraGroup.add( bounce.set("PARTICLE_PHYSIC_BOUNCE",1,0,2));
+    paraGroup.add( fiction.set("PARTICLE_PHYSIC_FICTION",1,0,2));
+//    paraGroup.add(particlePhysic);
     isStart = false;
     ofDisableArbTex();
     counter = 0 ;
@@ -110,7 +117,7 @@ void MyScene4::init()
         row = sequence[ particleSequenceIndex] % commonAssets->cellRows;
         
         ofPtr<ofxBox2dCircle> c = ofPtr<ofxBox2dCircle>(new ofxBox2dCircle);
-        c.get()->setPhysics(10, 0.1, 0.5);
+        c.get()->setPhysics(mass,bounce,fiction);
         c.get()->setup(box2d.getWorld(), commonAssets->elementCenterX.get()+ofRandom(-10,10), -i*100, commonAssets->goldenRatioBank[i%commonAssets->goldenRatioBank.size()]);
         ofVec2f pos = c.get()->getPosition();
         float r = c.get()->getRadius();
