@@ -337,7 +337,7 @@
 </Scene3>
 <Scene4>
     <S4_MAX_PARTICLE>
-        <val_0>319</val_0>
+        <val_0>127</val_0>
     </S4_MAX_PARTICLE>
     <S4_MIN_RADIUS>
         <val_0>11.5538</val_0>

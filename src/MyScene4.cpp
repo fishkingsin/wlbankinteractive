@@ -35,7 +35,7 @@ void MyScene4::setup()
     counter = 0 ;
     //    image.loadImage("bg.png");
     box2d.init();
-    box2d.setGravity(0, 30);
+    box2d.setGravity(0, 5);
     //    box2d.createGround();
     box2d.setFPS(30.0);
     //    setupEdge();
@@ -61,10 +61,13 @@ void MyScene4::setup()
     player.loadMovie("scene4/scene4.mov");
     player.setLoopState(OF_LOOP_NORMAL);
     
+    
 }
 void MyScene4::init()
 {
-    
+
+    player.play();
+    player.setPosition(0);
     commonAssets->goldenRatioBank.clear();
     int initNum=1;
     float initSize = maxRadius;
@@ -270,6 +273,7 @@ void MyScene4::sceneDidAppear()
 }
 void MyScene4::sceneDidDisappear(ofxScene *fromScreen)
 {
+    player.stop();
     circles.clear();
     edges.clear();
     isStart = false;
