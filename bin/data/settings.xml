@@ -340,10 +340,10 @@
         <val_0>319</val_0>
     </S4_MAX_PARTICLE>
     <S4_MIN_RADIUS>
-        <val_0>3.07308</val_0>
+        <val_0>11.5538</val_0>
     </S4_MIN_RADIUS>
     <S4_MAX_RADIUS>
-        <val_0>20.6</val_0>
+        <val_0>21.9192</val_0>
     </S4_MAX_RADIUS>
     <DEBUG_DRAW>
         <val_0>0</val_0>
@@ -352,10 +352,10 @@
         <val_0>15</val_0>
     </S4_TIME_OUT>
     <S4_MIN_R_SCALE>
-        <val_0>1.13077</val_0>
+        <val_0>1</val_0>
     </S4_MIN_R_SCALE>
     <S4_MAX_R_SCALE>
-        <val_0>1.21538</val_0>
+        <val_0>1</val_0>
     </S4_MAX_R_SCALE>
     <S4_LOGO_RADIUS>
         <val_0>131.469</val_0>
@@ -370,7 +370,7 @@
         <val_0>5000</val_0>
     </S4_LOGO_DELAY>
     <S4_DRAWSHAPE>
-        <val_0>0</val_0>
+        <val_0>1</val_0>
     </S4_DRAWSHAPE>
 </Scene4>
 <Scene7>
