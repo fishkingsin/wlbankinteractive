@@ -15,7 +15,7 @@
 
 #include "CustomParticle.h"
 #include "CommonAssets.h"
-//#define USE_BALLOON
+#define USE_BALLOON
 class MyScene1 : public BaseScene{
 public:
     MyScene1();
