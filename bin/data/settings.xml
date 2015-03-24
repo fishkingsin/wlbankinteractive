@@ -57,7 +57,7 @@
     <val_0>0</val_0>
 </audo>
 <DEBUG_TOGGLE>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </DEBUG_TOGGLE>
 <S3_MIN_RADIUS>
     <val_0>2.69615</val_0>
@@ -190,13 +190,13 @@
 </S3_DELAY_DENSITY>
 <Scene1>
     <S1_MAX_PARTICLE>
-        <val_0>323</val_0>
+        <val_0>350</val_0>
     </S1_MAX_PARTICLE>
     <S1_MIN_RADIUS>
-        <val_0>3.82692</val_0>
+        <val_0>5.71154</val_0>
     </S1_MIN_RADIUS>
     <S1_MAX_RADIUS>
-        <val_0>34.9231</val_0>
+        <val_0>21.1654</val_0>
     </S1_MAX_RADIUS>
     <MIN_DISTANCE>
         <val_0>14.6154</val_0>
@@ -268,7 +268,7 @@
         <val_0>255</val_0>
     </balloonB>
     <balloonScale>
-        <val_0>0.619231</val_0>
+        <val_0>0.361538</val_0>
     </balloonScale>
     <Toggle_Time_Prioirty>
         <val_0>1</val_0>
@@ -446,10 +446,10 @@
         <val_0>1</val_0>
     </MAX_SATURATE>
     <MIN_RADIUS>
-        <val_0>6.49231</val_0>
+        <val_0>4.86923</val_0>
     </MIN_RADIUS>
     <MAX_RADIUS>
-        <val_0>53.5385</val_0>
+        <val_0>22.1538</val_0>
     </MAX_RADIUS>
     <blockRectX>
         <val_0>0</val_0>
