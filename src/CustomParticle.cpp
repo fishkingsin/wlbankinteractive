@@ -46,7 +46,8 @@ void CustomParticle::draw() {
         ofRotateZ(getRotation());
         ofSetColor(theData->color);
         ofPushMatrix();
-        ofCircle(-radius,-radius,radius*2);
+        ofNoFill();
+        ofCircle(0,0,radius);
 //        theData->image->draw(-radius,-radius,radius*2,radius*2);
         ofPopMatrix();
         ofPopMatrix();
