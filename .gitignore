@@ -9,3 +9,11 @@ wlBankInteractive.sdf
 bin/wlBankInteractive.exp
 *.DS_Store
 *._*
+*.dll
+*.user
+wlBankInteractive.v11.suo
+*.exe
+bin/wlbankinteractive.lib
+*.ilk
+bin/wlbankinteractive_debug.lib
+*.pdb
